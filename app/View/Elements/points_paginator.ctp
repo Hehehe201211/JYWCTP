@@ -1,0 +1,69 @@
+{assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
+{$this->Paginator->options($options)}
+{$paginatorParams = $this->Paginator->params()}
+
+{if $paginatorParams['count'] > 0}
+<table width="596" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
+        <thead>
+            <tr class="con_2_tr con_2_xq_too">
+              {if $this->params['action'] == "expenses"}
+              <th class="tr_td5">收款方</th>
+            {else}
+              <th class="tr_td5">支出方</th>
+            {/if}
+              <th class="tr_td2">金额 </th>
+              <th class="tr_td7">时间 </th>
+              <th class="tr_td4">状态 </th>
+              <th class="tr_td1">标题</th>
+              <th class="tr_td8">选择操作 </th>
+            </tr>
+          </thead>
+        {foreach $informations as $info}
+	      <tr class="con_2_tr">
+            <td class="tr_td5">{$info.Member.nickname}</td>
+            <td class="tr_td2">{$info.PaymentHistory.number}元</td>
+            <td class="tr_td7">{$info.PaymentHistory.created}</td>
+            <td class="tr_td4">{if $info.PaymentHistory.type == 0}交易完成{else}卖家退款{/if}</td>
+            <td class="tr_td1">{$info.Information.title}</td>
+            <td class="con_2_xq_tofu tofu_anniu" >
+            <a href="javascript:void(0)" class="detail">详细</a>
+            <input type="hidden" value="{$info.PaymentHistory.information_id}" name="information_id" class="information_id">
+            </td>
+          </tr>
+        {/foreach}
+        <tr>
+            <td class="fanyea_x" colspan="6">
+                <div class="fanyea">
+                    {if $paginatorParams['prevPage']}
+                        <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                    {/if}
+                    <div class="dd_ym">
+                        <label>每页显示：</label>
+                        <select name="pageSize" id="pageSize">
+                        <option value="2" {if $pageSize == "2"} selected {/if}>10</option>
+                        <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
+                        <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
+                        <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
+                        </select>
+                    </div>
+                    <div class="dd_ym11"> <font>共{$paginatorParams['count']}条</font> <font>第{$paginatorParams['page']}/{$paginatorParams['pageCount']}页</font>
+                        <input type="text" id="jump" name="jump" value="{if isset($jump)}{$jump}{/if}">
+                        <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
+                    </div>
+                    {if $paginatorParams['nextPage']}
+                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                    {/if}
+                </div>
+            </td>
+        </tr>
+</table>
+{else}
+	{$msg}
+{/if}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{$form = ['isForm' => true, 'inline' => true]}
+{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#informationList', 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
+{$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
+{$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
+{$this->Js->writeBuffer()}

@@ -1,0 +1,60 @@
+{assign var=options value=['update' => '#commentList', 'evalScripts' => true]}
+{$this->Paginator->options($options)}
+{$paginatorParams = $this->Paginator->params()}
+{if $paginatorParams['count'] > 0}
+	<h3>&nbsp; </h3>
+	{foreach $comments as $comment}
+		<div class="xq_huif_tet">
+	        <p class="xq_huif_tet11">
+	        	{if $type == "send" && $comment.CooperationComment.type == 0}
+	        		<strong class="sender">我</strong>
+        		{elseif $type == "receiver" && $comment.CooperationComment.type == 1}
+                 <strong class="sender">我</strong>   
+	        	{else}
+	        		<strong>{$comment.Member.nickname}</strong>
+	        	{/if}
+		        {$comment.CooperationComment.content}
+	        </p>
+	        <p class="xq_huif_riq">{$comment.CooperationComment.created}</p>
+        </div>
+	{/foreach}
+  <div class="pagesMag">
+    <div class="fanyea">
+		{if $paginatorParams['prevPage']}
+			<div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+		{/if}
+      <div class="dd_ym">
+        <label>每页显示：</label>
+        <select name="pageSize" id="pageSize">
+            <option value="2" {if $pageSize == "2"} selected {/if}>10</option>
+            <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
+            <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
+            <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
+        </select>
+      </div>
+      <div class="dd_ym11">
+	      <font>共{$paginatorParams['count']}条
+	      </font>
+	      <font>第{$paginatorParams['page']}/{$paginatorParams['pageCount']}页
+	      </font>
+        <input type="text" id="jump" name="jump" value="{if isset($jump)}{$jump}{/if}">
+        <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
+      </div>
+      {if $paginatorParams['nextPage']}
+            <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+      {/if}
+    </div>
+  </div>
+{/if}
+{if $this->request->params['controller'] == "appeals"}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{else}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{/if}
+{$form = ['isForm' => true, 'inline' => true]}
+{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#commentList', 'method' => 'post', 'data' => $this->Js->get('#commentList')->serializeForm($form)]}
+{$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
+{$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
+{$this->Js->writeBuffer()}

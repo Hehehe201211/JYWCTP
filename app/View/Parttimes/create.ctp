@@ -1,0 +1,365 @@
+<script>
+{literal}
+$(document).ready(function(){
+	datepIniChange("#open","indate");
+    datepIniChange("#close","indate");
+	
+    $('#category').change(function(){
+        $('#sub_category').find('option:gt(0)').remove();
+        if ($(this).val() != "") {
+            $.ajax({
+                'type'  : 'Get',
+                'url'   : '/informations/getCategoryList/' + $(this).val(),
+                'success':function(data) {
+                    var dataobj=eval("("+data+")");
+                    var optionStr = "";
+                    $.each(dataobj, function(idx, item){
+                        optionStr += '<option value="'+item.Category.id+'">' + item.Category.name + '</option>'
+                    });
+                    $('#sub_category').append(optionStr);
+                }
+            });
+        }
+    });
+    //sidebarSF(3);
+    
+    //地图    
+   /* var strPosition;
+    $("#tglMap").toggle(function(e){
+        e.preventDefault();
+        $(".divMapContainer").slideDown("fast",function(){
+           strPosition=new googlemapjsv3({lat:"",lng:"",strCompany:""});
+        });
+        $(this).text("停用地图标记");
+    },function(e){      
+        e.preventDefault();
+        $(".divMapContainer").slideUp("fast");
+        $(this).text("启用地图标记");
+        strPosition=null;
+    });
+    $("#codeAddress").click(function(){
+        var a=document.getElementById("geostrPosition").value;
+        strPosition.codeAddress(a);
+    });*/
+	
+	//开始
+	$('#check').click(function(){
+		if (!checkData()) {
+		  $.ajax({
+		      url : '/members/getImageNumber',
+		      type : 'post',
+		      success : function(data)
+		      {
+		          if (data == $("#checkNum").val().toUpperCase()) {
+		              $("#parttimeForm").submit();
+		          } else {
+		              if ($("#checkNum").parent().find('.errorMsg').length == 0) {
+                          $("#checkNum").parent().append('<span class="errorMsg">验证码不一致</span>');
+                      } else {
+                          $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
+                      }
+		          }
+		      }
+		  });
+			
+		}
+	});
+	
+	var checkTarget = ['title','sub_title','contact','verificationCode','checkNum'];
+    var errorMsg = '<span class="errorMsg">请完善此项目</span>';
+	function checkData() {
+		var error=0;
+		$.each(checkTarget, function(target){		    
+			if($('#' + this).val() == "") {
+				if($('#' + this).parents(".sjle dl dt").find('.errorMsg').length == 0) {
+					$('#' + this).parents(".sjle dl dt").append(errorMsg);
+				}
+				error=1;
+			} else {
+				$('#' + this).parents(".sjle dl dt").find('.errorMsg').remove();
+			}
+		});
+		
+		if($('#sub_category').val() == "") {
+		   if ($('#sub_category').parent().next('.errorMsg').length == 0) {
+				  $('#sub_category').parents(".sjle dl dt").append(errorMsg);
+		      }
+			error = 1;			
+		} else {
+			$('#sub_category').parents(".sjle dl dt").find('.errorMsg').remove();
+		}
+		
+		if($("#open").val()==""||$("#close").val()=="") {
+			$("#open").parents(".sjle dl dt").append(errorMsg);
+		} else {
+			if($("#open").val()>$("#close").val()) {
+				$("#open").parents(".sjle dl dt").append(errorMsg);
+				error = 1;
+			} else {
+				$("#open").parents(".sjle dl dt").find(".errorMsg").remove();
+			}
+		}
+		
+		if ($("#ulTableCity li").length == 0){
+        	if ($('#ulTableCity').parent().parent().find('.errorMsg').html() == "") {
+        		$('#ulTableCity').parent().parent().find('.errorMsg').html("请完善此项目");
+        	}
+        	error = 1;
+        } else {
+        	$('#ulTableCity').parent().parent().find('.errorMsg').html("");
+        }
+		
+		$(".divSex input:radio:checked").each(function(index,element) {
+            if($(this).next().length !=0) {
+				if($(this).next().val()=="") {
+					$(this).parents(".sjle dl dt").append(errorMsg);
+					error = 1;
+				} else {
+					$(this).parents(".sjle dl dt").find(".errorMsg").remove();
+				}
+			} else {
+				$(this).parents(".sjle dl dt").find(".errorMsg").remove();
+			}
+        });			
+
+		$('.contact_content').each(function(){
+			if ($(this).val() == "") {
+				if($(this).parent().find('.errorMsg').length == 0) {
+					$(this).parent().append(errorMsg);
+				}
+				error=1;
+			} else {
+				$(this).parent().find('.errorMsg').remove();
+			}
+		});
+		
+		if (!error) {
+		  if ($("#checkNum").val().trim() == "") {
+		      error = 1;
+		      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
+		          $("#checkNum").parent().append(errorMsg);
+		      }
+		  }
+		}		
+		return error;
+	}
+    //结束
+    
+    $("button.addContact").live("click",function(e){
+        e.preventDefault();
+        $(this).parent().after($(this).parent().clone());
+        $(this).parent().next().children(".inpTextBox").val("");
+    });
+    $("button.deleContact").live("click",function(e){
+        e.preventDefault();
+        if ($("button.deleContact").length>1) $(this).parent().remove(); 
+    });
+    
+    //check number
+    $('#getCheckNum').prepend('<img id="code" src="/members/image">');
+    $('#getCheckNum').click(function(){
+        var src = '/members/image/' + Math.random();
+        $('#code').attr('src', src);
+    });
+});
+{/literal}
+</script>
+<div class="zy_z">
+    <div class="zy_zs">
+      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">平台兼职</a>&gt;&gt;<a href="#">发布兼职</a></p>      
+    </div>
+    <div class="hysj">
+      <ul>
+        <li>1.填写兼职信息</li>
+        <li>2.确认兼职信息</li>
+        <li>3.兼职发布成功</li>
+      </ul>
+      <div class="sjle" style="min-height:850px;">
+        <form method="post" action="/parttimes/check" id="parttimeForm">
+          <dl>
+            <dt>
+              <label><font class="facexh">*</font>信息标题：</label>
+              <input type="text" name="title" id="title">
+            </dt>
+            <dt class="productKinds">
+              <label><font class="facexh">*</font>产品所属分类：</label>
+                <select name="category" id="category">
+                    <option value="">请选择</option>
+                    {foreach $this->Category->parentCategoryList() as $value}
+                        <option value="{$value.Category.id}" {if isset($this->data['industries_id']) && $value.Category.id == $this->data['industries_id']}selected="selected"{/if}>{$value.Category.name}</option>
+                    {/foreach}
+                </select>
+                <select name="sub_category" id="sub_category">
+                <option value="">请选择</option>
+                </select>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>产品具体名称：</label>
+              <input type="text" name="sub_title" id="sub_title">
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>兼职时间：</label>
+              <ul class="validity" style="width:230px;">
+                <li>
+                  <input type="text" name="open" id="open"  readonly="readonly"/>
+                </li>
+                <li style="width:36px">至</li>
+                <li>
+                  <input type="text" name="close" id="close"  readonly="readonly"/>
+                </li>
+              </ul>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>客户区域范围：</label>
+              <div class="switch_box dtswitch_box">
+                <ul>
+                  <li class="city">
+                    <input type="button" class="inpButton" value="选择城市"/>
+                  </li>
+                </ul>
+                <ul class="ulTable ulTableCity" id="ulTableCity"></ul>
+              </div>
+			  <span class="errorMsg" style="position:absolute;left:366px;"></span>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>兼职配合方式：</label>
+              <div class="divSex cooperationWay">                
+                <label><input type="radio" name="method" checked="checked" value="1"/>提供客户信息</label>                
+                <label><input type="radio" name="method" value="2"/>协助跟单</label>                
+                <label><input type="radio" name="method" value="3"/>独立签单</label>
+              </div>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>报酬：</label>
+              <div class="divSex cooperationWay">                      
+                <label><input type="radio" name="pay" value="1" onclick="$(this).next().focus();" {if isset($this->data['pay']) && $this->data['pay'] == 1}checked="checked"{elseif !isset($this->data['pay'])} checked="checked"{/if} />按合同金额<input type="text" name="pay_rate" value="{if isset($this->data['pay_rate'])}{$this->data['pay_rate']}{/if}" onpaste="coinNum(this)" onkeyup="coinNum(this)"/>%</label>                 
+                <label><input type="radio" name="pay" value="2" onclick="$(this).next().focus();" {if isset($this->data['pay']) && $this->data['pay'] == 2}checked="checked"{/if} />按单数，每单<input type="text" name="pay_money" value="{if isset($this->data['pay_money'])}{$this->data['pay_money']}{/if}" onpaste="coinNum(this)" onkeyup="coinNum(this)"/>元</label>            
+                <label><input type="radio" name="pay" value="3" {if isset($this->data['pay']) && $this->data['pay'] == 3}checked="checked"{/if}/>协商确定</label>
+              </div>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>报酬支付时间：</label>
+              <div class="divSex cooperationWay">                
+                <label><input type="radio" name="pay_method" checked="checked" value="1" onclick="$(this).next().focus();"/>收款后<input type="text" name="pay_time" id="pay_time" onpaste="onlyNum(this)" onkeyup="onlyNum(this)"/>个工作日内转账</label>                
+                <label><input type="radio" name="pay_method" value="0"/>其它</label>
+              </div>
+            </dt>
+            <dt>
+              <label>报酬支付说明：</label>
+              <textarea cols="45" rows="5" name="pay_explanation">{if isset($this->data['pay_explanation'])}{$this->data['pay_explanation']}{/if}</textarea>
+            </dt>
+            <dt>
+              <label>兼职者推荐参与行业：</label>
+              <div class="switch_box dtswitch_box">
+              <ul>
+            <li class="trade"><input type="button" class="inpButton" name="industry" value="行业（可选）" /></li>
+          </ul>
+          
+          <ul class="ulTable ulTableTrade">
+                </ul></div>
+            </dt>
+            <dt>
+            <label><font class="facexh">*</font>联系人：</label>
+            <input type="text" class="contact" name="contact" id="contact" value="{if isset($this->data['contact'])}{$this->data['contact']}{/if}" />
+          </dt>
+            <dt>
+            <label><font class="facexh">*</font>联系方式：</label>
+            <div class="area1">
+              <select name="contact_method[]">
+                <option value="座机">座机</option>
+                <option value="手机">手机</option>
+                <option value="QQ">QQ</option>
+                <option value="MSN">MSN</option>
+              </select>
+            </div>
+            <input type="text" name="contact_content[]" style="width:108px;" class="contact_content" onpaste="Emailstr(this)" onkeyup="Emailstr(this)"/>
+            <button class="addContact">添加</button><button class="deleContact">删除</button>
+          </dt>
+            <dt>
+              <label>联系邮箱：</label>
+              <input type="text" class="post" name="email" value="{if isset($this->data['email'])}{$this->data['email']}{/if}" />
+              （如果有多个邮箱，请以“,”隔开） </dt>
+            <dt>
+              <label>联系地址：</label>
+              <input type="text" name="address" class="contact_method" value="{if isset($this->data['address'])}{$this->data['address']}{/if}" />
+            </dt>
+            <dt>
+              <label>兼职补充说明：</label>
+              <textarea cols="45" rows="5" name="additional">{if isset($this->data['additional'])}{$this->data['additional']}{/if}</textarea>
+            </dt>
+            <dt>
+              <label><font class="facexh">*</font>验证码：</label>
+              <input type="text" name="verificationCode" id="checkNum" style="width:60px;" class="inpTextBox">
+              <a href="javascript:void(0)" id="getCheckNum" class="getCheckNum" >看不清？</a>
+          </dt>
+          </dl>
+          <!--<ul>
+            <li>
+              <div class="divMapContainer">
+                <div class="divInput">
+                  <input type="text" id="geostrPosition" value="输入地址查询"/>
+                  <input type="button" value="搜索" id="codeAddress"/>
+                  <input type="hidden" id="comlatlng" />
+                </div>
+                <div id="mapLayout"></div>
+              </div>
+              <a href="#" id="tglMap">启用地图标记</a> </li>
+          </ul>-->
+          <div class="clearfix"></div>
+          <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
+        </form>
+      </div>
+    </div>
+    <div class="switch_box" >
+      <div class="divTable divTableCity" style="left:135px;top:190px;*top:-686px;">
+        <div class="divtt">
+          <div class="left fl"><strong>城市选择器</strong>(最多可选5项)</div>
+          <div class="right fr">[确定]</div>
+        </div>
+        <dl>
+          <dt class="goback"><a href="#">返回省份</a></dt>
+          <dl class="options">
+            {foreach $this->City->parentCityList() as $city}
+                <dd>
+                    <input type="checkbox" class="inpCheckbox" value="{$city.City.id}"/>
+                    <a href="#">{$city.City.name}</a>
+                </dd>
+            {/foreach}
+          </dl>
+          <dl class="subOptions">
+          </dl>
+          <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+          <dl class="selected">
+          </dl>
+        </dl>
+        <div class="divtt">
+          <div class="right fr">[确定]</div>
+        </div>
+      </div>
+      <div class="divTable divTableTrade" style="left:135px;top:473px;*top:-402px;">
+            <div class="divtt">
+              <div class="left fl"><strong>行业选择器</strong>(最多可选5项)</div>
+              <div class="right fr">[确定]</div>
+            </div>
+            <dl>
+              <dt class="goback"><a href="#">行业</a></dt>
+              <dl class="options">
+                {foreach $this->Category->parentCategoryList() as $value}
+                    <dd>
+                        <input type="checkbox" class="inpCheckbox" value="{$value.Category.id}"/>
+                        <a href="#">{$value.Category.name}</a>
+                    </dd>
+                {/foreach}
+              </dl>
+              <dl class="subOptions">
+              </dl>
+              <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+              <dl class="selected">
+              </dl>
+            </dl>
+            <div class="divtt">
+              <div class="right fr">[确定]</div>
+            </div>
+          </div>
+    </div>
+</div>
