@@ -187,6 +187,20 @@ $(document).ready(function(){
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
           </dt>
+		  <dt>
+            <label>企业招聘图片（大）：</label>
+            <div style="float:left;">
+            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
+            </div>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
+          </dt>
+		  <dt>
+            <label>企业招聘图片（小）：</label>
+            <div style="float:left;">
+            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
+            </div>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
+          </dt>
           <dt>
             <label><font class="facexh">*</font>公司简介：</label>
             <textarea rows="5" cols="45" id="introduction" name="introduction" >{$homepage.Homepage.introduction|replace:"<br/>":"\n"}</textarea>
@@ -305,6 +319,20 @@ $(document).ready(function(){
             <input type="file" name="thumbnail"><p class="imgfilesize">（图片文件大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">无</span>
+          </dt>
+		  <dt>
+            <label>企业招聘图片（大）：</label>
+            <div style="float:left;">
+            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
+            </div>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
+          </dt>
+		  <dt>
+            <label>企业招聘图片（小）：</label>
+            <div style="float:left;">
+            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
+            </div>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
           </dt>
           <dt>
             <label><font class="facexh">*</font>公司简介：</label>

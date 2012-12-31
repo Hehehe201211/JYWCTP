@@ -3,7 +3,7 @@
     <img src="{$this->webroot}img/ad_03.jpg" width="998" height="98" alt="" />
 </div>
 <div class="tg_message">
-    <img src="{$this->webroot}img/tel_06.jpg" alt="" height="186" width="200">
+    <img src="{$this->webroot}img/tel_06.gif" alt="" height="186" width="200">
     <ul>
         <li class="list" style="background:url({$this->webroot}img/su_03.jpg) left top no-repeat;">
             <h3>新手入门</h3>

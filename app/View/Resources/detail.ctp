@@ -1,39 +1,136 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+	//评论验证码
+    $('#commentCheckNum').after('<img id="commentCode" src="/members/image">');
+    $('#getCommentCheckNum').click(function(){
+        var src = '/members/image/' + Math.random();
+        $('#commentCode').attr('src', src);
+    });
 	$(".btnDownload,.linkLogin").click(function(){
-	var logined = $('#logined').val();
-	var downloaded = $('#downloaded').val();
-	if (logined == 1) {
-		if ($('#grade').val() == 2){
-			//高级会员
-			var point = $('#point').val();
-			var src = "";
+		var logined = $('#logined').val();
+		var downloaded = $('#downloaded').val();
+		if (logined == 1) {
+			if ($('#grade').val() == 2){
+				//高级会员
+				var point = $('#point').val();
+				var src = "";
+				$.ajax({
+					url : '/resources/checkPoint',
+					type : 'post',
+					data : 'point=' + point,
+					async : false,
+					success:function(data) {
+						var result = eval("("+data+")");
+						var documents_id = $('#documents_id').val();
+						if (result.result == 'OK') {
+							src = "/resources/download?id=" + documents_id;
+						} else {
+							src = '';
+							alert(result.msg);
+						}
+					}
+				});
+				if (src != "") {
+					$('#downloadIframe').attr('src', src);
+				}
+			} else {
+				bgKuang("#divDjbuz",".divDjbuz .closeDiv");
+			}
+		} else {
+		//还没有登陆，显示登陆框
+			if (!$('#loginCheckNum').next().is('img')) {
+				$('#loginCheckNum').after('<img id="loginCode" src="/members/image">');
+			    $('#getLoginCheckNum').click(function(){
+			        var src = '/members/image/' + Math.random();
+			        $('#loginCode').attr('src', src);
+			    });
+		    }
+			bgKuang("#divDjbuz",".divDjbuz .closeDiv");
+		}
+	});
+	//确保验证码显示
+	$('#loginCheckNum, #commentCheckNum').focus(function(){
+		if(!$(this).next().is('img')) {
+			$(this).after('<img id="loginCode" src="/members/image">');
+		}
+	})
+	
+	//登陆按钮
+	$('#btnCommentLogin').click(function(){
+		var errorMsg = '<span style="color:red">请输入此项</span>'
+		$('#loginBox span').remove();
+		if ($('#comment_nickname').val() == "") {
+			$('#comment_nickname').after(errorMsg);
+			return false;
+		}
+		if ($('#comment_password').val() == "") {
+			$('#comment_password').after(errorMsg);
+			return false;
+		}
+		if ($('#loginCheckNum').val() == "") {
+			$('#loginCheckNum').parent().append(errorMsg);
+			return false;
+		}
+		var nickname = $('#comment_nickname').val();
+		var password = $('#comment_password').val();
+		var checkNum = $('#loginCheckNum').val();
+		var type = 0;
+		
+		var params = "nickname=" + nickname + "&password=" + password + "&checkNum=" + checkNum + "&type=" + type;
+		console.log(params);
+		$.ajax({
+                type : 'post',
+                url  : '/members/ajaxlogin',
+                data : params,
+                success : function(data) {
+                    if (data == '') {
+                        window.location.href = location.href;
+                    }
+                    
+                    if (data != '') {
+                        msg = '<span style="color:red">' + data + '</span>';
+                        $('#loginBox ul :first-child').append(msg);
+                    }
+                    
+                }
+             });
+	});
+	
+	//评论按钮
+	$(".btnComment").click(function(){
+		var error = false;
+		var documents_id = $('#documents_id').val();
+		if ($('#comment').val() == "") {
+			error = true;
+		}
+		if (!error) {
 			$.ajax({
-				url : '/resources/checkPoint',
+				url : '/resources/addComment',
 				type : 'post',
-				data : 'point=' + point,
-				async : false,
-				success:function(data) {
+				data : 'comment=' + $('#comment').val() + '&documents_id=' + documents_id,
+				success : function(data) {
 					var result = eval("("+data+")");
-					var documents_id = $('#documents_id').val();
-					if (result.result == 'OK') {
-						src = "/resources/download?id=" + documents_id;
-					} else {
-						src = '';
+					if (result.result != "OK") {
 						alert(result.msg);
+					} else {
+						var li = 
+						'<li>' +
+				            '<div class="photo fl"><img src="' + result.thumbnail + '" /></div>' +
+				            '<div class="name">' + result.name + '</b><span>刚刚</span></div>' +
+				            '<div class="body">' +
+				              '<p>' + $('#comment').val() + '</p>' +
+				              '<div class="menu">' +
+					              '<a target="_self" href="javascript:void(0);" class="btnDing">支持</a>(0)' +
+					              '<a target="_self" href="javascript:void(0);" class="btnCai">反对</a>(0)<span>|</span>' +
+				              '</div>' +
+				            '</div>' +
+				          '</li>';
+				         $('.commentContent ul').append(li); 
 					}
 				}
 			});
-			if (src != "") {
-				$('#downloadIframe').attr('src', src);
-			}
-		} else {
-			bgKuang("#divDjbuz",".divDjbuz .closeDiv");
 		}
-	} else {
-		bgKuang("#divDjbuz",".divDjbuz .closeDiv");
-	}
 	});
 });
 {/literal}
@@ -77,60 +174,101 @@ $(document).ready(function(){
     </div>
     <div class="articleCommentN">  
        <h3>评论</h3>
-       {if $downloaded}
-        <div class="row">
-          <label>您的评论:</label>
-          <textarea onfocus="_Showvaldiv(0);" id="comment0" name="comment"></textarea>
-          <div class="clearfix"></div>
+       {if !empty($memberInfo) && $memberInfo.Member.id == $document.Document.members_id || $downloaded}
+       	<div id="sendComment">
+	        <div class="row">
+	          <label>您的评论:</label>
+	          <textarea id="comment" name="comment"></textarea>
+	          <div class="clearfix"></div>
+	        </div>
+	        <div class="row">
+	          <label>验证码:</label><input type="text" id="commentCheckNum"/>
+	          <a href="javascript:void(0);" id="getCommentCheckNum" title="刷新验证码">看不清？</a> 
+	        </div>
+	        <div class="row">          
+	          <a href="javascript:void(0);" title="递交" class="btnComment btnCommit">递交</a> 
+	        </div>
         </div>
-        <div class="row">
-          <label>验证码:</label><input type="text" />
-          <a href="javascript:;" title="刷新验证码"><img src="{$this->webroot}img/num_03.jpg" />看不清？</a> 
+       {else}
+       		{if empty($memberInfo)}
+       			<div class="nolog"> 登录后你可以发表评论，请先登录。<a class="linkNolog linkLogin" href="javascript:void(0);">登录&gt;&gt;</a></div>
+       		{else}
+       			<div class="nolog"> 下载之后你可以发表评论，请先下载查看。</div>
+       		{/if}
+       	<div id="sendComment" style="display:none">
+	        <div class="row">
+	          <label>您的评论:</label>
+	          <textarea onfocus="_Showvaldiv(0);" id="comment" name="comment"></textarea>
+	          <div class="clearfix"></div>
+	        </div>
+	        <div class="row">
+	          <label>验证码:</label><input type="text" />
+	          <a href="javascript:void(0);" title="刷新验证码"><img src="{$this->webroot}img/num_03.jpg" />看不清？</a> 
+	        </div>
+	        <div class="row">          
+	          <a href="javascript:void(0);" title="递交" class="btnCommit btnComment" onclick="alert('评论已递交。');">递交</a> 
+	        </div>
         </div>
-        <div class="row">          
-          <a href="javascript:;" title="递交" class="btnCommit" onclick="alert('评论已递交。');">递交</a> 
-        </div>
-        {else if empty($memberInfo)}
-        <div class="nolog"> 登录后你可以发表评论，请先登录。<a class="linkNolog linkLogin" href="javascript:void(0);">登录&gt;&gt;</a></div>
-        {else}
-        <div class="nolog"> 下载之后你可以发表评论，请先下载查看。</div>
-        {/if}
-      <div class="tilComment">共&nbsp;32&nbsp;条评论，显示&nbsp;32&nbsp;条</div>
+       {/if}
+
+<div id="comments">
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#comments', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$this->Paginator->options($options)}
+{$paginatorParams = $this->Paginator->params()}
+      <div class="tilComment">共&nbsp;{$paginatorParams['count']}&nbsp;条评论</div>
       <div class="commentContent">
         <ul>
+        {foreach $comments as $key => $comment}
           <li>
-            <div class="photo fl"><img src="{$this->webroot}img/avatar/avatar.php.gif" /></div>
-            <div class="name"><span class="fr">2楼</span><b>XXX5202012</b><span>4天前</span></div>
+            <div class="photo fl"><img src="{$this->webroot}{if !empty($comment.Attribute.thumbnail)}{$comment.Attribute.thumbnail}{else}img/tx.jpg{/if}" /></div>
+            <div class="name"><b>{$comment.Member.nickname}</b><span>{$comment.DocumentComment.created|date_format:"%Y-%m-%d"}</span></div>
             <div class="body">
-              <p>不用看了，美国都卖完了，瞬间被秒了</p>
+              <p>{$comment.DocumentComment.comment}</p>
               <div class="menu">
-	              <a target="_self" href="javascript:;" class="btnDing">支持</a>(0)
-	              <a target="_self" href="javascript:;" class="btnCai">反对</a>(0)<span>|</span>
-	              <a title="举报" href="javascript:void(0);" >举报</a>
-              </div>
-              <div class="divReply">
-                <input type="text" class="inpTextBox" />
-                <button class="btnReply">回复</button>
-                <button class="btnCancle">取消</button>
+              	  <input type="hidden" class="comments_id" value="{$comment.DocumentComment.id}" />
+	              <a target="_self" href="javascript:void(0);" class="btnDing">支持</a>({$comment.DocumentComment.support})
+	              <a target="_self" href="javascript:void(0);" class="btnCai">反对</a>({$comment.DocumentComment.opposition})<span>|</span>
               </div>
             </div>
           </li>
+          {/foreach}
         </ul>
       </div>
-      <div class="artFangye"> <a href="#" class="dd_span">上一页</a> <a href="#" class="dd_span">1</a> <a href="#" class="dd_span">2</a> <a href="#" class="dd_span">3</a> <a href="#" class="dd_span">4</a> <a href="#" class="dd_span">5</a> <a href="#" class="dd_span">6</a> <a href="#" class="dd_span">7</a> <a href="#" class="dd_span">8</a> <a href="#" class="dd_span">9</a> <a href="#" class="dd_span">...16</a>
-            <div class="dd_ym">
-              <select>
-                <option>100</option>
-                <option>50</option>
-                <option>20</option>
-                <option>10</option>
-              </select>
-            </div>
-            <div class="dd_ym11"><span>共64388条</span><span>第9999/9999页</span>
-              <input class="inpTextBox" type="text"/>
-            </div>
-            <a href="#" class="dd_span">跳转</a> <a href="#" class="dd_span">下一页</a> </div>
+      {if $paginatorParams['count'] > 0}
+      <div class="fanyea">
+      <form id="searchOpt">
+        {if $paginatorParams['prevPage']}
+            <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+        {/if}
+        <div class="dd_ym">
+            <label>每页显示：</label>
+            <select name="pageSize" id="pageSize">
+                <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
+                <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
+                <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
+                <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
+            </select>
+        </div>
+        <div class="dd_ym11">
+            <font>共{$paginatorParams['count']}条</font> <font>第{$paginatorParams['page']}/{$paginatorParams['pageCount']}页</font>
+            <input type="text" id="jump" name="jump" value="{if isset($jump)}{$jump}{/if}">
+            <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
+        </div>
+        {if $paginatorParams['nextPage']}
+            <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+        {/if}
+        </form>
     </div>
+    {/if}
+	</div>
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?id='|cat:$document.Document.id]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?id='|cat:$document.Document.id]}
+{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#comments', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
+{$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
+{$this->Js->writeBuffer()}
+  </div>
   </div>
   {$this->element('resource/left')}
 </div>
@@ -162,19 +300,19 @@ $(document).ready(function(){
       <ul>
         <li>
           <label>个人用户名：</label>
-          <input type="text" name="nickname" value="" id="username" class="username" />
+          <input type="text" name="nickname" value="" id="comment_nickname" class="username" />
         </li>
         <li>
           <label>密码：</label>
-          <input type="password" name="password" value="" id="password" class="password"/>
+          <input type="password" name="password" value="" id="comment_password" class="password"/>
         </li>
         <li>
           <label>验证码：</label>
-          <input type="text" name="yanzhengma" value="" class="yanzhengma" >
-          <a class="getCheckNum" href="javascript:void(0)"><img src="images/num_03.jpg"/>看不清？</a></li>
+          <input type="text" name="checknum" id="loginCheckNum" value="" class="yanzhengma" >
+          <a id="getLoginCheckNum" href="javascript:void(0)">看不清？</a></li>
         <li class="zinp">
-	        <a id="btnLogin" class="inp" href="javascript:void(0)">登录</a>
-	        <a id="btnRegister" class="inp" href="/members/register" target="_blank">免费注册</a>
+	        <a id="btnCommentLogin" class="inp" href="javascript:void(0)">登录</a>
+	        <a id="btnCommentRegister" class="inp" href="/members/register" target="_blank">免费注册</a>
 	        <a class="forget" href="wangjimima.html">忘记密码</a>
         </li>
       </ul>

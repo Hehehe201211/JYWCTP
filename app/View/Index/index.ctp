@@ -110,32 +110,45 @@ $(document).ready(function(){
             <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/6.jpg" alt="这是标题六" /></a>
         </div>
         <div class="keyuan">
-            <div class="fl">
-                <a class="aImg" href="plf-wyky2.html" target="_blank"><img src="{$this->webroot}img/ads/201211201512.png"/></a>
-                <div class="ulLists">
-                    <ul class="lists">
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                        <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="fl fr"><a class="aImg" href="plf-woyoukeyuan.html" target="_blank"><img src="{$this->webroot}img/ads/201211201512.png" /></a>
-                <div class="ulLists">
-                    <ul class="lists">
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-                        <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-                    </ul>
-                </div>
-            </div>
+      <div class="fl"> 
+      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>我要客源</h3>
+        <div class="ulLists">        
+          <ul class="lists">
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+          </ul>
         </div>
+      </div>
+      <div class="fl fr">
+      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>我有客源</h3>
+        <div class="ulLists">
+          <ul class="lists">
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
+            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div class="content_right">
