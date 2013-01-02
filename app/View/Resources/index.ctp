@@ -137,5 +137,9 @@
       </table>
     </div>
   </div>
+  {if !empty($memberInfo)}
+  {$this->element('resource/left_logined')}
+  {else}
   {$this->element('resource/left')}
+  {/if}
 </div>

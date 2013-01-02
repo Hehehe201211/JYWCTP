@@ -8,199 +8,74 @@
         <div class="arrow"></div>
     </div>
   <div class="conResource">
-    <div class="crumbsNav"><a href="plt-zytd.html">资源天地</a>&nbsp;&gt;&nbsp;<a href="plt-zytdI-list.html">客户管理</a></div>     
-    <div class="divResource">
+    <div class="crumbsNav"><a href="plt-zytd.html">资源天地</a>&nbsp;&gt;&nbsp;<a href="plt-zytdI-list.html">客户管理</a></div>
+    <div id="documents">
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#documents', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$this->Paginator->options($options)}
+{$paginatorParams = $this->Paginator->params()}  
+    <div class="divResource" style="float:none;width:auto;">
       <h2>客户管理</h2>
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      	{foreach $documents as $key => $document}
+	        {if $key%2 == 0}
+	        <tr>
+	        	<td class="title"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></td>
+	          	<td class="pages">{$document.Document.pages}页</td>
+	          	<td class="fraction"><span>{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</span></td>
+	        {else}
+	          	<td class="title"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></td>
+	          	<td class="pages">{$document.Document.pages}页</td>
+	          	<td class="fraction"><span>{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</span></td>
+	        </tr>
+	        {/if}
+        {/foreach}
+        {if $key%2 == 0}
+        	</tr>
+        {/if}
       </table>      
     </div>
-    <div class="divResource">   
-      <h2>客户管理</h2>   
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
-      </table>      
-    </div>   
-    <div class="adResource"><img src="images/ads/960x100.jpg" width="742" height="65" /></div> 
-    <div class="divResource">          
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
+    	<div class="fanye fanyePN">
+	    	<form id="searchOpt">
+	        {if $paginatorParams['prevPage']}
+	            <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+	        {/if}
+	        <div class="dd_ym">
+	            <label>每页显示：</label>
+	            <select name="pageSize" id="pageSize">
+	                <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
+	                <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
+	                <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
+	                <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
+	            </select>
+	        </div>
+	        <div class="dd_ym11">
+	            <font>共{$paginatorParams['count']}条</font> <font>第{$paginatorParams['page']}/{$paginatorParams['pageCount']}页</font>
+	            <input type="text" id="jump" name="jump" value="{if isset($jump)}{$jump}{/if}">
+	            <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
+	        </div>
+	        {if $paginatorParams['nextPage']}
+	            <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+	        {/if}
+	        </form>
+      	</div>
+{if isset($this->request->query['mid'])}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?mid='|cat:$this->request->query['mid']]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?mid='|cat:$this->request->query['mid']]}
+{else}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']]}
+{/if}
 
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
-      </table>      
-    </div>
-    <div class="divResource">            
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
-      </table>      
-    </div>     
-    <div class="clear">&nbsp;</div>
-    <div class="divResource">            
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
-      </table>      
-    </div>
-    <div class="divResource">            
-      <table width="360" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>
-        <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>5分</span></td>
-        </tr>
-         <tr>
-          <td class="title"><a href="plt-zytdI-article.html" target="_blank">雅思考试阅读部分全解析</a></td>
-          <td class="pages">3页</td>
-          <td class="fraction"><span>免费</span></td>
-        </tr>        
-      </table>      
-    </div>
-    <div class="fanye fanyePN"> <a href="#" class="dd_span">上一页</a> <a href="#" class="dd_span">1</a> <a href="#" class="dd_span">2</a> <a href="#" class="dd_span">3</a> <a href="#" class="dd_span">4</a> <a href="#" class="dd_span">5</a> <a href="#" class="dd_span">6</a> <a href="#" class="dd_span">7</a> <a href="#" class="dd_span">8</a> <a href="#" class="dd_span">9</a> <a href="#" class="dd_span">...16</a>
-      <div class="dd_ym">
-        <select>
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-          <option>20</option>
-        </select>
-      </div>
-      <div class="dd_ym11"><span>共64388条</span><span>第9999/9999页</span>
-        <input type="text" class="inpTextBox">
-      </div>
-      <a class="dd_span" href="#">跳转</a> <a href="#" class="dd_span">下一页</a> </div>
+{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#documents', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
+{$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
+{$this->Js->writeBuffer()}
+	</div>
   </div>
+  {if !empty($memberInfo)}
+  {$this->element('resource/left_logined')}
+  {else}
   {$this->element('resource/left')}
+  {/if}
 </div>

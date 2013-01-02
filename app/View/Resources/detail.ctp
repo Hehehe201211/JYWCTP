@@ -2,7 +2,7 @@
 {literal}
 $(document).ready(function(){
 	//评论验证码
-    $('#commentCheckNum').after('<img id="commentCode" src="/members/image">');
+    $('#getCommentCheckNum').prepend('<img id="commentCode" src="/members/image">');
     $('#getCommentCheckNum').click(function(){
         var src = '/members/image/' + Math.random();
         $('#commentCode').attr('src', src);
@@ -50,7 +50,7 @@ $(document).ready(function(){
 		}
 	});
 	//确保验证码显示
-	$('#loginCheckNum, #commentCheckNum').focus(function(){
+	$('#loginCheckNum').focus(function(){
 		if(!$(this).next().is('img')) {
 			$(this).after('<img id="loginCode" src="/members/image">');
 		}
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	//登陆按钮
 	$('#btnCommentLogin').click(function(){
 		var errorMsg = '<span style="color:red">请输入此项</span>'
-		$('#loginBox span').remove();
+		$('#loginCommentBox span').remove();
 		if ($('#comment_nickname').val() == "") {
 			$('#comment_nickname').after(errorMsg);
 			return false;
@@ -78,7 +78,6 @@ $(document).ready(function(){
 		var type = 0;
 		
 		var params = "nickname=" + nickname + "&password=" + password + "&checkNum=" + checkNum + "&type=" + type;
-		console.log(params);
 		$.ajax({
                 type : 'post',
                 url  : '/members/ajaxlogin',
@@ -90,7 +89,7 @@ $(document).ready(function(){
                     
                     if (data != '') {
                         msg = '<span style="color:red">' + data + '</span>';
-                        $('#loginBox ul :first-child').append(msg);
+                        $('#loginCommentBox ul:first-child').before(msg);
                     }
                     
                 }
@@ -100,9 +99,32 @@ $(document).ready(function(){
 	//评论按钮
 	$(".btnComment").click(function(){
 		var error = false;
+		$('#sendComment span').remove();
 		var documents_id = $('#documents_id').val();
 		if ($('#comment').val() == "") {
 			error = true;
+			$('#comment').after('<span class="errorMsg">先说几句吧...</span>');
+		} else $('#comment').next().remove();
+		if ($('#commentCheckNum').val() == "") {
+			error = true;
+			$('#commentCheckNum').parent().append('<span class="errorMsg" style="top:450px;">请输入验证码</span>');
+		} else {
+			$.ajax({
+		      url : '/members/getImageNumber',
+		      type : 'post',
+		      async : false,
+		      success : function(data)
+		      {
+		          if (data != $('#commentCheckNum').val().toUpperCase()) {
+		              error = true;
+		              if ($("#commentCheckNum").parent().find('.errorMsg').length == 0) {
+                          $("#commentCheckNum").parent().append('<span class="errorMsg" style="top:450px;">验证码不一致</span>');
+                      } else {
+                          $("#commentCheckNum").parent().find('.errorMsg').html('验证码不一致');
+                      }
+		          }
+		      }
+		  });
 		}
 		if (!error) {
 			$.ajax({
@@ -114,24 +136,104 @@ $(document).ready(function(){
 					if (result.result != "OK") {
 						alert(result.msg);
 					} else {
+						alert('发表评论成功！');
 						var li = 
 						'<li>' +
 				            '<div class="photo fl"><img src="' + result.thumbnail + '" /></div>' +
-				            '<div class="name">' + result.name + '</b><span>刚刚</span></div>' +
+				            '<div class="name"><b>' + result.name + '</b><span>刚刚</span></div>' +
 				            '<div class="body">' +
 				              '<p>' + $('#comment').val() + '</p>' +
 				              '<div class="menu">' +
+				              	  '<input class="comments_id" type="hidden" value="' + result.id + '">' +
 					              '<a target="_self" href="javascript:void(0);" class="btnDing">支持</a>(0)' +
-					              '<a target="_self" href="javascript:void(0);" class="btnCai">反对</a>(0)<span>|</span>' +
+					              '<a target="_self" href="javascript:void(0);" class="btnCai">反对</a>(0)' +
 				              '</div>' +
 				            '</div>' +
 				          '</li>';
-				         $('.commentContent ul').append(li); 
+				         $('.commentContent ul').prepend(li);
+				         $('#comment').val('');
+				         $("#commentCheckNum").val('');
+				         var src = '/members/image/' + Math.random();
+        				$('#commentCode').attr('src', src);
 					}
 				}
 			});
 		}
 	});
+	//针对评论，发表意见
+	$('.btnDing').live('click', function(){
+		var comments_id = $(this).parent().find('.comments_id').val();
+		if (sendOption(comments_id, 1)) {
+			var support = parseInt($(this).parent().find('.support').html()) + 1;
+			var opposition = parseInt($(this).parent().find('.opposition').html());
+			var html = '<span  class="manner">我已支持过</span><span>支持(' + support +')反对(' + opposition +')</span>';
+			$(this).parent().html(html);
+		}
+	});
+	$('.btnCai').live('click', function(){
+		var comments_id = $(this).parent().find('.comments_id').val();
+		if (sendOption(comments_id, 0)) {
+			var support = parseInt($(this).parent().find('.support').html());
+			var opposition = parseInt($(this).parent().find('.opposition').html()) + 1;
+			var html = '<span class="manner">我已反对过</span><span>支持(' + support +')反对(' + opposition +')</span>';
+			$(this).parent().html(html);
+		}
+	});
+	function sendOption(comments_id, option)
+	{
+		var success = false;
+		$.ajax({
+			url : '/resources/support',
+			type : 'post',
+			async : false,
+			data : 'comments_id=' + comments_id + '&option=' + option,
+			success : function(data){
+				var result = eval("("+data+")");
+				if (result.result != "OK") {
+					alert(result.msg);
+				} else {
+					success = true;
+				}
+			}
+		});
+		return success;
+	}
+	
+	//收藏和删除收藏
+	$('.addFavorite').live('click', function(){
+		var documents_id = $('#documents_id').val();
+		if (sendFavorite(documents_id, 'add')) {
+			$(this).text('删除收藏').removeClass('addFavorite').addClass('delFavorite');
+		}
+	});
+	$('.delFavorite').live('click', function(){
+		var documents_id = $('#documents_id').val();
+		if (sendFavorite(documents_id, 'del')) {
+			$(this).text('收藏').removeClass('delFavorite').addClass('addFavorite');
+		}
+	});
+	function sendFavorite(documents_id, action)
+	{
+		var success = false;
+		$.ajax({
+			url : '/resources/favorite',
+			type : 'post',
+			async : false,
+			data : 'documents_id=' + documents_id + '&action=' + action,
+			success : function(data){
+				var result = eval("("+data+")");
+				if (result.result == 'unlogin') {
+					window.location.href = location.href;
+				} else if (result.result != "OK") {
+					alert(result.msg);
+				} else {
+					success = true;
+				}
+			}
+		});
+		return success;
+	}
+	
 });
 {/literal}
 </script>
@@ -152,9 +254,9 @@ $(document).ready(function(){
 	    {$file_info[0]}
     </h1>
     <div class="sbResource">
-      <h3>文档信息<a href="javascript:void(0);" class="inform linkLogin">举报</a></h3>
+      <h3><a href="javascript:void(0);" class="inform linkLogin">举报</a>文档信息</h3>
       <p class="docInfo">浏览：{$document.Document.clicked}次&nbsp;&nbsp;&nbsp;下载：{$document.Document.download_cnt}次</p>
-      <p class="docInfo">贡献者：<a href="plt-zytd-hislist.html" target="_blank">{$document.Member.nickname}</a></p>
+      <p class="docInfo">贡献者：<a href="/resources/listview?mid={$document.Document.members_id}" target="_blank">{$document.Member.nickname}</a></p>
       <p class="docInfo">贡献时间：{$document.Document.created|date_format:"%Y-%m-%d"}</p>
       <p class="docInfo"><span class="fl">格式：</span><span class="spanFileFormat {$this->Unit->getFileIcon($file_info[1])}"></span>{$file_info[1]}</p>
       <p class="docInfo">关键词：
@@ -164,7 +266,13 @@ $(document).ready(function(){
       <p class="filedescribe">{$document.Document.introduction}</p>
       <div class="clearfix"></div>
     </div>
-    <div class="downFile"> <a href="javascript:void(0);" class="btnCollect">收藏</a>
+    <div class="downFile">
+    	{if $isFavourite}
+    		<a href="javascript:void(0);" class="btnCollect delFavorite">删除收藏</a>
+    	{else}
+    		<a href="javascript:void(0);" class="btnCollect addFavorite">收藏</a>
+    	{/if}
+   
       <div class="download"><a href="javascript:void(0);" class="btnDownload">下载</a>
         <div class="describe">
           <p>大小：{printf("%.1f", $document.Document.size/1000)}KB</p>
@@ -202,11 +310,11 @@ $(document).ready(function(){
 	          <div class="clearfix"></div>
 	        </div>
 	        <div class="row">
-	          <label>验证码:</label><input type="text" />
-	          <a href="javascript:void(0);" title="刷新验证码"><img src="{$this->webroot}img/num_03.jpg" />看不清？</a> 
+	          <label>验证码:</label><input type="text" id="commentCheckNum"/>
+	          <a href="javascript:void(0);" id="getCommentCheckNum" title="刷新验证码">看不清？</a> 
 	        </div>
 	        <div class="row">          
-	          <a href="javascript:void(0);" title="递交" class="btnCommit btnComment" onclick="alert('评论已递交。');">递交</a> 
+	          <a href="javascript:void(0);" title="递交" class="btnCommit btnComment">递交</a> 
 	        </div>
         </div>
        {/if}
@@ -225,11 +333,31 @@ $(document).ready(function(){
             <div class="name"><b>{$comment.Member.nickname}</b><span>{$comment.DocumentComment.created|date_format:"%Y-%m-%d"}</span></div>
             <div class="body">
               <p>{$comment.DocumentComment.comment}</p>
-              <div class="menu">
-              	  <input type="hidden" class="comments_id" value="{$comment.DocumentComment.id}" />
-	              <a target="_self" href="javascript:void(0);" class="btnDing">支持</a>({$comment.DocumentComment.support})
-	              <a target="_self" href="javascript:void(0);" class="btnCai">反对</a>({$comment.DocumentComment.opposition})<span>|</span>
-              </div>
+              {if !empty($memberInfo) && $comment.DocumentComment.members_id != $memberInfo.Member.id}
+              	{if $comment.Option.option !== NULL}
+              		<div class="menu">
+              		  {if $comment.Option.option == true}
+              		  <span class="manner">我已支持过</span>
+              		  {else}
+              		  <span class="manner">我已反对过</span>
+              		  {/if}
+		              支持({$comment.DocumentComment.support})反对({$comment.DocumentComment.opposition})
+	               </div>
+              	{else}
+	              <div class="menu">
+	              	  <input type="hidden" class="comments_id" value="{$comment.DocumentComment.id}" />
+		              <a target="_self" href="javascript:void(0);" class="btnDing">支持</a>(<span class="support">{$comment.DocumentComment.support}</span>)
+		              <a target="_self" href="javascript:void(0);" class="btnCai">反对</a>(<span class="opposition">{$comment.DocumentComment.opposition}</span>)
+	              </div>
+              	{/if}
+              {else if $comment.DocumentComment.members_id == $memberInfo.Member.id}
+              	  <div class="menu">
+		              支持(<span class="support">{$comment.DocumentComment.support}</span>)
+		              反对(<span class="opposition">{$comment.DocumentComment.opposition}</span>)
+	              </div>
+             {else}
+              	<div class="menu"></div>
+             {/if}
             </div>
           </li>
           {/foreach}
@@ -239,7 +367,7 @@ $(document).ready(function(){
       <div class="fanyea">
       <form id="searchOpt">
         {if $paginatorParams['prevPage']}
-            <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+            <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
         {/if}
         <div class="dd_ym">
             <label>每页显示：</label>
@@ -256,7 +384,7 @@ $(document).ready(function(){
             <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
         </div>
         {if $paginatorParams['nextPage']}
-            <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+            <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
         {/if}
         </form>
     </div>
@@ -270,7 +398,11 @@ $(document).ready(function(){
 {$this->Js->writeBuffer()}
   </div>
   </div>
+  {if !empty($memberInfo)}
+  {$this->element('resource/left_logined')}
+  {else}
   {$this->element('resource/left')}
+  {/if}
 </div>
 
 <input type="hidden" id="downloaded" value="{if $downloaded}1{else}0{/if}" />
@@ -296,7 +428,7 @@ $(document).ready(function(){
 <div class="divDjbuz" id="divDjbuz" style="width:274px;"> <a class="closeDiv" href="#">&nbsp;</a>
   <div class="login">
     <div class="frmTitle">您需要登录后才能继续操作</div>
-    <form action="#" method="post" id="loginBox">
+    <form action="#" method="post" id="loginCommentBox">
       <ul>
         <li>
           <label>个人用户名：</label>

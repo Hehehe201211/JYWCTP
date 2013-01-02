@@ -12,11 +12,31 @@
             <div class="name"><b>{$comment.Member.nickname}</b><span>{$comment.DocumentComment.created|date_format:"%Y-%m-%d"}</span></div>
             <div class="body">
               <p>{$comment.DocumentComment.comment}</p>
-              <div class="menu">
-              	  <input type="hidden" class="comments_id" value="{$comment.DocumentComment.id}" />
-	              <a target="_self" href="javascript:void(0);" class="btnDing">支持</a>({$comment.DocumentComment.support})
-	              <a target="_self" href="javascript:void(0);" class="btnCai">反对</a>({$comment.DocumentComment.opposition})<span>|</span>
-              </div>
+              {if !empty($memberInfo) && $comment.DocumentComment.members_id != $memberInfo.Member.id}
+              	{if $comment.Option.option !== NULL}
+              		<div class="menu">
+              		  {if $comment.Option.option == true}
+              		  <span class="manner">我已支持过</span>
+              		  {else}
+              		  <span class="manner">我已反对过</span>
+              		  {/if}
+		              支持({$comment.DocumentComment.support})反对({$comment.DocumentComment.opposition})
+	               </div>
+              	{else}
+	              <div class="menu">
+	              	  <input type="hidden" class="comments_id" value="{$comment.DocumentComment.id}" />
+		              <a target="_self" href="javascript:void(0);" class="btnDing">支持</a>(<span class="support">{$comment.DocumentComment.support}</span>)
+		              <a target="_self" href="javascript:void(0);" class="btnCai">反对</a>(<span class="opposition">{$comment.DocumentComment.opposition}</span>)
+	              </div>
+              	{/if}
+              {else if $comment.DocumentComment.members_id == $memberInfo.Member.id}
+              	  <div class="menu">
+		              支持(<span class="support">{$comment.DocumentComment.support}</span>)
+		              反对(<span class="opposition">{$comment.DocumentComment.opposition}</span>)
+	              </div>
+             {else}
+              	<div class="menu"></div>
+             {/if}
             </div>
           </li>
           {/foreach}

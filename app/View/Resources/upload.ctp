@@ -12,58 +12,51 @@ $(document).ready(function(){
         if ($(this).text()=="收起") $(this).text("展开");
         else $(this).text("收起");
     });
-
+    $(".itemBd .btnInfo").live("click",function(){
+        
+    }); 
     $(".titleFU .btnUpload").click(function(){
-       $(" .corFU .divCorFU:last").after($(".fileUpload > .divCorFU").clone());
+        $(" .fileUpload .corFU").append($(".corFU .divCorFU").eq(0).clone());
         $(".corFU .divCorFU").last().show();
         $("html,body").animate({scrollTop:$(".corFU .divCorFU").last().offset().top},"normal");
     });
-	$(".corFU .btnUpload").click(function(){
-		$(".titleFU .btnUpload").click();
-	});
-    $(".titleFU a.btnCommit").click(function(){
-		$('.btnInfo').click();
-	});
-   $('.corFU .btnCommit').live('click', function(){	
-      if (!errorV()) $('#documentForm').submit();
+    
+    $('.btnInfo').live('click', function(){        
+		var errorMsg = '<span class="errorMsg">请输入此项目</span>';		
+		var error=0;
+		$(this).parents('.corFU .divCorFU').find('input').not('.keyword').each(function(index,element){
+			if($(element).val() == "") {				
+				$(element).parent().append(errorMsg);
+				error=1;
+			} else {
+				$(element).parent().find('.errorMsg').remove();
+			}
+		});
+		var txta=$(this).parents('.corFU .divCorFU').find('textarea');
+		if($(txta).val() == "") {
+			$(txta).parent().append(errorMsg);
+			error=1;
+		} else {
+			$(txta).parent().find('.errorMsg').remove();
+		}
+		
+		var slt=$(this).parents('.corFU .divCorFU').find('select');
+		if($(slt).val() == "") {
+			$(slt).parent().append(errorMsg);
+			error=1;
+		} else {
+			$(slt).parent().find('.errorMsg').remove();
+		}
+       if (!error) $('#documentForm').submit();
     })
 });
-function errorV(){
-	var errorMsg = '<span class="errorMsg">请输入此项目</span>';		
-	var error=0;
-	$('.corFU .btnCommit').parents(".corFU").find('input').not('.keyword').each(function(){
-		if($(this).val() == "") {				
-			$(this).parent().append(errorMsg);
-			error=1;
-		} else {
-			$(this).parent().find('.errorMsg').remove();
-		}
-	});
-	$('.corFU .btnCommit').parents(".corFU").find('textarea').each(function() {
-		if($(this).val() == "") {
-			$(this).parent().append(errorMsg);
-			error=1;
-		} else {
-			$(this).parent().find('.errorMsg').remove();
-		}
-	});			
-	$('.corFU .btnCommit').parents(".corFU").find('select').each(function() {
-		if($(this).val() == "") {
-			$(this).parent().append(errorMsg);
-			error=1;
-		} else {
-			$(this).parent().find('.errorMsg').remove();
-		}
-	});			
-	return error;			
-}
 {/literal}
 </script>
 <div class="main">
   <div class="conResource">
     <div class="crumbsNav"><a href="plt-zytd.html">资源天地</a>&nbsp;&gt;&nbsp;上传文档</div>
     <div class="fileUpload">
-      <div class="titleFU"> <a href="javascript:;" class="fr btnCommit" >完成上传</a><a href="javascript:;" class="fr btnUpload">添加文档</a>
+      <div class="titleFU"> <a href="javascript:;" class="fr btnCommit" onclick="alert('文档上传成功。');window.open('plt-zytdI-center.html','_self');">完成上传</a><a href="javascript:;" class="fr btnUpload">添加文档</a>
         <h2>上传文档</h2>
       </div>
       <div class="divCorFU" style="display:none;">
@@ -106,7 +99,7 @@ function errorV(){
             <div>
               <input type="text" name="keyword[]" class="keyword"/>
             </div>
-            </div>
+            <a href="javascript:;" class="btnInfo">提交信息</a> </div>
         </div>
       <form method="post" action="/resources/finish" id="documentForm" enctype="multipart/form-data">
       <div class="corFU">
@@ -149,12 +142,11 @@ function errorV(){
             <div>
                 <input type="text" name="keyword[]" class="keyword"/>
             </div>
-            </div>
+            <a href="javascript:void(0);" class="btnInfo">提交信息</a> </div>
         </div>
-        <div class="divBtnContainer" style="width:236px"><a href="javascript:;" class="fr btnCommit">完成上传</a><a href="javascript:;" class="fr btnUpload">添加文档</a></div>
       </div>
+    </div>
     </form>
-        </div>
     <div class="uploadNotice">
       <dl class="mb10">
         <dt>上传须知</dt>
@@ -189,5 +181,9 @@ function errorV(){
       </table>
     </div>
   </div>
+  {if !empty($memberInfo)}
+  {$this->element('resource/left_logined')}
+  {else}
   {$this->element('resource/left')}
+  {/if}
 </div>
