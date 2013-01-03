@@ -8,10 +8,6 @@ $(document).ready(function(){
     $("#banners").KinSlideshow({moveStyle:"left",intervalTime:4,mouseEvent:"click",titleFont:{TitleFont_size:14,TitleFont_color:"#FFF"}});
     $(".duwu_bottm_con").imageScroller({next: "duwu_bottm_left",prev: "duwu_bottm_right",frame:"bookListCon",child: "li",auto: true,num:6,timer:5000,moveDistance:-95});
     
-    $("#btnLogin").click(function(){
-        if (!($("#username").val()==""||$("#username").val()=="请输入用户名"||$("#password").val()==""||$("#yanzhengma").val()==""||$("#yanzhengma").val()=="输入验证码"))  window.open("new-hyzy.html","_blank");
-    });
-    
     //选项卡切换
     $("#myTab1 li").mouseenter(function(){
         var tabIndex=$("#myTab1 li").index(this);
@@ -87,6 +83,72 @@ $(document).ready(function(){
   $(".footer .links .close").click(function(){
       $(this).parent().slideUp("fast");
   });
+  
+  
+  	//验证码
+    $('#yanzhengma').after('<img id="code" src="/members/image">');
+    $('#getCheckNum').click(function(){
+        var src = '/members/image/' + Math.random();
+        $('#code').attr('src', src);
+    });
+    
+    //login
+    $('#btnLogin').click(function(e){
+        var msg = '';
+        var error = false;
+        var nickname = $('#loginBox input[name="nickname"]').val();
+        var password = $('#loginBox input[name="password"]').val();
+        var checkNum = $('#loginBox input[name="checkNum"]').val();
+        var type = $('#loginBox input[name="type"]:checked').val();
+        if (nickname == '' || nickname == '请输入用户名') {
+            msg = '<li>请输入用户名</li>'
+            error = true;
+        }
+        if (password == '') {
+            msg += '<li>请输入密码</li>';
+            error = true;
+        }
+        if (checkNum == '' || checkNum == '验证码') {
+            msg += '<li>请输入验证码</li>';
+            error = true;
+        }
+        if (type == null) {
+            msg += '<li>请选择类型</li>';
+            error = true;
+        }
+        if (error) {
+            e.preventDefault();
+            $('#loginWarning .question').html(msg);
+            $("#loginWarning").fadeIn("fast");
+            var t=setTimeout("hideWarning()",10000);
+            
+        }
+        
+        if(!error) {
+             params = "nickname=" + nickname + "&password=" + password + "&checkNum=" + checkNum + "&type=" + type;
+             $.ajax({
+                type : 'post',
+                url  : '/members/ajaxlogin',
+                data : params,
+                success : function(data) {
+                    if (data == '') {
+                        window.location.href = location.href;
+                    }
+                    
+                    if (data != '') {
+                        msg = '<li>' + data + '</li>';
+                        $('#loginWarning ul').html(msg);
+                        $("#loginWarning").fadeIn("fast");
+                        var t=setTimeout("hideWarning()",10000);
+                    } else {
+                        $('#loginWarning').hide();
+                    }
+                    
+                }
+             });
+         }
+    });
+  
 });
 {/literal}
 </script>
@@ -111,40 +173,44 @@ $(document).ready(function(){
         </div>
         <div class="keyuan">
       <div class="fl"> 
-      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>我要客源</h3>
+      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>我要客源<span>谁需要我的产品</span></h3>
         <div class="ulLists">        
           <ul class="lists">
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-wyky2xq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+          {foreach $needTaskList as $information}
+          	<li>
+          	<a href="/search/infodetail?id={$information.Information.id}" target="_blank">
+	          	{$information.Information.title}/
+	          	{if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元{/if}
+	          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
+	          	{if $information.Information.payment_type == 3}聚客币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}/
+	          	{$provincial = $this->City->cityName({$information.Information.provincial})}
+	          	{$city = $this->City->cityName({$information.Information.city})}
+	          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/
+	          	{$information.Information.created|date_format:"%Y-%m-%d"}
+          	</a>
+          	</li>
+          {/foreach}
           </ul>
         </div>
       </div>
       <div class="fl fr">
-      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>我有客源</h3>
+      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>我有客源<span>谁可以提供产品给我</span></h3>
         <div class="ulLists">
           <ul class="lists">
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元/上海 上海/66/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/聚客币：50元；积分：100分/上海 上海/99/2012-11-24</a></li>
-            <li><a href="plf-woyoukeyuanxq.html" target="_blank">聚业务悬赏测试1/50元/上海 上海/0</a></li>
+	          {foreach $hasTaskList as $information}
+	          	<li>
+	          	<a href="/search/infodetail?id={$information.Information.id}" target="_blank">
+		          	{$information.Information.title}/
+		          	{if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元{/if}
+		          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
+		          	{if $information.Information.payment_type == 3}聚客币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}/
+		          	{$provincial = $this->City->cityName({$information.Information.provincial})}
+		          	{$city = $this->City->cityName({$information.Information.city})}
+		          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/
+		          	{$information.Information.created|date_format:"%Y-%m-%d"}
+	          	</a>
+	          	</li>
+	          {/foreach}
           </ul>
         </div>
       </div>
@@ -153,19 +219,20 @@ $(document).ready(function(){
 
     <div class="content_right">
         <div class="login">
+            {if empty($memberInfo)}
             <h3>会员登录</h3>
             <form action="#" method="post" id="loginBox">
                 <ul>
                     <li>
-                        <input type="text" name="username" value="请输入用户名" id="username" class="username" txt="请输入用户名" />
+                        <input type="text" name="nickname" value="请输入用户名" id="username" class="username" txt="请输入用户名" />
                     </li>
                     <li>
                         <input type="password" name="password" value="" id="password" class="password"/>
                         <label id="passwordL" for="password">请输入密码</label>
                     </li>
                     <li>
-                        <input type="text" name="yanzhengma" value="验证码" class="yanzhengma" txt="验证码"/>
-                        <a id="getCheckNum" href="javascript:void(0)"><img src="{$this->webroot}img/num_03.jpg"/>看不清？</a>
+                        <input type="text" name="checkNum" value="验证码" class="yanzhengma" id="yanzhengma" txt="验证码"/>
+                        <a id="getCheckNum" href="javascript:void(0)">看不清？</a>
                     </li>
                     <li style="margin-bottom:4px;">
                         <label>类型：</label>
@@ -173,12 +240,15 @@ $(document).ready(function(){
                         <label><input type="radio" name="type" />企业</label>
                     </li>
                     <li class="zinp">
-                        <a href="new-hyzy.html" id="btnLogin" class="inp">登录</a>
-                        <a href="zhuce.html" class="inp">免费注册</a>
+                        <a href="javascript:void(0)" id="btnLogin" class="inp">登录</a>
+                        <a href="/members/register" class="inp">免费注册</a>
                     </li>
                     <li class="liForget"><a href="wangjimima.html">忘记密码？</a>&nbsp;&nbsp;</li>
                 </ul>
             </form>
+            {else}
+            <h3><a href="/members">会员主页</a></h3>
+            {/if}
         </div>
         <div class="crAd"><img src="{$this->webroot}img/ads/20110615175842023378.jpg" /></div>
         <div class="change2">
@@ -260,24 +330,24 @@ $(document).ready(function(){
                 <div class="myTab0_Content0">
                     <div class="con_c">
                         <div class="con_c_zuo">
-                            <div class="con_c_zuo_wm"><a href="#"><img src="{$this->webroot}img/zjfk_1.jpg"  alt=""/></a>
+                            <div class="con_c_zuo_wm"><a class="icon" href="#" ></a>
                                 <p class="con_c_zuo_bt">企业从事产品及服务</p>
                                 <p class="con_c_zuo_kj"><a href="#">[展示模板]</a><a href="#">[企业资料录入]</a> </p>
                                 <p class="con_c_zuo_slnr">聚业务通过互联网平台，为广大企业用户，提供产品展示、服务宣传的平台，帮助企业用户提升产品知名度，轻松招聘优秀商务人员。 </p>
                             </div>
-                            <div class="con_c_zuo_wm"> <a href="#"><img src="{$this->webroot}img/zjfk_1.jpg"  alt=""/></a>
+                            <div class="con_c_zuo_wm"><a class="icon icon1" href="#"></a>
                                 <p class="con_c_zuo_bt">企业产品资料</p>
                                 <p class="con_c_zuo_kj"><a href="#">[展示模板]</a><a href="#">[产品资料上传]</a> </p>
                                 <p class="con_c_zuo_slnr">通过该栏目，企业用户可以上传企业的产品，资料（图片、文字、说明书等），方便有意向从事兼职的会员下载浏览 </p>
                             </div>
                         </div>
                         <div class="con_c_zuo">
-                            <div class="con_c_zuo_wm"><a href="#"><img src="{$this->webroot}img/zjfk_1.jpg"  alt=""/></a>
+                            <div class="con_c_zuo_wm"><a class="icon icon2" href="#"></a>
                                 <p class="con_c_zuo_bt">发布兼职信息</p>
                                 <p class="con_c_zuo_kj"><a href="#">[展示模板]</a><a href="#">[兼职信息录入]</a><a href="#">[简历检索 ]</a> </p>
                                 <p class="con_c_zuo_slnr">用最少的成本，获得更多的客户资源，招聘兼职业务人员是企业用户最理想的选择；聚业务网站汇聚了全国最优秀的各行业业务人员 </p>
                             </div>
-                            <div class="con_c_zuo_wm"> <a href="#"><img src="{$this->webroot}img/zjfk_1.jpg"  alt=""/></a>
+                            <div class="con_c_zuo_wm"><a class="icon icon3" href="#"></a>
                                 <p class="con_c_zuo_bt">广告位合作方式</p>
                                 <p class="con_c_zuo_kj"><a href="#">[广告位资源]</a><a href="#">[申请广告位]</a> </p>
                                 <p class="con_c_zuo_slnr">酒香也怕巷子深，聚业务为企业用户量身定制广告位，且根据网站访问者的身份精准投放，让您的企业“有的放矢” </p>
@@ -320,78 +390,132 @@ $(document).ready(function(){
         <div class="index_xshdm">
             <div class="ziyuan_tit tilziyuan"> <span>资源天地</span>
                 <ul>
-                    <li class="active4"><a href="plt-zytdrmcz.html">入门成长</a></li>
-                    <li><a href="#">培训课件</a></li>
-                    <li><a href="#">客户管理</a></li>
-                    <li><a href="#">方案模板</a></li>
-                    <li><a href="#">总结计划</a></li>
-                    <li style="border: medium none;"><a href="#">案例分析</a></li>
+                    <li class="active4"><a href="/resources/search?type=1">入门成长</a></li>
+                    <li><a href="/resources/search?type=2">培训课件</a></li>
+                    <li><a href="/resources/search?type=3">客户管理</a></li>
+                    <li><a href="/resources/search?type=4">方案模板</a></li>
+                    <li><a href="/resources/search?type=5">总结计划</a></li>
+                    <li style="border: medium none;"><a href="/resources/search?type=6">案例分析</a></li>
                 </ul>
             </div>
             <div class="index_xshdm_xm">
                 <ul>
                     <li class="listZYTD" style="display:block;">
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">入门成长红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span><span class="time">2012-08-31 14:46</span></a></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">入门成长红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span><span class="time">2012-08-31 14:46</span></a></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">入门成长红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span><span class="time">2012-08-31 14:46</span></a></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">入门成长红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span><span class="time">2012-08-31 14:46</span></a></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">入门成长红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span><span class="time">2012-08-31 14:46</span></a></li>
+                        	{if !empty($documents.chengzhang)}
+                        		{foreach $documents.chengzhang as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有入门成长相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.chengzhang) >= 5}
+                        	<p><a href="/resources/search?type=1" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                     <li class="listZYTD" >
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">培训课件红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">培训课件红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">培训课件红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">培训课件红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">培训课件红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
+                        	{if !empty($documents.peixun)}
+                        		{foreach $documents.peixun as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有培训课件相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.peixun) >= 5}
+                        	<p><a href="/resources/search?type=2" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                     <li class="listZYTD" >
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">客户管理红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">客户管理红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">客户管理红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">客户管理红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">客户管理红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
+                        	{if !empty($documents.kehu)}
+                        		{foreach $documents.kehu as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有客户管理相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.kehu) >= 5}
+                        	<p><a href="/resources/search?type=3" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                     <li class="listZYTD" >
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">方案模板红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">方案模板红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">方案模板红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">方案模板红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">方案模板红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
+                        	{if !empty($documents.fangan)}
+                        		{foreach $documents.fangan as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有方案模板相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.fangan) >= 5}
+                        	<p><a href="/resources/search?type=4" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                     <li class="listZYTD" >
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">总结计划红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">总结计划红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">总结计划红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">总结计划红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">总结计划红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
+                        	{if !empty($documents.zongjie)}
+                        		{foreach $documents.zongjie as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有总结计划相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.zongjie) >= 5}
+                        	<p><a href="/resources/search?type=5" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                     <li class="listZYTD" >
                         <ul>
-                            <li><a href="plt-zytdI-article.html" target="_blank">案例分析红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">案例分析红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">案例分析红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">案例分析红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
-                            <li><a href="plt-zytdI-article.html" target="_blank">案例分析红杏招聘网可靠吗？<span class="coin">10分</span><span class="coin">10页</span><span class="count">下载：10次</span></a><span class="time">2012-08-31 14:46</span></li>
+                        	{if !empty($documents.anli)}
+                        		{foreach $documents.anli as $key => $document}
+                        			<li>
+                        				<a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}
+                        				<span class="coin">10分</span><span class="coin">{$document.Document.pages}页</span>
+                        				<span class="count">下载：{$document.Document.download_cnt}次</span>
+                        				<span class="time">{$document.Document.created|date_format:"%Y-%m-%d"}</span></a>
+                    				</li>
+                        		{/foreach}
+                        	{else}
+                        	没有案例分析相关的资源。
+                        	{/if}
                         </ul>
-                        <p><a href="plt-zytdI-list.html" target="_blank">更多...</a></p>
+                        {if count($documents.anli) >= 5}
+                        	<p><a href="/resources/search?type=6" target="_blank">更多...</a></p>
+                        {/if}
                     </li>
                 </ul>
-                <a href="javascript:;" class="btnUploadDoc linkLogin">我要上传</a>
+                <a href="/resources/upload" class="btnUploadDoc linkLogin">我要上传</a>
             </div>
         </div>
     </div>

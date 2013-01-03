@@ -106,7 +106,6 @@
                 </td>
             </tr>
         </table>
-        <!--
         <ul class="ulParttime">
             <li>经验要求：
                 <select>
@@ -154,7 +153,6 @@
                 </select>
             </li>
         </ul>
-        -->
     </div>
     <!--<div class="toggleMap">打开地图检索</div>-->    
     <!--

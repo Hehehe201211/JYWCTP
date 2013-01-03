@@ -44,7 +44,7 @@ $(document).ready(function(){
     		<dl class="result">
               <dt>
               	<span class="spanFileFormat">&nbsp;</span>
-	            <a class="textEllipsis" href="plt-zytdI-article.html" target="_blank">{$document.Document.title}</a>
+	            <a class="textEllipsis" href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a>
 	            <span class="clr666">{$document.Document.created|date_format:"%Y-%m-%d"}</span>
               </dt>
               <dd></dd>
@@ -56,6 +56,8 @@ $(document).ready(function(){
 	              <span class="clr666">下载次数：{$document.Document.download_cnt}次</span>
 	              <span class="clr666">|</span>
 	              <span class="clr666">共：{$document.Document.pages}页</span>
+	              <span class="clr666">|</span>
+	              <span class="clr666">积分：{if $document.Document.point == 0}免费{else}{$document.Document.point}{/if}分</span>
               </dd>
             </dl>
     	{/foreach}

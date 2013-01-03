@@ -18,6 +18,8 @@
           <span class="clr666">下载次数：{$document.Document.download_cnt}次</span>
           <span class="clr666">|</span>
           <span class="clr666">共：{$document.Document.pages}页</span>
+          <span class="clr666">|</span>
+          <span class="clr666">积分：{if $document.Document.point == 0}免费{else}{$document.Document.point}{/if}分</span>
       </dd>
     </dl>
 {/foreach}

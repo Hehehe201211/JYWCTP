@@ -16,15 +16,15 @@
     </thead>
     {foreach $informations as $information}
     <tr class="con_2_tr">
-        <td class="tr_td1"><a href="javascript:void(0)">{$information.Member.nickname}</a></td>
+        <td class="tr_td1"><a href="/search/infodetail?id={$information.Information.id}">{$information.Member.nickname}</a></td>
         <td class="tr_td2">
-            <a href="javascript:void(0)" >
+            <a href="/search/infodetail?id={$information.Information.id}" >
             {$this->Category->getCategoryName($information.Information.category)} 
             {$this->Category->getCategoryName($information.Information.sub_category)}
             </a>
         </td>
         <td class="tr_td3">
-            <a href="javascript:void(0)">
+            <a href="/search/infodetail?id={$information.Information.id}">
                 {if $information.Information.payment_type == 1}
                     聚客币：{$information.Information.price}元
                 {else if $information.Information.payment_type == 2}
@@ -35,7 +35,7 @@
             </a>
         </td>
         <td class="tr_td4">
-            <a href="javascript:void(0)">
+            <a href="/search/infodetail?id={$information.Information.id}">
                 {$provincial = $this->City->cityName($information.Information.provincial)} 
                 {$city = $this->City->cityName($information.Information.city)}
                 {if $provincial != $city}
@@ -45,8 +45,8 @@
                 {/if}
             </a>
         </td>
-        <td class="tr_td5"><a href="javascript:void(0)">有效</a></td>
-        <td class="con_2_xq_tofu tofu_anniu"><a href="javascript:void(0)" target="_blank">详情</a></td>
+        <td class="tr_td5"><a href="/search/infodetail?id={$information.Information.id}">有效</a></td>
+        <td class="con_2_xq_tofu tofu_anniu"><a href="/search/infodetail?id={$information.Information.id}" target="_blank">详情</a></td>
     </tr>
     {/foreach}    
 </table>

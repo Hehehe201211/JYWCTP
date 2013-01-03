@@ -86,7 +86,7 @@
                 </span>
             </li>
             <li class="keyword">
-                <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字"/>
+                <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onfocus="this.select()"/>
             </li>
         </ul>
         <table width="0" border="0" cellspacing="0" cellpadding="0">

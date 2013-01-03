@@ -31,7 +31,11 @@ $(document).ready(function(){
     <div class="wmxxjs_right">
         <form id="searchOpt">
             {$this->element('common/keyuan-search-bar')}
-            <div class="biaotit">检索结果</div>
+			{if $type=="need"}
+            <div class="biaotit">检索到客源信息</div>
+			{else}
+			<div class="biaotit">检索到悬赏信息</div>
+			{/if}
             {$this->element('common/keyuan-result')}
         </form>
         <input type="hidden" id="info_type" value="{$type}" />

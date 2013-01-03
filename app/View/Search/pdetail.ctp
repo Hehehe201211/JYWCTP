@@ -1,6 +1,6 @@
 <div class="main">
     <div class="wmxxjs_left">
-        <div class="biaotit">推销路由器</div>
+        <div class="biaotit">{$parttime.PartTime.title}</div>
         <div class="gongsichakan_jobs jsxxxq">
             <div class="gongsichakan_post">
                 <p class="jinggao">发布时间：{$parttime.PartTime.created|date_format:"%Y-%m-%d"} 信息编号：{$parttime.PartTime.id} 该信息被浏览 {$parttime.PartTime.clicked + $clicked} 次 </p>

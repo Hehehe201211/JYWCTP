@@ -34,71 +34,108 @@
     </ul>
   </div>
   <div class="header_top">
-    <div class="header_top_logo"><img src="img/logo.jpg" alt="" /></div>
+    <div class="header_top_logo"><img src="{$this->webroot}img/logo.jpg" alt="" /></div>
     <div class="header_top_number">
+      <div class="header_top_numberH">
+        <div>新增会员</div>
+        <div>新增信息</div>
+        <div class="long">新增招聘兼职</div>
+      </div>
       <div class="header_top_index_tj">
         <div class="index_tj_s"><span id="index_tj_sp"></span> <span id="index_tj_sp1"></span></div>
         <div class="index_tj">
           <ul>
             <li>
-              <h2>所有</h2>
-              <ul>
-                <li>访问次数</li>
-                <li>流量占比</li>
-                <li>访客数</li>
-                <li>平均时长</li>
-              </ul>
-              <ul>
-                <li>100%</li>
-                <li>59</li>
-                <li>51</li>
-                <li>5.44</li>
-              </ul>
+              <table width="125%" border="0">
+                <tr>
+                  <td width="16%" rowspan="2" class="title">所有</td>
+                  <td width="13%">个人会员</td>
+                  <td width="13%">企业会员</td>
+                  <td width="12%">客源</td>
+                  <td width="12%">悬赏</td>
+                  <td width="11%">简历</td>
+                  <td width="12%">岗位</td>
+                  <td width="11%">兼职</td>
+                </tr>
+                <tr>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                </tr>
+              </table>
             </li>
             <li>
-              <h2>昨日</h2>
-              <ul>
-                <li>访问次数</li>
-                <li>流量占比</li>
-                <li>访客数</li>
-                <li>平均时长</li>
-              </ul>
-              <ul>
-                <li>100%</li>
-                <li>59</li>
-                <li>51</li>
-                <li>5.44</li>
-              </ul>
+              <table width="125%" border="0">
+                <tr>
+                  <td width="16%" rowspan="2" class="title">昨日</td>
+                  <td width="13%">个人会员</td>
+                  <td width="13%">企业会员</td>
+                  <td width="12%">客源</td>
+                  <td width="12%">悬赏</td>
+                  <td width="11%">简历</td>
+                  <td width="12%">岗位</td>
+                  <td width="11%">兼职</td>
+                </tr>
+                <tr>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                </tr>
+              </table>
             </li>
             <li>
-              <h2>本周</h2>
-              <ul>
-                <li>访问次数</li>
-                <li>流量占比</li>
-                <li>访客数</li>
-                <li>平均时长</li>
-              </ul>
-              <ul>
-                <li>100%</li>
-                <li>59</li>
-                <li>51</li>
-                <li>5.44</li>
-              </ul>
+              <table width="125%" border="0">
+                <tr>
+                  <td width="16%" rowspan="2" class="title">本周</td>
+                  <td width="13%">个人会员</td>
+                  <td width="13%">企业会员</td>
+                  <td width="12%">客源</td>
+                  <td width="12%">悬赏</td>
+                  <td width="11%">简历</td>
+                  <td width="12%">岗位</td>
+                  <td width="11%">兼职</td>
+                </tr>
+                <tr>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                </tr>
+              </table>
             </li>
             <li>
-              <h2>本月</h2>
-              <ul>
-                <li>访问次数</li>
-                <li>流量占比</li>
-                <li>访客数</li>
-                <li>平均时长</li>
-              </ul>
-              <ul>
-                <li>100%</li>
-                <li>59</li>
-                <li>51</li>
-                <li>5.44</li>
-              </ul>
+              <table width="125%" border="0">
+                <tr>
+                  <td width="16%" rowspan="2" class="title">本月</td>
+                  <td width="13%">个人会员</td>
+                  <td width="13%">企业会员</td>
+                  <td width="12%">客源</td>
+                  <td width="12%">悬赏</td>
+                  <td width="11%">简历</td>
+                  <td width="12%">岗位</td>
+                  <td width="11%">兼职</td>
+                </tr>
+                <tr>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                  <td>999999</td>
+                </tr>
+              </table>
             </li>
           </ul>
         </div>
@@ -108,7 +145,7 @@
       <div class="x_search2 x_only2" >
         <div id="top_select" class="x_slist2" > <a class="x_selected select" href="#" hidefocus="true"><span id="topSearch" class="rel">任务</span></a> </div>
         <input id="inpSearch" class="test2" type="text" name="input"/>
-        <input class="image2" width="22" type="image" height="26" src="img/topsearch_04.jpg" name="inpSearch" />
+        <input class="image2" width="22" type="image" height="26" src="{$this->webroot}img/topsearch_04.gif" name="inpSearch" />
         <ul id="topSearchUl" class="select_list" style="display:none;">
           <li><a href="#">任务标题</a></li>
           <li><a href="#">任务号</a></li>
