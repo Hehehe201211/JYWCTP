@@ -100,11 +100,9 @@ $(document).ready(function(){
               <input type="text" name="checkNum" value="验证码" id="checkNum" class="yanzhengma" txt="验证码"/>
               <a id="getCheckNum" href="javascript:void(0)">看不清？</a></li>
             <li>
-              <label>类型：</label>
-              <input type="radio" name="type" value="0" checked="checked" class="fl" id="person"/>
-              <label class="fl" style="width:30px;" for="person">个人</label>
-              <input type="radio" name="type" value="1" class="fl" id="enterprise"/>
-              <label class="fl" style="width:30px;" for="enterprise">企业</label>
+              <label>类型：</label>              
+              <label class="fl" ><input type="radio" name="type" value="0" checked="checked"/>个人</label>              
+              <label class="fl" ><input type="radio" name="type" value="1"/>企业</label>
             </li>
             <li class="zinp">
 	            <a id="btnLogin" class="inp" href="javascript:void(0)">登录</a>

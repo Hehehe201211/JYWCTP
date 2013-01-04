@@ -1,5 +1,4 @@
-<div class="advance_seach pltParttimes">
-    <a class="zclan" href="javascript:void(0)" id="search">检索</a>
+<div class="advance_seach pltParttimes">    
     <div class="switch_box">
         <div class="divTable divTableCity">
             <div class="divtt">
@@ -49,7 +48,7 @@
             </div>
         </div>
         -->
-        <div class="divTable divTableProduct">
+        <div class="divTable divTableProduct" style="left:118px;">
             <div class="divtt">
                 <div class="left fl"><strong>产品或服务</strong>(最多可选5项)</div>
                 <div class="right fr">[确定]</div>
@@ -154,18 +153,5 @@
             </li>
         </ul>
     </div>
-    <!--<div class="toggleMap">打开地图检索</div>-->    
-    <!--
-    <input type="text" value="" class="inpKeyword"/>
-    -->
-</div>
-
-<div class="divMap">
-    <div class="divMapCon">
-        <div class="divInput">
-            <input type="text" id="geostrPosition" value="当前中心位置：厦门市思明区软件园二期；检索半径：1千米" readonly="readonly"/>
-            <input type="hidden" id="comlatlng" />
-        </div>
-        <div id="mapLayout"></div>
-    </div>
+    <a class="zclan zclan4" href="javascript:void(0)" id="search">检索</a>
 </div>

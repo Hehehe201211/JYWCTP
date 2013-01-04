@@ -5,29 +5,78 @@
       <li class="loginInfo"> <ul class="fr">
           <li><a href="zhuce.html" target="_blank">网站说明</a></li>
           <li class="line"></li>
-          <li><a href="zhuce.html" target="_blank">好友推荐</a></li>
+          {if empty($memberInfo) || $memberInfo.Member.type == Configure::read('UserType.Personal')}
+          <li><a href="/accounts/invite" target="_blank">好友推荐</a></li>
+          {/if}
           <li class="line"></li>
-          <li><a href="zhuce.html" target="_blank">站内信</a></li>
+          <li><a href="/accounts/sms" target="_blank">站内信</a></li>
           <li class="line"></li>
-          <li class="cor"><a href="zhuce.html" target="_blank">企业服务</a>
-             <div class="moreList" style="width:60px;"><a href="#" target="_blank">企业服务</a><a href="#" target="_blank">常规招聘</a><a href="#" target="_blank">平台兼职</a></div>
+          {if empty($memberInfo)}
+          <li class="cor">
+          <a href="zhuce.html" target="_blank">企业服务</a>
+             <div class="moreList" style="width:60px;">
+	             <a href="#" target="_blank">企业服务</a>
+	             <a href="#" target="_blank">常规招聘</a>
+	             <a href="#" target="_blank">平台兼职</a>
+             </div>
           </li>
           <li class="line"></li>
-          <li class="cor"><a href="zhuce.html" target="_blank">我的聚业务</a>
-             <div class="moreList" style="width:72px;"><a href="#" target="_blank">我的悬赏</a><a href="#" target="_blank">我的需求</a><a href="#" target="_blank">面试邀请</a><a href="#" target="_blank">平台兼职</a></div>
-          </li>           
-        </ul>      
-      您好，游客，欢迎光临聚业务网&nbsp;<a href="zhuce.html" target="blank" class="toptoolUseN">注册/登录</a>        
+          <li class="cor">
+          <a href="zhuce.html" target="_blank">我的聚业务</a>
+             <div class="moreList" style="width:72px;">
+	             <a href="#" target="_blank">我的悬赏</a>
+	             <a href="#" target="_blank">我的需求</a>
+	             <a href="#" target="_blank">面试邀请</a>
+	             <a href="#" target="_blank">平台兼职</a>
+             </div>
+          </li>
+          {else if $memberInfo.Member.type == Configure::read('UserType.company')}
+          <li class="cor">
+          <a href="zhuce.html" target="_blank">企业服务</a>
+             <div class="moreList" style="width:60px;">
+	             <a href="#" target="_blank">企业服务</a>
+	             <a href="#" target="_blank">常规招聘</a>
+	             <a href="#" target="_blank">平台兼职</a>
+             </div>
+          </li>
+          {else}
+          <li class="cor">
+          <a href="zhuce.html" target="_blank">我的聚业务</a>
+             <div class="moreList" style="width:72px;">
+	             <a href="#" target="_blank">我的悬赏</a>
+	             <a href="#" target="_blank">我的需求</a>
+	             <a href="#" target="_blank">面试邀请</a>
+	             <a href="#" target="_blank">平台兼职</a>
+             </div>
+          </li>
+          {/if}
+        </ul>
+        {if empty($memberInfo)}
+        您好，游客，欢迎光临聚业务网&nbsp;<a href="/members/register" target="blank" class="toptoolUseN">注册/登录</a>
+        {else}
+        您好，{$memberInfo.Member.nickname}，欢迎光临聚业务网&nbsp;<a href="/members/logout" target="blank" class="toptoolUseN">[安全退出]</a>
+        {/if}
       </li>
       <li class="help"><a href="#" target="_blank">帮助</a></li>
       <li class="daohang"><a href="#" target="_blank">网站导航</a>&nbsp;
         <dl>
           <dt><a href="#" target="_blank">个人会员</a></dt>
-          <dd><a href="#" target="_blank">发布需求</a><a href="#" target="_blank">发布悬赏</a><a href="#" target="_blank">我要充值</a></dd>
+          <dd><a href="#" target="_blank">发布需求</a>
+	          <a href="#" target="_blank">发布悬赏</a>
+	          <a href="#" target="_blank">我要充值</a>
+          </dd>
           <dt><a href="#" target="_blank">企业会员</a></dt>
-          <dd><a href="#" target="_blank">发布招聘</a><a href="#" target="_blank">发布兼职</a></dd>
+          <dd>
+	          <a href="/fulltimes/create" target="_blank">发布招聘</a>
+	          <a href="/parttimes/create" target="_blank">发布兼职</a>
+          </dd>
           <dt><a href="#" target="_blank">聚业务社区</a></dt>
-          <dd><a href="#" target="_blank">博文</a><a href="#" target="_blank">论坛</a><a href="#" target="_blank">知道</a><a href="#" target="_blank">新闻</a></dd>
+          <dd>
+	          <a href="#" target="_blank">博文</a>
+	          <a href="#" target="_blank">论坛</a>
+	          <a href="#" target="_blank">知道</a>
+	          <a href="#" target="_blank">新闻</a>
+          </dd>
           <dt><a href="#" target="_blank">所有服务</a></dt>          
         </dl>
       </li>

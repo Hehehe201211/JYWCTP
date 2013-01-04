@@ -10,12 +10,10 @@ $(document).ready(function(){
 </script>
 
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wyjz.html">兼职管理</a>&gt;&gt;<a href="#">我要兼职</a></p>
-      <!-- InstanceEndEditable -->
-    </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
-    <div class="xxjs partTime" style="overflow-y:visible;min-height:460px;">
+    <div class="zy_zs">
+      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wyjz.html">兼职管理</a>&gt;&gt;<a href="#">我要兼职</a></p>      
+    </div>    
+    <div class="xxjs partTime" style="overflow-y:visible;min-height:485px;">
         <div class="biaotit">我要兼职</div>
         <form id="search_conditions">
         <div class="advance_seach">
@@ -46,8 +44,7 @@ $(document).ready(function(){
                     <div class="divtt">
                       <div class="right fr">[确定]</div>
                     </div>
-                </div>
-    
+                </div>    
                 <div class="divTable divTableTrade">
                     <div class="divtt">
                       <div class="left fl">
@@ -84,7 +81,7 @@ $(document).ready(function(){
                       <input type="button" class="inpButton" value="行业（可选）"/>
                       </span> </li>
                     <li class="keyword">
-                      <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" />
+                      <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onfocus="this.select()"/>
                     </li>
                 </ul>
         
@@ -124,9 +121,8 @@ $(document).ready(function(){
                       </select>
                     </li>
                 </ul>
-            </div>
-            
-             <div class="divMap">
+            </div>            
+             <!--<div class="divMap">
                 <div class="divMapCon">
                     <div class="divInput">
                         <input type="text" id="geostrPosition" value="输入地址查询"/>
@@ -136,7 +132,7 @@ $(document).ready(function(){
                     <div id="mapLayout"></div>
                 </div>
             </div>
-            <div class="toggleMap">打开地图检索</div>
+            <div class="toggleMap">打开地图检索</div>-->
             <a class="zclan zclan4" href="javascript:void(0)" id="search">查询</a>
         </div>
         </form>
@@ -231,6 +227,5 @@ $(document).ready(function(){
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
-    </div>
-    <!-- InstanceEndEditable -->
+    </div>    
 </div>
