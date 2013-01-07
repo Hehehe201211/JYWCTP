@@ -5,32 +5,8 @@ $(document).ready(function(){
 	$(".newResume").click(function(){
 		if ($("#baseInfo tbody tr").length==0) alert("请先填写基础信息");
 		else window.open("/resumes/create");
-	});
-	  
-    
-    /*$(".znxTitle li").click(function(e){
-        e.preventDefault();
-        var tabIndex=$(".znxTitle li").index(this);
-        tabSwitching(tabIndex,".znxTitle li",".znxContent>div","active");
-        $(this).append($(".znxTitle li a.deleResume"));
-    });*/
-    /*$(".znxTitle li a.deleResume").click(function(e){
-        e.preventDefault();
-        if (confirm("确定删除""+$(this).prev().text()+""这份简历吗？")) {
-            var tabIndex=$(".znxTitle li").index($(this).parent());
-            var adele=$(this).clone(true);
-            $(this).parent().remove();
-            $(".znxContent>div").eq(tabIndex).remove();
-            if ($(".conResume div").length>0) {
-                $(".znxTitle li").eq(0).click();
-                $(".znxTitle li").eq(0).append(adele);
-            } else {
-                $(".resumeTlt span a:eq(0)").remove();
-                $(".conResume").append("<a href='jzgg-00.html' style='text-decoration:underline;' target='_blank'>你当前没有简历，点击添加</a>");
-            }
-        }
-    }); */   
-    
+	});	  
+            
     $("body").append($("#jsxxxq"));    
     $("#resumeBase").click(function(){
         bgKuang("#jsxxxq",".jsxxxqB .closeDiv");
@@ -39,15 +15,12 @@ $(document).ready(function(){
     $("button.addContact").live("click",function(e){
         e.preventDefault();
         $(this).parent().after($(this).parent().clone());
-        $(this).parent().next().children(".inpTextBox").val("");
-        //
-        
+        $(this).parent().next().children(".inpTextBox").val("");        
     });
     $("button.deleContact").live("click",function(e){
         e.preventDefault();
         if ($("button.deleContact").length>1) $(this).parent().remove(); 
-    });
-    
+    });    
     $('#provincial_local').change(function(){
         $('#city').find('option').remove();
         if ($(this).val() != "") {
@@ -92,7 +65,6 @@ $(document).ready(function(){
         }
     });
     
-    //在这边填写js验证必填字段。
     $('#editBtn').click(function(){       
        var checkTarget = ['name','provincial_now','city_now','address', 'telephone', 'email', 'nationality', 'ethnic'];
        var errorMsg = '<span class="errorMsg">请输入此项目</span>';    
@@ -126,11 +98,6 @@ $(document).ready(function(){
                 {
                     var result=eval("("+data+")");
                     if(result.result == 'OK') {
-                        /*
-                        $('#baseInfo').load('/resumes/getBase', {}, function(){
-                            $('.jsxxxqB .closeDiv').click();
-                        });
-                        */
                         alert(result.msg);
                         $('.jsxxxqB .closeDiv').click();
                         location.href=location.href;
@@ -159,7 +126,7 @@ $(document).ready(function(){
   <div class="znx resume">
     <div class="resumeTlt">
       <ul class="znxTitle">
-        <li class="active"> <a href="#">基础信息</a><!-- <a title="删除当前简历" href="#" class="deleResume">&nbsp;</a>--> </li>
+        <li class="active"> <a href="#">基础信息</a></li>
       </ul>
       <span><a class="newResume" href="javascript:;">新增简历</a></span> </div>
     <div class="znxContent conResume">
@@ -256,9 +223,9 @@ $(document).ready(function(){
               </tr>
               {/foreach}
             </table>
-            <div class="fanyea" style="margin:0 5px;">
+            <div class="fanyea">
                 {if $paginatorParams['prevPage']}
-                    <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                    <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                 {/if}
                 <div class="dd_ym">
                     <label>每页显示：</label>
@@ -275,7 +242,7 @@ $(document).ready(function(){
                     <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                 </div>
                 {if $paginatorParams['nextPage']}
-                    <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                    <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                 {/if}
             </div>
             {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
@@ -436,25 +403,7 @@ $(document).ready(function(){
               <select name="city_now" id="city_now">
                 <option value="">请选择</option>
               </select>
-            </dt>
-            <!--
-            <dt>
-              <label>联系方式：</label>
-              <div class="area1">
-                <select name="method[]">
-                  <option>座机</option>
-                  <option selected="selected" value="手机">手机</option>
-                  <option value="QQ">QQ</option>
-                  <option value="MSN">MSN</option>
-                  <option value="E-mail">E-mail</option>
-                  <option value="其他">其他</option>
-                </select>
-              </div>
-              <input type="text" name="method_number[]" style="width:155px;">
-              <button class="addContact">添加</button>
-              <button class="deleContact">删除</button>
-            </dt>
-            -->
+            </dt>            
             <dt>
               <label><font class="facexh">*</font>联系电话：</label>
               <input type="text" name="telephone" id="telephone"/>

@@ -56,7 +56,12 @@
 	      	{if !empty($homepage.Homepage.thumbnail_job) && file_exists($path)}
 	      	<img src="{$this->webroot}img/ads/1350529873.jpg" />
 	      	{else}
-	      	{$homepage.Homepage.company_name}
+            <table width="100%" height="100%" border="0">
+  <tr>
+    <td>{$homepage.Homepage.company_name}</td>
+  </tr>
+</table>
+	      	
 	      	{/if}
 	      </a>
       </li>

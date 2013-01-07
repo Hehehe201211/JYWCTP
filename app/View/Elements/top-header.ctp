@@ -7,8 +7,8 @@
           <li class="line"></li>
           {if empty($memberInfo) || $memberInfo.Member.type == Configure::read('UserType.Personal')}
           <li><a href="/accounts/invite" target="_blank">好友推荐</a></li>
-          {/if}
-          <li class="line"></li>
+		  <li class="line"></li>
+          {/if}          
           <li><a href="/accounts/sms" target="_blank">站内信</a></li>
           <li class="line"></li>
           {if empty($memberInfo)}
@@ -54,7 +54,7 @@
         {if empty($memberInfo)}
         您好，游客，欢迎光临聚业务网&nbsp;<a href="/members/register" target="blank" class="toptoolUseN">注册/登录</a>
         {else}
-        您好，{$memberInfo.Member.nickname}，欢迎光临聚业务网&nbsp;<a href="/members/logout" target="blank" class="toptoolUseN">[安全退出]</a>
+        您好，<font color="#FF3300">{$memberInfo.Member.nickname}</font>，欢迎光临聚业务网&nbsp;<a href="/members/logout" target="blank" class="toptoolUseN">[安全退出]</a>
         {/if}
       </li>
       <li class="help"><a href="#" target="_blank">帮助</a></li>

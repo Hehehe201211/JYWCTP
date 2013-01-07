@@ -181,7 +181,7 @@ $(document).ready(function(){
             </table>
             <div class="fanyea">
                     {if $paginatorParams['prevPage']}
-                        <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                        <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                     {/if}
                     <div class="dd_ym">
                         <label>每页显示：</label>
@@ -198,7 +198,7 @@ $(document).ready(function(){
                         <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                         {if $paginatorParams['nextPage']}
-                            <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                            <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                         {/if}
                     </div>
         </div>

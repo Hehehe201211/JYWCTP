@@ -100,7 +100,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="divBtnContainer">
+            <div class="divBtnContainer" style="width:200px;">
                 <a class="zclan zclan7 linkLogin" href="#">我有客源</a>
                 <a class="zclan zclan7 linkLogin" href="javascript:;">收藏</a>
             </div>

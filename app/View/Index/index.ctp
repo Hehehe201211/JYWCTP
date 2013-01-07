@@ -74,11 +74,7 @@ $(document).ready(function(){
        $(this).css("margin-left",0);
        window.clearInterval(zy_zBottomRcdT);
   });
-    
-  $(".linkLogin").click(function(e){
-        e.preventDefault();
-        bgKuang("#divDjbuz",".divDjbuz .closeDiv");         
-  });
+
   $(".serTable .applyFor").click(function(e){
         e.preventDefault();
         bgKuang("#jsxxxqB",".jsxxxqB .closeDiv");           
@@ -237,7 +233,57 @@ $(document).ready(function(){
                 </ul>
             </form>
             {else}
-            <h3><a href="/members">会员主页</a></h3>
+	            {if $memberInfo.Member.type = Configure::read('UserType.Personal')}
+	            	{if $memberInfo.Member.grade != 2}
+				      <h3>{$memberInfo.Member.nickname}</h3>
+				      <dl class="mebLinks">
+				        <dt>你还不是高级会员，点击<a class="upgrade" href="/members/upgrade">立即升级</a></dt>
+				        <dd><a target="_blank" href="#">检索客源</a></dd>
+				        <dd><a target="_blank" href="#">检索悬赏</a></dd>
+				        <dd><a target="_blank" href="#">检索职位</a></dd>
+				        <dd><a target="_blank" href="#">检索兼职</a></dd>
+				        <dd>&nbsp;</dd>
+				        <dd><a class="logout" target="_blank" href="/members/logout">退出</a></dd>
+				      </dl>
+				      {else}
+					      <h3>{$memberInfo.Member.nickname}</h3>
+					      <dl class="mebLinks">        
+					        <dd><a href="#" target="_blank">检索客源</a></dd>
+					        <dd><a href="#" target="_blank">发布客源</a></dd>
+					        <dd><a href="#" target="_blank">检索悬赏</a></dd>
+					        <dd><a href="#" target="_blank">发布悬赏</a></dd>
+					        <dd><a href="#" target="_blank">检索职位</a></dd>
+					        <dd><a href="#" target="_blank">简历管理</a></dd>   
+					        <dd><a href="#" target="_blank">检索兼职</a></dd>     
+					        <dd><a href="#" target="_blank">兼职管理</a></dd> 
+					        <dd><a href="#" target="_blank">文档管理</a></dd>       
+					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
+					      </dl>
+				      {/if}
+			      {else}
+			      		{if $memberInfo.Member.grade != 2}
+					      <h3>{$memberInfo.Member.nickname}</h3>
+					      <dl class="mebLinks">
+					        <dt>你还不是高级会员，点击<a href="/members/upgrade" class="upgrade">立即升级</a></dt>
+					        <dd><a href="#" target="_blank">检索简历</a></dd>
+					        <dd><a href="#" target="_blank">检索精英</a></dd>
+					        <dd>&nbsp;</dd>
+					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
+					      </dl>
+			      		{else}
+					      <h3>{$memberInfo.Member.nickname}</h3>
+					      <dl class="mebLinks">        
+					        <dd><a href="#" target="_blank">信息管理</a></dd>
+					        <dd><a href="#" target="_blank">产品管理</a></dd>
+					        <dd><a href="#" target="_blank">检索简历</a></dd>
+					        <dd><a href="#" target="_blank">招聘管理</a></dd>
+					        <dd><a href="#" target="_blank">检索精英</a></dd>
+					        <dd><a href="#" target="_blank">兼职管理</a></dd>   
+					        <dd>&nbsp;</dd>         
+					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
+					      </dl>
+			      		{/if}
+			      {/if}
             {/if}
         </div>
         <div class="crAd"><img src="{$this->webroot}img/ads/20110615175842023378.jpg" /></div>
@@ -245,62 +291,48 @@ $(document).ready(function(){
             <div class="nTab3">
                 <div class="TabTitle3">
                     <ul id="myTab2">
-                        <li class="active3"><a href="/static?tpl=gonggao">公告</a></li>
-            <li><a href="/static?tpl=guize">规则</a></li>
-            <li><a href="/static?tpl=tixian">提现</a></li>
-            <li style="width:71px;"><a href="/static?tpl=jiaoyianquan">交易安全</a></li>
+                    {foreach $notices as $key => $notice}
+	                    {if $key == 0}
+	                    	<li class="active3"><a href="/static?tpl=gonggao">{$notice.Notice.title}</a></li>
+	                    {elseif $key+1 == count($notices)}
+	                    	<li style="width:71px;"><a href="/static?tpl=jiaoyianquan">{$notice.Notice.title}</a></li>
+	                    {else}
+	                    	<li><a href="/static?tpl=gonggao">{$notice.Notice.title}</a></li>
+	                    {/if}
+                    {/foreach}
                     </ul>
                 </div>
                 <div class="TabContent3">
-                    <div class="myTab1_Content2" style="display:block">
+                {foreach $notices as $key => $notice}
+                	{if $key == 0}
+                	<div class="myTab1_Content2" style="display:block">
                         <div class="con_3">
                             <ul>
-                                <li><a href="#1">新fea新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新faer闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻awrra新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻闻闻新闻新闻</a><span>[2011-9-19]</span></li>
+                            	{foreach $notice.subNotice as $sub}
+                            		<li><a href="#1">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                            	{/foreach}
                             </ul>
-                            <h5><a href="/static?tpl=gonggao">查看更多&gt;&gt;</a></h5>
+                            {if count($notice.subNotice) == 5}
+                            	<h5><a href="#">查看更多&gt;&gt;</a></h5>
+                            {/if}
                         </div>
                     </div>
+                    {else}
                     <div class="myTab1_Content2">
                         <div class="con_3">
                             <ul>
-                                <li><a href="#1">新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
+                            	{foreach $notice.subNotice as $sub}
+                            		<li><a href="#1">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                            	{/foreach}
                             </ul>
-                            <h5><a href="/static?tpl=guize">查看更多&gt;&gt;</a></h5>
+                            {if count($notice.subNotice) == 5}
+                            	<h5><a href="#">查看更多&gt;&gt;</a></h5>
+                            {/if}
                         </div>
                     </div>
-                    <div class="myTab1_Content2">
-                        <div class="con_3">
-                            <ul>
-                                <li><a href="#1">新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            </ul>
-                            <h5><a href="/static?tpl=tixian">查看更多&gt;&gt;</a></h5>
-                        </div>
-                    </div>
-                
-                    <div class="myTab1_Content2">
-                        <div class="con_3">
-                            <ul>
-                                <li><a href="#1">新新festet闻新闻新闻新新闻新闻新闻新新闻新新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                                <li><a href="#1">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            </ul>
-                            <h5><a href="/static?tpl=jiaoyianquan">查看更多&gt;&gt;</a></h5>
-                        </div>
-                    </div>
+                    {/if}
+                {/foreach}
+
                 </div>
             </div>
         </div>
@@ -358,13 +390,14 @@ $(document).ready(function(){
                             </tr>
                         </thead>
                     </table>
-                    <table width="100%" border="1" cellspacing="0" cellpadding="0" class="serTable">
-                    	{foreach $parttimes as $parttime}
+                    {foreach $parttimes as $parttime}
+                    <table width="100%" border="1" cellspacing="0" cellpadding="0" class="serTable">        
+                    <tbody>            	
                     		<tr class="con_2_tr">
 	                            <td width="15%">
 	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
 	                            {$this->Category->getCategoryName($parttime.PartTime.category)} 
-            {					{$this->Category->getCategoryName($parttime.PartTime.sub_category)}
+            					{$this->Category->getCategoryName($parttime.PartTime.sub_category)}
 	                            </a>
 	                            </td>
 	                            <td width="27%">
@@ -392,7 +425,7 @@ $(document).ready(function(){
 	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</a>
 	                            </td>
 	                            <td width="13%">
-	                            <a class="detail linkLogin" href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">详细信息</a>
+	                            <a class="detail " href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">详细信息</a>
 	                            </td>
 	                        </tr>      
 	                        <tr class="con_2_tr">
@@ -400,9 +433,10 @@ $(document).ready(function(){
 	                            <td colspan="5" class="left">
 	                            <p class="textEllipsis">{$parttime.PartTime.additional}</p>
 	                            </td>
-	                        </tr>
-                    	{/foreach}
+	                        </tr>    
+                            </tbody>                	
                     </table>
+                    {/foreach}
                 </div>
             <!-- 结束切换 --> 
             </div>
@@ -560,7 +594,7 @@ $(document).ready(function(){
 </table>
                     </li>
                 </ul>
-                <a href="/resources/upload" class="btnUploadDoc linkLogin">我要上传</a>
+                <a href="/resources/upload" class="btnUploadDoc ">我要上传</a>
             </div>
         </div>
     </div>

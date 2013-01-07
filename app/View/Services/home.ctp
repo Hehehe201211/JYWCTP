@@ -187,15 +187,15 @@ $(document).ready(function(){
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
           </dt>
-		  <dt>
+		 <!-- <dt>
             <label>企业招聘图片（大）：</label>
             <div style="float:left;">
             <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
-          </dt>
+          </dt>-->
 		  <dt>
-            <label>企业招聘图片（小）：</label>
+            <label>企业招聘图片：</label>
             <div style="float:left;">
             <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
             </div>
@@ -247,7 +247,7 @@ $(document).ready(function(){
             <div style="float:left;">
             <div class="area1">
               <select name="contact_methods[]">
-                <option value="座">座机</option>
+                <option value="座机">座机</option>
                 <option value="手机">手机</option>
                 <option value="QQ">QQ</option>
                 <option value="MSN">MSN</option>
@@ -320,15 +320,15 @@ $(document).ready(function(){
             </div>
             <span class="spanValue spanValueI">无</span>
           </dt>
-		  <dt>
+		 <!-- <dt>
             <label>企业招聘图片（大）：</label>
             <div style="float:left;">
             <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
-          </dt>
+          </dt>-->
 		  <dt>
-            <label>企业招聘图片（小）：</label>
+            <label>企业招聘图片：</label>
             <div style="float:left;">
             <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
             </div>
