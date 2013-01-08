@@ -21,12 +21,11 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>      
     </div>    
-    <div class="hysj hysj_fb">
-      <ul>
-        <li>1.填写兼职信息</li>
-        <li>2.确认兼职信息</li>
-        <li>3.兼职发布成功</li>
-      </ul>
+<ul class="ulFormStep">
+      <li>1.填写兼职信息</li>
+      <li>2.确认兼职信息</li>
+      <li>3.兼职发布成功</li>
+    </ul>
       <div class="sjle">
         <div class="xq_zl">
           <div class="xq_zl_xbxq">
@@ -94,8 +93,7 @@ $(document).ready(function(){
                 {else}
                 协商确定
                 {/if}
-                <input type="hidden" name="pay" value="{$this->data['pay']}">
-                
+                <input type="hidden" name="pay" value="{$this->data['pay']}">                
                 </td>
               </tr>
               <tr>
@@ -183,5 +181,4 @@ $(document).ready(function(){
           </div>
         </div>
       </div>      
-    </div>    
-</div>
+    </div>   

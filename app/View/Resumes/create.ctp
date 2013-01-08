@@ -158,12 +158,11 @@ $(document).ready(function(){
             <a href="#">填写简历</a>
         </p>
     </div>
-    <div class="hysj">
-        <ul>
-            <li>1.填写简历信息</li>
-            <li>2.确认信息</li>
-            <li>3.新增成功</li>
-        </ul>
+		<ul class="ulFormStep">
+      <li>1.填写简历信息</li>
+      <li>2.确认信息</li>
+      <li>3.新增成功</li>
+    </ul> 
     <div class="sjle" style="margin:8px 0 0 18px;">
         <form method="post" action="/resumes/check" id="resume">
         <dl>
@@ -408,4 +407,3 @@ $(document).ready(function(){
       </form>
     </div>
     </div>
-</div>

@@ -1,15 +1,12 @@
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>
-      <!-- InstanceEndEditable -->
-    </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
-    <div class="hysj hysj_fbcg">
-      <ul>
-        <li>1.填写兼职信息</li>
-        <li>2.确认兼职信息</li>
-        <li>3.兼职发布成功</li>
-      </ul>
+    <div class="zy_zs">
+      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>     
+    </div>   
+<ul class="ulFormStep">
+      <li>1.填写兼职信息</li>
+      <li>2.确认兼职信息</li>
+      <li>3.兼职发布成功</li>
+    </ul>
       {if !$error}
       <div class="success">
         <p class="gongxi">{$msg}</p>
@@ -30,5 +27,3 @@
       </div>
       {/if}
     </div>
-    <!-- InstanceEndEditable -->
-</div>

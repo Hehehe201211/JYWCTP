@@ -22,12 +22,11 @@ $(document).ready(function(){
 
 </script>
 <div class="zy_z">
-<div class="hysj hysj_fb">
-<ul>
-	<li>1.填写发布信息</li>
-	<li>2.确认信息</li>
-	<li>3.发布成功</li>
-</ul>
+<ul class="ulFormStep ulFormStep2">
+      <li>1.填写发布信息</li>
+      <li>2.确认信息</li>
+      <li>3.发布成功</li>
+    </ul>
 <div class="sjle">
 <div class="xq_zl">
 <div class="xq_zl_xbxq">
@@ -166,6 +165,5 @@ $(document).ready(function(){
 </div>
 <a class="zclan zclan2" href="javascript:void(0)" id="complete">发布</a> <a
 	class="zclan zclan2" href="javascript:void(0)" id="back">修改</a></div>
-</div>
 </div>
 </div>

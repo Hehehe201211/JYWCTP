@@ -168,12 +168,11 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">平台兼职</a>&gt;&gt;<a href="#">发布兼职</a></p>      
     </div>
-    <div class="hysj">
-      <ul>
-        <li>1.填写兼职信息</li>
-        <li>2.确认兼职信息</li>
-        <li>3.兼职发布成功</li>
-      </ul>
+	  <ul class="ulFormStep">
+      <li>1.填写兼职信息</li>
+      <li>2.确认兼职信息</li>
+      <li>3.兼职发布成功</li>
+    </ul>
       <div class="sjle" style="min-height:850px;">
         <form method="post" action="/parttimes/check" id="parttimeForm">
           <dl>
@@ -203,7 +202,7 @@ $(document).ready(function(){
                 <li>
                   <input type="text" name="open" id="open"  readonly="readonly"/>
                 </li>
-                <li style="width:36px">至</li>
+                <li style="width:36px;text-align:center">至</li>
                 <li>
                   <input type="text" name="close" id="close"  readonly="readonly"/>
                 </li>
@@ -253,8 +252,7 @@ $(document).ready(function(){
               <div class="switch_box dtswitch_box">
               <ul>
             <li class="trade"><input type="button" class="inpButton" name="industry" value="行业（可选）" /></li>
-          </ul>
-          
+          </ul>          
           <ul class="ulTable ulTableTrade">
                 </ul></div>
             </dt>
@@ -293,18 +291,6 @@ $(document).ready(function(){
               <a href="javascript:void(0)" id="getCheckNum" class="getCheckNum" >看不清？</a>
           </dt>
           </dl>
-          <!--<ul>
-            <li>
-              <div class="divMapContainer">
-                <div class="divInput">
-                  <input type="text" id="geostrPosition" value="输入地址查询"/>
-                  <input type="button" value="搜索" id="codeAddress"/>
-                  <input type="hidden" id="comlatlng" />
-                </div>
-                <div id="mapLayout"></div>
-              </div>
-              <a href="#" id="tglMap">启用地图标记</a> </li>
-          </ul>-->
           <div class="clearfix"></div>
           <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
         </form>
@@ -362,4 +348,3 @@ $(document).ready(function(){
             </div>
           </div>
     </div>
-</div>

@@ -3,9 +3,8 @@
 {$paginatorParams = $this->Paginator->params()}
 
 {if $paginatorParams['count'] > 0}
-<table width="596" cellspacing="0" cellpadding="0" border="0"
-    class="con_2_table">
-    <tbody>
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
+<thead>
         <tr class="con_2_tr con_2_xq_too">
 			<th style="width:75px;" class="tr_td8">{if $type=="need"}卖家{else}买家{/if}</th> 
 			<th class="tr_td1">信息标题</th>
@@ -14,6 +13,7 @@
 			<th style="width:80px;" class="tr_td5">交易时间 </th>
 			<th style="width:70px;" class="tr_td4">状态 </th>                             
         </tr>
+        </thead>
         {foreach $informations as $info}
 	        <tr class="con_2_tr">
 	                  <th><a href="/confirm/detail/{$type}:{$info.PaymentTransaction.information_id}/mid:{$info.Member.id}" target="_blank">{$info.Member.nickname}</a></th> 
@@ -40,12 +40,11 @@
                         {$status[{$info.PaymentTransaction.status} - 2]}
 	                  </td>
 	        </tr>
-        {/foreach}
-        <tr>
-            <td class="fanyea_x" colspan="6">
-                <div class="fanyea">
+        {/foreach}        
+</table>
+<div class="fanyea">
                     {if $paginatorParams['prevPage']}
-                        <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                        <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                     {/if}
                     <div class="dd_ym">
                         <label>每页显示：</label>
@@ -61,13 +60,9 @@
                         <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                     {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div  class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
 {else}
 <div class="tip">{$msg}。你可以<a href="/informations/search/need">检索悬赏</a><a href="/informations/search/has">检索客源</a><a href="/informations/create/need">发布悬赏</a><a href="/informations/create/has">发布客源</a></div>
 {/if}

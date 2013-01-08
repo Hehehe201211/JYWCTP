@@ -107,12 +107,11 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人信息修改</a></p>
     </div> 
-    <div class="hysj">
-        <ul>
-            <li>1.信息修改</li>
-            <li>2.信息确认</li>
-            <li>3.修改成功</li>
-        </ul> 
+	<ul class="ulFormStep">
+      <li>1.信息修改</li>
+      <li>2.信息确认</li>
+      <li>3.修改成功</li>
+    </ul>
       <div class="sjle">
       <form id="editForm" action="/accounts/editCheck" method="post" enctype="multipart/form-data">
         <ul>
@@ -237,24 +236,3 @@ $(document).ready(function(){
       </form>
 	  </div>
     </div>
-    <!--<div class="bottomRcd">
-      <div class="fl">
-        <h3>热门悬赏<a class="more" href="#">更多...</a></h3>
-        <ul>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-      <div class="fl fr">
-        <h3>最新客源<a class="more" href="#">更多...</a></h3>
-        <ul>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-    </div>  
-    <div class="bottomRcdPos"></div>
-    -->
-</div>

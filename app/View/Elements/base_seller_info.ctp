@@ -25,36 +25,40 @@ $(document).ready(function(){
 });
 {/literal}
 </script>
-<div class="zy_zszl">
-	<div class="biaotit">{if $type == "need"}卖家{else}买家{/if}</div>
-	<div class="zy_zszl_z">
-		<dl>
-			<dt>
-				<dl>
-					<dt class="borBlue"><img src="/img/tx.jpg"></dt>
-					<dd class="member">
-						<span><a href="javascript:void(0)" class="btnAddFri">加为好友</a>{$author.Member.nickname}</span>
-						<span>会员等级：{if $author.Member.grade == 1}新手{elseif $author.Member.grade == 2}高级{/if}</span>
-						<span>上次登陆时间：{date('d', time() - strtotime($author.Member.lastlogin))}天内</span>
-						<span>客源数量：{$transaction_has_num}次</span>
-						<span>交易次数：{$transaction_need_num}次</span>
-						<span>好评率：100%</span>
-					</dd>
-				</dl>
-			</dt>
-		</dl>
-	</div>
-	<div class="zy_zszl_r">
-		<dl>
-		<form id="msg">
-			<dd class="ddAddFri">
+ <div class="mebBaseinfo">
+ <div class="biaotit">{if $type == "need"}卖家{else}买家{/if}</div>
+        <div class="mebBaseinfoL">
+          <table width="100%" height="100%" border="0">
+            <tr>
+              <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
+              <td width="66%"><a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>{$author.Member.nickname}</td>
+            </tr>
+            <tr>
+              <td>会员等级：{if $author.Member.grade == 1}新手{elseif $author.Member.grade == 2}高级{/if}</td>
+            </tr>
+            <tr>
+              <td>上次登陆时间：{date('d', time() - strtotime($author.Member.lastlogin))}天内</td>
+            </tr>
+            <tr>
+              <td>客源数量：{$transaction_has_num}次</td>
+            </tr>
+            <tr>
+              <td>交易次数：{$transaction_need_num}次</td>
+            </tr>
+            <tr>
+              <td>好评率：100%</td>
+            </tr>            
+          </table>
+        </div>
+        <div class="mebBaseinfoR">
+          <dl>   
+           <dd class="ddAddFri"><form id="msg">			
             <p>请输入身份验证信息</p>
             <input type="hidden" name="receiver" value="{$author.Member.id}" />
             <input type="hidden" name="type" value="2" />
             <textarea class="txtAddFri" name="content" id="content"></textarea>
             <input type="button" value="发送" id="send"/>
-          </dd>
-        </form>
-		</dl>
-	</div>
-</div>
+        </form></dd>
+          </dl>
+        </div>
+      </div>

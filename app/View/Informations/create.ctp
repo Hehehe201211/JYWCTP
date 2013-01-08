@@ -253,12 +253,11 @@ $(document).ready(function(){
 
 
 <div class="zy_z">
-    <div class="hysj">
-      <ul>
-        <li>1.填写发布信息</li>
-        <li>2.确认信息</li>
-        <li>3.发布成功</li>
-      </ul>
+<ul class="ulFormStep">
+      <li>1.填写发布信息</li>
+      <li>2.确认信息</li>
+      <li>3.发布成功</li>
+    </ul>
       <div class="sjle">
       <form id="information" method="post" action="/informations/check{if !empty($target)}?target={$target}{/if}">
       		<input type="hidden" id="parttime" name="parttime" value="{if !empty($parttime)}{$this->request->query['parttime']}{elseif isset($this->data['parttime'])}{$this->data['parttime']}{/if}">
@@ -384,7 +383,7 @@ $(document).ready(function(){
                   <li>
                     <input type="text" name="open" id="open" value="{if !empty($target) && isset($targetInfo)}{$targetInfo.Information.open|date_format:"%Y-%m-%d"}{elseif isset($this->data['open'])}{$this->data['open']}{/if}" readonly="readonly"/>
                   </li>
-                  <li style="width:36px">至</li>
+                  <li style="width:36px;text-align:center;">至</li>
                   <li>
                     <input type="text" name="close" id="close" value="{if !empty($target) && isset($targetInfo)}{$targetInfo.Information.close|date_format:"%Y-%m-%d"}{elseif isset($this->data['close'])}{$this->data['close']}{/if}" readonly="readonly"/>
                   </li>
@@ -481,62 +480,6 @@ $(document).ready(function(){
 	            <button class="addContact">添加</button><button class="deleContact">删除</button>
 	          </dt>
               {/if}
-          <!--
-          <dt>
-            <label><font class="facexh">*</font>联系方式：</label>
-            <div class="area1">
-              <select name="mode[]">
-                <option value="座机">座机</option>
-                <option value="手机">手机</option>
-                <option value="QQ">QQ</option>
-                <option value="MSN">MSN</option>
-              </select>
-            </div>
-            <input type="text" style="width:108px;" name="contact_method[]" class="contact_method" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
-            <button class="addContact">添加</button><button class="deleContact">删除</button>
-          </dt>
-              {if isset($this->data['contact'])}
-				{foreach $this->data['contact'] as $key => $contact}
-				  <dt class="dtConnection{$key}">
-	                <label><font class="facexh">*</font>联系人：</label>
-	                <input type="text" name="contact[]" class="contact" id="acpro_inp9" value="{$contact}">
-	              </dt>
-	              <dt class="dtConnection{$key}">
-	                <label><font class="facexh">*</font>联系人职位：</label>
-	                <input type="text" name="post[]" class="post" id="acpro_inp10" value="{$this->data['post'][$key]}">
-	              </dt>
-	              <dt class="dtConnection{$key}">
-	                <label><font class="facexh">*</font>单位详细地址：</label>
-	                <input type="text" id="address" class="address" name="address[]" value="{$this->data['address'][$key]}">
-	              </dt>
-	              <dt class="dtConnection{$key}">
-	                <label><font class="facexh">*</font>联系方式：</label>
-	                <input type="text" name="contact_method[]" class="contact_method" id="acpro_inp11" value="{$this->data['contact_method'][$key]}" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
-	                <button class="addCon" value="">添加</button>
-	                {if $key > 0}
-	                <button btnnum="{$key}" value="" class="deleCon">删除</button>
-	                {/if}
-	              </dt>
-				{/foreach}
-              {else}
-	              <dt>
-	                <label><font class="facexh">*</font>联系人：</label>
-	                <input type="text" name="contact[]" class="contact" id="acpro_inp9">
-	              </dt>
-	              <dt>
-	                <label><font class="facexh">*</font>联系人职位：</label>
-	                <input type="text" name="post[]" class="post" id="acpro_inp10">
-	              </dt>
-	              <dt>
-	                <label><font class="facexh">*</font>单位详细地址：</label>
-	                <input type="text" id="address" class="address" name="address[]">
-	              </dt>
-	              <dt>
-	                <label><font class="facexh">*</font>联系方式：</label>
-	                <input type="text" name="contact_method[]" class="contact_method" id="acpro_inp11" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
-	                <button class="addCon" value="">添加</button>
-	              </dt>
-              {/if}-->
 			  <dt>
 	                <label><font class="facexh">*</font>单位详细地址：</label>
 	                <input type="text" id="address" class="address" name="address" value="{if isset($this->data['address'])}{$this->data['address']}{/if}">
@@ -567,5 +510,4 @@ $(document).ready(function(){
             <a class="zclan zclan4" href="javascript:void(0)" id="check">预览</a>
           </form>
       </div>
-    </div>
     </div>

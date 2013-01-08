@@ -29,7 +29,7 @@
       </thead>
       <tbody>
       {foreach $favourites as $favourite}
-          <tr class="con_2_tr even">
+          <tr class="con_2_tr ">
             <td class="tr_td2"><a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}">{$favourite.PartTime.title}</a></td>
             <td class="tr_td1"><a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}">{$favourite.Member.company_name}</a></td>        
             <td class="tr_td3"><a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}">{$favourite.PartTime.sub_title}</a></td>        

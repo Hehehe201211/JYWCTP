@@ -196,12 +196,11 @@ $(document).ready(function(){
 
 
 <div class="zy_z">
-    <div class="hysj">
-      <ul>
-        <li>1.填写发布信息</li>
-        <li>2.确认信息</li>
-        <li>3.发布成功</li>
-      </ul>
+	  <ul class="ulFormStep">
+      <li>1.填写发布信息</li>
+      <li>2.确认信息</li>
+      <li>3.发布成功</li>
+    </ul>
       <div class="sjle">
         <form id="information" method="post" action="/informations/check">
         <input type="hidden" name="type" value="{$type}">
@@ -281,7 +280,7 @@ $(document).ready(function(){
                 <li>
                     <input type="text" name="open" id="open" value="{if isset($this->data['open'])}{$this->data['open']}{/if}" readonly="readonly"/>
                   </li>
-                  <li style="width:36px">至</li>
+                  <li style="width:36px;text-align:center">至</li>
                   <li>
                     <input type="text" name="close" id="close" value="{if isset($this->data['close'])}{$this->data['close']}{/if}" readonly="readonly"/>
                </li>
@@ -319,4 +318,3 @@ $(document).ready(function(){
         </form>
       </div>
     </div>
-</div>

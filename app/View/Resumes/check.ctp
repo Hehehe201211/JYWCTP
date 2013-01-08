@@ -15,12 +15,11 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wwtj.html">兼职管理</a>&gt;&gt;<a href="wdjj.html">我的简历</a></p>
     </div>
-    <div class="hysj hysj_fb">
-      <ul>
-        <li>1.填写简历信息</li>
-        <li>2.确认信息</li>
-        <li>3.新增成功</li>
-      </ul>
+<ul class="ulFormStep ulFormStep2">
+      <li>1.填写简历信息</li>
+      <li>2.确认信息</li>
+      <li>3.新增成功</li>
+    </ul> 
     <div class="resume">
       <h3>{$this->data['title']} - {$memberInfo.Attribute.name}</h3>
       <table class="preview" border="1" cellspacing="0" cellpadding="0" width="100%">
@@ -180,4 +179,3 @@ $(document).ready(function(){
             <input type="hidden" name="has_worked" id="has_worked" value="0"/>
         {/if}
     </form>
-</div>

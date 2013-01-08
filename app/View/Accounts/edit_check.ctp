@@ -14,15 +14,14 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
         <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人信息修改</a></p>
     </div>
-    <div class="hysj hysj_fb">
-        <ul>
-            <li>1.信息修改</li>
-            <li>2.信息确认</li>
-            <li>3.修改成功</li>
-        </ul> 
+<ul class="ulFormStep ulFormStep2">
+      <li>1.信息修改</li>
+      <li>2.信息确认</li>
+      <li>3.修改成功</li>
+    </ul> 
         <div class="sjle">
         <div class="xq_zl_xbxq">
             <form id="edit" action="" method="post" >
@@ -123,4 +122,3 @@ $(document).ready(function(){
         <a href="javascript:void(0)" id="backBtn" class="zclan zclan2">上一步</a>
         </div>
     </div>
-</div>

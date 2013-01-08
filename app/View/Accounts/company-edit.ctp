@@ -26,12 +26,11 @@ $(document).ready(function(){
             <a href="#">兼职发布详情</a>
         </p>
     </div>    
-    <div class="hysj">
-        <ul>
-            <li>1.完善资料</li>
-            <li>2.信息确认</li>
-            <li>3.修改成功</li>
-        </ul> 
+<ul class="ulFormStep">
+      <li>1.完善资料</li>
+      <li>2.信息确认</li>
+      <li>3.修改成功</li>
+    </ul>
     <div class="sjle">
        <form method="post" action="#">
         <ul>   
@@ -143,5 +142,4 @@ $(document).ready(function(){
         </ul>
        </form>
       </div>
-      </div>   
-</div>
+</div>   

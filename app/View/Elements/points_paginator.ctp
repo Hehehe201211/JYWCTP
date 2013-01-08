@@ -3,7 +3,7 @@
 {$paginatorParams = $this->Paginator->params()}
 
 {if $paginatorParams['count'] > 0}
-<table width="596" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
         <thead>
             <tr class="con_2_tr con_2_xq_too">
               {if $this->params['action'] == "expenses"}
@@ -30,12 +30,11 @@
             <input type="hidden" value="{$info.PaymentHistory.information_id}" name="information_id" class="information_id">
             </td>
           </tr>
-        {/foreach}
-        <tr>
-            <td class="fanyea_x" colspan="6">
-                <div class="fanyea">
+        {/foreach}        
+</table>
+<div class="fanyea">
                     {if $paginatorParams['prevPage']}
-                        <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                        <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                     {/if}
                     <div class="dd_ym">
                         <label>每页显示：</label>
@@ -51,12 +50,9 @@
                         <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                     {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-            </td>
-        </tr>
-</table>
 {else}
 	{$msg}
 {/if}

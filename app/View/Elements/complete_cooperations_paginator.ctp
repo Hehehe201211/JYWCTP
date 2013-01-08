@@ -85,7 +85,7 @@
                           <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                     {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
