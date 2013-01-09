@@ -2,10 +2,6 @@
 {literal}
 $(document).ready(function(){
 $("body").append("<div id='bgKuang'></div><div style='display: none;' id='goumaikuang'></div>");
-$(".inpKeyword").focus(function(){
-		$(this).select();
-	});
-	
 	//价格范围
 	$( "#slider-price" ).slider({
 		range: true,
@@ -46,10 +42,9 @@ $(".inpKeyword").focus(function(){
 			}
 		});
 	});	
-	$(".close").live("click",function(e){				
+	$(".close").live("click",function(){		
 		$("#bgKuang").fadeOut("fast");
-		$("#goumaikuang").hide();
-		//if ($(this).attr("href")=="#"||$(this).attr("href")=="") e.preventDefault();
+		$("#goumaikuang").hide();		
 	});
 	$(".tofu_anniu a").undelegate();
 	
@@ -59,7 +54,7 @@ $(".inpKeyword").focus(function(){
         $('#informationList').load('/informations/search/' + $('#detail_type').val(), searchOpt, function(){});
 	});
 });
-{/literal}
+//{/literal}
 </script>
 
 <div class="zy_z" style="overflow: visible;">
@@ -160,7 +155,7 @@ $(".inpKeyword").focus(function(){
               </span>
             </li>
             <li class="keyword">
-              <input type="text" value="请输入关键字" placeholder="请输入关键字" class="inpKeyword inpTextBox" name="inpKeyword" id="acpro_inp65" widdit="on" autocomplete="off">
+              <input type="text" value="请输入关键字" placeholder="请输入关键字" class="inpKeyword inpTextBox" name="inpKeyword" id="acpro_inp65" widdit="on" autocomplete="off" onfocus="this.select()">
             </li>
           </ul>
           

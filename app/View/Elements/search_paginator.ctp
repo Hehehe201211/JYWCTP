@@ -3,7 +3,6 @@
 {$options = ['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-
 <table width="100%" cellspacing="0" cellpadding="0" border="0"
     class="con_2_table">
       <thead>
@@ -60,8 +59,7 @@
                     <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/payment/{$info.Information.id}">我需要类似服务</a></td>
                 {else}
                     <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/create/has/?target={$info.Information.id}&target_member={$info.Information.members_id}">我有该客源 </a></td>
-                {/if}
-               
+                {/if}               
             </tr>
         {/foreach}        
     </tbody>

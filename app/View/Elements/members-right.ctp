@@ -76,5 +76,4 @@
             <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
         </ul>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion6" --> <!-- InstanceEndEditable -->
 </div>
