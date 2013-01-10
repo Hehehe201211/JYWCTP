@@ -35,9 +35,9 @@
             <a href="/cooperations/detail" target="_blank">详情</a>
             </td>
           </tr>
-      {/foreach}
-      <tr>
-        <td colspan="6" class="fanyea_x"><div class="fanyea">
+      {/foreach}        
+      </table>
+      <div class="fanyea">
             {if $paginatorParams['prevPage']}
                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
             {/if}
@@ -57,12 +57,9 @@
                 <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
             </div>
             {if $paginatorParams['nextPage']}
-                <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
+                <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
             {/if}
           </div>
-          </td>
-      </tr>  
-      </table>
         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
         {$form = ['isForm' => true, 'inline' => true]}

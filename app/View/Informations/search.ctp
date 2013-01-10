@@ -65,134 +65,140 @@ $("body").append("<div id='bgKuang'></div><div style='display: none;' id='goumai
     <div style="overflow:visible;" class="xxjs">
       <div class="biaotit">{if $type=="has"}所有客源{else}所有悬赏{/if}</div>
       <div class="advance_seach">
-        <div class="switch_box">
-          <div class="divTable divTableCity">
-            <div class="divtt">
-              <div class="left fl"><strong>城市选择器</strong>(最多可选5项)</div>
-              <div class="right fr">[确定]</div>
-            </div>
-            <dl>
-              <dt class="goback"><a href="#">返回省份</a></dt>
+        <div class="switchBox">
+    <ul>
+      <li class="lists city"><span class="title">
+        <input type="button" value="城市（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>城市选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">返回省份</a></dt>
+            <dd>
               <dl class="options">
-              	{foreach $this->City->parentCityList() as $city}
-              		<dd>
-	                  <input type="checkbox" value="{$city.City.id}" class="inpCheckbox">
-	                  <a href="#">{$city.City.name}</a>
-                   </dd>
-              	{/foreach}
-              </dl>
-              <dl class="subOptions">
-              </dl>
-              <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-              <dl class="selected">
-              </dl>
-            </dl>
-            <div class="divtt">
-              <div class="right fr">[确定]</div>
-            </div>
-          </div>
-          <div class="divTable divTableTrade">
-            <div class="divtt">
-              <div class="left fl"><strong>行业选择器</strong>(最多可选5项)</div>
-              <div class="right fr">[确定]</div>
-            </div>
-            <dl>
-              <dt class="goback"><a href="#">行业</a></dt>
-              <dl class="options">
-              	{foreach $this->Category->parentCategoryList() as $cate}
-              		<dd>
-	                  <input type="checkbox" value="{$cate.Category.id}" class="inpCheckbox">
-	                  <a href="#">{$cate.Category.name}</a>
-	               </dd>
-              	{/foreach}
-              </dl>
-              <dl class="subOptions">
-              </dl>
-              <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-              <dl class="selected">
-              </dl>
-            </dl>
-            <div class="divtt">
-              <div class="right fr">[确定]</div>
-            </div>
-          </div>
-          <div class="divTable divTableProduct">
-            <div class="divtt">
-              <div class="left fl"><strong>产品或服务</strong>(最多可选5项)</div>
-              <div class="right fr">[确定]</div>
-            </div>
-            <dl>
-              <dt class="goback"><a href="#">返回产品或服务</a></dt>
-              <dl class="options">
-              	{foreach $this->Category->parentCategoryList() as $cate}
-                    <dd>
-                      <input type="checkbox" value="{$cate.Category.id}" class="inpCheckbox">
-                      <a href="#">{$cate.Category.name}</a>
-                   </dd>
+                {foreach $this->City->parentCityList() as $city}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$city.City.id}" class="inpCheckbox">
+                    {$city.City.name}</label>
+                </dd>
                 {/foreach}
               </dl>
               <dl class="subOptions">
               </dl>
-              <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+            </dd>
+            <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+            <dd>
               <dl class="selected">
               </dl>
-            </dl>
-            <div class="divtt">
-              <div class="right fr">[确定]</div>
-            </div>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
           </div>
-          <ul>
-            <li class="city"><span class="title">
-              <input type="button" value="城市（可选）" class="inpButton">
-              </span>
-            </li>
-            <li class="trade"><span class="title">
-              <input type="button" value="行业（可选）" class="inpButton">
-              </span>
-            </li>
-            <li class="product"><span class="title">
-              <input type="button" value="产品或服务（可选）" class="inpButton">
-              </span>
-            </li>
-            <li class="keyword">
-              <input type="text" value="请输入关键字" placeholder="请输入关键字" class="inpKeyword inpTextBox" name="inpKeyword" id="acpro_inp65" widdit="on" autocomplete="off" onfocus="this.select()">
-            </li>
-          </ul>
-          
-			<table width="0" cellspacing="0" cellpadding="0" border="0">
-				<tbody>
-				  <tr>
-				    <td><ul class="ulTable ulTableCity"></ul></td>
-				    <td><ul class="ulTable ulTableTrade"></ul></td>
-				    <td><ul class="ulTable ulTableProduct"></ul></td>
-				  </tr>
-				</tbody>
-			</table>
-          <ul>
-            <li style="width:255px;">
-              <label>信息价格：</label>
-              <input type="text" id="amount-jiage" name="price" onkeyup="phoneNum(this)" onpaste="phoneNum(this)"/>
-              <div id="slider-price" style="margin-left:80px"></div>
-            </li>
-            <li style="width:190px;">是否支持积分交易：
-              <select name="payment_method">
-                <option value="">不限</option>
-                <option value="1">是</option>
-                <option value="0">否</option>
-              </select>
-            </li>
-            <li style="width:140px;">发布日期：
-              <select name="limitTime">
-                <option value="0">当日</option>
-                <option value="3">3天</option>
-                <option value="7">一周</option>
-                <option value="30">一个月</option>
-                <option value="">全部</option>
-              </select>
-            </li>
-          </ul>
-          
         </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li>
+      <li class="lists trade"><span class="title">
+        <input type="button" value="行业（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>行业选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">行业</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->Category->parentCategoryList() as $value}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$value.Category.id}" class="inpCheckbox">
+                    {$value.Category.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+            </dd>
+            <dt>您已经选择的行业是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li>
+      <li class="lists product"><span class="title">
+        <input type="button" value="产品或服务（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>产品或服务</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">返回产品或服务</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->Category->parentCategoryList() as $cate}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$cate.Category.id}" class="inpCheckbox">
+                    {$cate.Category.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+              <dl class="subOptions">
+              </dl>
+            </dd>
+            <dt>您已经选择的产品和服务是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li>
+      <li class="lists keyword">
+        <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onFocus="this.select()"/>
+      </li>
+      </ul>
+      <div class="clearfix"></div>
+      <ul>
+      <li class="lists" style="width:255px;height:40px;">
+        <label>信息价格：</label>
+        <input type="text" id="amount-jiage" name="price" />
+        <div id="slider-price" style="margin-left:66px"></div>
+      </li>
+      <li class="lists" style="width:115px;">是否支持积分交易：
+        <select name="payment_method">
+          <option value="">不限</option>
+          <option value="1">是</option>
+          <option value="0">否</option>
+        </select>
+      </li>
+      <li class="lists">发布日期：
+        <select name="limitTime">
+          <option value="">全部</option>
+          <option value="0">当日</option>
+          <option value="3">3天</option>
+          <option value="7">一周</option>
+          <option value="30">一个月</option>
+        </select>
+      </li>
+    </ul>
+  </div>
         <!--<div class="divMap">
           <div class="divMapCon"><img src="{$this->webroot}img/dt.jpg"></div>
         </div>

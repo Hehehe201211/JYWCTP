@@ -196,7 +196,9 @@ $(document).ready(function(){
             $('#company_register').submit();
         }
     });
-    
+    $("#yanzhengma").keypress(function(e){
+		  if ($(this).val()!=""&&e.keyCode==13) $("#btnLogin").click();
+	  });
     
     //check number
     $('#yanzhengma').after('<img id="code" src="/members/image">');

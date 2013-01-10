@@ -76,7 +76,7 @@ class FulltimesController extends AppController
     {
         $this->set('title_for_layout', "我要工作");
         if (!$this->RequestHandler->isAjax()) {
-            $js = array('retrieavl');
+            $js = array('retrieval');
             $css = array(
 		        'common'
 	        );

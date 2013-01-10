@@ -153,7 +153,7 @@ class ResumesController extends AppController
     {
         if (!$this->RequestHandler->isAjax()) {
             $this->set('title_for_layout', "简历检索");
-	        $js = array('retrieavl');
+	        $js = array('retrieval');
 	        $this->_appendJs($js);
 	        $this->Resumes->search();
         } else {

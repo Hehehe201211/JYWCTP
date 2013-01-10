@@ -17,7 +17,7 @@ class ElitesController extends AppController
     {
         $js = array(
             'jquery-ui',
-            'retrieavl'
+            'retrieval'
         );
         $css = array('ui/jquery-ui');
         $this->_appendCss($css);

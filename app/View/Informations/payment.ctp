@@ -92,145 +92,114 @@ $(document).ready(function(){
       <div class="hx"></div>
     </div>    
     {$this->element('base_seller_info')}
-    <div class="xq_zl">
-      <div class="xq_zl_xbxq">
-        <div class="biaotit">{$information.Information.title}</div>
-<table width="570" id="information">
-	<tbody>
-	<tr>
+    <div class="tableDetail">
+<div class="biaotit">{$information.Information.title}</div>
+      <table width="100%">
+        <tr>
         {$provincial = $this->City->cityName($information.Information.provincial)}
-        {$city = $this->City->cityName($information.Information.city)}
-        {if $provincial == $city}
-            <td width="132" class="tdRight">省份：</td>
-            <td width="57" class="tdLeft">{$provincial}</td>
-			<td width="42" class="tdRight"> </td>
-            <td width="319" class="tdLeft"> </td>
-        {else}
-            <td width="132" class="tdRight">省份：</td>
-            <td width="57" class="tdLeft">{$provincial}</td>
-            <td width="42" class="tdRight">城市：</td>
-            <td width="319" class="tdLeft">{$city}</td>
-        {/if}
-		
-	</tr>
-	<tr>
-		<td width="132" class="tdRight">行业：</td>
-		<td class="tdLeft" colspan="3">{$this->Category->getCategoryName($information.Information.industries_id)}
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight">采购产品：</td>
-		<td class="tdLeft" colspan="3">
-		{$this->Category->getCategoryName($information.Information.category)} 
+        {$city = $this->City->cityName($information.Information.city)}        
+        <th width="25%">所在区域：</th>
+        <td width="75%">{if $provincial == $city}{$provincial}{else}{$provincial}&nbsp;{$city}{/if}</td>
+        </tr>
+        <tr>
+          <th>行业：</th>
+          <td>{$this->Category->getCategoryName($information.Information.industries_id)}</td>
+        </tr>
+        <tr>
+          <th>采购产品：</th>
+          <td>{$this->Category->getCategoryName($information.Information.category)} 
 		{$this->Category->getCategoryName($information.Information.sub_category)}
 		{$this->Category->getCategoryName($information.Information.other_category)}
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight connection">采购单位：</td>
-		<td class="tdLeft" colspan="3">
-		{if $paid}
+</td>
+        </tr>
+        <tr>
+          <th >采购单位：</th>
+          <td class="red">{if $paid}
 		{$information.Information.company}
 		{else}
 		******
 		{/if}
-		</td>
-	</tr>
-	<tr>
-            <td class="tdRight connection">联系人：</td>
-            <td colspan="3" class="tdLeft">{if $paid}
+</td>
+        </tr>       
+ <tr>
+          <th>联系人：</th>
+          <td class="red">{if $paid}
 			    {$information.Information.contact}
 			{else}
 			    ******
 			{/if}</td>
-          </tr>
-          <tr>
-            <td class="tdRight connection">联系人职位：</td>
-            <td colspan="3" class="tdLeft">{if $paid}
+        </tr>
+        <tr>
+          <th>联系人职位：</th>
+          <td class="red">{if $paid}
                 {$information.Information.post}
             {else}
                 ******
             {/if}</td>
-          </tr>
-		  {foreach $attributes as $attr}
-          <tr>
-            <td class="tdRight connection">联系方式：</td>
-            <td colspan="3" class="tdLeft">{if $paid}
+        </tr>
+         {foreach $attributes as $attr}
+        <tr>
+          <th>联系方式：</th>
+          <td class="red">{if $paid}
                 {$attr.InformationAttribute.contact_method}
             {else}
                 ******
             {/if}</td>
-          </tr>
-		  {/foreach}
-          <tr>
-            <td class="tdRight connection">联系人地址：</td>
-            <td colspan="3" class="tdLeft">{if $paid}
+        </tr>
+ {/foreach}
+ <tr>
+          <th>联系人地址：</th>
+          <td class="red">{if $paid}
                 {$information.Information.address}
             {else}
                 ******
             {/if}</td>
-          </tr>
-	<tr>
-		<td class="tdRight">信息交易价格：</td>
-		<td class="tdLeft" colspan="3">
-			{if $information.Information.payment_type == 1}
+        </tr>        
+        <tr>
+          <th>信息交易价格：</th>
+          <td>{if $information.Information.payment_type == 1}
 				聚客币：{$information.Information.price}元
 			{else if $information.Information.payment_type == 2}
 				积分：{$information.Information.point}分
 			{else}
 				聚客币：{$information.Information.price}元；积分：{$information.Information.point}分
 			{/if}
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight">有效期：</td>
-		<td class="tdLeft" colspan="3">
-		{$information.Information.open} - {$information.Information.close}
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight">预计合作金额：</td>
-		<td class="tdLeft" colspan="3">
-			{$information.Information.profit}元人民币
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight">预计合作时间：</td>
-		<td class="tdLeft" colspan="3">
-			{$information.Information.finished}
-		</td>
-	</tr>
-	<tr>
-		<td class="tdRight">客户选择服务商因素：</td>
-		<td class="tdLeft" colspan="3">
-		{$information.Information.reason}
-		</td>
-	</tr>
-	{if $type=="has" && $memberInfo.Member.grade < 1}
+</td>
+        </tr>     
+        <tr>
+          <th>有效期：</th>
+          <td>{$information.Information.open} - {$information.Information.close} </td>
+        </tr>   
+        <tr>
+          <th>预计合作金额：</th>
+          <td>{$information.Information.profit}元人民币</td>
+        </tr>
+        <tr>
+          <th>预计合作时间：</th>
+          <td>{$information.Information.finished}</td>
+        </tr>
+        <tr>
+          <th>客户选择服务商因素：</th>
+          <td>{$information.Information.reason}</td>
+        </tr>
+        {if $type=="has" && $memberInfo.Member.grade < 1}
 				<tr>
-					<td class="tdRight"></td>
-					<td class="tdLeft" colspan="3"><em>你的会员等级不足以购买此信息，是否立即<a target="_blank" href="/members/upgrade">提升会员等级</a>？</em></td>
+					<th>&nbsp;</th>
+					<td><em>你的会员等级不足以购买此信息，是否立即<a target="_blank" href="/members/upgrade">提升会员等级</a>？</em></td>
 				</tr>
 				{/if}
-    <tr>
-		<td class="tdRight">信息描述：</td>
-		<td class="tdLeft" colspan="3"><p>
-			{if empty($information.Information.introduction)}无{else}{$information.Information.introduction}{/if}</p>
-		</td>
-	</tr>
-    <tr>
-		<td class="tdRight">采购补充：</td>
-		<td class="tdLeft" colspan="3"><p>
-			{if empty($information.Information.additional)}无{else}{$information.Information.additional}{/if}</p>
-		</td>
-	</tr>
-	</tbody>
-</table>
-      </div>
-      <div>
-      	{if !$paid && $memberInfo.Member.grade > 1}<a id="btnXuyao" class="moreInfo zclan zclan4" href="javascript:void(0)">我需要</a>{/if}
-      </div>
-      <div class="clear"></div>
+        <tr>
+          <th>信息描述：</th>
+          <td><p>
+			{if empty($information.Information.introduction)}无{else}{$information.Information.introduction}{/if}</p></td>
+        </tr>
+        <tr>
+          <th>采购补充：</th>
+          <td><p>
+			{if empty($information.Information.additional)}无{else}{$information.Information.additional}{/if}</p></td>
+        </tr>
+      </table>
+      {if !$paid && $memberInfo.Member.grade > 1}<a id="btnXuyao" class="moreInfo zclan zclan4" href="javascript:void(0)">我需要</a>{/if}
     </div>
     </div>
 

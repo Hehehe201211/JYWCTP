@@ -150,7 +150,7 @@ $(document).ready(function(){
     });
   
 });
-//{/literal}
+{/literal}
 </script>
 <div class="main">
     <div id="loginWarning">
@@ -173,7 +173,7 @@ $(document).ready(function(){
         </div>
         <div class="keyuan">
       <div class="fl"> 
-      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>我要客源<span>谁需要我的产品</span></h3>
+      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>最新客源<span>谁需要我的产品</span></h3>
         <div class="ulLists">        
           <ul class="lists">
           {foreach $needTaskList as $information}
@@ -187,7 +187,7 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="fl fr">
-      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>我有客源<span>谁可以提供产品给我</span></h3>
+      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>最新悬赏<span>谁可以提供产品给我</span></h3>
         <div class="ulLists">
           <ul class="lists">
 	          {foreach $hasTaskList as $information}
@@ -293,11 +293,11 @@ $(document).ready(function(){
                     <ul id="myTab2">
                     {foreach $notices as $key => $notice}
 	                    {if $key == 0}
-	                    	<li class="active3"><a href="/static?tpl=gonggao">{$notice.Notice.title}</a></li>
+	                    	<li class="active3"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
 	                    {elseif $key+1 == count($notices)}
-	                    	<li style="width:71px;"><a href="/static?tpl=jiaoyianquan">{$notice.Notice.title}</a></li>
+	                    	<li style="width:71px;"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
 	                    {else}
-	                    	<li><a href="/static?tpl=gonggao">{$notice.Notice.title}</a></li>
+	                    	<li><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
 	                    {/if}
                     {/foreach}
                     </ul>
@@ -309,11 +309,11 @@ $(document).ready(function(){
                         <div class="con_3">
                             <ul>
                             	{foreach $notice.subNotice as $sub}
-                            		<li><a href="#1">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                            		<li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
                             	{/foreach}
                             </ul>
                             {if count($notice.subNotice) == 5}
-                            	<h5><a href="#">查看更多&gt;&gt;</a></h5>
+                            	<h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
                             {/if}
                         </div>
                     </div>
@@ -322,11 +322,11 @@ $(document).ready(function(){
                         <div class="con_3">
                             <ul>
                             	{foreach $notice.subNotice as $sub}
-                            		<li><a href="#1">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                            		<li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
                             	{/foreach}
                             </ul>
                             {if count($notice.subNotice) == 5}
-                            	<h5><a href="#">查看更多&gt;&gt;</a></h5>
+                            	<h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
                             {/if}
                         </div>
                     </div>

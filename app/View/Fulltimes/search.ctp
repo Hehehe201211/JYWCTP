@@ -21,72 +21,79 @@ $(document).ready(function(){
         <div class="biaotit">我要工作</div>
         <form id="searchOpt">
         <div class="advance_seach">
-            <div class="switch_box">
-                <div class="divTable divTableCity">
-                    <div class="divtt">
-                        <div class="left fl"><strong>城市选择器</strong>(最多可选5项)</div>
-                        <div class="right fr">[确定]</div>
-                    </div>
-                    <dl>
-                        <dt class="goback"><a href="#">返回省份</a></dt>
-                        <dl class="options">
-                        {foreach $this->City->parentCityList() as $city}
-                            <dd>
-                                <input type="checkbox" class="inpCheckbox" value="{$city.City.id}"/>
-                                <a href="#">{$city.City.name}</a>
-                            </dd>
-                        {/foreach}
-                        </dl>
-                        <dl class="subOptions">
-                        </dl>
-                        <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-                        <dl class="selected">
-                        </dl>
-                    </dl>
-                    <div class="divtt">
-                        <div class="right fr">[确定]</div>
-                    </div>
-                </div>
-                <div class="divTable divTableTrade">
-                    <div class="divtt">
-                        <div class="left fl"><strong>行业选择器</strong>(最多可选5项)</div>
-                        <div class="right fr">[确定]</div>
-                    </div>
-                    <dl>
-                        <dt class="goback"><a href="#">行业</a></dt>
-                        <dl class="options">
-                        {foreach $this->Category->parentCategoryList() as $value}
-                            <dd>
-                                <input type="checkbox" class="inpCheckbox" value="{$value.Category.id}"/>
-                                <a href="#">{$value.Category.name}</a>
-                            </dd>
-                        {/foreach}
-                        </dl>
-                        <dl class="subOptions">
-                        </dl>
-                        <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-                        <dl class="selected">
-                        </dl>
-                    </dl>
-                    <div class="divtt">
-                        <div class="right fr">[确定]</div>
-                    </div>
-                </div>
-                <ul>
-                    <li class="city">
-                        <span class="title"><input type="button" class="inpButton" value="工作区域（可选）"/></span>
-                    </li>
-                    <li class="trade">
-                        <span class="title"><input type="button" class="inpButton" value="意向行业（可选）"/></span>
-                    </li>
-                </ul>
-                <table width="0" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td><ul class="ulTable ulTableCity"></ul></td>
-                        <td><ul class="ulTable ulTableTrade"></ul></td>
-                    </tr>
-                </table>
-                <ul class="ulParttime">
+            <div class="switchBox">
+    <ul>
+      <li class="lists city"><span class="title">
+        <input type="button" value="工作区域（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>城市选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">返回省份</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->City->parentCityList() as $city}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$city.City.id}" class="inpCheckbox">
+                    {$city.City.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+              <dl class="subOptions">
+              </dl>
+            </dd>
+            <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li>
+      <li class="lists trade"><span class="title">
+        <input type="button" value="意向行业（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>行业选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">行业</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->Category->parentCategoryList() as $value}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$value.Category.id}" class="inpCheckbox">
+                    {$value.Category.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+            </dd>
+            <dt>您已经选择的行业是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li> 
+      </ul>
+      <div class="clearfix"></div>
+      <ul class="ulParttime">
                     <li>经验要求：
                         <select name="continued">
                             <option value="">不限</option>
@@ -133,7 +140,7 @@ $(document).ready(function(){
                         </select>
                     </li>
                 </ul>
-            </div>
+  </div>
             <a class="zclan zclan4" href="javascript:void(0)" id="search">查询</a>
         </div>
         

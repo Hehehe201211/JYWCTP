@@ -20,9 +20,7 @@
             {/foreach}
           </ul>
         </div>
-        <table width="596" border="0" cellspacing="0" cellpadding="0" class="con_2_table">     
-          <tr>
-            <td class="fanyea_x"><div  class="fanyea">
+        <div  class="fanyea">
                 {if $paginatorParams['prevPage']}
                     <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                 {/if}
@@ -42,12 +40,9 @@
                     <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                   </div>
                   {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                   {/if}
               </div>
-              </td>
-          </tr>
-        </table>
 </div>
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
 {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}

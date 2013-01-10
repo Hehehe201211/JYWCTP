@@ -21,27 +21,6 @@ $(document).ready(function(){
             });
         }
     });
-    //sidebarSF(3);
-    
-    //地图    
-   /* var strPosition;
-    $("#tglMap").toggle(function(e){
-        e.preventDefault();
-        $(".divMapContainer").slideDown("fast",function(){
-           strPosition=new googlemapjsv3({lat:"",lng:"",strCompany:""});
-        });
-        $(this).text("停用地图标记");
-    },function(e){      
-        e.preventDefault();
-        $(".divMapContainer").slideUp("fast");
-        $(this).text("启用地图标记");
-        strPosition=null;
-    });
-    $("#codeAddress").click(function(){
-        var a=document.getElementById("geostrPosition").value;
-        strPosition.codeAddress(a);
-    });*/
-	
 	//开始
 	$('#check').click(function(){
 		if (!checkData()) {
@@ -100,13 +79,11 @@ $(document).ready(function(){
 			}
 		}
 		
-		if ($("#ulTableCity li").length == 0){
-        	if ($('#ulTableCity').parent().parent().find('.errorMsg').html() == "") {
-        		$('#ulTableCity').parent().parent().find('.errorMsg').html("请完善此项目");
-        	}
+		if ($(".city .selectedOpts li").length == 0){
+			$('.city').parents(".dtSwitchBox").append('<span class="errorMsg" style="left: 240px;">请完善此项目</span>');        	
         	error = 1;
         } else {
-        	$('#ulTableCity').parent().parent().find('.errorMsg').html("");
+        	$('.city').parents(".dtSwitchBox").find('.errorMsg').remove();
         }
 		
 		$(".divSex input:radio:checked").each(function(index,element) {
@@ -208,17 +185,47 @@ $(document).ready(function(){
                 </li>
               </ul>
             </dt>
-            <dt>
+            <dt style="overflow:visible">
               <label><font class="facexh">*</font>客户区域范围：</label>
-              <div class="switch_box dtswitch_box">
-                <ul>
-                  <li class="city">
-                    <input type="button" class="inpButton" value="选择城市"/>
-                  </li>
-                </ul>
-                <ul class="ulTable ulTableCity" id="ulTableCity"></ul>
-              </div>
-			  <span class="errorMsg" style="position:absolute;left:366px;"></span>
+              <div class="switchBox dtSwitchBox">
+    <ul>
+      <li class="lists city"><span class="title">
+        <input type="button" value="选择城市" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>城市选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">返回省份</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->City->parentCityList() as $city}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$city.City.id}" class="inpCheckbox">
+                    {$city.City.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+              <dl class="subOptions">
+              </dl>
+            </dd>
+            <dt>您已经选择的城市是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li>       
+      </ul>            
+  </div>
             </dt>
             <dt>
               <label><font class="facexh">*</font>兼职配合方式：</label>
@@ -247,14 +254,45 @@ $(document).ready(function(){
               <label>报酬支付说明：</label>
               <textarea cols="45" rows="5" name="pay_explanation">{if isset($this->data['pay_explanation'])}{$this->data['pay_explanation']}{/if}</textarea>
             </dt>
-            <dt>
+            <dt style="overflow:visible">
               <label>兼职者推荐参与行业：</label>
-              <div class="switch_box dtswitch_box">
-              <ul>
-            <li class="trade"><input type="button" class="inpButton" name="industry" value="行业（可选）" /></li>
-          </ul>          
-          <ul class="ulTable ulTableTrade">
-                </ul></div>
+              <div class="switchBox dtSwitchBox">
+    <ul>      
+      <li class="lists trade"><span class="title">
+        <input type="button" value="行业（可选）" class="inpButton">
+        </span>
+        <div class="divTable">
+          <div class="divtt">
+            <div class="right">[确定]</div>
+            <strong>行业选择器</strong>（最多可选5项） </div>
+          <dl>
+            <dt class="goback"><a href="#">行业</a></dt>
+            <dd>
+              <dl class="options">
+                {foreach $this->Category->parentCategoryList() as $value}
+                <dd>
+                  <label>
+                    <input type="checkbox" value="{$value.Category.id}" class="inpCheckbox">
+                    {$value.Category.name}</label>
+                </dd>
+                {/foreach}
+              </dl>
+            </dd>
+            <dt>您已经选择的行业是:(点击可以取消选择)</dt>
+            <dd>
+              <dl class="selected">
+              </dl>
+            </dd>
+          </dl>
+          <div class="divtt">
+            <div class="right">[确定]</div>
+          </div>
+        </div>
+        <ul class="selectedOpts">
+        </ul>
+      </li> 
+      </ul>   
+  </div>
             </dt>
             <dt>
             <label><font class="facexh">*</font>联系人：</label>
@@ -295,56 +333,4 @@ $(document).ready(function(){
           <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
         </form>
       </div>
-    </div>
-    <div class="switch_box" >
-      <div class="divTable divTableCity" style="left:135px;top:190px;*top:-686px;">
-        <div class="divtt">
-          <div class="left fl"><strong>城市选择器</strong>(最多可选5项)</div>
-          <div class="right fr">[确定]</div>
-        </div>
-        <dl>
-          <dt class="goback"><a href="#">返回省份</a></dt>
-          <dl class="options">
-            {foreach $this->City->parentCityList() as $city}
-                <dd>
-                    <input type="checkbox" class="inpCheckbox" value="{$city.City.id}"/>
-                    <a href="#">{$city.City.name}</a>
-                </dd>
-            {/foreach}
-          </dl>
-          <dl class="subOptions">
-          </dl>
-          <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-          <dl class="selected">
-          </dl>
-        </dl>
-        <div class="divtt">
-          <div class="right fr">[确定]</div>
-        </div>
-      </div>
-      <div class="divTable divTableTrade" style="left:135px;top:473px;*top:-402px;">
-            <div class="divtt">
-              <div class="left fl"><strong>行业选择器</strong>(最多可选5项)</div>
-              <div class="right fr">[确定]</div>
-            </div>
-            <dl>
-              <dt class="goback"><a href="#">行业</a></dt>
-              <dl class="options">
-                {foreach $this->Category->parentCategoryList() as $value}
-                    <dd>
-                        <input type="checkbox" class="inpCheckbox" value="{$value.Category.id}"/>
-                        <a href="#">{$value.Category.name}</a>
-                    </dd>
-                {/foreach}
-              </dl>
-              <dl class="subOptions">
-              </dl>
-              <dt>您已经选择的城市是:(点击可以取消选择)</dt>
-              <dl class="selected">
-              </dl>
-            </dl>
-            <div class="divtt">
-              <div class="right fr">[确定]</div>
-            </div>
-          </div>
     </div>

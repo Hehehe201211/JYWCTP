@@ -16,7 +16,7 @@ class ParttimesController extends AppController
     {
         $js = array(
             'jquery-ui',
-            'retrieavl'
+            'retrieval'
         );
         $css = array('ui/jquery-ui');
         $this->_appendCss($css);
@@ -80,7 +80,7 @@ class ParttimesController extends AppController
         if (isset($this->request->query['type']) && $this->request->query['type'] == 'need') {
             $js = array(
 	            'jquery-ui',
-	            'retrieavl'
+	            'retrieval'
 	        );
 	        $css = array('ui/jquery-ui');
 	        $this->_appendCss($css);

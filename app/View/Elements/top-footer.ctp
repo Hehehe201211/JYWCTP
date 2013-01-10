@@ -4,23 +4,11 @@
 </div>
 <div class="tg_message">
     <div class="OLService">
-    <table width="100%" height="100%" border="0">
+    <table width="100%" height="100%" border="0">      
       <tr>
-        <td><div align="right">在线客服1：</div></td>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1415851084&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1415851084:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a></td>
-      </tr>
-      <tr>
-        <td><div align="right">在线客服1：</div></td>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2647359920&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2647359920:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a></td>
-      </tr>
-      <tr>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1415851084&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1415851084:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服</a></td>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1415851084&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1415851084:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服</a></td>
-      </tr>
-      <tr>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2647359920&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2647359920:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服</a></td>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2647359920&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2647359920:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服</a></td>
-      </tr>
+        <td><div align="right">在线客服1：</div><div>&nbsp;</div><div align="right">在线客服1：</div></td>
+        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2647359920&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2647359920:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><div>&nbsp;</div><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1415851084&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1415851084:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a></td>
+      </tr>            
     </table>
   </div>
     <ul>

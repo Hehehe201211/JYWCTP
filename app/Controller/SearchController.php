@@ -150,6 +150,7 @@ class SearchController extends AppController
      */
     public function offer()
     {
+        $this->set('title_for_layout', "企业招聘");
         $this->currentTopBar = 'offer';
         $this->_graphicOffer();
         $this->_linkOffer();
