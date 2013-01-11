@@ -9,7 +9,7 @@ class ResourcesController extends AppController
 {
 
     var $uses = array('Document', 'DownloadDocument', 'DocumentComment', 'DocumentCommentOption', 'DocumentFavourite');
-    var $components = array('Upload', 'File', 'RequestHandler');
+    var $components = array('Upload', 'File', 'RequestHandler', 'Unit');
     var $helpers = array('Unit');
     public function index()
     {
@@ -122,6 +122,9 @@ class ResourcesController extends AppController
     public function upload()
     {
         $this->set('title_for_layout', "资源上传");
+        if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.company')) {
+            $this->redirect('/resources');
+        }
     }
     
     public function download()
@@ -655,5 +658,8 @@ class ResourcesController extends AppController
         if (!$this->RequestHandler->isAjax()) {
         	$this->_getHots();
         }
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

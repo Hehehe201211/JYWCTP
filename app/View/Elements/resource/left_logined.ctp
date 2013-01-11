@@ -31,7 +31,9 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="sbResource">
-	<a href="/resources/upload" class="fileUpload" target="_blank">上传文档</a>
+	{if $memberInfo.Member.type != Configure::read('UserType.company')}
+    <a href="/resources/upload" class="fileUpload" target="_blank">上传文档</a>
+    {/if}
     <div class="userInfo">
       <h3>{$memberInfo.Member.nickname}</h3>
       <div class="userData">下载文档：

@@ -149,4 +149,10 @@ class NoticesController extends AppController
     	}
     	$this->_sendJson($result);
     }
+    
+    public function ckfinder()
+    {
+        $this->autoLayout = false;
+        $this->_appendJs('ckfinder/ckfinder');
+    }
 }

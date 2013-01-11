@@ -9,7 +9,7 @@ class ServicesController extends AppController
 {
     var $layout = 'members';
     public $uses = array('Homepage', 'Product', 'Service');
-    var $components = array('Upload', 'Thumbnail');
+    var $components = array('Upload', 'Thumbnail', 'Unit');
     /**
      * 
      * 公司主页
@@ -277,5 +277,8 @@ class ServicesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

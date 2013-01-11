@@ -22,11 +22,11 @@ $(document).ready(function(){
     </div>
     <div class="otherLinks">
       <ul>
-        <li><a href="pltS-index.html">新手入门</a></li>
-        <li><a href="pltS-index.html">交易机制</a></li>
-        <li><a href="pltS-index.html">支付方式</a></li>
-        <li><a href="pltS-index.html">客户服务</a></li>
-        <li><a href="pltS-index.html">帮助信息</a></li>
+        <li><a href="/static?tpl=xinshou">新手入门</a></li>
+        <li><a href="/static?tpl=jiaoyijizhi">交易机制</a></li>
+        <li><a href="/static?tpl=zhifufangshi">支付方式</a></li>
+        <li><a href="/static?tpl=kehufuwu">客户服务</a></li>
+        <li><a href="/static?tpl=bangzhu">帮助信息</a></li>
       </ul>
       <div class="clearfix"></div>
     </div>
@@ -44,8 +44,7 @@ $(document).ready(function(){
         {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
         {$this->Paginator->options($options)}
         {$paginatorParams = $this->Paginator->params()}
-      <div class="crumbs">
-      </div>
+      <div class="crumbs">通知中心&nbsp;&gt;&nbsp;<a href="/notices/listview?pid={$this->request->query['pid']}">{if $this->request->query['pid']==7}公告{else if $this->request->query['pid']==8}规则{else if $this->request->query['pid']==9}提现{else if $this->request->query['pid']==10}交易安全{/if}</a></div>
       <div class="serviceCon">
       <ul class="titleLists">
       {foreach $notices as $notice}

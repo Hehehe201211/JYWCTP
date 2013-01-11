@@ -9,7 +9,7 @@ class CooperationsController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Parttime');
+    var $components = array('RequestHandler', 'Parttime', 'Unit');
     var $uses = array('CooperationComment', 'Cooperation','CooperationComment','PartTime');
     var $paginate;
     /**
@@ -551,5 +551,8 @@ class CooperationsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

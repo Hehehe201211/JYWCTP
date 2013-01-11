@@ -8,7 +8,7 @@
 class AuditionsController extends AppController
 {
     var $layout = 'members';
-    var $components = array('RequestHandler');
+    var $components = array('RequestHandler', 'Unit');
     var $helpers = array('Js', 'City', 'Category');
     var $uses = array('Audition', 'Fulltime');
     public function listView()
@@ -464,5 +464,8 @@ class AuditionsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

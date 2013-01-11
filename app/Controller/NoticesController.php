@@ -8,7 +8,7 @@
 class NoticesController extends AppController
 {
     var $helpers = array('Js');
-    var $components = array('RequestHandler');
+    var $components = array('RequestHandler', 'Unit');
     public function listview()
     {
         $this->set('title_for_layout', "系统信息");
@@ -113,5 +113,8 @@ class NoticesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

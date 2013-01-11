@@ -10,7 +10,7 @@
 </div>
 <form id="contentForm">
 <textarea id="contents" name="content"></textarea>
-{$this->Fck->load('contents')}
+{$this->Fck->load('contents', '/admin/templates/ckfinder')}
 <input type="hidden" name="templates_id" value="" id="templates_id">
 <input type="button" value="确认" id="check">
 </form>

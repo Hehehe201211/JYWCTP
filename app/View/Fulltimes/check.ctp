@@ -12,7 +12,7 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
         <p>
             <a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;
             <a href="qy-jzfbmx.html">常规招聘</a>&gt;&gt;
@@ -153,5 +153,4 @@ $(document).ready(function(){
         <a href="javascript:void(0)" id="back" class="zclan zclan3">修改</a>
     </form>
     </div>
-
 </div>

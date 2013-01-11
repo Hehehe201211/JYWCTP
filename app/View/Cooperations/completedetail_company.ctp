@@ -16,11 +16,9 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-slijzky.html">平台兼职</a>&gt;&gt;<a href="#">未合作的客源</a></p>
-      <!-- InstanceEndEditable -->
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
     {if $cooperation.Cooperation.status == 10 || $cooperation.Cooperation.status == 11}
         <div class="biaotit">投诉原因</div>
         <div class="zy_zszlB">
@@ -171,7 +169,6 @@ $(document).ready(function(){
         {$this->element('cooperation_comments_paginator')}
         </form>
     </div>
-    <!-- InstanceEndEditable -->
 </div>
 {$this->element('member_detail')}
 {$this->element('information_detail')}

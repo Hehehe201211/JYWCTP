@@ -117,17 +117,15 @@ $(document).ready(function(){
 });
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p>
           <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
           <a href="javascript:void(0)">信息管理</a>&gt;&gt;
           <a href="javascript:void(0)">站内信</a>
       </p>
-      <!-- InstanceEndEditable -->
       <div class="zy_zszl">
       </div>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
     <div class="znx">
         <ul class="znxTitle">
             <li class="active"><a href="#">系统信息</a></li>
@@ -266,26 +264,4 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-    <!-- InstanceEndEditable -->
-    <!--
-    <div class="bottomRcd">
-        <div class="fl">
-            <h3>热门悬赏<a class="more" href="#">更多...</a></h3>
-            <ul>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-            </ul>
-        </div>
-        <div class="fl fr">
-            <h3>最新客源<a class="more" href="#">更多...</a></h3>
-            <ul>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-                <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-            </ul>
-        </div>
-    </div>  
-    <div class="bottomRcdPos"></div>
-    -->
 </div>

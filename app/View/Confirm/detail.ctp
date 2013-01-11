@@ -93,7 +93,6 @@ $(document).ready(function(){
 		}
 	});
 });
-
 {/literal}
 </script>
 
@@ -102,37 +101,33 @@ $(document).ready(function(){
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html.html">{if $type=="need"}我要客源{else}我有客源{/if}</a>&gt;&gt;<a href="#">待确认交易</a></p>    
     </div>    
     {$this->element('base_seller_info')}
-    <div class="xq_zl">
-      <div class="xq_zl_xbxq">
+<div class="tableDetail">
         <div class="biaotit">{$information.Information.title}<span>（交易中）</span></div>
-        <table width="570">
-	<tbody>
+        <table width="100%">
+   <tr>
+          <th width="25%">所在区域：</th>
+          <td width="75%">{$this->City->cityName($information.Information.provincial)}&nbsp;{$this->City->cityName($information.Information.city)}</td>
+        </tr>		
 		<tr>
-			<td width="132" class="tdRight">省份：</td>
-			<td width="57" class="tdLeft">{$this->City->cityName($information.Information.provincial)}</td>
-			<td width="42" class="tdRight">城市：</td>
-			<td width="319" class="tdLeft">{$this->City->cityName($information.Information.city)}</td>
-		</tr>
-		<tr>
-			<td width="132" class="tdRight">行业：</td>
-			<td class="tdLeft" colspan="3">{$this->Category->getCategoryName($information.Information.industries_id)}
+			<th>行业：</th>
+			<td>{$this->Category->getCategoryName($information.Information.industries_id)}
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">采购产品：</td>
-			<td class="tdLeft" colspan="3">
+			<th>采购产品：</th>
+			<td>
 			{$this->Category->getCategoryName($information.Information.category)}
 			{$this->Category->getCategoryName($information.Information.sub_category)}
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">采购单位：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.company}
+			<th>采购单位：</th>
+			<td>{$information.Information.company}
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">信息交易价格：</td>
-			<td class="tdLeft" colspan="3">
+			<th>信息交易价格：</th>
+			<td>
 			{if $transaction.PaymentTransaction.payment_type == 1}
 			聚客币：{$transaction.PaymentTransaction.number}元 
 			{/if} 
@@ -142,67 +137,67 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">有效期：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.open|date_format:"%Y-%m-%d"} -
+			<th>有效期：</th>
+			<td>{$information.Information.open|date_format:"%Y-%m-%d"} -
 			{$information.Information.close|date_format:"%Y-%m-%d"}</td>
 		</tr>
 		<tr>
-			<td class="tdRight">预计合作金额：</td>
-			<td class="tdLeft" colspan="3">
+			<th>预计合作金额：</th>
+			<td>
 			{$information.Information.profit}元人民币</td>
 		</tr>
 		<tr>
-			<td class="tdRight">预计合作时间：</td>
-			<td class="tdLeft" colspan="3">
+			<th>预计合作时间：</th>
+			<td>
 			{$information.Information.finished|date_format:"%Y-%m-%d"}</td>
 		</tr>
 		<tr>
-			<td class="tdRight">客户选择服务商因素：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.reason}
+			<th>客户选择服务商因素：</th>
+			<td>{$information.Information.reason}
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">联系人：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.contact}
+			<th>联系人：</th>
+			<td class="red">{$information.Information.contact}
 			</td>
 		</tr>
 		<tr>
-			<td class="tdRight">联系人职位：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.post}
+			<th>联系人职位：</th>
+			<td class="red">{$information.Information.post}
 			</td>
 		</tr>
 		{foreach $attributes as $value}
-		<tr class="connection">
-            <td class="tdRight">联系方式：</td>
-			<td class="tdLeft" colspan="3">{$value.InformationAttribute.mode} {$value.InformationAttribute.contact_method}
+		<tr>
+            <th>联系方式：</th>
+			<td class="red">{$value.InformationAttribute.mode} {$value.InformationAttribute.contact_method}
 			</td>
 		</tr>
 		{/foreach}
 		<tr>
-			<td class="tdRight">联系人地址：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.address}
+			<th>联系人地址：</th>
+			<td>{$information.Information.address}
 			</td>
 		</tr>
         <tr>
-			<td class="tdRight">信息详情：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.introduction}
+			<th>信息详情：</th>
+			<td>{$information.Information.introduction}
 			</td>
 		</tr>
         <tr>
-			<td class="tdRight">采购补充：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.additional}
+			<th>采购补充：</th>
+			<td>{$information.Information.additional}
 			</td>
 		</tr>
-	</tbody>
 </table>        
-      </div>
+<div class="divBtnContainer" style="width:200px;">
       {if $information.Information.members_id != $memberInfo.Member.id}
-        	<a href="javascript:void(0)" class="zclan zclan2 btnTrdComplete">交易完成</a>
+        	<a href="javascript:void(0)" class="zclan zclan7 btnTrdComplete">交易完成</a>
         {/if}
         {if !$complainted}
-        	<a href="javascript:void(0)" class="zclan zclan2 btnTousu">投诉</a>
+        	<a href="javascript:void(0)" class="zclan zclan7 btnTousu">投诉</a>
         {/if}
-    </div>
+        </div>
+</div>
     <div id="xq_huif">
     <form id="commentList">
     {$this->element('comments_paginator')}
@@ -218,7 +213,7 @@ $(document).ready(function(){
     </div>	
     </div>
     
-<div style="width: 430px; display: none;position: absolute; z-index: 100;" id="djbuz">
+<div style="width:430px; display: none;z-index: 100;" id="djbuz">
 <form id="complaints">
 <div style="width:430px;"id="djbuz">
   <div class="djbuzTit"><span class="biaot" style="width:397px;">投诉此信息</span><a href="#" title="关闭" id="closeKuang"></a></div>
@@ -239,6 +234,4 @@ $(document).ready(function(){
   </div> 
 </div>
 </form>
-</div>  
-    
-    
+</div>

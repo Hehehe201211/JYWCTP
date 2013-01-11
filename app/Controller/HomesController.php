@@ -8,7 +8,7 @@ class HomesController extends AppController
 {
     var $layout = 'homes';
     var $uses = array('Homepage', 'CompanyAttribute', 'Service', 'Product', 'Fulltime', 'PartTime');
-    var $components = array('Ft', 'Parttime', 'RequestHandler');
+    var $components = array('Ft', 'Parttime', 'RequestHandler', 'Unit');
     var $helpers = array('Js', 'City', 'Category');
     
     /**
@@ -162,6 +162,9 @@ class HomesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
     
 }

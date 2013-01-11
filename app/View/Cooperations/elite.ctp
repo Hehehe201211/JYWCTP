@@ -29,11 +29,9 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">信息概览</a></p>
-      <!-- InstanceEndEditable -->
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" --> 
     <div class="xxjs partTime" style="overflow-y:visible;min-height:460px;">
       <div class="biaotit">业务精英检索</div>
       <div class="advance_seach">
@@ -338,9 +336,7 @@ $(document).ready(function(){
         <li>&nbsp;</li>
       </ul>
     </div>
-    <table width="596" border="0" cellspacing="0" cellpadding="0" class="con_2_table">     
-      <tr>
-        <td class="fanyea_x"><div  class="fanyea">
+    <div  class="fanyea">
             <div class="dd_span"><a href="#">上一页</a></div>
             <div class="dd_ym">
               <label>每页显示：</label>
@@ -356,8 +352,5 @@ $(document).ready(function(){
               <div class="dd_span1"><a href="#">跳转</a></div>
             </div>
             <div class="dd_span"><a href="#">下一页</a></div>
-          </div></td>
-      </tr>
-    </table>
-    <!-- InstanceEndEditable -->
+          </div>    
 </div>

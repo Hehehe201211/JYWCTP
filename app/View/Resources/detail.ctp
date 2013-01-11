@@ -267,12 +267,13 @@ $(document).ready(function(){
       <div class="clearfix"></div>
     </div>
     <div class="downFile">
-    	{if $isFavourite}
-    		<a href="javascript:void(0);" class="btnCollect delFavorite">删除收藏</a>
-    	{else}
-    		<a href="javascript:void(0);" class="btnCollect addFavorite">收藏</a>
-    	{/if}
-   
+        {if !empty($memberInfo)}
+        	{if $isFavourite}
+        		<a href="javascript:void(0);" class="btnCollect delFavorite">删除收藏</a>
+        	{else}
+        		<a href="javascript:void(0);" class="btnCollect addFavorite">收藏</a>
+        	{/if}
+        {/if}
       <div class="download"><a href="javascript:void(0);" class="btnDownload">下载</a>
         <div class="describe">
           <p>大小：{printf("%.1f", $document.Document.size/1000)}KB</p>

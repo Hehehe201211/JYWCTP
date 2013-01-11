@@ -87,115 +87,92 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html.html">{if $info_type=="need"}我要客源{else}我有客源{/if}</a>&gt;&gt;<a href="#">待确认交易</a></p>
-    <!-- InstanceEndEditable -->
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" --> 
     {$this->element('base_seller_info')}
-    <div class="xq_zl">
-      <div class="xq_zl_xbxq">
-        <div class="biaotit">{$information.Information.title}<span>（交易中）</span></div>
-        <table width="570">
-	<tbody>
-		<tr>
-			<td width="132" class="tdRight">省份：</td>
-			<td width="57" class="tdLeft">{$this->City->cityName($information.Information.provincial)}</td>
-			<td width="42" class="tdRight">城市：</td>
-			<td width="319" class="tdLeft">{$this->City->cityName($information.Information.city)}</td>
-		</tr>
-		<tr>
-			<td width="132" class="tdRight">行业：</td>
-			<td class="tdLeft" colspan="3">{$this->Category->getCategoryName($information.Information.industries_id)}
-			</td>
-		</tr>
-		<tr>
-			<td class="tdRight">采购产品：</td>
-			<td class="tdLeft" colspan="3">
-			{$this->Category->getCategoryName($information.Information.category)}
+    <div class="tableDetail">
+<div class="biaotit">{$information.Information.title}<span>（交易中）</span></div>
+      <table width="100%">
+        <tr>
+          <th width="25%">所在区域：</th>
+          <td width="75%">{$this->City->cityName($information.Information.provincial)}&nbsp;{$this->City->cityName($information.Information.city)}</td>
+        </tr>
+         <tr>
+          <th>行业：</th>
+          <td>{$this->Category->getCategoryName($information.Information.industries_id)}</td>
+        </tr>
+        <tr>
+          <th>采购产品：</th>
+          <td class="red">{$this->Category->getCategoryName($information.Information.category)}
 			{$this->Category->getCategoryName($information.Information.sub_category)}
-			</td>
-		</tr>
-		<tr>
-			<td class="tdRight">采购单位：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.company}
-			</td>
-		</tr>
-		<tr>
-			<td class="tdRight">信息交易价格：</td>
-			<td class="tdLeft" colspan="3">
-			{if $paymentTransaction.PaymentTransaction.payment_type == 1}
+</td>
+        </tr>
+        <tr>
+          <th>采购单位</th>
+          <td class="red"> {$information.Information.company}</td>
+        </tr>               
+        <tr>
+          <th>信息交易价格：</th>
+          <td>{if $paymentTransaction.PaymentTransaction.payment_type == 1}
 			聚客币：{$paymentTransaction.PaymentTransaction.number}元 
 			{else $paymentTransaction.PaymentTransaction.payment_type == 2}
 			积分：{$paymentTransaction.PaymentTransaction.number}分 
-			{/if}
-			</td>
-		</tr>
-		<tr>
-			<td class="tdRight">有效期：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.open|date_format:"%Y-%m-%d"} -
+			{/if}</td>
+        </tr> 
+        <tr>
+          <th>有效期：</th>
+          <td>{$information.Information.open|date_format:"%Y-%m-%d"} -
 			{$information.Information.close|date_format:"%Y-%m-%d"}</td>
-		</tr>
-		<tr>
-			<td class="tdRight">预计合作金额：</td>
-			<td class="tdLeft" colspan="3">
-			{$information.Information.profit}元人民币</td>
-		</tr>
-		<tr>
-			<td class="tdRight">预计合作时间：</td>
-			<td class="tdLeft" colspan="3">
-			{$information.Information.finished|date_format:"%Y-%m-%d"}</td>
-		</tr>
-		<tr>
-			<td class="tdRight">客户选择服务商因素：</td>
-			<td class="tdLeft" colspan="3">{$information.Information.reason}
-			</td>
-		</tr>
-		{foreach $attributes as $value}
-		<tr class="connection">
-			<td colspan="6"><span> <label>联系人：</label>{$value.InformationAttribute.contact}
-			</span> <span> <label>联系人职位：</label>{$value.InformationAttribute.post}
-			</span> <span> <label>联系人地址：</label>{$value.InformationAttribute.address}
-			</span> <span> <label> 联系方式：</label>{$value.InformationAttribute.contact_method}
-			</span></td>
-		</tr>
-		{/foreach}
-	</tbody>
-</table>
-        
-      </div>
-      <div class="biaotit">信息详情</div>
-      <div class="xxContent">
-        <div class="description" id="zhiwei">
-          <table cellspacing="0" cellpadding="0">
-            <tbody><tr>
-              	<td>
-              		{$information.Information.introduction}
-				</td>
-            </tr>
-          </tbody>
-          </table>
-        </div>
-        <div class="clear"></div>
-      </div>
-      <div class="biaotit">采购补充</div>
-      <div class="xxContent">
-        <div class="description" id="zhiwei">
-          <table cellspacing="0" cellpadding="0">
-            <tbody><tr>
-              <td>{$information.Information.additional}</td>
-            </tr>
-          </tbody></table>
-        </div>
-        <div class="clear"></div>
-        {if $info_type=="need"}
-            <a href="javascript:void(0)" class="zclan zclan2 zclan3 btnTrdComplete">交易完成</a>
+        </tr>
+        <tr>
+          <th>预计合作金额：</th>
+          <td>{if empty($information.Information.profit)}0{else}{$information.Information.profit}{/if}元人民币</td>
+        </tr>
+        <tr>
+          <th>预计合作时间：</th>
+          <td>{$information.Information.finished|date_format:"%Y-%m-%d"}</td>
+        </tr>
+        <tr>
+          <th>联系人：</th>
+          <td class="red">{$value.InformationAttribute.contact}</td>
+        </tr>
+        <tr>
+          <th>联系人职位：</th>
+          <td class="red">{$value.InformationAttribute.post}</td>
+        </tr>
+        {foreach $attributes as $value}
+        <tr>
+          <th>联系方式：</th>
+          <td class="red">{$value.InformationAttribute.contact_method}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <th>单位详细地址：</th>
+          <td class="red">{$value.InformationAttribute.address}</td>
+        </tr>       
+        <tr>
+          <th>客户选择服务商因素：</th>
+          <td>{$information.Information.reason}</td>
+        </tr>
+        <tr>
+          <th>信息详情：</th>
+          <td><P>{$information.Information.introduction}</P></td>
+        </tr>
+        <tr>
+          <th>采购补充：</th>
+          <td><p>{$information.Information.additional}</p></td>
+        </tr>
+      </table>
+     {if $info_type=="need"}            
             {if !$complainted}
-            	<a href="javascript:void(0)" class="zclan zclan2 btnTousu">投诉</a>
+            	<a href="javascript:void(0)" class="zclan  zclan4 btnTrdComplete">交易完成</a>
+             {else}<div class="divBtnContainer" style="width:200px;">
+             <a href="javascript:void(0)" class="zclan zclan7 btnTrdComplete">交易完成</a><a href="javascript:void(0)" class="zclan zclan7 btnTousu">投诉</a>
+             </div>
             {/if}
-        {/if}
-      </div>
-    </div>
+    {/if}
+ </div>
     <div id="xq_huif">
     {if count($comments) > 0}
     	<h3>&nbsp; </h3>
@@ -213,8 +190,7 @@ $(document).ready(function(){
 	        </div>
         {/foreach}
     {/if}
-	<div class="pagesMag">
-            <div class="fanye fanyefr">
+	<div class="fanye">
               <div class="dd_span"><a href="#">上一页</a></div>
               <div class="dd_ym">
                 <label>每页显示：</label>
@@ -230,8 +206,7 @@ $(document).ready(function(){
                 <div class="dd_span1"><a href="#">跳转</a></div>
               </div>
               <div class="dd_span"><a href="#">下一页</a></div>
-            </div>
-          </div>		
+            </div>		
       <form method="post" id="comment">
       <p class="xq_huif_centr_toprr">
         <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
@@ -241,10 +216,8 @@ $(document).ready(function(){
       </p>
       </form>
     </div>
-	<!-- InstanceEndEditable --> 
-    </div>
-    
-<div style="width: 430px; height: 200px; top: 1219px; left: 576.5px; display: none; position: absolute; z-index: 100;" id="djbuz">
+    </div>    
+<div style="width:430px;height:200px;display: none;z-index:99;" id="djbuz">
 <form id="complaints">
 <div style="width:430px;height:200px;" id="djbuz">
   <div class="djbuzTit"><span class="biaot" style="width:397px;">投诉此信息</span><a href="#" title="关闭" id="closeKuang"></a></div>

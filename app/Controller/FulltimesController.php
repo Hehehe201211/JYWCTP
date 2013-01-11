@@ -4,7 +4,7 @@ class FulltimesController extends AppController
 {
     var $layout = 'members';
     var $uses = array('Fulltime', 'FulltimeFavourite');
-    var $components = array('RequestHandler', 'Ft');
+    var $components = array('RequestHandler', 'Ft', 'Unit');
     var $helpers = array('Js', 'City', 'Category');
     public function create()
     {
@@ -311,5 +311,8 @@ class FulltimesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

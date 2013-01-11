@@ -36,17 +36,17 @@
       {foreach $invites as $invite}
       <tr class="con_2_tr">
         <td class="tr_td2">
-            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}" style="font-weight: bold;">
+            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">
                 {$invite.MemberAttribute.full_name}
             </a>
         </td>
         <td class="tr_td1">
-            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}" style="font-weight: bold;">
+            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">
             {$this->Category->getCategoryName($invite.MemberAttribute.category_id)}
             </a>
         </td>        
         <td class="tr_td5">
-            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}" style="font-weight: bold;">
+            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">
             {$provincial = $this->City->cityName($invite.MemberAttribute.provincial_id)} 
             {$city = $this->City->cityName($invite.MemberAttribute.city_id)}
             {if $provincial != $city}
@@ -57,7 +57,7 @@
             </a>
         </td>
         <td class="con_2_xq_tofu xiushan_anniu">
-            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}" style="font-weight: normal;">详情</a>
+            <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">详情</a>
         </td>
       </tr>
       {/foreach}       
@@ -82,7 +82,7 @@
             <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
           </div>
           {if $paginatorParams['nextPage']}
-                <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
           {/if}
           </div>
     </div>    

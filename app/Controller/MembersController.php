@@ -16,7 +16,7 @@ class MembersController extends AppController
         'PartTime',
         'Cooperation'
     );
-    var $components = array('ImageCheck');
+    var $components = array('ImageCheck', 'Unit');
     var $helpers = array('City', 'Category');
     public function index()
     {
@@ -455,6 +455,9 @@ class MembersController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
     
     //

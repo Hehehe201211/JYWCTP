@@ -3,7 +3,7 @@
 {$paginatorParams = $this->Paginator->params()}
 
 {if $paginatorParams['count'] > 0}
-  <table width="596" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
+  <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
     <thead>
             <tr class="con_2_tr con_2_xq_too">
               <th style="width:75px;" class="tr_td8">买家</th> 
@@ -16,31 +16,31 @@
            </thead>
             <tbody><tr class="con_2_tr">
               <th><a target="_blank" href="hyzl.html">张伟</a></th> 
-              <td><a target="_blank" href="new-jycxxq.html" style="font-weight: bold;">公司标志制作</a></td>
+              <td><a target="_blank" href="new-jycxxq.html">公司标志制作</a></td>
               <td>聚客币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
-              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq.html" style="font-weight: normal;">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#" style="font-weight: normal;">删除</a></td>
+              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq.html">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#">删除</a></td>
             </tr> 
             <tr class="con_2_tr">
               <th><a target="_blank" href="hyzl.html">张伟</a></th> 
-              <td><a target="_blank" href="new-jycxxq2.html" style="font-weight: bold;">公司标志制作</a></td>
+              <td><a target="_blank" href="new-jycxxq2.html">公司标志制作</a></td>
               <td>聚客币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
-              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq2.html" style="font-weight: normal;">详情</a><a onclick="confirm('确定删除这条信息吗？')" href="#" style="font-weight: normal;">删除</a></td>
+              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq2.html">详情</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
             </tr> 
             <tr class="con_2_tr">
               <th class="tr_td1"><a target="_blank" href="hyzl.html">张伟</a></th> 
-              <td><a target="_blank" href="wdssxq2.html" style="font-weight: bold;">公司标志制作</a></td>
+              <td><a target="_blank" href="wdssxq2.html">公司标志制作</a></td>
               <td>聚客币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
-              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="wdssxq2.html" style="font-weight: normal;">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#" style="font-weight: normal;">删除</a></td>                                   
-            </tr> 
-          <tr>
-         <td class="fanyea_x" colspan="6">
-         <div class="fanyea">
+              <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="wdssxq2.html">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#">删除</a></td>          
+            </tr>           
+    </tbody>
+</table>
+<div class="fanyea">
             <div class="dd_span"><a href="#">上一页</a></div>
             <div class="dd_ym">
               <label>每页显示：</label>
@@ -56,10 +56,7 @@
               <div class="dd_span1"><a href="#">跳转</a></div>
             </div>
             <div class="dd_span"><a href="#">下一页</a></div>
-              </div></td>
-        </tr>
-    </tbody>
-</table>
+              </div>
 {else}
 	{$msg}
 {/if}

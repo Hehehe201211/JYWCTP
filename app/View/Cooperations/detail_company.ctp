@@ -42,11 +42,9 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-  <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+  <div class="zy_zs">
     <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="jltdjl.html">兼职管理</a>&gt;&gt;<a href="#">客源提供记录详情</a></p>
-    <!-- InstanceEndEditable -->
   </div>
-  <!-- InstanceBeginEditable name="EditRegion5" -->
   <div class="mebleft">
     <div class="biaotit"><strong>{$sender.MemberAttribute.name}的会员信息</strong></div>
     <table width="100%">
@@ -159,8 +157,10 @@ $(document).ready(function(){
   <div class="clear">&nbsp;</div>
   <div class="xq_zl">
   <input type="hidden" id="cooperations_id" value="{$this->request->query['receiver']}">
-  <a href="javascript:void(0)" id="agree" class="zclan zclan2">同意合作</a>
-  <a href="javascript:void(0)" id="refuse" class="zclan zclan2">谢绝合作</a>
+  <div class="divBtnContainer" style="width:200px;">
+  <a href="javascript:void(0)" id="agree" class="zclan zclan7">同意合作</a>
+  <a href="javascript:void(0)" id="refuse" class="zclan zclan7">谢绝合作</a>
+  </div>
   </div>
 </div>
 {$this->element('member_detail')}

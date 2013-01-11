@@ -106,7 +106,7 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr class="even">
-            <th style="vertical-align:top" scope="row">报酬支付补充说明：</th>
+            <th scope="row">报酬支付补充说明：</th>
             <td>
             {$parttime.PartTime.pay_explanation}
             </td>
@@ -150,9 +150,11 @@ $(document).ready(function(){
         <div class="biaotit">补充说明</div>
         <div class="xxContent">{$parttime.PartTime.additional}</div>
       </div>  
+	  <div class="divBtnContainer" style="width:200px;">
       <a href="javascript:void(0)" class="zclan zclan2 btnDeliverR">我有客源</a>
       <input type="hidden" id="favourite_id" value="{$this->request->query['id']}">
       <a href="javascript:void(0)" class="zclan zclan2" id="delete">删除</a>
+	  </div>
     </div>    
   </div>
 

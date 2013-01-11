@@ -20,9 +20,12 @@ class FckHelper extends AppHelper
     ]";
 	var $ignoreEmptyParagraph = true;
     
-    public function load($id = null, $toolbar = null)
+    public function load($id = null, $url = null, $toolbar = null)
     {
         if (empty($id)) {
+            return;
+        }
+        if (empty($url)) {
             return;
         }
         if (empty($toolbar)) {
@@ -35,7 +38,7 @@ class FckHelper extends AppHelper
 //        filebrowserImageUploadUrl : 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
 //        filebrowserFlashUploadUrl : 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
         
-        $code = "var frckeditor = CKEDITOR.replace('" . $id . "', {toolbar : " . $toolbar . ", filebrowserImageBrowseUrl : 'templates/ckfinder?Type=Images'})";
+        $code = "var frckeditor = CKEDITOR.replace('" . $id . "', {toolbar : " . $toolbar . ", filebrowserImageBrowseUrl : '" . $url . "?Type=Images'})";
         return $this->Html->scriptBlock($code);
     }
     public function set($name, $value)

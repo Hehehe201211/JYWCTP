@@ -8,49 +8,48 @@
         <div class="nTab3"> 
             <div class="TabTitle3">
                 <ul id="myTab2">
-                    <li class="active3">公告</li>
-                    <li>规则</li>
-                    <li>提现</li>
+                    {foreach $notices as $key => $notice}
+                        {if $key <= 2 && $key == 0}
+                            <li class="active3">{$notice.Notice.title}</li>
+                        {else if $key <= 2}
+                            <li>{$notice.Notice.title}</li>
+                        {/if}
+                    {/foreach}
                     <li class="long">兼职黑名单</li>
                 </ul>
             </div>
             <div class="TabContent3">
-                <div class="myTab1_Content2" style="display:block">
-                    <div class="con_3">
-                        <ul>
-                            <li><a href="#">新fea新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新faer闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻awrra新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻闻闻新闻新闻</a><span>[2011-9-19]</span></li>
-                        </ul>
-                        <h5><a href="#">更多&gt;&gt;</a></h5>
-                    </div>
-                </div>
-                <div class="myTab1_Content2">
-                    <div class="con_3">
-                        <ul>
-                            <li><a href="#">新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻21212g新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻afea新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻aaaa新闻闻闻新闻新闻</a><span>[2011-9-19]</span></li>
-                        </ul>
-                        <h5><a href="#">更多&gt;&gt;</a></h5>
-                    </div>
-                </div>
-                <div class="myTab1_Content2">
-                    <div class="con_3">
-                        <ul>
-                            <li><a href="#">新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新新闻新闻新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻1012121新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻gsggdsrh新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻新闻新闻新闻</a><span>[2011-9-19]</span></li>
-                            <li><a href="#">新闻新闻闻闻新闻新闻</a><span>[2011-9-19]</span></li>
-                        </ul>
-                        <h5><a href="#">更多&gt;&gt;</a></h5>
-                    </div>
-                </div>
+                {foreach $notices as $key => $notice}
+                    {if $key <= 2}
+                        {if $key == 0}
+                        <div class="myTab1_Content2" style="display:block">
+                            <div class="con_3">
+                                <ul>
+                                    {foreach $notice.subNotice as $sub}
+                                        <li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                                    {/foreach}
+                                </ul>
+                                {if count($notice.subNotice) == 5}
+                                    <h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
+                                {/if}
+                            </div>
+                        </div>
+                        {else}
+                        <div class="myTab1_Content2">
+                            <div class="con_3">
+                                <ul>
+                                    {foreach $notice.subNotice as $sub}
+                                        <li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                                    {/foreach}
+                                </ul>
+                                {if count($notice.subNotice) == 5}
+                                    <h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
+                                {/if}
+                            </div>
+                        </div>
+                        {/if}
+                    {/if}
+                {/foreach}
                 <div class="myTab1_Content2">
                     <div class="con_3">
                         <ul>

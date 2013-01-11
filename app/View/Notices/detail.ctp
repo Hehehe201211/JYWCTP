@@ -8,7 +8,6 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="main">
-
   <div class="ntcLeft">
     <div class="suckerdiv">
       <h3>通知中心</h3>
@@ -21,11 +20,11 @@ $(document).ready(function(){
     </div>
     <div class="otherLinks">
       <ul>
-        <li><a href="pltS-index.html">新手入门</a></li>
-        <li><a href="pltS-index.html">交易机制</a></li>
-        <li><a href="pltS-index.html">支付方式</a></li>
-        <li><a href="pltS-index.html">客户服务</a></li>
-        <li><a href="pltS-index.html">帮助信息</a></li>
+        <li><a href="/static?tpl=xinshou">新手入门</a></li>
+        <li><a href="/static?tpl=jiaoyijizhi">交易机制</a></li>
+        <li><a href="/static?tpl=zhifufangshi">支付方式</a></li>
+        <li><a href="/static?tpl=kehufuwu">客户服务</a></li>
+        <li><a href="/static?tpl=bangzhu">帮助信息</a></li>
       </ul>
       <div class="clearfix"></div>
     </div>
@@ -39,11 +38,11 @@ $(document).ready(function(){
     </form>         
     </div>
     <div class="corContent">
-      <div class="crumbs">    
+      <div class="crumbs"> {$notice.Notice.title}
       </div>
       <div class="serviceCon">
         {if !empty($notice)}
-            <h1>{$notice.Notice.title}</h1>
+            <!--<h1></h1>-->
             {$notice.Notice.content}
         {else}
         <h1>此系统信息不存在！</h1>

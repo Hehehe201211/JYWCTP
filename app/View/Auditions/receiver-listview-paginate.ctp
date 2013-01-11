@@ -18,18 +18,18 @@
         {$educated = Configure::read('Fulltime.educated')}
         {foreach $auditions as $audition}
             <tr class="con_2_tr">
-                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: bold;">{$audition.ResumeBase.name}</a></td>
-                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: bold;">{$audition.Fulltime.post}</a></td>
-                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: bold;">{$audition.Resume.continued}年以上</a></td>
+                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">{$audition.ResumeBase.name}</a></td>
+                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">{$audition.Fulltime.post}</a></td>
+                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">{$audition.Resume.continued}年以上</a></td>
                 <td>
-                <a target="_blank" href="qy-sddjlxq.html" style="font-weight: bold;">
+                <a target="_blank" href="qy-sddjlxq.html">
                 {if $audition.Resume.educated !== NULL}
                     {$educated[$audition.Resume.educated]}
                 {/if}
                 </a>
                 </td>
                 <td>
-                <a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: bold;">
+                <a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">
                     {$provincial = $this->City->cityName($audition.ResumeBase.provincial_now)}
                     {$city = $this->City->cityName($audition.ResumeBase.city_now)}
                     {if $provincial != $city}
@@ -39,17 +39,17 @@
                     {/if}
                 </a>
                 </td>        
-                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: bold;">{$audition.Audition.created|date_format:"%Y-%m-%d"}</a></td>
+                <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">{$audition.Audition.created|date_format:"%Y-%m-%d"}</a></td>
                 <td class="con_2_xq_tofu xiushan_anniu">
-                <a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}" style="font-weight: normal;">详情</a>
-                <a href="javascript:var a=confirm('删除此信息对方不会收到提示，是否删除？')" style="font-weight: normal;">删除</a>
+                <a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">详情</a>
+                <a href="javascript:var a=confirm('删除此信息对方不会收到提示，是否删除？')">删除</a>
                 </td>
             </tr>
         {/foreach}
     </table>
     <div class="fanyea">
                     {if $paginatorParams['prevPage']}
-                        <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                        <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                     {/if}
                     <div class="dd_ym">
                       <label>每页显示：</label>
@@ -66,7 +66,7 @@
                         <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                     {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
     </form>

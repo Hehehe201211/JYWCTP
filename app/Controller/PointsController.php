@@ -9,7 +9,7 @@ class PointsController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Fund');
+    var $components = array('RequestHandler', 'Fund', 'Unit');
     var $uses = array(
         'PaymentHistory',
         'MemberAttribute',
@@ -100,5 +100,8 @@ class PointsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

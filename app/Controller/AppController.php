@@ -93,6 +93,7 @@ class AppController extends Controller {
         $this->set('memberInfo', $this->_memberInfo);
         $this->set('currentMenu', $this->currentMenu);
         $this->set('currentTopBar', $this->currentTopBar);
+        
     }
     
     public function beforeFilter()
@@ -105,7 +106,7 @@ class AppController extends Controller {
             'search'        => array(),
             'accounts'      => array('eComplete'),
             'homes'         => array(),
-            'resources'     => array(),
+            'resources'     => array('index', 'detail', 'listview', 'search'),
             'notices'       => array()
         );
         $checkSession = true;

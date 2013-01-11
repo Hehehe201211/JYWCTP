@@ -53,7 +53,7 @@ class IndexController extends AppController
         //兼职信息
         $this->_parttimes();
         
-        //系统信息
+//        //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
     }

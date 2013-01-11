@@ -2,15 +2,12 @@
 {literal}
 $(document).ready(function(){
 });
-
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-ypqq.html">平台兼职</a>&gt;&gt;<a href="#">邀请详情</a></p>
-      <!-- InstanceEndEditable -->
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
      <div class="biaotit">的会员信息</div>
     <div class="xq_zl_xbxq">
       <table width="100%">
@@ -108,9 +105,9 @@ $(document).ready(function(){
             <a href="/parttimes/detail?id={$parttime.PartTime.id}" target="_blank">详情</a>
             </td>
           </tr>
-      {/foreach}
-      <tr>
-        <td colspan="6" class="fanyea_x"><div class="fanyea">
+      {/foreach}        
+      </table>
+      <div class="fanyea">
             {if $paginatorParams['prevPage']}
                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
             {/if}
@@ -130,15 +127,11 @@ $(document).ready(function(){
             <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
           </div>
           {if $paginatorParams['nextPage']}
-                <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
           {/if}
           </div>
-      </td>
-      </tr>  
-      </table>
       </div>
     <div class="clear">&nbsp;</div>
-    <!-- InstanceEndEditable -->
 </div>
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
 {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}

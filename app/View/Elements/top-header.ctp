@@ -13,40 +13,40 @@
           <li class="line"></li>
           {if empty($memberInfo)}
           <li class="cor">
-          <a href="zhuce.html" target="_blank">企业服务</a>
+          <a href="/services/home" target="_blank">企业服务</a>
              <div class="moreList" style="width:60px;">
-	             <a href="#" target="_blank">企业服务</a>
-	             <a href="#" target="_blank">常规招聘</a>
-	             <a href="#" target="_blank">平台兼职</a>
+	             <a href="/services/home" target="_blank">企业服务</a>
+	             <a href="/fulltimes/create" target="_blank">常规招聘</a>
+	             <a href="/parttimes/create" target="_blank">平台兼职</a>
              </div>
           </li>
           <li class="line"></li>
           <li class="cor">
-          <a href="zhuce.html" target="_blank">我的聚业务</a>
+          <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="#" target="_blank">我的悬赏</a>
-	             <a href="#" target="_blank">我的需求</a>
-	             <a href="#" target="_blank">面试邀请</a>
-	             <a href="#" target="_blank">平台兼职</a>
+	             <a href="/informations/issue/?type=has" target="_blank">我有客源</a>
+	             <a href="/informations/issue/?type=need" target="_blank">我要客源</a>
+	             <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
+	             <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
           </li>
           {else if $memberInfo.Member.type == Configure::read('UserType.company')}
           <li class="cor">
-          <a href="zhuce.html" target="_blank">企业服务</a>
+          <a href="/services/home" target="_blank">企业服务</a>
              <div class="moreList" style="width:60px;">
-	             <a href="#" target="_blank">企业服务</a>
-	             <a href="#" target="_blank">常规招聘</a>
-	             <a href="#" target="_blank">平台兼职</a>
+	             <a href="/services/home" target="_blank">企业服务</a>
+	             <a href="/fulltimes/create" target="_blank">常规招聘</a>
+	             <a href="/parttimes/create" target="_blank">平台兼职</a>
              </div>
           </li>
           {else}
           <li class="cor">
-          <a href="zhuce.html" target="_blank">我的聚业务</a>
+          <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="#" target="_blank">我的悬赏</a>
-	             <a href="#" target="_blank">我的需求</a>
-	             <a href="#" target="_blank">面试邀请</a>
-	             <a href="#" target="_blank">平台兼职</a>
+	             <a href="/informations/issue/?type=has" target="_blank">我有客源</a>
+	             <a href="/informations/issue/?type=need" target="_blank">我要客源</a>
+	             <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
+	             <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
           </li>
           {/if}
@@ -60,16 +60,32 @@
       <li class="help"><a href="#" target="_blank">帮助</a></li>
       <li class="daohang"><a href="#" target="_blank">网站导航</a>&nbsp;
         <dl>
-          <dt><a href="#" target="_blank">个人会员</a></dt>
-          <dd><a href="#" target="_blank">发布需求</a>
-	          <a href="#" target="_blank">发布悬赏</a>
+        {if empty($memberInfo)}
+          <dt><a href="/members" target="_blank">个人会员</a></dt>
+          <dd><a href="/informations/create/has" target="_blank">发布客源</a>
+	          <a href="/informations/create/need" target="_blank">发布悬赏</a>
 	          <a href="#" target="_blank">我要充值</a>
           </dd>
-          <dt><a href="#" target="_blank">企业会员</a></dt>
+          <dt><a href="/members" target="_blank">企业会员</a></dt>
           <dd>
 	          <a href="/fulltimes/create" target="_blank">发布招聘</a>
 	          <a href="/parttimes/create" target="_blank">发布兼职</a>
           </dd>
+        {else}
+            {if $memberInfo.Member.type == Configure::read('UserType.company')}
+            <dt><a href="/members" target="_blank">企业会员</a></dt>
+            <dd>
+                <a href="/fulltimes/create" target="_blank">发布招聘</a>
+                <a href="/parttimes/create" target="_blank">发布兼职</a>
+            </dd>
+            {else}
+            <dt><a href="/members" target="_blank">个人会员</a></dt>
+            <dd><a href="/informations/create/has" target="_blank">发布客源</a>
+                <a href="/informations/create/need" target="_blank">发布悬赏</a>
+                <a href="#" target="_blank">我要充值</a>
+            </dd>
+            {/if}
+        {/if}
           <dt><a href="#" target="_blank">聚业务社区</a></dt>
           <dd>
 	          <a href="#" target="_blank">博文</a>

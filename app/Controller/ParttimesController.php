@@ -11,7 +11,7 @@ class ParttimesController extends AppController
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
     var $uses = array('PartTime', 'Information', 'Cooperation', 'PartTimeFavourite');
-    var $components = array('RequestHandler', 'Parttime');
+    var $components = array('RequestHandler', 'Parttime', 'Unit');
     public function create()
     {
         $js = array(
@@ -278,5 +278,8 @@ class ParttimesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

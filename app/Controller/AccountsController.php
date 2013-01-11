@@ -4,7 +4,7 @@ class AccountsController extends AppController
 {
     var $layout = 'members';
     var $uses = array('Member', 'MemberAttribute', 'AccountTmp', 'FriendGroup', 'Friendship', 'StationMessage', 'CompanyAttribute');
-    var $components = array('RequestHandler', 'Friend', 'StationMsg');
+    var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit');
     var $helpers = array('Js', 'City', 'Category');
     /**
      * 
@@ -307,6 +307,9 @@ class AccountsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
     
 }

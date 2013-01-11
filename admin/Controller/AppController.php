@@ -31,7 +31,7 @@ class AppController extends Controller {
         'blueprint/plugins/link-icons/screen.css', 
         'admin.css'
     );
-    protected $jsArray = array('jquery-1.6.2.min.js', 'site-common.js');
+    protected $jsArray = array('jquery-1.6.2.min.js','jquery-ui.js', 'site-common.js');
     protected $metaArray = array();
     public $viewClass = 'Smarty';
     const DEFAULT_THEME = 'south-street';

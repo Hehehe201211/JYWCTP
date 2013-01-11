@@ -7,7 +7,7 @@ class FavouritesController extends AppController
         'PartTime'
     );
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Info');
+    var $components = array('RequestHandler', 'Info', 'Unit');
     var $paginate;
     public function listview()
     {
@@ -140,5 +140,8 @@ class FavouritesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

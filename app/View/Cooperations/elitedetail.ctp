@@ -6,13 +6,11 @@ $(document).ready(function(){
         bgKuang(".jsxxxqB",".jsxxxqB .closeDiv");           
     });
 });
-
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-ypqq.html">平台兼职</a>&gt;&gt;<a href="#">业务精英检索详情</a></p>
-      <!-- InstanceEndEditable -->
       <div class="zy_zszl enterpriseInfo">
         <div class="zy_zszl_z">
           <dl>
@@ -33,7 +31,6 @@ $(document).ready(function(){
         </div>
       </div>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
      <div class="biaotit">XXX5202012的会员信息</div>
     <div class="xq_zl_xbxq">
       <table width="100%">
@@ -105,9 +102,9 @@ $(document).ready(function(){
         <td><a target="_blank" href="qy-ycgwfkkyxq.html">2012-09-24<br>14:25</a></td>
         <td><a target="_blank" href="qy-ycgwfkkyxq.html">未付款</a></td>
         <td class="con_2_xq_tofu xiushan_anniu"><a href="qy-ycgwfkkyxq.html" target="_blank">详情</a><a href="javascript:if (confirm('如果您已经付款，请点击确定。')) alert('等对方确认后，兼职结束。');">已付款</a></td>
-      </tr>
-      <tr>
-        <td colspan="6" class="fanyea_x"><div class="fanyea">
+      </tr>        
+      </table>
+      <div class="fanyea">
             <div class="dd_span"><a href="#">上一页</a></div>
             <div class="dd_ym">
               <label>每页显示：</label>
@@ -123,10 +120,7 @@ $(document).ready(function(){
               <div class="dd_span1"><a href="#" style="font-weight: bold;">跳转</a></div>
             </div>
             <div class="dd_span"><a href="#" style="font-weight: bold;">下一页</a></div>
-          </div></td>
-      </tr>  
-      </table>
+          </div>
     <div class="clear">&nbsp;</div>
      <a class="zclan zclan4 btnDeliverR" href="#">邀请参与</a>
-    <!-- InstanceEndEditable -->
 </div>

@@ -43,7 +43,8 @@ $(document).ready(function(){
     	{foreach $documents as $document}
     		<dl class="result">
               <dt>
-              	<span class="spanFileFormat">&nbsp;</span>
+              {$file_info= explode('.', $document.Document.file_name)}
+              	<span class="spanFileFormat {$this->Unit->getFileIcon($file_info[1])}">&nbsp;</span>
 	            <a class="textEllipsis" href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a>
 	            <span class="clr666">{$document.Document.created|date_format:"%Y-%m-%d"}</span>
               </dt>

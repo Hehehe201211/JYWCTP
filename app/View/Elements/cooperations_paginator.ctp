@@ -61,8 +61,8 @@
                 <td class="tr_td5"><a target="_blank" href="/cooperations/detail/?{$type}={$coop.Cooperation.id}">{$status[$coop.Cooperation.status - 1]}</a></td>
                 <td class="tr_td5"><a target="_blank" href="/cooperations/detail/?{$type}={$coop.Cooperation.id}">{$coop.Cooperation.created|date_format:"%Y-%m-%d"}</a></td>
                 <td class="con_2_xq_tofu xiushan_anniu">
-                    <a href="/cooperations/detail/?{$type}={$coop.Cooperation.id}" target="_blank" style="font-weight: normal;">详情</a>
-                    <a href="javascript:void(0)" style="font-weight: normal;">删除</a>
+                    <a href="/cooperations/detail/?{$type}={$coop.Cooperation.id}" target="_blank">详情</a>
+                    <a href="javascript:void(0)">删除</a>
                 </td>
             </tr>
         {/foreach}
@@ -87,7 +87,7 @@
                           <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
                     </div>
                     {if $paginatorParams['nextPage']}
-                        <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                        <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}

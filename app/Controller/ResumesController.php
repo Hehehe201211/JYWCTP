@@ -10,7 +10,7 @@ class ResumesController extends AppController
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
     var $uses = array('ResumeBase', 'Resume', 'ResumeWork', 'ResumeEducation', 'Fulltime');
-    var $components = array('RequestHandler', 'Resumes');
+    var $components = array('RequestHandler', 'Resumes', 'Unit');
     var $paginate;
     public function create()
     {
@@ -280,5 +280,8 @@ class ResumesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //系统信息
+        $notices = $this->Unit->notice();
+        $this->set('notices', $notices);
     }
 }

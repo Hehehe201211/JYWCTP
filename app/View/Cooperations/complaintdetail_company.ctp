@@ -51,11 +51,9 @@ $(document).ready(function(){
 {/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-slijzky.html">平台兼职</a>&gt;&gt;<a href="#">被投诉的合作</a></p>
-      <!-- InstanceEndEditable -->
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
     <div class="biaotit">投诉原因</div>
     <div class="zy_zszlB">
       <div class="txtTousu">
@@ -185,7 +183,6 @@ $(document).ready(function(){
       </p>
       </form>
     </div>
-    <!-- InstanceEndEditable -->
 </div>
 {$this->element('member_detail')}
 {$this->element('information_detail')}
