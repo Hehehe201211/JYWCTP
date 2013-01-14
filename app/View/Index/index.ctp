@@ -5,7 +5,7 @@ $(document).ready(function(){
     $(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"});
     $(".content_mid .keyuan .ulLists").Scroll({line:2,speed:200,timer:3000,up:"",down:"",selector:".content_mid .keyuan .ulLists"});
     $(".keyuan .fr .ulLists").Scroll({line:2,speed:200,timer:3000,up:"",down:"",selector:".keyuan .fr .ulLists"});
-    $("#banners").KinSlideshow({moveStyle:"left",intervalTime:4,mouseEvent:"click",titleFont:{TitleFont_size:14,TitleFont_color:"#FFF"}});
+    $("#banners").KinSlideshow({moveStyle:"left",intervalTime:6,mouseEvent:"click",titleFont:{TitleFont_size:14,TitleFont_color:"#FFF"}});
     $(".duwu_bottm_con").imageScroller({next: "duwu_bottm_left",prev: "duwu_bottm_right",frame:"bookListCon",child: "li",auto: true,num:6,timer:5000,moveDistance:-95});
 	
 	$(".header_top_search .test2").keypress(function(e){
@@ -83,8 +83,7 @@ $(document).ready(function(){
   $(".footer .links .close").click(function(){
       $(this).parent().slideUp("fast");
   });
-  
-  
+    
   	//验证码
     $('#yanzhengma').after('<img id="code" src="/members/image">');
     $('#getCheckNum').click(function(){
@@ -120,8 +119,7 @@ $(document).ready(function(){
             e.preventDefault();
             $('#loginWarning .question').html(msg);
             $("#loginWarning").fadeIn("fast");
-            var t=setTimeout("hideWarning()",10000);
-            
+            var t=setTimeout("hideWarning()",10000);            
         }
         
         if(!error) {
@@ -133,8 +131,7 @@ $(document).ready(function(){
                 success : function(data) {
                     if (data == '') {
                         window.location.href = location.href;
-                    }
-                    
+                    }                    
                     if (data != '') {
                         msg = '<li>' + data + '</li>';
                         $('#loginWarning ul').html(msg);
@@ -142,15 +139,13 @@ $(document).ready(function(){
                         var t=setTimeout("hideWarning()",10000);
                     } else {
                         $('#loginWarning').hide();
-                    }
-                    
+                    }                    
                 }
              });
          }
-    });
-  
+    });  
 });
-{/literal}
+//{/literal}
 </script>
 <div class="main">
     <div id="loginWarning">
@@ -161,19 +156,18 @@ $(document).ready(function(){
         </div>
         <div class="arrow"></div>
     </div>
-
     <div class="content_mid" >
         <div id="banners">
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/1.jpg" alt="这是标题一" /></a>
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/2.jpg" alt="这是标题二" /></a>
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/3.jpg" alt="这是标题三" /></a>
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/4.jpg" alt="这是标题四" /></a>
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/5.jpg" alt="这是标题五" /></a>
-            <a href="http://www.lanrentuku.com" target="_blank"><img src="{$this->webroot}img/banners/6.jpg" alt="这是标题六" /></a>
+		<a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner5a.jpg" alt="马上注册，体验聚业务为您精心打造的服务" /></a>
+            <a href="/static?tpl=about-us" target="_blank"><img src="{$this->webroot}img/banners/banner1a.jpg" alt="聚业务——为您提供业务生涯一站式服务" /></a>
+            <a href="/static?tpl=kehufuwu" target="_blank"><img src="{$this->webroot}img/banners/banner2b.jpg" alt="聚业务——助力您的企业" /></a>
+            <!--<a href="/static?tpl=SIndex" target="_blank"><img src="{$this->webroot}img/banners/banner3a.jpg" alt="强大的兼职服务功能，轻松领取兼职报酬" /></a>-->
+            <a href="/static?tpl=haoyou" target="_blank"><img src="{$this->webroot}img/banners/banner4a.jpg" alt="参加聚业务网站平台推广活动，轻松赚取积分" /></a>            
+            <a href="/static?tpl=youhui" target="_blank"><img src="{$this->webroot}img/banners/banner6a.jpg" alt="你有一条经验，我有一条经验，我们彼此交换，每人可拥有两条经验。" /></a>
         </div>
         <div class="keyuan">
       <div class="fl"> 
-      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>最新客源<span>谁需要我的产品</span></h3>
+      <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>最新客源</h3>
         <div class="ulLists">        
           <ul class="lists">
           {foreach $needTaskList as $information}
@@ -187,7 +181,7 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="fl fr">
-      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>最新悬赏<span>谁可以提供产品给我</span></h3>
+      <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>最新悬赏</h3>
         <div class="ulLists">
           <ul class="lists">
 	          {foreach $hasTaskList as $information}
@@ -202,7 +196,6 @@ $(document).ready(function(){
       </div>
     </div>
     </div>
-
     <div class="content_right">
         <div class="login">
             {if empty($memberInfo)}
@@ -233,52 +226,52 @@ $(document).ready(function(){
                 </ul>
             </form>
             {else}
-	            {if $memberInfo.Member.type = Configure::read('UserType.Personal')}
+	            {if $memberInfo.Member.type == Configure::read('UserType.Personal')}
 	            	{if $memberInfo.Member.grade != 2}
 				      <h3>{$memberInfo.Member.nickname}</h3>
 				      <dl class="mebLinks">
 				        <dt>你还不是高级会员，点击<a class="upgrade" href="/members/upgrade">立即升级</a></dt>
-				        <dd><a target="_blank" href="#">检索客源</a></dd>
-				        <dd><a target="_blank" href="#">检索悬赏</a></dd>
-				        <dd><a target="_blank" href="#">检索职位</a></dd>
-				        <dd><a target="_blank" href="#">检索兼职</a></dd>
+				        <dd><a target="_blank" href="/informations/search/has">检索客源</a></dd>
+				        <dd><a target="_blank" href="/informations/search/need">检索悬赏</a></dd>
+				        <dd><a target="_blank" href="/fulltimes/search">检索职位</a></dd>
+				        <dd><a target="_blank" href="/parttimes/listview?type=need">检索兼职</a></dd>
 				        <dd>&nbsp;</dd>
 				        <dd><a class="logout" target="_blank" href="/members/logout">退出</a></dd>
 				      </dl>
 				      {else}
 					      <h3>{$memberInfo.Member.nickname}</h3>
 					      <dl class="mebLinks">        
-					        <dd><a href="#" target="_blank">检索客源</a></dd>
-					        <dd><a href="#" target="_blank">发布客源</a></dd>
-					        <dd><a href="#" target="_blank">检索悬赏</a></dd>
-					        <dd><a href="#" target="_blank">发布悬赏</a></dd>
-					        <dd><a href="#" target="_blank">检索职位</a></dd>
-					        <dd><a href="#" target="_blank">简历管理</a></dd>   
-					        <dd><a href="#" target="_blank">检索兼职</a></dd>     
-					        <dd><a href="#" target="_blank">兼职管理</a></dd> 
-					        <dd><a href="#" target="_blank">文档管理</a></dd>       
+					        <dd><a href="/informations/search/has" target="_blank">检索客源</a></dd>
+					        <dd><a href="/informations/create/has" target="_blank">发布客源</a></dd>
+					        <dd><a href="/informations/search/need" target="_blank">检索悬赏</a></dd>
+					        <dd><a href="/informations/create/need" target="_blank">发布悬赏</a></dd>
+					        <dd><a href="/fulltimes/search" target="_blank">检索职位</a></dd>
+					        <dd><a href="/resumes/listview" target="_blank">简历管理</a></dd>   
+					        <dd><a href="/parttimes/listview?type=need" target="_blank">检索兼职</a></dd>     
+					        <dd><a href="/invitations/listview" target="_blank">兼职管理</a></dd> 
+					        <dd><a href="/resources/listview?mid={$memberInfo.Member.id}" target="_blank">文档管理</a></dd>       
 					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
 					      </dl>
 				      {/if}
 			      {else}
+
 			      		{if $memberInfo.Member.grade != 2}
 					      <h3>{$memberInfo.Member.nickname}</h3>
 					      <dl class="mebLinks">
 					        <dt>你还不是高级会员，点击<a href="/members/upgrade" class="upgrade">立即升级</a></dt>
-					        <dd><a href="#" target="_blank">检索简历</a></dd>
-					        <dd><a href="#" target="_blank">检索精英</a></dd>
+					        <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
+					        <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
 					        <dd>&nbsp;</dd>
 					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
 					      </dl>
 			      		{else}
 					      <h3>{$memberInfo.Member.nickname}</h3>
 					      <dl class="mebLinks">        
-					        <dd><a href="#" target="_blank">信息管理</a></dd>
-					        <dd><a href="#" target="_blank">产品管理</a></dd>
-					        <dd><a href="#" target="_blank">检索简历</a></dd>
-					        <dd><a href="#" target="_blank">招聘管理</a></dd>
-					        <dd><a href="#" target="_blank">检索精英</a></dd>
-					        <dd><a href="#" target="_blank">兼职管理</a></dd>   
+					        <dd><a href="/services/material" target="_blank">产品管理</a></dd>
+					        <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
+					        <dd><a href="/auditions/listview?type=receive" target="_blank">招聘管理</a></dd>
+					        <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
+					        <dd><a href="/parttimes/listview?type=send" target="_blank">兼职管理</a></dd>   
 					        <dd>&nbsp;</dd>         
 					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
 					      </dl>
@@ -286,7 +279,7 @@ $(document).ready(function(){
 			      {/if}
             {/if}
         </div>
-        <div class="crAd"><img src="{$this->webroot}img/ads/20110615175842023378.jpg" /></div>
+        <div class="crAd"><a href="/accounts/invite"><img src="{$this->webroot}img/ads/20110615175842023378.jpg" /></a></div>
         <div class="change2">
             <div class="nTab3">
                 <div class="TabTitle3">
@@ -450,7 +443,7 @@ $(document).ready(function(){
                     <li><a href="/resources/search?type=3">客户管理</a></li>
                     <li><a href="/resources/search?type=4">方案模板</a></li>
                     <li><a href="/resources/search?type=5">总结计划</a></li>
-                    <li style="border: medium none;"><a href="/resources/search?type=6">案例分析</a></li>
+                    <li style="border:0 none;"><a href="/resources/search?type=6">案例分析</a></li>
                 </ul>
             </div>
             <div class="index_xshdm_xm">
@@ -461,10 +454,10 @@ $(document).ready(function(){
                         		{foreach $documents.chengzhang as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -484,10 +477,10 @@ $(document).ready(function(){
                         		{foreach $documents.peixun as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -507,10 +500,10 @@ $(document).ready(function(){
                         		{foreach $documents.kehu as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -530,10 +523,10 @@ $(document).ready(function(){
                         		{foreach $documents.fangan as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -553,10 +546,10 @@ $(document).ready(function(){
                         		{foreach $documents.zongjie as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -576,10 +569,10 @@ $(document).ready(function(){
                         		{foreach $documents.anli as $key => $document}
                         			<tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
-    <td width="9%">1{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</td>
-    <td width="8%">{$document.Document.pages}页</td>
-    <td width="13%">下载：{$document.Document.download_cnt}次</td>
-    <td width="10%">{$document.Document.created|date_format:"%Y-%m-%d"}</td>
+    <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
+    <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
+    <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
+    <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
                         		{/foreach}
                         	{else}
@@ -602,17 +595,17 @@ $(document).ready(function(){
         <div class="fuwu">
             <h1><a href="plt-jzxx.html"><span class="fr">更多...</span>最新企业会员认证</a></h1>
             <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/pig_03.jpg" width="77" height="73" alt="" /></a></dt>
+                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
                 <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
                 <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
             </dl>
             <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/pig_03.jpg" width="77" height="73" alt="" /></a></dt>
+                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
                 <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
                 <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
             </dl>
             <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/pig_03.jpg" width="77" height="73" alt="" /></a></dt>
+                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
                 <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
                 <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
             </dl>

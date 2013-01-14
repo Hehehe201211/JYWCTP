@@ -9,7 +9,7 @@
         <li>
             <p>
                 <input type="checkbox" class="inpChk inpCheckbox checkboxVal" name="" value="{$message.StationMessage.id}">
-                <a class="trader" href="hyzl.html">{$message.Member.nickname}</a>
+                <a class="trader" href="/accounts/fdetail?fid={$message.Member.id}">{$message.Member.nickname}</a>
                 <a target="_blank" href="#" class="title">发来信息。</a>
                 <span class="time">{$message.StationMessage.title}</span>
                 <span class="time">[{$message.StationMessage.created|date_format:"%Y-%m-%d %H:%M:%S"}]</span>

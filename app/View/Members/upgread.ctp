@@ -69,8 +69,7 @@ $(document).ready(function(){
 </script>
 
 <div class="zy_z">
-<div class="hysj">
-	<ul>
+	<ul class="ulFormStep">
 		<li>1.填写邮箱地址和密码</li>
 		<li>2.输入身份信息</li>
 		<li>3.注册成功</li>
@@ -113,5 +112,4 @@ $(document).ready(function(){
 		</div>
 		</form>
 	</div>
-</div>
 </div>

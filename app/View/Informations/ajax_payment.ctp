@@ -1,7 +1,7 @@
 <div style="width:550px;" id="djbuz">
 	<div class="djbuzTit">
 		<span class="fk_tit">{$information.Information.title}</span>
-		<a href="#" title="关闭" class="closeKuang close">
+		<a href="javascript:void(0)" title="关闭" class="closeKuang close">
 		</a>
 	</div>
     <div class="tableDetail" style="padding-top:3px;">
@@ -31,7 +31,8 @@
         <tr>
           <th>{if $type == "has"}采购单位：{else}产品提供单位：{/if}</th>
           <td class="red">{if $type == "has" && $paid}{$information.Information.company}{else if $type == "need"}{$information.Information.company}{else}******{/if} </td>
-        </tr>        
+        </tr>
+        {if $type == 'has'}
         <tr>
           <th>联系人：</th>
           <td class="red">{if $paid}{$attribute.InformationAttribute.contact}{else}******{/if}</td>
@@ -50,6 +51,7 @@
           <th>单位详细地址：</th>
           <td class="red">{if $paid}{$attribute.InformationAttribute.address}{else}******{/if}</td>
         </tr>
+        {/if}
         <tr>
           <th>客源有效期：</th>
           <td>{$information.Information.open|date_format:"%Y-%m-%d"} - {$information.Information.close|date_format:"%Y-%m-%d"}</td>
@@ -99,7 +101,7 @@
 	{else}
 	<a target="_blank" href="/informations/create/has/?target={$information.Information.id}&target_member={$information.Information.members_id}" class="zclan zclan7 close">我有客源</a>
 	{/if}
-	<a href="#" class="zclan zclan7 close">关闭详情</a>
+	<a href="javascript:void(0)" class="zclan zclan7 close">关闭详情</a>
     </div>
     </div> 	
 	<input type="hidden" value="{$clicked}" id="clicked" name="clicked">    

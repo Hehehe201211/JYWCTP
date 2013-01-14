@@ -8,14 +8,12 @@ $(document).ready(function(){
     $('#backBtn').click(function(){
         $('#upgrade').attr('action', '/members/upgrade');
         $('#upgrade').submit();
-    });
-    
+    });    
 });
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="apep-zhaq.html">账号管理</a>&gt;&gt;<a href="#">企业会员升级</a></p>
-      <!-- InstanceEndEditable -->
       <div class="zy_zszl enterpriseInfo">
         <div class="zy_zszl_z">
           <dl>
@@ -36,7 +34,6 @@ $(document).ready(function(){
         </div>
       </div>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" -->
     <div class="hysj hysj_fb">
       <ul>
         <li>1.填写企业资料</li>
@@ -150,5 +147,4 @@ $(document).ready(function(){
         <a class="zclan zclan2" id="backBtn" href="javascript:void(0)">上一步</a>
       </div>
     </div>
-    <!-- InstanceEndEditable -->
 </div>

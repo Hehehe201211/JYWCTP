@@ -232,14 +232,14 @@ function addGroup(){
         {foreach $friendships as $friend}
             <li class="contacts-item">
                 <div class="img">
-                    <a href="hylx.html" title="好友资料">
+                    <a href="/accounts/fdetail?fid={$friend.Friendship.friend_members_id}" title="好友资料">
                         <img alt="好友" src="{$this->webroot}img/tx.jpg">
                     </a>
                 </div>
                 <div class="name">
-                    <a href="hylx.html" title="好友资料" class="friendName">{$friend.Attribute.name}（{$friend.Member.nickname}）</a>
+                    <a href="/accounts/fdetail?fid={$friend.Friendship.friend_members_id}" title="好友资料" class="friendName">{$friend.Attribute.name}（{$friend.Member.nickname}）</a>
                     <br />{$friend.Attribute.company}<br />业务员<br />进行过&nbsp;
-                    <a href="hyzl.html" titlt="交易记录">8</a>&nbsp;笔交易
+                    <a href="javascript:void(0)" titlt="交易记录">8</a>&nbsp;笔交易
                 </div>
                 <div class="btn btns">
                     <a href="javascript:void(0)" class="btnCon">联系</a>

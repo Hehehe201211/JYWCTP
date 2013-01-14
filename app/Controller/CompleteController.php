@@ -33,14 +33,33 @@ class CompleteController extends AppController
         } else {
             $type = "has";
         }
-        $this->Info->transaction($this->_memberInfo['Member']['id'], $type, array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective')));
+	   if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            $status = array();
+            foreach ($this->request->data['status'] as $sta) {
+                if ($sta == Configure::read('Transaction.status_code.complete')) {
+                    $status[] = Configure::read('Transaction.status_code.complete');
+                    $status[] = Configure::read('Transaction.status_code.complaint_cancel');
+                    $status[] = Configure::read('Transaction.status_code.appeal_effective');
+                }
+                if ($sta == Configure::read('Transaction.status_code.appeal_invalid')) {
+                    $status[] = Configure::read('Transaction.status_code.appeal_invalid');
+                }
+            }
+            $this->set('status', $this->request->data['status']);
+        } else {
+            $status = array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'));
+            $this->set('status', array(Configure::read('Transaction.status_code.complete')));
+        }   
+        $this->Info->transaction($this->_memberInfo['Member']['id'], $type, $status);
         $this->set("type", $type);
         if ($this->RequestHandler->isAjax()) {
             if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
                 $this->set('jump', $page);
             }
+            $this->set('isAjax', true);
             $this->render('/Elements/transaction_paginator');
         }
+        $this->set('isAjax', false);
     }
     
     

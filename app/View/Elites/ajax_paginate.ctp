@@ -63,7 +63,7 @@
         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
         {$form = ['isForm' => true, 'inline' => true]}
-        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#result')->serializeForm($form)]}
+        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}

@@ -54,7 +54,7 @@ class InfoComponent extends Component
         	'Information.city', 
         	'Information.id'
         );
-        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : 2;
+        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;
         $this->controller->paginate = array(
             'PaymentTransaction' => array('limit' => $pageSize,
@@ -134,7 +134,7 @@ class InfoComponent extends Component
             'status',
             'clicked'
         );
-        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : 2;
+        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;
         $this->controller->paginate = array(
             'Information' => array('limit' => $pageSize,
@@ -182,7 +182,7 @@ class InfoComponent extends Component
 //            'conditions' => 'InformationComment.from_members_id = Member.id'
             'conditions' => 'InformationComment.members_id = Member.id'
         );
-        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : 2;
+        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;
         $this->controller->paginate = array(
             'InformationComment' => array('limit' => $pageSize,

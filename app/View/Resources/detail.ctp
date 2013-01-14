@@ -27,7 +27,7 @@ $(document).ready(function(){
 							src = "/resources/download?id=" + documents_id;
 						} else {
 							src = '';
-							alert(result.msg);
+							if (confirm(result.msg+'\n点击确定打开充值页面；充值页面可能会被浏览器拦截，请点击允许。')) window.open("/coins/charge","_blank");
 						}
 					}
 				});

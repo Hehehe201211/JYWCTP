@@ -181,7 +181,7 @@ $(document).ready(function(){
                         <li>
                             <p>
                                 <input type="checkbox" class="inpChk inpCheckbox checkboxVal" name="" value="{$message.StationMessage.id}">
-                                <a class="trader" href="hyzl.html">{$message.Member.nickname}</a>
+                                <a class="trader" href="/accounts/fdetail?fid={$message.Member.id}">{$message.Member.nickname}</a>
                                 <a target="_blank" href="#" class="title">发来信息。</a>
                                 <span class="time">{$message.StationMessage.title}</span>
                                 <span class="time">[{$message.StationMessage.created|date_format:"%Y-%m-%d %H:%M:%S"}]</span>
@@ -190,7 +190,7 @@ $(document).ready(function(){
                             </p>
                             <div class="znxMesCon">
                                 {$message.StationMessage.content}
-                                <input type="button" onclick="window.open('hylx.html','_blank');" value="回复" name="" class="inpButton">
+                                <input type="button" onclick="window.open('/accounts/fdetail?fid={$message.Member.id}','_blank');" value="回复" name="" class="inpButton">
                             </div>
                         </li>
                         {elseif $message.StationMessage.type == Configure::read('Sms.friendRequest')}

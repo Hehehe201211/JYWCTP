@@ -58,7 +58,7 @@
                 {else if $type == "has"}
                     <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/payment/{$info.Information.id}">我需要类似服务</a></td>
                 {else}
-                    <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/create/has/?target={$info.Information.id}&target_member={$info.Information.members_id}">我有该客源 </a></td>
+                    <td class="con_2_xq_tofu xiushan_anniu"><a href="javascript:void(0)">详情 </a></td>
                 {/if}               
             </tr>
         {/foreach}        
@@ -71,7 +71,7 @@
                     <div class="dd_ym">
                         <label>每页显示：</label>
                         <select name="pageSize" id="pageSize">
-                        <option value="2" {if $pageSize == "2"} selected {/if}>10</option>
+                        <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                         <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                         <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                         <option value="100" {if $pageSize == "100"} selected {/if}>100</option>

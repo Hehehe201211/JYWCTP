@@ -974,7 +974,16 @@ class InformationsController extends AppController
         } else {
             $this->set('paramError', true);
         }
-        $conditions['status'] = Configure::read('Information.status_flg.active');
+        if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            foreach ($this->request->data['status'] as $status) {
+                $or[] = array('status' => $status);
+            }
+            $conditions['OR'] = $or;
+            $this->set('status', $this->request->data['status']);
+        } else {
+            $conditions['status'] = Configure::read('Information.status_code.active');
+            $this->set('status', array(Configure::read('Information.status_code.active')));
+        }
         $fields = array(
             'id',
             'title',
@@ -1001,13 +1010,12 @@ class InformationsController extends AppController
         );
         $this->set('pageSize', $pageSize);
         $this->set("informations", $this->paginate('Information'));
-//        $this->set("type", "myself");
         $this->set('type', $type);
         if ($this->RequestHandler->isAjax()) {
             if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
                 $this->set('jump', $page);
             }
-            $this->render('/Elements/paginator');
+            $this->render('issue-paginator');
         }
     }
 

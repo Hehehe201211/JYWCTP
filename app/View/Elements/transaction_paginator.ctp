@@ -1,7 +1,14 @@
 {assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-
+{if $paginatorParams['count'] > 0 || $isAjax}
+<div class="tableSort" style="clear: both;">
+      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complete'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.complete')}" name="status[]" class="inpRadio status">
+      <label for="position">交易完成</label>
+      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal_invalid'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal_invalid')}" name="status[]" class="inpRadio status">
+      <label for="time">无效的</label>
+</div>
+{/if}
 {if $paginatorParams['count'] > 0}
 <table width="100%" cellspacing="0" cellpadding="0" border="0"
     class="con_2_table">
@@ -50,7 +57,7 @@
                     <div class="dd_ym">
                         <label>每页显示：</label>
                         <select name="pageSize" id="pageSize">
-                        <option value="2" {if $pageSize == "2"} selected {/if}>10</option>
+                        <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                         <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                         <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                         <option value="100" {if $pageSize == "100"} selected {/if}>100</option>

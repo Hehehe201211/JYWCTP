@@ -19,6 +19,7 @@ class StationMsgComponent extends Component
             'conditions' => 'Attribute.members_id = Member.id'
         );
         $fields = array(
+            'Member.id',
             'Member.nickname',
             'Member.created',
             'Attribute.provincial_id',

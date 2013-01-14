@@ -8,27 +8,18 @@
             <dl>
                 <dt>我有客源</dt>
                 <dd><a href="/informations/search/need">所有悬赏</a></dd>
-                <dd><a href="/informations/create/has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我要发布</a></dd>
-                <dd><a href="/informations/issue/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>客源列表</a></dd>
                 <dd><a href="/informations/received/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>收到的悬赏</a></dd>
-                <dd><a href="/confirm/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>待确认交易</a></dd>
-                <dd><a href="/complete/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已交易记录</a></dd>
-                <dd><a href="/complaints/index/been" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我被投诉</a></dd>
-                <dd><a href="/appeals/listview" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的申诉</a></dd>
-                <dd><a href="/invalid/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>无效客源</a></dd>
-                <dd><a href="/cancel/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已撤销客源</a></dd>
-                <dd><a href="/overtime/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已过期客源</a></dd>
+                <dd><a href="/informations/create/has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>发布客源</a></dd>
+                <dd><a href="/informations/issue/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的客源</a></dd>
+                <dd><a href="/confirm/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a></dd>
+                <dd><a href="/complete/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已结束</a></dd>
                 <dt>我要客源</dt>
                 <dd><a href="/informations/search/has">所有客源</a></dd>
-                <dd><a href="/informations/create/need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我要悬赏</a></dd>
-                <dd><a href="/informations/issue/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>悬赏列表</a></dd>
                 <dd><a href="/informations/received/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>收到的客源</a></dd>
-                <dd><a href="/confirm/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>待确认交易</a></dd>
-                <dd><a href="/complete/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已交易记录</a></dd>
-                <dd><a href="/complaints/index/active" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的投诉</a></dd>
-                <dd><a href="/invalid/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>无效客源</a></dd>
-                <dd><a href="/cancel/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已撤销悬赏</a></dd>
-                <dd><a href="/overtime/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已过期悬赏</a></dd>
+                <dd><a href="/informations/create/need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我要悬赏</a></dd>
+                <dd><a href="/informations/issue/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的悬赏</a></dd>
+                <dd><a href="/confirm/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a></dd>
+                <dd><a href="/complete/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}> 已结束</a></dd>
             </dl>
         </div>
     </div>

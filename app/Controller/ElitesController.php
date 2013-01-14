@@ -27,7 +27,7 @@ class ElitesController extends AppController
             'MemberAttribute.locking' => 0,
             'Member.type'             => 0
         );
-        $pageSize = 2;
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $this->_search($conditions, $pageSize, 0);
         $this->set('pageSize', $pageSize);
         if ($this->RequestHandler->isAjax()){
@@ -137,7 +137,7 @@ class ElitesController extends AppController
             $categorys = explode(',', $this->request->query["amp;categorys"]);
             $conditions['MemberAttribute.category_id'] = $categorys;
         }
-        $pageSize = 2;
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $this->_search($conditions, $pageSize, 0);
         $this->set('pageSize', $pageSize);
         $this->set('citys', implode(',', $citys));

@@ -1,7 +1,17 @@
-{assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
+{$form = ['isForm' => true, 'inline' => true]}
+{assign var=options value=['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-
+{if $paginatorParams['count'] > 0 || $isAjax}
+<div class="tableSort" style="clear: both;">
+      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.transaction'), $status)}checked="checked"{/if} checked="checked" value="{Configure::read('Transaction.status_code.transaction')}" name="status[]" class="inpRadio status">
+      <label for="position">待确认交易</label>
+      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complaint'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.complaint')}" name="status[]" class="inpRadio status">
+      <label for="time">被投诉客源</label>
+      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal')}" name="status[]" class="inpRadio status">
+      <label for="company">我的申述</label>
+</div>
+{/if}
 {if $paginatorParams['count'] > 0}
 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
 <thead>
@@ -11,7 +21,7 @@
 			<th style="width:90px;" class="tr_td2">信息价格 </th>
 			<th style="width:80px;" class="tr_td7">客源地址</th>
 			<th style="width:80px;" class="tr_td5">交易时间 </th>
-			<th style="width:70px;" class="tr_td4">状态 </th>                             
+			<th style="width:70px;" class="tr_td4">状态 </th>
         </tr>
         </thead>
         {foreach $informations as $info}

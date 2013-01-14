@@ -33,7 +33,7 @@ $(document).ready(function(){
 		$(this).next().remove();
 	});
 	
-	datepIniChange("#birthday",1960,2010);
+	datepIniChange("#birthday","birth");
 	
 	$('#provincial').change(function(){
 		$('#city').find('option:gt(0)').remove();
@@ -150,8 +150,7 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人会员升级</a></p>      
     </div>    
-    <div class="hysj">
-      <ul>
+      <ul class="ulFormStep">
         <li>1.填写个人资料</li>
         <li>2.信息确认</li>
         <li>3.升级成功</li>
@@ -262,4 +261,3 @@ $(document).ready(function(){
         </form>        
       </div>
     </div> 
-    </div>

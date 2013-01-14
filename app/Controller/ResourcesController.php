@@ -662,4 +662,12 @@ class ResourcesController extends AppController
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
     }
+    
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
+            $this->redirect('/members');
+        }
+    }
 }

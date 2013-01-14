@@ -294,8 +294,33 @@ class AccountsController extends AppController
         $this->set("cssClass", 'zhucrig_x3');
         $this->set('msg', $msg);
     }
-    
-    
+    /**
+     * 
+     * 好友详情
+     * 站内信交流记录等
+     */
+    public function fdetail()
+    {
+        if (isset($this->request->query['fid']) && !empty($this->request->query['fid'])) {
+            $constions = array(
+                'StationMessage.status'    => 1,
+                'StationMessage.type'      => 1
+            );
+            $constions['OR'] = array(
+                array('sender' => $this->_memberInfo['Member']['id'], 'receiver' => $this->request->query['fid']),
+                array('sender' => $this->request->query['fid'], 'receiver' => $this->_memberInfo['Member']['id'])
+            );
+            $this->StationMsg->getMessageList($constions);
+            if ($this->RequestHandler->isAjax()) {
+                $this->render('fdetail-paginator');
+            } else {
+                $firend = $this->Member->find('first', array('conditions' => array('id' => $this->request->query['fid'])));
+                $this->set('firend', $firend);
+            }
+        } else {
+            ;
+        }
+    }
     
     public function beforeRender()
     {

@@ -13,12 +13,10 @@ $(document).ready(function(){
 });
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人会员升级</a></p>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" --> 
-    <div class="hysj hysj_fb">
-      <ul>
+      <ul class="ulFormStep ulFormStep2">
         <li>1.填写个人资料</li>
         <li>2.信息确认</li>
         <li>3.升级成功</li>
@@ -113,8 +111,8 @@ $(document).ready(function(){
         </table>
         </form>
         </div>
-        <a href="javascript:void(0)" id="upgradeBtn" class="zclan zclan2">升级</a><a href="javascript:void(0)" id="backBtn" class="zclan zclan2">上一步</a>
+		<div class="divBtnContainer" style="width: 200px;">
+        <a href="javascript:void(0)" id="upgradeBtn" class="zclan zclan7">升级</a><a href="javascript:void(0)" id="backBtn" class="zclan zclan7">上一步</a>
+		</div>
       </div>
-    </div>
-	<!-- InstanceEndEditable --> 
     </div>

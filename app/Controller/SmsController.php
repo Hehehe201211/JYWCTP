@@ -23,7 +23,7 @@ class SmsController extends AppController
             if ($this->StationMessage->save($data)) {
                 $result = array(
                    'result'    => 'OK',
-                   'msg'       => '站内信发生成功！'
+                   'msg'       => '站内信发送成功！'
                 );
             }
         }

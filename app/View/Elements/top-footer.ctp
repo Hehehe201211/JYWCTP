@@ -4,11 +4,18 @@
 </div>
 <div class="tg_message">
     <div class="OLService">
-    <table width="100%" height="100%" border="0">      
-      <tr>
-        <td><div align="right">在线客服1：</div><div>&nbsp;</div><div align="right">在线客服1：</div></td>
-        <td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2647359920&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2647359920:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><div>&nbsp;</div><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1415851084&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1415851084:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a></td>
-      </tr>            
+    <table width="100%" height="100%" border="0">
+        <tr>
+          <td class="th">在线客服1<br />
+            在线客服2<br />       
+            服务电话<br />
+            E-mail            
+            </td>
+          <td>：<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2819047342&amp;site=qq&amp;menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="http://wpa.qq.com/pa?p=2:2819047342:41"></a><br />
+            ：<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1415851084&amp;site=qq&amp;menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="http://wpa.qq.com/pa?p=2:1415851084:41"></a><br />
+：0592-8264266<br />：<a href="mailto:juyewu@juyewu.com">juyewu@juyewu.com</a>
+</td>
+        </tr>
     </table>
   </div>
     <ul>

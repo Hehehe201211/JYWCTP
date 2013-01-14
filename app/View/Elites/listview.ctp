@@ -27,7 +27,7 @@ $(document).ready(function(){
     $('#searchBtn').click(function(){
         var conditionsArray = $('#search_conditions').serializeArray();
         $('#result').load('/elites/search', conditionsArray, function(){            
-        });        
+        });
     });
 });
 {/literal}
@@ -138,7 +138,6 @@ $(document).ready(function(){
         <div class="toggleMap">打开地图检索</div>-->
         <a class="zclan zclan4" href="javascript:void(0)" id="searchBtn">查询</a>
     </div>
-    </form>
     <div id="result">
     {assign var=options value=['update' => '#result', 'evalScripts' => true]}
     {$this->Paginator->options($options)}
@@ -183,10 +182,11 @@ $(document).ready(function(){
         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
         {$form = ['isForm' => true, 'inline' => true]}
-        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#result')->serializeForm($form)]}
+        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
     </div>
+    </form>
     </div>
 </div>

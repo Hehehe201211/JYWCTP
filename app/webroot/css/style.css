@@ -1,0 +1,97 @@
+﻿@charset "utf-8";
+
+.xian{ background:url(../images/geli_03.jpg) repeat-x; height:2px; margin:20px 0px 10px; width:auto;}
+
+
+/*-----------------------------------// 主体内容 //-----------------------------------*/
+
+.main2{ background:url(../images/geli_03.jpg) repeat-x; height:2px; margin:30px 0px; width:auto;}
+/*-----------------------------------// 产品分类 //-----------------------------------*/
+.class{ width:216px; height:486px; float:left; background:url(../images/class_03.jpg) center repeat-x; border:#FFF solid 1px;}
+.class h1{ height:32px; line-height:32px; font-size:14px; font-weight:bolder; color:#FFF; padding-left:20px; background:#f6c36b;}
+.pro_class_list{ }
+.pro_class_list li a{ height:42px; line-height:42px; font-size:14px;display:block; color:#262625; overflow:hidden; background:url(../images/geli_03.jpg) bottom repeat-x;padding-left:20px; }
+.pro_class_list li a:hover{background:url(../images/geli_03.jpg) bottom repeat-x #f0f0f0;color:#262625;}
+/*-----------------------------------// 大图、悬赏、最新发布 //-----------------------------------*/
+
+.banner{ width:549px; margin:0 auto; height:217px;}
+
+
+
+/*-----------------------------------// 中部左 //-----------------------------------*/
+
+#hydh{ width:720px; height:25px; margin-bottom:8px;}
+#hydh label{width:60px; float:left; text-align:right; color:#000; padding-right:12px;}
+#hydh select{ width:100px; margin:0 auto; display:block; float:left;}
+/*#hydh select option{ line-height:25px;height:60px;}*/
+#hydh input{ margin-left:5px; height:19px; background:#FFF; border:1px solid #C3C3C3; line-height:19px; overflow:hidden; display:block; width:100px; float:left;}
+#hydh button{ margin-left:5px;background:#FFF; border:1px solid #C3C3C3; width:80px; height:22px; }
+/*
+.index_xszy{ width:720px;}*/
+
+
+
+
+
+.index_download{width:720px;}
+.index_download span{ color:#ff9900; font-size:13px; margin-right:8px;}
+.index_download h2{ font-size:13px; line-height:36px; border-bottom:dashed 1px #aeaeae; color:#b6b6b6;}
+.index_download h2 a{ color:#909090; font-size:13px; line-height:30px;}
+.index_download h2 a:hover{ color:#ff9900; font-size:13px; line-height:30px;}
+
+.ziyu_dlt #abc{ width:720px; background:#009;}
+#abc .index_hyxw{ width:720px;}
+#abc .index_hyxw ul{ width:700px; height:20px; background:#000;}
+
+
+
+/*-----------------------------------// 首页间断滚动 //-----------------------------------*/
+.rollBox{width:730px; height:242px;overflow:hidden;margin:0 auto; clear:both;}
+.rollBox .LeftBotton{height:242px;width:30px;background:url(../images/left.jpg) no-repeat left center;overflow:hidden;float:left;display:inline;cursor:pointer; margin-right:3px; }
+.rollBox .RightBotton{height:242px;width:30px;background:url(../images/right.jpg) no-repeat right center;overflow:hidden;float:right;display:inline;cursor:pointer;  margin-left:3px;}
+.rollBox .Cont{width:664px; height:242px;overflow:hidden;float:left; }
+.rollBox .ScrCont{width:10000000px; height:242px;}
+.rollBox .Cont .pic{ width:122px; height:232px; display:block;display:inline; float:left;display:inline; margin-right:13px; margin-top:10px; }
+.rollBox .Cont .pic img{margin:0px auto;  vertical-align:middle;border: 1px solid #cccccc; }
+.rollBox .Cont .pic a:hover img {border: 1px solid #f7951e;}
+.pic .title{ text-align:left; width:122px; font-size:13px; color:#666666; line-height:18px; height:18px; overflow:hidden; background:#FFF}
+.pic .like{ text-align:left; width:122px; font-size:13px; color:#cc0000;ine-height:18px; height:18px; overflow:hidden; background:url(../images/heart_03.jpg) left 8px no-repeat #fff; text-indent:10px;}
+.rollBox #List1,.rollBox #List2{float:left;height:262px; margin-top:18px;}
+
+/*-----------------------------------// 中部右 //-----------------------------------*/
+
+
+/*-----------------------------------// 广告位 //-----------------------------------*/
+
+/*-----------------------------------// 底部信息 //-----------------------------------*/
+
+/*-----------------------------------// 底部 //-----------------------------------*/
+.footer{ line-height:33px; height:auto; font-size:12px; color:#909090; width:1000px; margin:0 auto; text-align:center; padding-top:10px;}
+.footer a{ color:#909090; text-decoration:none;}
+.footer a:hover{ color:#f7951e;}
+.ren{ width:1000px; height:60px; overflow:hidden; margin:0 auto; text-align:center;}
+.ren ul{ width:auto; margin:10px auto; padding-left:200px;}
+.ren ul li{ float:left; margin-right:13px; width:auto;}
+
+
+.index_wykey{width:780px; height:219px; overflow:hidden;float:left; display:block;}
+.shequmianbaoxie{ width:1000px; height:20px; margin:0px auto;}
+.shequmianbaoxie a{ color:#ff9900;}
+.shequmianbaoxie a:hover{ color:#ff9900; text-decoration:underline;}
+
+.gywm_zbianlan{ width:216px; height:auto; float:left; margin-top:10px ;display:block; overflow:hidden;}
+.gywm_zbianlan span{ width:214px; height:28px; line-height:28px; display:block; background:url(../images/sqfl.jpg) top repeat-x; 
+border:1px solid #d9d9d9; text-indent:14px; font-size:14px; color:#ff9900; font-weight:bold;}
+.gywm_zbianlan_nra{ width:214px; height:auto; padding:10px 0px;border:1px solid #d9d9d9;}
+.gywm_zbianlan_nra ul li{ width:214px; line-height:30px; font-size:12px; font-weight:bold; margin-bottom:5px; }
+.gywm_zbianlan_nra ul li a{ color:#000;  display:block; overflow:hidden; border-bottom:1px dashed #dedede; border-top:1px dashed #dedede; padding-left:20px;}
+.gywm_zbianlan_nra ul li a:hover{ background:#ccc; color:#FFF; display:block; overflow:hidden;}
+
+.gywm_mt10{ margin-top:10px;}
+ .gywm_zbianlgy { width:549px; height:auto; float:left; display:block; overflow:hidden;  background:url(../images/sqfl.jpg) repeat-x; border:1px solid #d9d9d9; }
+
+.gywm_zbianlgy span{ width:150px; height:28px; line-height:28px; display:block; float:left;text-indent:14px; font-size:14px; color:#ff9900; font-weight:bold;}
+
+.gywm_zbianlgy a{ color:#ff9900; line-height:28px; height:28px; width:40px; display:block; float:right; padding-right:10px;}
+.gywm_zbianlgy a:hover{color:#ff9900;} 
+.gywm_zbianlgy_nr{ border:1px solid #d9d9d9; width:549px; height:300px;}

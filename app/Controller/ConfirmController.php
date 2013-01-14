@@ -32,14 +32,23 @@ class ConfirmController extends AppController
         } else {
             $type = "has";
         }
-        $this->Info->transaction($this->_memberInfo['Member']['id'], $type, Configure::read('Transaction.status_code.transaction'));
+        if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            $status = $this->request->data['status'];
+            $this->set('status', $this->request->data['status']);
+        } else {
+            $status = Configure::read('Transaction.status_code.transaction');
+            $this->set('status', array(Configure::read('Transaction.status_code.transaction')));
+        }
+        $this->Info->transaction($this->_memberInfo['Member']['id'], $type, $status);
         $this->set("type", $type);
         if ($this->RequestHandler->isAjax()) {
             if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
                 $this->set('jump', $page);
             }
+            $this->set('isAjax', true);
             $this->render('/Elements/confirm_paginator');
         }
+        $this->set('isAjax', false);
     }
     
     public function detail()

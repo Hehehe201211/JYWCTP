@@ -19,6 +19,9 @@ class SearchController extends AppController
      */
     public function index()
     {
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
+            $this->redirect('/members');
+        }
         if (isset($this->request->query['type'])) {
             if ($this->request->query['type'] == 'has') {
                 $type = 'has';
@@ -134,6 +137,9 @@ class SearchController extends AppController
      */
     public function infodetail()
     {
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
+            $this->redirect('/members');
+        }
     	if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['grade'] == 2) {
     		//TODO 已经登陆，跳转到会员主页
     		$this->redirect('/informations/payment/' . $this->request->query['id']);
@@ -150,6 +156,9 @@ class SearchController extends AppController
      */
     public function offer()
     {
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
+            $this->redirect('/fulltimes/create');
+        }
         $this->set('title_for_layout', "企业招聘");
         $this->currentTopBar = 'offer';
         $this->_graphicOffer();
@@ -220,6 +229,9 @@ class SearchController extends AppController
      */
     public function parttime()
     {
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
+            $this->redirect('/parttimes/create');
+        }
         $conditions = array();
 //        if (isset($this->request->data['citys'])) {
 //            $conditions['OR'] = array('PartTime.provincial' => $this->request->data['citys'], 'PartTime.city' => $this->request->data['citys']);
@@ -250,6 +262,9 @@ class SearchController extends AppController
     
     public function pdetail()
     {
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')){
+            $this->redirect('/parttimes/create');
+        }
         $this->set('title_for_layout', "兼职信息详情");
         $this->currentTopBar = 'parttime';
         if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {

@@ -3,6 +3,14 @@
 {$paginatorParams = $this->Paginator->params()}
 
 {if $paginatorParams['count'] > 0}
+<div class="tableSort" style="clear: both;">
+      <input type="checkbox" id="position" checked="checked" value="position" name="zjSort" class="inpRadio">
+      <label for="position">未交易</label>
+      <input type="checkbox" id="time" value="time" name="zjSort" class="inpRadio">
+      <label for="time">已过期</label>
+      <input type="checkbox" value="company" id="company" name="zjSort" class="inpRadio">
+      <label for="company">已撤销</label>
+</div>
 <table width="100%" cellspacing="0" cellpadding="0" border="0"
     class="con_2_table">
     <thead>
@@ -44,7 +52,7 @@
                     {$status[{$info.Information.status} - 1]}
                 </td>
                 <td class="tr_td5">{$info.Information.clicked}</td>
-                {if $type == "myself"}
+                {if $infoType == "myself"}
                     <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
                 {else if $type == "received"}
                     <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要</a><a  href="javascript:void(0)">忽略</a></td>
