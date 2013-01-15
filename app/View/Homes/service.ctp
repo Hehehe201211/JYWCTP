@@ -7,7 +7,7 @@ $(document).ready(function(){
     $(".middle .ulProducts li").css({"margin-left":mulLR,"margin-right":mulLR});
 	$(".ulProducts li img").each(function(){
 		var num=($(this).parent().height()-$(this).height())/2;
-		$(this).css("margin-top",num);
+		$(this).css("margin-top","1px");
 	});
     
     //切换详情

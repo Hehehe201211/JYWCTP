@@ -107,7 +107,8 @@ $(document).ready(function(){
 					var result = eval("("+data+")");
 					if (result.result == "OK") {
 						alert("申诉提交成功");
-						location.href="/appeals/listview/has";
+						//location.href="/appeals/listview/has";
+						location.href="/confirm/listview/?type=" + $('#info_type').val();
 					}
 				}
 			});
@@ -136,13 +137,15 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;
+      <p><a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
       {if $type == "has"}
-      <a href="grxxxg.html.html">我有客源</a>&gt;&gt;
-      <a href="#">我被投诉</a>
+      <a href="javascript:void(0)">我有客源</a>&gt;&gt;
+      <a href="javascript:void(0)">我被投诉</a>
+      <input type="hidden" id="info_type" value="has" />
       {else}
-      <a href="grxxxg.html.html">我要客源</a>&gt;&gt;
-      <a href="#">我的投诉</a>
+      <a href="javascript:void(0)">我要客源</a>&gt;&gt;
+      <a href="javascript:void(0)">我的投诉</a>
+      <input type="hidden" id="info_type" value="need" />
       {/if}
       </p>
     </div>   

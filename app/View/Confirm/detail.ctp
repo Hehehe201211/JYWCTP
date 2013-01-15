@@ -1,24 +1,18 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-	$(".btnTousu").click(function(e){
-		if ($('#bgKuang').length == 0) {
-			$("body").append("<div id='bgKuang'></div>");
-		}
-		$("#bgKuang").css({width:$(document).width(),height:$(document).height()});
-		$("#bgKuang").fadeTo("fast",0.5,function(){
-			$("#djbuz").css({"top":$(window).scrollTop()+220+"px","left":($(document).width()-$("#djbuz").width())/2+"px","display":"block"});
-		});
-		e.preventDefault();
+	$("body").append($(".divDjbuz"));
+	$(".btnTousu").click(function(){
+		bgKuang("#divDjbuz1",".divDjbuz .closeKuang");
 	});
-	$("#closeKuang,.payShortage").click(function(){
-		$("#djbuz").css("display","none");
-		$('#bgKuang').remove();
+	$(".payShortage").click(function(){
+		$(".divDjbuz .closeKuang").click();
 	});
+	
 	//投诉
 	$('#complaintsBtn').click(function(){
-		if ($('#content').val() == "") {
-			
+		if ($('#complaints_content').val() == "") {
+			alert('请输入投诉原因！');
 		} else {
 			var data = $('#complaints').serialize();
 			$.ajax({
@@ -28,12 +22,8 @@ $(document).ready(function(){
 				success : function(data) {
 					var result = eval("("+data+")");
 					if (result.result == 'OK') {
-					/*
-						$("#djbuz").css("display","none");
-						$('#bgKuang').remove();
-						$('.btnTousu').hide();
-					*/
-						location.href = '/complaints/index/active'
+						//location.href = '/complaints/index/active'
+						location.href = '/confirm/listview/?type=' + $('#info_type').val();
 					} else {
 					   alert(result.msg);
 					   location.reload();
@@ -98,7 +88,16 @@ $(document).ready(function(){
 
   <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html.html">{if $type=="need"}我要客源{else}我有客源{/if}</a>&gt;&gt;<a href="#">待确认交易</a></p>    
+      <p>
+          <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+          <a href="javascript:void(0)">
+          {if $type=="need"}我要客源
+          <input type="hidden" id="info_type" value="need" />
+          {else}我有客源
+          <input type="hidden" id="info_type" value="has" />
+          {/if}</a>&gt;&gt;
+          <a href="javascript:void(0)">待确认交易</a>
+      </p>    
     </div>    
     {$this->element('base_seller_info')}
 <div class="tableDetail">
@@ -123,6 +122,28 @@ $(document).ready(function(){
 		<tr>
 			<th>采购单位：</th>
 			<td>{$information.Information.company}
+			</td>
+		</tr>
+        <tr>
+			<th>联系人：</th>
+			<td class="red">{$information.Information.contact}
+			</td>
+		</tr>
+		<tr>
+			<th>联系人职位：</th>
+			<td class="red">{$information.Information.post}
+			</td>
+		</tr>
+		{foreach $attributes as $value}
+		<tr>
+            <th>联系方式：</th>
+			<td class="red">{$value.InformationAttribute.mode} {$value.InformationAttribute.contact_method}
+			</td>
+		</tr>
+		{/foreach}
+		<tr>
+			<th>联系人地址：</th>
+			<td>{$information.Information.address}
 			</td>
 		</tr>
 		<tr>
@@ -155,29 +176,7 @@ $(document).ready(function(){
 			<th>客户选择服务商因素：</th>
 			<td>{$information.Information.reason}
 			</td>
-		</tr>
-		<tr>
-			<th>联系人：</th>
-			<td class="red">{$information.Information.contact}
-			</td>
-		</tr>
-		<tr>
-			<th>联系人职位：</th>
-			<td class="red">{$information.Information.post}
-			</td>
-		</tr>
-		{foreach $attributes as $value}
-		<tr>
-            <th>联系方式：</th>
-			<td class="red">{$value.InformationAttribute.mode} {$value.InformationAttribute.contact_method}
-			</td>
-		</tr>
-		{/foreach}
-		<tr>
-			<th>联系人地址：</th>
-			<td>{$information.Information.address}
-			</td>
-		</tr>
+		</tr>		
         <tr>
 			<th>信息详情：</th>
 			<td>{$information.Information.introduction}
@@ -213,14 +212,13 @@ $(document).ready(function(){
     </div>	
     </div>
     
-<div style="width:430px; display: none;z-index: 100;" id="djbuz">
+<div style="width:430px;" id="divDjbuz1" class="divDjbuz">
 <form id="complaints">
-<div style="width:430px;"id="djbuz">
-  <div class="djbuzTit"><span class="biaot" style="width:397px;">投诉此信息</span><a href="#" title="关闭" id="closeKuang"></a></div>
+  <div class="djbuzTit"><span class="biaot" style="width:397px;">投诉此信息</span><a href="#" title="关闭" class="closeKuang"></a></div>
   <p class="biaot_wz">信息标题：<strong>{$information.Information.title}</strong></p>
   <p class="biaot_wz">发布人：<strong>{$author.Member.nickname}</strong></p>
   <p class="biaot_wz">请输入投诉此信息理由：</p>
-  <p class="biaot_wz"><textarea class="txtJytsly" name="content" id="content"></textarea></p>
+  <p class="biaot_wz"><textarea class="txtJytsly" name="content" id="complaints_content"></textarea></p>
   <input type="hidden" id="information_id" name="information_id" value="{$information.Information.id}" />
   <input type="hidden" name="target_members_id" value="{$author.Member.id}" id ="target_members_id"/>
   <input type="hidden" name="members_id" value="{$memberInfo.Member.id}" />
@@ -232,6 +230,5 @@ $(document).ready(function(){
 	  	<a class="payShortage" href="javascript:void(0)">取消</a>
 	  </span>
   </div> 
-</div>
 </form>
 </div>

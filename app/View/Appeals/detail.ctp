@@ -59,7 +59,11 @@ $(document).ready(function(){
 
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html.html">我有客源</a>&gt;&gt;<a href="#">我的申诉详情</a></p>     
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">我有客源</a>&gt;&gt;
+      <a href="javascript:void(0)">我的申诉详情</a>
+      </p>     
     </div>
 	{$this->element('base_seller_info')}
     <div class="biaotit">投诉原因</div>
@@ -81,7 +85,7 @@ $(document).ready(function(){
       {else}
       平台判定信息无效，交易完成。
       {/if}
-      <a class="SSmore" href="#">点击查看申诉详情。</a>
+      <a class="SSmore" href="javascript:void(0)">点击查看申诉详情。</a>
       </div>
       <table cellspacing="0" cellpadding="0" border="1" class="tablePTSSXQ" style="display: none;">
         <tbody><tr>

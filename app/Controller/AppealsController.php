@@ -69,12 +69,36 @@ class AppealsController extends AppController
 	public function detail()
 	{
 	    $this->set('title_for_layout', "申诉详细");
+	    /*
 	    $query = $this->request->params['named'];
 	    if (!isset($query['id']) || empty($query['id'])) {
 	        $this->_sysDisplayErrorMsg("没有此信息的详情！");
             return 0;
 	    }
-	    $appeal = $this->Appeal->find('first', array('conditions' => array('id' => $query['id'])));
+	    */
+	   $query = $this->request->query;
+        if ((!isset($query['active']) && !isset($query['been'])) || (isset($query['active']) && isset($query['been']))){
+            //TODO error 
+            $this->_sysDisplayErrorMsg("没有你要确认的信息！");
+            return 0;
+        }
+	   if (isset($query['active']) && !empty($query['active'])) {
+            $id = $query['active'];
+            $conditions = array(
+                'information_id' => $id, 
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'buyer_members_id' => $query['mid'], 
+            );
+        }
+        if (isset($query['been']) && !empty($query['been'])) {
+            $id = $query['been'];
+            $conditions = array(
+                'information_id' => $id, 
+                'members_id' => $query['mid'], 
+                'buyer_members_id' => $this->_memberInfo['Member']['id'], 
+            );
+        }
+	    $appeal = $this->Appeal->find('first', array('conditions' => $conditions));
 	    if (empty($appeal)) {
 	        $this->_sysDisplayErrorMsg("没有此信息的详情！");
             return 0;
@@ -97,7 +121,7 @@ class AppealsController extends AppController
         }
         
         //platform
-        $this->Info->appealAnswer($query['id']);
+        $this->Info->appealAnswer($appeal['Appeal']['id']);
         $templates = $this->AppealAnswerTemplate->find('all');
         $this->set('templates', $templates);
         $this->set('appeal', $appeal);

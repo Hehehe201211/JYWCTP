@@ -54,11 +54,11 @@
 	                </a>
                 </td>
                 {if $type == "myself"}
-                    <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
+                    <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1"><a href="/informations/detail/{$info.Information.id}">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
                 {else if $type == "has"}
-                    <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/payment/{$info.Information.id}">我需要类似服务</a></td>
+                    <td class="con_2_xq_tofu tofu_anniu xiushan_anniu1"><a href="/informations/payment/{$info.Information.id}">我需要类似服务</a></td>
                 {else}
-                    <td class="con_2_xq_tofu xiushan_anniu"><a href="javascript:void(0)">详情 </a></td>
+                    <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1"><a href="javascript:void(0)">详情 </a></td>
                 {/if}               
             </tr>
         {/foreach}        

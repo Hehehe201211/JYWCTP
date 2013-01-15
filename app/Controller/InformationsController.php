@@ -76,7 +76,7 @@ class InformationsController extends AppController
         $this->set('city', $city['City']['name']);
         $category = $this->Category->find('first', array('fields' => array('name'), 'conditions' => array('id' => $this->request->data['category'])));
         $sub_category = $this->Category->find('first', array('fields' => array('name'), 'conditions' => array('id' => $this->request->data['sub_category'])));
-        if (!$this->request->data['type']) {
+        if ($this->request->data['type'] != 1) {
             $industry = $this->Category->find('first', array('fields' => array('name'), 'conditions' => array('id' => $this->request->data['industries_id'])));
             $this->set('industry', $industry['Category']['name']);
         }
@@ -181,7 +181,28 @@ class InformationsController extends AppController
     
     public function edit()
     {
-       
+        $this->set('title_for_layout', "信息修改");
+        $this->_appendJs(array('jquery-ui'));
+        $this->_appendCss(array('ui/jquery-ui', 'ui/calendar'));
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            $conditions = array(
+                'id' => $this->request->query['id'],
+                'members_id' => $this->_memberInfo['Member']['id']
+            );
+            $information = $this->Information->find('first', array('conditions' => $conditions));
+            if (empty($information)) {
+                $this->_sysDisplayErrorMsg('没有可以编辑的对象！');
+            } else {
+                $this->set('info', $information);
+                //不是悬赏信息的话，查找联系人信息
+                if ($information['Information']['type'] != 1) {
+                    $attributes = $this->InformationAttribute->find('all', array('conditions' => array('information_id' => $information['Information']['id'])));
+                    $this->set('attributes', $attributes);
+                }
+            }
+        } else {
+            $this->_sysDisplayErrorMsg('没有可以编辑的对象！');
+        }
     }
     
     public function editcheck()

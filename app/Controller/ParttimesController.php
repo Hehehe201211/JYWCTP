@@ -10,7 +10,7 @@ class ParttimesController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-    var $uses = array('PartTime', 'Information', 'Cooperation', 'PartTimeFavourite');
+    var $uses = array('PartTime', 'Information', 'Cooperation', 'PartTimeFavourite', 'Homepage');
     var $components = array('RequestHandler', 'Parttime', 'Unit');
     public function create()
     {
@@ -157,6 +157,9 @@ class ParttimesController extends AppController
 		        );
 		        $favourite = $this->PartTimeFavourite->find('count', array('conditions' => $conditions)) > 0;
 		        $this->set('isFavourite', $favourite);
+		        
+		        $companyHome = $this->Homepage->find('first', array('conditions' => array('members_id' => $detail['Member']['id'])));
+		        $this->set('homepage', $companyHome);
             }
         } else {
             $this->set('clicked', 0);

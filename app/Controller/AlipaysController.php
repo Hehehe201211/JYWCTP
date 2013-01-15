@@ -12,7 +12,7 @@ class AlipaysController extends AppController
      */
     public function check()
     {
-        
+        $this->layout = 'resume_preview';
     }
     
     /**
@@ -97,4 +97,15 @@ class AlipaysController extends AppController
         $this->autoRender = false;
     }
     
+    public function beforeRender()
+    {
+        $css = array(
+        'ui/jquery-ui',
+        'member',
+        );
+        $js = array('member', 'jquery-ui');
+        $this->_appendCss($css);
+        $this->_appendJs($js);
+        parent::beforeRender();
+    }
 }

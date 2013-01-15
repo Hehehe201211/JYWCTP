@@ -28,13 +28,10 @@ $(document).ready(function(){
         {$this->Paginator->options($options)}
         {$paginatorParams = $this->Paginator->params()}
         {if $paginatorParams['count'] > 0}
-            <div class="tableSort" style="clear: both;">
-                  <input type="checkbox" checked="checked" value="{Configure::read('Information.status_code.active')}" name="status[]" class="inpRadio status">
-                  <label for="position">未交易</label>
-                  <input type="checkbox" value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="inpRadio status">
-                  <label for="time">已过期</label>
-                  <input type="checkbox" value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="inpRadio status">
-                  <label for="company">已撤销</label>
+            <div class="tableSort" style="clear: both;">                  
+                  <label><input type="checkbox" checked="checked" value="{Configure::read('Information.status_code.active')}" name="status[]" class="inpRadio status">未交易</label>                  
+                  <label><input type="checkbox" value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="inpRadio status">已过期</label>                  
+                  <label><input type="checkbox" value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="inpRadio status">已撤销</label>
             </div>
             <table width="100%" cellspacing="0" cellpadding="0" border="0"
                 class="con_2_table">
@@ -77,8 +74,7 @@ $(document).ready(function(){
                                 {$status[{$info.Information.status} - 1]}
                             </td>
                             <td class="tr_td5">{$info.Information.clicked}</td>
-                            <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
-                           
+                            <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>                           
                         </tr>
                     {/foreach}
             </table>

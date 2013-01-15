@@ -1,7 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-$("body").append("<div id='bgKuang'></div><div style='display: none;' id='goumaikuang'></div>");
+$("body").append($(".divDjbuz"));
 	//价格范围
 	$( "#slider-price" ).slider({
 		range: true,
@@ -14,37 +14,21 @@ $("body").append("<div id='bgKuang'></div><div style='display: none;' id='goumai
 	});
 	$( "#amount-jiage" ).val($( "#slider-price" ).slider( "values", 0 ) +" - " + $( "#slider-price" ).slider( "values", 1 ) );
 	
-	/*$(".toggleMap").toggle(function(){
-		$(".divMapCon").show("fast");
-		$(this).text("隐藏地图检索");
-	},function(){
-		$(".divMapCon").hide("fast");
-		$(this).text("打开地图检索");
-	});*/
-	
 	//信息详情
 	$(".con_2_table a:not(.tofu_anniu a)").live("click",function(e){
 		var id = $(this).parent().parent().attr('id');
 		var type = $('#detail_type').val();
 		var num = $(this).parent().parent().find('.tr_td5');
-		$('#goumaikuang').load('/informations/ajax_payment #djbuz', {'id' : id, 'type' : type}, function(){
-			e.preventDefault();	
-			var bgW=$(document).width();
-			if ($(document).width()<screen.availWidth) bgW=screen.availWidth; 
-			$("#goumaikuang").show();			
-			$("#bgKuang").css({width:bgW,height:($(document).height()+$("#djbuz").height())});
-			$("#goumaikuang").css({"width":$("#djbuz").width(),"height":$("#djbuz").height()});	
-		    $("#goumaikuang").css({"top":$(window).scrollTop()+100+"px","left":($(document).width()-$("#goumaikuang").width())/2+"px"});
-			$("#bgKuang").fadeTo("fast",0.5);
-			var clicked = $('#goumaikuang').find('#clicked').val();
+		$('#divDjbuz1').load('/informations/ajax_payment #djbuz', {'id' : id, 'type' : type}, function(){			
+			bgKuang("#divDjbuz1",".divDjbuz .closeKuang");	
+			var clicked = $('#divDjbuz1').find('#clicked').val();
 			if (clicked == 1) {
 				num.find('a').text(parseInt(num.find('a').text())+1);
 			}
 		});
 	});	
 	$(".close").live("click",function(){		
-		$("#bgKuang").fadeOut("fast");
-		$("#goumaikuang").hide();		
+		$(".divDjbuz .closeKuang").click();
 	});
 	$(".tofu_anniu a").undelegate();
 	
@@ -213,3 +197,7 @@ $("body").append("<div id='bgKuang'></div><div style='display: none;' id='goumai
 </form>
     </div>
     <input type="hidden" id="detail_type" value="{$type}" />
+<div style="width:550px;" id="divDjbuz1" class="divDjbuz">
+    <div id="djbuz">
+    </div>
+    </div>

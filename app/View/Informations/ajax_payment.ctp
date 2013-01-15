@@ -1,7 +1,7 @@
 <div style="width:550px;" id="djbuz">
 	<div class="djbuzTit">
 		<span class="fk_tit">{$information.Information.title}</span>
-		<a href="javascript:void(0)" title="关闭" class="closeKuang close">
+		<a href="javascript:void(0)" title="关闭" class="closeKuang">
 		</a>
 	</div>
     <div class="tableDetail" style="padding-top:3px;">

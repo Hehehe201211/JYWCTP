@@ -98,7 +98,7 @@ class ComplaintsController extends AppController
         $this->set('title_for_layout', "投诉详细");
         $query = $this->request->query;
         
-        if ((!isset($query['active']) && !$query['been']) || (isset($query['active']) && isset($query['been']))){
+        if ((!isset($query['active']) && !isset($query['been'])) || (isset($query['active']) && isset($query['been']))){
             //TODO error 
             $this->_sysDisplayErrorMsg("没有你要确认的信息！");
             return 0;
@@ -107,13 +107,22 @@ class ComplaintsController extends AppController
         if (isset($query['active']) && !empty($query['active'])) {
             $id = $query['active'];
             $type = "active";
-            $conditions = array('id' => $id, 'members_id' => $this->_memberInfo['Member']['id'], 'status' => array(Configure::read('Complaint.status_code.discuss'), Configure::read('Complaint.status_code.platform')));
-//            $conditions = array('id' => $id, 'members_id' => $this->_memberInfo['Member']['id']);
+            $conditions = array(
+                'information_id' => $id, 
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'target_members_id' => $query['mid'],  
+                'status' => array(Configure::read('Complaint.status_code.discuss'), Configure::read('Complaint.status_code.platform'))
+            );
         }
         if (isset($query['been']) && !empty($query['been'])) {
             $id = $query['been'];
             $type = "been";
-            $conditions = array('id' => $id, 'target_members_id' => $this->_memberInfo['Member']['id'], 'status' => Configure::read('Complaint.status_code.discuss'));
+            $conditions = array(
+                'information_id' => $id, 
+                'members_id' => $query['mid'], 
+                'target_members_id' => $this->_memberInfo['Member']['id'],
+                'status' => Configure::read('Complaint.status_code.discuss')
+            );
         }
         if (empty($id)) {
             //TODO

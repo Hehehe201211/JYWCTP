@@ -18,9 +18,11 @@ $(document).ready(function(){
       <input type="hidden" value="has" id="info_type">
       {/if}
       </a>&gt;&gt;
-      <a href="#">待确认交易</a></p>
+      <a href="#">交易中</a></p>
     </div>
-    <div class="biaotit">待确认交易</div>
+    {if $type=="need"}<div class="biaotit">交易中的悬赏</div>
+    {else}<div class="biaotit">交易中的客源</div>
+    {/if}    
 	<form id="informationList">
     	{$this->element('confirm_paginator')}
 	</form>

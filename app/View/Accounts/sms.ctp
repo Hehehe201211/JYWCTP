@@ -150,7 +150,7 @@ $(document).ready(function(){
                     <input type="checkbox" class="inpChk" name="" id="znxConTradeAll"/>
                     <label for="znxConTradeAll">全选</label>
                     <input type="button" class="inpButton deleMess" name="" value="删除"/>
-                    <div class="fanye">
+                    <div class="fanyea">
                         <div class="dd_span"><a href="#">上一页</a></div>
                         <div class="dd_ym">
                             <label>每页显示：</label>
@@ -227,7 +227,7 @@ $(document).ready(function(){
                     <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
                     <form id="msgOpt" >
                         <input type="hidden" name="msg_type" value="station" />
-                        <div class="fanye">
+                        <div class="fanyea">
                             {if $paginatorParams['prevPage']}
                                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                             {/if}

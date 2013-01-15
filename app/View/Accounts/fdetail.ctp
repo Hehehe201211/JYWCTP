@@ -1,80 +1,96 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+    /*$(".btnAddFri").click(function(){
+		$(this).parents(".mebBaseinfo").find(".mebBaseinfoR dd").toggle();
+	});*/
+	var errorMsg = '<span class="errorMsg">请输入此项目</span>';
+	var checkTarget = ['title', 'content'];
     $('#sendMsg').click(function(){
-        if ($('#title').val() == "") {
-            
-            return false;
-        }
-        if ($('#content').val() == "") {
-            
-            return false;
-        }
-        $.ajax({
-            url : '/sms/addMsg',
-            type : 'post',
-            data : $('#msgForm').serializeArray(),
-            success : function(data) {
-                var result = eval("("+data+")");
-                var date = new Date();
-                date = date.getFullYear() + '-' + date.getMonth()+1 + '-' + date.getDate();
-                if (result.result == "OK") {
-                    var str = '<div class="xq_huif_tet">'+
-                                    '<p class="xq_huif_tet11">'+
-                                            '<strong class="sender">我</strong>' + $('#content').val() +
-                                    '</p>'+
-                                    '<p class="xq_huif_riq">' + date +'</p>'+
-                              '</div>';
-                    $('#result').prepend(str);
-                    $('#title').val("");
-                    $('#content').val("");
-                    alert(result.msg);
-                  } else {
-                    alert(result.msg);
-                }
-            }
-        });
+		var error=0;
+		$.each(checkTarget, function(target){
+			if($('#' + this).val() == "") {
+				$('#' + this).parent('dd').append(errorMsg);
+				error=1;
+			} else {
+				$('#' + this).parent('dd').find('.errorMsg').remove();
+			}
+		});
+		if (!error) {
+			$.ajax({
+				url : '/sms/addMsg',
+				type : 'post',
+				data : $('#msgForm').serializeArray(),
+				success : function(data) {
+					var result = eval("("+data+")");
+					var date = new Date();
+					date = date.getFullYear() + '-' + date.getMonth()+1 + '-' + date.getDate();
+					if (result.result == "OK") {
+						var str = '<div class="xq_huif_tet">'+
+										'<p class="xq_huif_tet11">'+
+												'<strong class="sender">我</strong>' + $('#content').val() +
+										'</p>'+
+										'<p class="xq_huif_riq">' + date +'</p>'+
+								  '</div>';
+						$('#result').prepend(str);
+						$('#title').val("");
+						$('#content').val("");
+						alert(result.msg);
+					  } else {
+						alert(result.msg);
+					}
+				}
+			});
+		}
     });
-
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
       <p>
       <a href="javascript:void(0">我的聚业务</a>&gt;&gt;
       <a href="javascript:void(0">好友管理</a>&gt;&gt;
       <a href="javascript:void(0)">好友联系</a>
       </p>
     </div>
-    <!-- InstanceBeginEditable name="EditRegion5" --> 
-    <div class="zy_zszl">
-          <div class="zy_zszl_z">
-            <dl>
-              <dt>
-                <dl>
-              <dt class="borBlue"><img src="{$this->webroot}img/tx.jpg"></dt>
-              <dd class="member">
-                  <span>会员名称：{$firend.Member.nickname}</span>
-                  <span>公司名称：{$firend.Member.company_name}</span>
-                  <span>行业：互联网</span><span>发布信息数：8次</span>
-                  <span>交易次数：8次</span><span>好评率：100%</span>
-              </dd>
-            </dl>
-              </dt>              
-            </dl>
-          </div>
-          <div class="zy_zszl_r">
-            <dl>
-        </dl>
-          </div>
+    <div class="mebBaseinfo">
+        <div class="mebBaseinfoL">
+          <table width="100%" height="100%" border="0">
+            <tr>
+              <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
+              <td width="66%"><!--<a href="javascript:;" class="btnAddFri">修改备注</a>-->会员名称：{$firend.Member.nickname}</td>
+            </tr>
+            <tr>
+              <td>公司名称：{$firend.Member.company_name}</td>
+            </tr>
+            <tr>
+              <td>行业：互联网</td>
+            </tr>
+            <tr>
+              <td>发布信息数：8次</td>
+            </tr>
+            <tr>
+              <td>交易次数：8次</td>
+            </tr>
+            <tr>
+              <td>好评率：100%</td>
+            </tr>            
+          </table>
         </div>
+        <div class="mebBaseinfoR">
+          <dl>
+            <dd style="display:none"><input type="text" value="请输入备注名" onfocus="this.select();" placeholder="请输入备注名"/>
+            <input type="button" value="修改" onclick="javascript:alert('备注成功。');"/></dd>
+          </dl>
+        </div>
+      </div>    
     <div class="biaotit">与<em>{$firend.Member.nickname}</em>的联系记录</div>
     <div class="znx">
         <dl>
         <form id="msgForm">
           <dd>
-            <label>主题：</label><input type="text" name="title" class="inpTextBox" id="title">
+            <label><font class="facexh">*</font>主题：</label><input type="text" name="title" class="inpTextBox" id="title">
           </dd>
           <dd>
             <label><font class="facexh">*</font>内容：</label>
@@ -136,25 +152,5 @@ $(document).ready(function(){
             {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
             {$this->Js->writeBuffer()}
         </div>
-      </div>
-    <!-- InstanceEndEditable -->     
-    <div class="bottomRcd" style="position: fixed; display: none;">
-      <div class="fl">
-        <h3>热门悬赏<a href="#" class="more">更多...</a></h3>
-        <ul>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-      <div class="fl fr">
-        <h3>最新客源<a href="#" class="more">更多...</a></h3>
-        <ul>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a class="li" href="#">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-    </div>  
-    <div class="bottomRcdPos" style="display: none;"></div>   
+      </div>      
 </div>

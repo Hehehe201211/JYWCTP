@@ -81,7 +81,7 @@ $(document).ready(function(){
         <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <th width="119" scope="row">公司名称：</th>
-            <td width="373"><a href="javascript:void(0)" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
+            <td width="373"><a href="{if !empty($homepage)}/homes/index/{$homepage.Homepage.domain}{else}javascript:void(0){/if}" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
           </tr>
           <tr>
             <th width="119" scope="row">营业执照：</th>

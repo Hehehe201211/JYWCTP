@@ -36,8 +36,12 @@ class ConfirmController extends AppController
             $status = $this->request->data['status'];
             $this->set('status', $this->request->data['status']);
         } else {
-            $status = Configure::read('Transaction.status_code.transaction');
-            $this->set('status', array(Configure::read('Transaction.status_code.transaction')));
+            $status = array(
+	            Configure::read('Transaction.status_code.transaction'), 
+	            Configure::read('Transaction.status_code.complaint'),
+	            Configure::read('Transaction.status_code.appeal')
+            );
+            $this->set('status', $status);
         }
         $this->Info->transaction($this->_memberInfo['Member']['id'], $type, $status);
         $this->set("type", $type);
