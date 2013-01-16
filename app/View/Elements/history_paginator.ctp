@@ -17,7 +17,7 @@
             <tbody><tr class="con_2_tr">
               <th><a target="_blank" href="hyzl.html">张伟</a></th> 
               <td><a target="_blank" href="new-jycxxq.html">公司标志制作</a></td>
-              <td>聚客币：100元</td>
+              <td>业务币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
               <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq.html">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#">删除</a></td>
@@ -25,7 +25,7 @@
             <tr class="con_2_tr">
               <th><a target="_blank" href="hyzl.html">张伟</a></th> 
               <td><a target="_blank" href="new-jycxxq2.html">公司标志制作</a></td>
-              <td>聚客币：100元</td>
+              <td>业务币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
               <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="new-jycxxq2.html">详情</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
@@ -33,7 +33,7 @@
             <tr class="con_2_tr">
               <th class="tr_td1"><a target="_blank" href="hyzl.html">张伟</a></th> 
               <td><a target="_blank" href="wdssxq2.html">公司标志制作</a></td>
-              <td>聚客币：100元</td>
+              <td>业务币：100元</td>
               <td>福建省思明区</td>
               <td>2012-08-28 10:27</td> 
               <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="wdssxq2.html">详情</a><a onclick="alert('双方互评未完成，暂时无法删除。')" href="#">删除</a></td>          

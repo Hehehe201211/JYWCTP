@@ -33,7 +33,14 @@ $(document).ready(function(){
           </tr>
            <tr>
             <td class="tdRight">我的头像：</td>
-            <td class="tdLeft" colspan="3"><img src="{$this->webroot}img/tx.jpg"></td>
+            <td class="tdLeft" colspan="3">
+                {if !empty($thumbnail)}
+                <img src="{$this->webroot}{$thumbnail}">
+                {else}
+                <img src="{$this->webroot}img/tx.jpg">
+                {/if}
+            </td>
+            <input type="hidden" name="thumbnail" value="{$thumbnail}" />
           </tr>
           <tr>
             <td class="tdRight">性别：</td>
@@ -68,7 +75,13 @@ $(document).ready(function(){
           <tr>
             <td width="176" class="tdRight">所在城市：</td>
             <td class="tdLeft" colspan="3">
-            {$this->City->cityName($this->data['provincial'])}{$this->City->cityName($this->data['city'])}
+            {$provincial = $this->City->cityName($this->data['provincial'])}
+            {$city = $this->City->cityName($this->data['city'])}
+            {if $provincial == $city}
+            {$provincial}
+            {else}
+            {$provincial} {$city}
+            {/if}
 			<input type="hidden" name="provincial" id="provincial" value="{$this->data['provincial']}" />
 			<input type="hidden" name="city" id="city" value="{$this->data['city']}" />
 			</td>

@@ -1,6 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+$("body").append($(".divDjbuz"));
 	//站内信
 	$('.inpButton').click(function(){
 		if($('#comment_content').val() != "") {
@@ -207,7 +208,7 @@ $(document).ready(function(){
             <th>信息交易价格：</th>
             <td>
                 {if $transaction.PaymentTransaction.payment_type == 1}
-                    聚客币：{$transaction.PaymentTransaction.number}元
+                    业务币：{$transaction.PaymentTransaction.number}元
                 {else if $transaction.PaymentTransaction.payment_type == 2}
                     积分：{$transaction.PaymentTransaction.number}分
                 {/if}

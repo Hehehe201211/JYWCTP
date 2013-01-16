@@ -231,7 +231,7 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>上传企业营业执照：</label>
-            <input name="license" type="file" id="license"/><p style="width:150px;" class="imgfilesize">（文件大小不超过500K）</p>
+            <input name="face" type="file" id="license"/><p style="width:150px;" class="imgfilesize">（文件大小不超过500K）</p>
           </li>
           <!--<li>
              <div class="divMapContainer">
@@ -248,7 +248,7 @@ $(document).ready(function(){
           <li>
             <label for="vehicle" class="protocol">
               <input type="checkbox" name="vehicle" id="vehicle"/>
-              我接受 <a href="#">《聚业务服务协议（试行）》</a>
+              我接受 <a href="/static?tpl=mianze">《聚业务服务协议（试行）》</a>
             </label>
           </li>
           <li><a class="zclan zclan4" href="javascript:void(0)">提交</a></li>

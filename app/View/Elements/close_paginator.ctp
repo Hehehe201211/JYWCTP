@@ -20,7 +20,7 @@
                       <td><a style="font-weight: bold;" href="/informations/closedetail/?{$info_type}={$info.PaymentHistory.information_id}" target="_blank">{$info.Information.title}</a></td>
                       <td>
                         {if $info.PaymentHistory.payment_type == 1}
-                                聚客币：{$info.PaymentHistory.number}元
+                                业务币：{$info.PaymentHistory.number}元
                             {else if $info.PaymentHistory.payment_type == 2}
                                 积分：{$info.PaymentHistory.number}分
                         {/if}

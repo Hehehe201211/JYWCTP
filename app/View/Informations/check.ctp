@@ -65,7 +65,7 @@ $(document).ready(function(){
 		<th>信息交易价格：</th>
 		<td>
 			{if isset($this->data['pay_coin']) && $this->data['pay_coin'] == 1} 
-				聚客币：{$this->data['price']}元 
+				业务币：{$this->data['price']}元 
 				<input type="hidden" value="{$this->data['pay_coin']}" name="pay_coin" />
 				<input type="hidden" value="{$this->data['price']}" name="price" />
 			{/if}

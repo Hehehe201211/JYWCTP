@@ -184,45 +184,7 @@ String.prototype.trim = function () {
             <a href="grxxxg.html">账号管理</a>>>
             <a href="#">账号安全</a>
         </p>
-    <div class="mebBaseinfo">
-        <div class="mebBaseinfoL">
-          <table width="100%" height="100%" border="0">
-            <tbody><tr>
-              <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
-              <td width="66%">会员昵称：聚业务</td>
-            </tr>
-            <tr>
-              <td>会员等级：高级会员</td>
-            </tr>
-            <tr>
-              <td>绑定手机：1500****500</td>
-            </tr>
-            <tr>
-              <td>绑定邮箱：ya*****@qq.com</td>
-            </tr>
-            <tr>
-              <td>行业：互联网</td>
-            </tr>
-            <tr>
-              <td>地址：福建省厦门市</td>
-            </tr>
-            <tr>
-              <td class="mebInfo" colspan="2"><span>资料完整度：</span><span class="progressBar"><span>&nbsp;20%&nbsp;</span></span><a href="#">完善资料</a><a title="身份已认证" href="new-grhysj.html" class="icon iconS"></a><a title="未绑定邮箱" href="new-zhaq.html" class="icon iconM"></a><a title="未绑定手机" href="new-zhaq.html" class="icon iconT"></a><a href="#" title="已绑定支付宝" class="icon iconB"></a></td>
-            </tr>
-          </tbody></table>
-        </div>
-        <div class="mebBaseinfoR">
-          <dl>
-            <dd>已发布：<a href="new-ywfbmx.html">0</a>条客源&nbsp;&nbsp;<a href="xslb.html">0</a>条悬赏</dd>
-            <dd>已收到：<a href="new-sddxq.html">0</a>条客源&nbsp;&nbsp;<a href="new-sddsx.html">0</a>条悬赏</dd>
-            <dd>待确认客源：<a href="dqrjy.html">0</a>条</dd>
-            <dd>待处理投诉：<a href="new-wbts.html">0</a>条</dd>
-            <dd>留言：<a href="new-znx.html">0</a>条</dd>
-            <dd>虚拟币余额：<a href="new-zhye.html">0</a>元&nbsp;&nbsp;积分：<a href="jfmx.html">0</a>分</dd>
-            <dd>聚客币：<a href="new-zhye.html">余额</a><a href="new-czjl.html">充值</a><a target="_blank" href="txsq.html">提现</a><a href="new-qbmx.html">明细</a></dd>
-          </dl>
-        </div>
-      </div>
+        {$this->element('base_info')}
     </div>
     <div class="safe_item safe_password clearfix">
         <div class="safe_item_title">账号密码 </div>
@@ -247,7 +209,7 @@ String.prototype.trim = function () {
     <div class="safe_item safe_alipay clearfix">
         <div class="safe_item_title">支付宝 </div>
         <div class="safe_item_des">
-          <p><strong>ya*******@qq.com</strong></p>提现。 
+          <p><strong>{$memberInfo.Attribute.pay_account}</strong></p>提现。 
         </div>
         <div class="safe_item_but">
           <a href="javascript:void(0)" id="safe_alipay" class="btnSaftMod btnZFBMod">修改</a>
@@ -257,7 +219,7 @@ String.prototype.trim = function () {
     <div class="safe_item safe_mobile clearfix">
         <div class="safe_item_title">认证手机 </div>
         <div class="safe_item_des">
-          <p><strong>150****4745</strong></p>绑定手机后，您即可使用手机号码进行登录，在忘记密码时也可通过绑定手机找回。 
+          <p><strong>{$memberInfo.Attribute.mobile}</strong></p>绑定手机后，您即可使用手机号码进行登录，在忘记密码时也可通过绑定手机找回。 
         </div>
         <div class="safe_item_but">
           <a href="javascript:void(0)" id="safe_mobile" class="btnSaftMod btnMBMod">修改</a>

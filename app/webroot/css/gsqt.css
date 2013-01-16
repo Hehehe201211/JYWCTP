@@ -35,11 +35,9 @@ body{background:#50574f;}
 .main .right{width:115px;}
 .main .left .navRight{background-image:url(../img/gsqtNavLiBgH.png);float:left;}
 .main .middle{background:#ba791c;width:772px;float:left;padding-bottom:12px;}
-/*.main .middle .conLeft{float:left;width:476px;}*/
 .main .middle .conLeft th{text-align:right;}
 .main .conLeft .content{padding:12px 8px;background:#8C4300;overflow:hidden;}
 .main .conLeft .content p{text-indent:2em;}
-/*.main .middle .conRight{color:#FFF;float:left;width:272px;}*/
 .main .middle .conRImg{width:256px;border:2px #FFC solid;float:right;margin-left:8px;}
 
 .navMiddle ul li{float:left;height:34px;margin-top:7px;}
@@ -112,10 +110,10 @@ body{background:#50574f;}
 .djbuz .getCheckNum img{height:20px;vertical-align:middle;}
 .imgYanzhengma{height:22px;margin:0 8px;}
 
-.footer{background:#a8580f;}
-.footer .left{margin:40px 0 0 113px;width:387px;float:left;color:#fff;}
+.footer{background:#a8580f;height:150px;}
+.footer .left{margin:20px 0 0 113px;width:387px;float:left;color:#fff;}
 .footer a{text-decoration:underline;font-size:14px;color:#f0be5d;}
 .footer a:hover{color:#FF0;}
 .footer p{text-align:left;font-size:14px;}
 .footer span{color:#CCC;font-size:14px;}
-.footer .right{margin:30px 0 0;}
+.footer .right{margin:20px 0 0;}

@@ -5,10 +5,6 @@ $(document).ready(function(){
     var mulLR=$(".main .middle .ulProducts").width()/$(".middle .ulProducts li").length-$(".middle .ulProducts li").width();
     var mulLR=mulLR/2;
     $(".middle .ulProducts li").css({"margin-left":mulLR,"margin-right":mulLR});
-	$(".ulProducts li img").each(function(){
-		var num=($(this).parent().height()-$(this).height())/2;
-		$(this).css("margin-top","1px");
-	});
     
     //切换详情
     var n=-1;
@@ -53,11 +49,15 @@ $(document).ready(function(){
             <li>
             <a href="javascript:void(0)">
                 <div class="borderImg">
-                {if !empty($product.Product.big_thumbnail)}
+				<table width="100%" border="0" height="100%">
+              <tr>
+                <td> {if !empty($product.Product.big_thumbnail)}
                 <img src="{$this->webroot}{$product.Product.small_thumbnail}" alt="{$product.Product.name}" />
                 {else}
                 <img src="{$this->webroot}img/noimage.gif" alt="not image" />
-                {/if}
+                {/if}</td>
+              </tr>
+            </table>               
                 </div>
                 <p>{$product.Product.name}</p>
             </a>

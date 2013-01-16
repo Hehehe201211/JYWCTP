@@ -15,6 +15,9 @@ class AccountsController extends AppController
         $this->set('title_for_layout', "账号安全");
         if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.company')) {
             $this->render('security-company');
+        } else {
+            $historyInfo = $this->Member->getHistoryInfo($this->_memberInfo['Member']['id']);
+            $this->set('historyInfo', $historyInfo);
         }
     }
     /**

@@ -27,7 +27,7 @@ $(document).ready(function(){
 							src = "/resources/download?id=" + documents_id;
 						} else {
 							src = '';
-							if (confirm(result.msg+'\n点击确定打开充值页面；充值页面可能会被浏览器拦截，请点击允许。')) window.open("/coins/charge","_blank");
+							if (confirm(result.msg+'\n点击确定打开充值页面；若页面被浏览器拦截，请点击允许。')) window.open("/coins/charge");
 						}
 					}
 				});
@@ -54,8 +54,7 @@ $(document).ready(function(){
 		if(!$(this).next().is('img')) {
 			$(this).after('<img id="loginCode" src="/members/image">');
 		}
-	})
-	
+	})	
 	//登陆按钮
 	$('#btnCommentLogin').click(function(){
 		var errorMsg = '<span style="color:red">请输入此项</span>'

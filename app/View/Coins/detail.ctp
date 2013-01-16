@@ -48,7 +48,7 @@
                     <td class="tdRight">信息交易价格：</td>
                     <td class="tdLeft" colspan="3">
                         {if $history.PaymentHistory.payment_type == 1}
-                            聚客币：{$history.PaymentHistory.number}元
+                            业务币：{$history.PaymentHistory.number}元
                         {else if $history.PaymentHistory.payment_type == 2}
                             积分：{$history.PaymentHistory.number}分
                         {/if}
@@ -106,7 +106,7 @@
                   {$member.Member.nickname}支付给你
               {/if}
                     {if $history.PaymentHistory.payment_type == 1}
-                    聚客币：{$history.PaymentHistory.number}元
+                    业务币：{$history.PaymentHistory.number}元
                 {else if $history.PaymentHistory.payment_type == 2}
                     积分：{$history.PaymentHistory.number}分
                 {/if}

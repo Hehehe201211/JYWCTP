@@ -1,20 +1,6 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-	$('#search').click(function(){
-    	var params = "";
-    	if ($('#typeSel').val() != "") {
-    		params = '?type=' + $('#typeSel').val();
-    	}
-    	if ($('#key_word').val() != "") {
-    		if (params == "") {
-    			params = '?key_word=' + $('#key_word').val();
-    		} else {
-    			params = parmas + '&key_word=' + $('#key_word').val();
-    		}
-    	}
-		window.location.href = '/resources/search' + params;
-    });
     $('.prev').live('click', function(){
     	var param = $(this).attr('href');
     	var page = param.substr(param.indexOf('?page=') + 6);
@@ -28,6 +14,20 @@ $(document).ready(function(){
     	return false;
     });
 });
+function searchRe(event){
+	  var params = "";
+	  if ($('#typeSel').val() != "") {
+		  params = '?type=' + $('#typeSel').val();
+	  }
+	  if ($('#key_word').val() != "") {
+		  if (params == "") {
+			  params = '?key_word=' + $('#key_word').val();
+		  } else {
+			  params = parmas + '&key_word=' + $('#key_word').val();
+		  }
+	  }
+	  window.location.href = '/resources/search' + params;
+}
 {/literal}
 </script>
 <div class="sbResource">
@@ -59,9 +59,8 @@ $(document).ready(function(){
 		      <option value="4">方案模板</option>
 		      <option value="5">总结计划</option>
 		      <option value="6">案例分析</option>
-	      </select>
-	      <input type="text" id="key_word" class="inpTextBox" name="key_word" />
-	      <input type="button" class="inpButton" id="search" value="搜索"/>
+	      </select>	      
+          <input type="text" id="key_word" class="inpTextBox" name="key_word" value="敲击enter键进行搜索" placeholder="敲击enter键进行搜索" onclick="this.select()" onkeypress="searchRe(event)"/>	      
       </div>
       <ul>
         <li><a href="/resources/search?type=1" target="_blank">入门成长</a></li>

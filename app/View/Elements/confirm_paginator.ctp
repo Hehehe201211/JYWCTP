@@ -3,13 +3,10 @@
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
 {if $paginatorParams['count'] > 0 || $isAjax}
-<div class="tableSort" style="clear: both;">
-      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.transaction'), $status)}checked="checked"{/if} checked="checked" value="{Configure::read('Transaction.status_code.transaction')}" name="status[]" class="inpRadio status">
-      <label for="position">待确认交易</label>
-      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complaint'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.complaint')}" name="status[]" class="inpRadio status">
-      <label for="time">被投诉客源</label>
-      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal')}" name="status[]" class="inpRadio status">
-      <label for="company">我的申述</label>
+<div class="tableSort" style="clear: both;">      
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.transaction'), $status)}checked="checked"{/if} checked="checked" value="{Configure::read('Transaction.status_code.transaction')}" name="status[]" class="inpRadio status">待确认交易</label>      
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complaint'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.complaint')}" name="status[]" class="inpRadio status">被投诉客源</label>      
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal')}" name="status[]" class="inpRadio status">申述中</label>
 </div>
 {/if}
 {if $paginatorParams['count'] > 0}
@@ -49,7 +46,7 @@
                     {/if}
 	                  <td>
     	                  {if $info.PaymentTransaction.payment_type == 1}
-                                聚客币：{$info.PaymentTransaction.number}元
+                                业务币：{$info.PaymentTransaction.number}元
                             {else if $info.PaymentTransaction.payment_type == 2}
                                 积分：{$info.PaymentTransaction.number}分
                         {/if}

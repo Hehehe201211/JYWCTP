@@ -1,6 +1,9 @@
 <script>
 {literal}
 $(document).ready(function(){
+	datepIniChange("#open","indate");
+    datepIniChange("#close","indate");
+    datepIniChange("#finished","indate");   
     $('#provincial').change(function(){
         $('#city').find('option:gt(0)').remove();
         if ($(this).val() != "") {
@@ -39,13 +42,8 @@ $(document).ready(function(){
                 }
             });
         }
-    });
+    });    
     
-    datepIniChange("#open","indate");
-    datepIniChange("#close","indate");
-    datepIniChange("#finished","indate");   
-    
-    //
     $('#check').click(function(){
         if (!checkData()) {
             $("#information").submit();
@@ -65,74 +63,34 @@ $(document).ready(function(){
         var error=0;
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
-                if($('#' + this).parent('dt').find('.errorMsg').length == 0) {
-                    $('#' + this).parent('dt').append(errorMsg);
-                }
+               $('#' + this).parent().append(errorMsg);
                 error=1;
             } else {
-                $('#' + this).parent('dt').find('.errorMsg').remove();
+                $('#' + this).parent().find('.errorMsg').remove();
             }
         });
         if ($('#city').val() == "") {
-            if($('#city').parent('dt').find('.errorMsg').length == 0) {
-                $('#city').parent('dt').append(errorMsg);
-            }
+            $('#city').parent('dt').append(errorMsg);
             error=1;
         } else if($('#provincial').val() != ""){
-            $('#city').parent('dt').find('.errorMsg').remove();
+            $('#city').parent().find('.errorMsg').remove();
         }
-        $('#open,#close').parent().parent().find('.errorMsg').remove();
+        $('#open').parent().parent().find('.errorMsg').remove();
         if($('#open').val() == "" || $('#close').val() == "") {
-            $('#open,#close').parent().parent().append(errorMsg);
+            $('#open').parent().parent().append(errorMsg);
             error=1;
         } else if($('#open').val() != "" && $('#close').val() != "") {
-            var open_str = $('#open').val().replace('\/', '-');
-            var close_str = $('#close').val().replace('\/', '-');
-            var open = new Date(open_str.split('-')[0], (parseInt(open_str.split('-')[1]) - 1), open_str.split('-')[2]);
-            var result1 = open.getFullYear() + '-';
-            var result2;
-            if (open.getMonth() + 1 < 10) {
-                 result1 += "0" + (open.getMonth() + 1) + '-'
-            } else {
-                 result1 += (open.getMonth() + 1) + '-'
-            }
-            if (open.getDate() < 10) {
-                 result1 += "0" + open.getDate();
-            } else {
-                 result1 += open.getDate();
-            }
-            if (result1 != open_str) {
-                 $('#open,#close').parent().parent().append(dateEMsg);
-                 error=1;
-            } else {
-                 var close = new Date(close_str.split('-')[0], (parseInt(close_str.split('-')[1]) - 1), close_str.split('-')[2]);
-                 result2 = close.getFullYear() + '-';
-                 if (close.getMonth() + 1 < 10) {
-                    result2 += "0" + (close.getMonth() + 1) + '-'
-                } else {
-                     result2 += (close.getMonth() + 1) + '-'
-                }
-                if (close.getDate() < 10) {
-                     result2 += "0" + close.getDate();
-                } else {
-                     result2 += close.getDate();
-                }
-                 if (result2 != close_str) {
-                     $('#open,#close').parent().parent().append(dateEMsg);
-                     error=1;
-                 }
-            }
-            if (result2 < result1) {
-                 $('#open,#close').parent().parent().append(dateEMsg);
+            var open_str = $('#open').val();
+            var close_str = $('#close').val();
+            if (close_str < open_str) {
+                 $('#open').parent().parent().append(dateEMsg);
                  error=1;
             }
         }
         
         $('.contact, .post, .address, .contact_method').each(function(){
             if ($(this).val() == "") {
-                if($(this).parent().find('.errorMsg').length == 0) {
-                    $(this).parent().append(errorMsg);
-                }
+                $(this).parent().append(errorMsg);
                 error=1;
             } else {
                 $(this).parent().find('.errorMsg').remove();
@@ -143,19 +101,11 @@ $(document).ready(function(){
         {
             if($('#pay_coin').attr('checked') == "checked") {
                 if ($('#price').val() == "") {
-                    if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-                        $('#price').parent().parent().append(errorMsg);
-                    } else {
-                        $('#price').parent().parent().find('.errorMsg').html("请输入此项目")
-                    }
+                    $('#price').parent().parent().append(errorMsg);
                     error = 1;
                     priceErr = true;
                 } else if (!re.test($('#price').val())){
-                    if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-                        $('#price').parent().parent().append(intEMsg);
-                    } else {
-                        $('#price').parent().parent().find('.errorMsg').html("请输入数字")
-                    }
+                   $('#price').parent().parent().append(intEMsg);
                     error = 1;
                     priceErr = true;
                 } else {
@@ -164,60 +114,26 @@ $(document).ready(function(){
             }
             if(!priceErr && $('#pay_point').attr('checked') == "checked") {
                 if ($('#point').val() == "") {
-                    if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-                        $('#point').parent().parent().append(errorMsg);
-                    } else {
-                        $('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-                    }
+                   $('#point').parent().parent().append(errorMsg);
                     error = 1;
                 } else if (!re.test($('#point').val())){
-                    if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-                        $('#point').parent().parent().append(intEMsg);
-                    } else {
-                        $('#point').parent().parent().find('.errorMsg').html("请输入数字")
-                    }
+                   $('#point').parent().parent().append(intEMsg);
                     error = 1;
                 } else {
                     $('#point').parent().parent().find('.errorMsg').remove();
                 }
             }
             if ($('#pay_coin').attr('checked') != "checked" && $('#pay_point').attr('checked') != "checked") {
-                if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-                    $('#point').parent().parent().append(errorMsg);
-                } else {
-                    $('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-                }
+               $('#point').parent().parent().append(errorMsg);
                 error = 1;
             }
         }
         if (!re.test($('#profit').val())) {
-            if ($('#profit').parent().find('.errorMsg').length == 0) {
-                $('#profit').parent().append(intEMsg);
-            }
+            $('#profit').parent().append(intEMsg);
             error = 1;
         } else {
             $('#profit').parent().find('.errorMsg').remove();
-        }
-        $('#finished').parent().find('.errorMsg').remove();
-        if ($('#finished').val() != "") {
-          var finished_str = $('#finished').val().replace('\/', '-');
-          var finished = new Date(finished_str.split('-')[0], (parseInt(finished_str.split('-')[1]) - 1), finished_str.split('-')[2]);
-          var result = finished.getFullYear() + '-';
-             if (finished.getMonth() + 1 < 10) {
-                result += "0" + (finished.getMonth() + 1) + '-'
-            } else {
-                 result += (finished.getMonth() + 1) + '-'
-            }
-            if (finished.getDate() < 10) {
-                 result += "0" + finished.getDate();
-            } else {
-                 result += finished.getDate();
-            }
-             if (result != finished_str) {
-                 $('#finished_str').parent().append(dateEMsg);
-                 error=1;
-             }
-        }
+        }        
         return error;
     }
     
@@ -260,6 +176,10 @@ $(document).ready(function(){
     </ul>
       <div class="sjle">
       <form id="information" method="post" action="/informations/check{if !empty($target)}?target={$target}{/if}">
+            <input type="hidden" id="parttime" name="parttime" value="">
+            <input type="hidden" name="target" value="">
+            <input type="hidden" name="target_member" value="">
+            
             <dl>
               <dt>
                 <label><font class="facexh">*</font>信息标题：</label>

@@ -1,31 +1,37 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-	$('.cancel').click(function(){
-		if (confirm("你确定要撤销此信息吗？")) {
-			$.ajax({
-				url : '/informations/ajax_cancel',
-				type : 'post',
-				data : 'information_id=' + $('#information_id').val(),
-				success : function(data){
-					var result = eval("("+data+")");
-					if (result.result == 'OK') {
-						//$('.buttons').hide();
-						location.href = "/cancel/listview";
-					} else {
-						alert(result.msg);
-					}
-				}
-			});
-		}
-	});
+    $('.cancel').click(function(){
+        if (confirm("你确定要撤销此信息吗？")) {
+            $.ajax({
+                url : '/informations/ajax_cancel',
+                type : 'post',
+                data : 'information_id=' + $('#information_id').val(),
+                success : function(data){
+                    var result = eval("("+data+")");
+                    if (result.result == 'OK') {
+                        //$('.buttons').hide();
+                        //location.href = "/cancel/listview";
+                        location.href = "/informations/issue/?type=" + $('#info_type').val();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
 });
 {/literal}
 </script>
-<div class="zy_z">	
-		<div class="sjle">
-			<div class="tableDetail">
-<div class="biaotit">{$information.Information.title}</div>
+<div class="zy_z">
+{if $information.Information.type == Configure::read('Information.type.need')}
+<input type="hidden" id="info_type" value="need" />
+{else}
+<input type="hidden" id="info_type" value="has" />
+{/if}
+        <div class="sjle">
+            <div class="tableDetail">
+            <div class="biaotit">{$information.Information.title}</div>
       <table width="100%">
         <tr>
           <th width="25%">所在区域：</th>
@@ -40,7 +46,7 @@ $(document).ready(function(){
         <tr>
           <th>采购产品：</th>
           <td class="red">{$this->Category->getCategoryName({$information.Information.category})}
-									{$this->Category->getCategoryName({$information.Information.sub_category})}
+                                    {$this->Category->getCategoryName({$information.Information.sub_category})}
 </td>
         </tr>
         <tr>
@@ -49,8 +55,8 @@ $(document).ready(function(){
         </tr>               
         <tr>
           <th>信息交易价格：</th>
-          <td>{if $information.Information.payment_type != 2}聚客币：{$information.Information.price}元{/if}
-    			  {if $information.Information.payment_type != 1}积分：{$information.Information.point}分{/if}</td>
+          <td>{if $information.Information.payment_type != 2}业务币：{$information.Information.price}元{/if}
+                  {if $information.Information.payment_type != 1}积分：{$information.Information.point}分{/if}</td>
         </tr> 
         {if $information.Information.type == 0}        
         <tr>
@@ -101,11 +107,13 @@ $(document).ready(function(){
       </table>
       {if !$paid}
       <div class="divBtnContainer" style="width:300px;">
-		<a class="zclan zclan7" href="/informations/edit?id={$information.Information.id}">修改</a>
+        {if $information.Information.status == Configure::read('Information.status_code.active')}
+        <a class="zclan zclan7" href="/informations/edit?id={$information.Information.id}">修改</a>
         <a class="zclan zclan7 cancel" href="javascript:void(0)">撤销</a>
+        {/if}
         <a class="zclan zclan7" href="javascript:void(0)">删除</a>
-		<input type="hidden" id="information_id" value="{$information.Information.id}" />							
-	 </div>{/if}
+        <input type="hidden" id="information_id" value="{$information.Information.id}" />                            
+     </div>{/if}
  </div>
-		</div>
+        </div>
 </div>

@@ -26,11 +26,11 @@
         <td class="tr_td3">
             <a href="/search/infodetail?id={$information.Information.id}">
                 {if $information.Information.payment_type == 1}
-                    聚客币：{$information.Information.price}元
+                    业务币：{$information.Information.price}元
                 {else if $information.Information.payment_type == 2}
                     积分：{$information.Information.point}分
                 {else}
-                    聚客币：{$information.Information.price}元<br/>积分：{$information.Information.point}分
+                    业务币：{$information.Information.price}元<br/>积分：{$information.Information.point}分
                 {/if}
             </a>
         </td>

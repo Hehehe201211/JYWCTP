@@ -31,7 +31,11 @@ $(document).ready(function(){
           <table width="100%" height="100%" border="0">
             <tr>
               <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
-              <td width="66%"><a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>{$author.Member.nickname}</td>
+              <td width="66%">
+              {if !$isFriend}
+                <a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>{$author.Member.nickname}
+              {/if}
+              </td>
             </tr>
             <tr>
               <td>会员等级：{if $author.Member.grade == 1}新手{elseif $author.Member.grade == 2}高级{/if}</td>
@@ -47,7 +51,7 @@ $(document).ready(function(){
             </tr>
             <tr>
               <td>好评率：100%</td>
-            </tr>            
+            </tr>
           </table>
         </div>
         <div class="mebBaseinfoR">

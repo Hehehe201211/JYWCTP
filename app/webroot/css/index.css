@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .content_mid{float:left;width:748px;overflow:hidden;margin-bottom:12px;}
-#banners{margin-bottom:12px;width:748px;overflow:hidden;}
+#banners{margin-bottom:12px;width:748px;overflow:hidden;visibility:hidden;}
 #banners img{width:748px;height:314px;}
 .content_mid .keyuan{margin-bottom:12px;overflow:hidden;}
 .content_mid .keyuan .fl{width:352px;border:1px #FFF solid;background:#FFF;height:211px;overflow:hidden;padding:0 6px;}
@@ -25,7 +25,7 @@
 #passwordL{left:43px;top:48px;*top:51px;}
 .login ul li input.yanzhengma{background-position:0 -39px;width:37px;}
 .login ul li label{line-height:20px;} 
-.login ul li label .inpRadio{margin-right:5px;}
+.login ul li label .inpRadio{margin-right:5px;*vertical-align:middle;*margin-right:0;}
 .zinp{text-align:center;margin-left:18px;}
 .login .liForget{text-align:right;margin-top:-7px;}
 .login .liForget a:hover{text-decoration:underline;color:#333;}

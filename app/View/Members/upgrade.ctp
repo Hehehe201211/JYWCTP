@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$(this).next().remove();
 	});
 	$(".sjle>form>ul>li>input:eq(7)").focus(function(){
-		$(this).after("<div class='prompt'>该支付宝账户用于网站虚拟币提现时，只能转到该支付宝账号，请准确填写。</div>");
+		$(this).after("<div class='prompt'>该支付宝账户用于网站业务币提现时，只能转到该支付宝账号，请准确填写。</div>");
 	});
 	$(".sjle>form>ul>li>input:eq(7)").blur(function(){
 		$(this).next().remove();
@@ -253,7 +253,7 @@ $(document).ready(function(){
           <li>
             <label class="protocol" for="vehicle">
               <input type="checkbox" id="vehicle" name="vehicle" class="inpCheckbox">
-              我接受 <a href="#">《聚业务服务协议（试行）》</a>
+              我接受 <a href="/static?tpl=mianze">《聚业务服务协议（试行）》</a>
             </label>
           </li>
           <li><a href="javascript:void(0)" class="zclan zclan4">提交</a></li>

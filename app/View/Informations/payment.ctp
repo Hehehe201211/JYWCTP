@@ -158,11 +158,11 @@ $(document).ready(function(){
         <tr>
           <th>信息交易价格：</th>
           <td>{if $information.Information.payment_type == 1}
-				聚客币：{$information.Information.price}元
+				业务币：{$information.Information.price}元
 			{else if $information.Information.payment_type == 2}
 				积分：{$information.Information.point}分
 			{else}
-				聚客币：{$information.Information.price}元；积分：{$information.Information.point}分
+				业务币：{$information.Information.price}元；积分：{$information.Information.point}分
 			{/if}
 </td>
         </tr>     
@@ -209,7 +209,7 @@ $(document).ready(function(){
   <div  class="djbuzTit"><span class="fk_tit">支付确认</span><a id="closeKuang" title="关闭" href="javascript:void(0)"></a></div>
   <table class="payTable">
   <tr>
-    <th colspan="3"><span>{$memberInfo.Member.nickname}</span> 聚客币余额：<span>{$memberInfo.Attribute.virtual_coin}</span>元 &nbsp;&nbsp;积分：<span>{$memberInfo.Attribute.point}</span>分</th>
+    <th colspan="3"><span>{$memberInfo.Member.nickname}</span> 业务币余额：<span>{$memberInfo.Attribute.virtual_coin}</span>元 &nbsp;&nbsp;积分：<span>{$memberInfo.Attribute.point}</span>分</th>
     </tr>
   <tr>
     <td class="payTableTil">信息标题：</td>
@@ -221,7 +221,7 @@ $(document).ready(function(){
     {if $information.Information.payment_type == 1}
 	    <td width="147">
 		    <input type="radio" name="pay_method" id="zffsJKB" checked="checked" value="coin"/>
-		    <label for="zffsJKB">聚客币支付：
+		    <label for="zffsJKB">业务币支付：
 		    	<span>{$information.Information.price}</span>元
 		    </label>
 		    <input name="virtual_coin" value="{$information.Information.price}" type="hidden" />
@@ -239,7 +239,7 @@ $(document).ready(function(){
     {else}
     	<td width="147">
 		    <input type="radio" name="pay_method" id="zffsJKB" checked="checked" value="coin"/>
-		    <label for="zffsJKB">聚客币支付：
+		    <label for="zffsJKB">业务币支付：
 		    	<span>{$information.Information.price}</span>元
 		    </label>
 		    <input name="virtual_coin" value="{$information.Information.price}" type="hidden" />

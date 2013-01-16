@@ -151,11 +151,11 @@ $(document).ready(function(){
             <th>信息交易价格：</th>
             <td>
                 {if $information.Information.payment_type == 1}
-                    聚客币：{$information.Information.price}元
+                    业务币：{$information.Information.price}元
                 {else if $information.Information.payment_type == 2}
                     积分：{$information.Information.point}分
                 {else}
-                    聚客币：{$information.Information.price}元；积分：{$information.Information.point}分
+                    业务币：{$information.Information.price}元；积分：{$information.Information.point}分
                 {/if}
             </td>
           </tr>  

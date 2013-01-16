@@ -2,7 +2,7 @@
   <div  class="djbuzTit"><span class="fk_tit">支付确认</span><a id="closeKuang" title="关闭" href="#"></a></div>
   <table class="payTable">
   <tr>
-    <th colspan="3">xxx5202012，聚客币余额：1000元，积分：1000分</th>
+    <th colspan="3">xxx5202012，业务币余额：1000元，积分：1000分</th>
     </tr>
   <tr>
     <td width="125" class="payTableTil">信息标题：</td>
@@ -10,7 +10,7 @@
     </tr>
   <tr>
     <td class="payTableTil">支付方式：</td>
-    <td width="147"><input type="radio" name="zffs" id="zffsJKB" checked="checked"/><label for="zffsJKB">聚客币支付：<span>100</span>元</label></td>
+    <td width="147"><input type="radio" name="zffs" id="zffsJKB" checked="checked"/><label for="zffsJKB">业务币支付：<span>100</span>元</label></td>
     <td width="212"><input type="radio" name="zffs" id="zffsJF" /><label for="zffsJF">积分支付：<span>100</span>分</label></td>
   </tr>
   <tr>

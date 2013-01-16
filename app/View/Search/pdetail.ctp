@@ -33,7 +33,7 @@
                         <td>
                         {$citys = explode(',', $parttime.PartTime.area)}
                         {foreach $citys as $city_id}
-                        {$this->City->cityName($city_id)}<br/>
+                        {$this->City->cityName($city_id)}&nbsp;
                         {/foreach}
                         </td>
                     </tr>

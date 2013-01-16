@@ -16,7 +16,7 @@ class MembersController extends AppController
         'PartTime',
         'Cooperation'
     );
-    var $components = array('ImageCheck', 'Unit');
+    var $components = array('ImageCheck', 'Unit', 'Upload', 'Thumbnail');
     var $helpers = array('City', 'Category');
     public function index()
     {
@@ -241,14 +241,48 @@ class MembersController extends AppController
     
     public function upgradecheck()
     {
+        $thumbnail = '';
+        if (isset($_FILES['face'])) {
+            $filename = $this->_memberInfo['Member']['id'] . '_face_thumbnail';
+            $path = TMP;
+            $result = $this->Upload->upload($_FILES['face'], $path, $filename, "image");
+            if ($result['result'] == 'OK') {
+                $path = "thumbnail/" . 
+                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+                if (!file_exists($path)) {
+                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                    try {
+                        exec($command);
+                    } catch (Exception $e) {
+                        $this->log($e->getMessage());
+                    }
+                }
+                $srcParams = array(
+                    'path' => $result['path'],
+                    'name' => $result['name']
+                );
+                $descParams = array(
+                    'imagepath' => Configure::read('Data.path') . $path,
+                    'imagename'      => "face_thumbnail",
+                    'outx'      => 112,
+                    'outy'      => 124
+                );
+                if ($this->Thumbnail->resize($srcParams, $descParams)){
+                    $thumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
+                    @unlink($result['path'] . '/' . $result['name']);
+                }
+            }
+        }
+        $this->set('thumbnail', $thumbnail);
         if (isset($this->request->data['type']) && isset($this->request->data['type']) == 1) {
             $this->render('upgradecheck-company');
         }
     }
     public function upgradecomplete()
     {
+        $error = false;
         $member_id = $this->_memberInfo['Member']['id'];
-//        var_dump($this->request->data);
         if (isset($this->request->data['type']) && isset($this->request->data['type']) == 1) {
 	        if ($this->CompanyAttribute->find('count', array('conditions' => array('members_id' => $member_id))) > 0) {
 	            $this->redirect('/members');
@@ -275,12 +309,13 @@ class MembersController extends AppController
                 'category_id'   => $this->request->data['category_id'],
                 'service'       => implode(",", $this->request->data['service']),
                 'business_scope'=> $this->request->data['business_scope'],
-//                'license'       => $this->request->data['license']
+                'license'       => $this->request->data['license']
             );
             if ($this->Member->upgradeCompany($data)) {
-                $message = "您成功升级到高级会员！";
+                $message = "您成功升级到高级会员！请等待聚业务平台工作人员的审核。你可以发布相关资料！";
             } else {
                 $message = "由于系统原因会员升级失败，请你稍候再试！";
+                $error = true;
             }
             $this->set('message', $message);
             $type = 1;
@@ -300,7 +335,9 @@ class MembersController extends AppController
                 'pay_account'    => $this->request->data['pay_account'],
                 'pay_password'    => md5($this->request->data['pay_password']),
                 'last_login'    => date('Y-m-d H:i:s', time()),
-                'service'        => implode(',', $this->request->data['service'])
+                'point'         => Configure::read('Register.point'),
+                'service'        => implode(',', $this->request->data['service']),
+                'thumbnail'     => $this->request->data['thumbnail']
             );
             if (isset($this->request->data['birthday'])) {
                 $data['birthday'] = $this->request->data['birthday'];
@@ -318,6 +355,7 @@ class MembersController extends AppController
                 $message = "您成功升级到高级会员，现在可以免费发布信息或寻找兼职！";
             } else {
                 $message = "由于系统原因会员升级失败，请你稍候再试！";
+                $error = true;
             }
             $this->set('message', $message);
             $type = 0;
@@ -327,7 +365,8 @@ class MembersController extends AppController
            $this->Session->write("memberInfo", $memberInfo);
         }
         $this->set('memberInfo', $memberInfo);
-//        var_dump($memberInfo);
+        $this->set('type', $type);
+        $this->set('error', $error);
     }
     
     public function upgreadfinish()

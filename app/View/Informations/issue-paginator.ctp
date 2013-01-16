@@ -2,13 +2,10 @@
 {assign var=options value=['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-<div class="tableSort" style="clear: both;">
-      <input type="checkbox" {if in_array(Configure::read('Information.status_code.active'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.active')}" name="status[]" class="inpRadio status">
-      <label for="position">未交易</label>
-      <input type="checkbox" {if in_array(Configure::read('Information.status_code.overtime'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="inpRadio status">
-      <label for="time">已过期</label>
-      <input type="checkbox" {if in_array(Configure::read('Information.status_code.cancel'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="inpRadio status">
-      <label for="company">已撤销</label>
+<div class="tableSort" style="clear: both;">      
+      <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.active'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.active')}" name="status[]" class="inpRadio status">未交易</label>      
+      <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.overtime'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="inpRadio status">已过期</label>      
+      <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.cancel'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="inpRadio status">已撤销</label>
 </div>
 {if $paginatorParams['count'] > 0}
     <table width="100%" cellspacing="0" cellpadding="0" border="0"
@@ -31,11 +28,11 @@
                     </td>
                     <td class="tr_td2">
                         {if $info.Information.payment_type == 1}
-                                聚客币：{$info.Information.price}元
+                                业务币：{$info.Information.price}元
                             {else if $info.Information.payment_type == 2}
                                 积分：{$info.Information.point}分
                             {else}
-                                聚客币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
+                                业务币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
                         {/if}
                     </td>
                     <td class="tr_td7">
@@ -52,8 +49,7 @@
                         {$status[{$info.Information.status} - 1]}
                     </td>
                     <td class="tr_td5">{$info.Information.clicked}</td>
-                    <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
-                   
+                    <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>                   
                 </tr>
             {/foreach}
     </table>

@@ -41,11 +41,11 @@
             <th class="tdRight">信息交易价格：</th>
             <td class="tdLeft" colspan="3">
             {if $information.Information.payment_type == 1}
-				聚客币：{$information.Information.price}元
+				业务币：{$information.Information.price}元
 			{else if $information.Information.payment_type == 2}
 				积分：{$information.Information.point}分
 			{else}
-				聚客币：{$information.Information.price}元；积分：{$information.Information.point}分
+				业务币：{$information.Information.price}元；积分：{$information.Information.point}分
 			{/if}
             </td>
           </tr>

@@ -15,7 +15,8 @@ class InformationsController extends AppController
         'Member',
         'Payment',
         'Appraisal',
-        'PartTime'
+        'PartTime',
+        'Friendship'
     );
     var $helpers = array('Js', 'City', 'Category');
     var $components = array('RequestHandler', 'Info', 'Unit');
@@ -152,6 +153,9 @@ class InformationsController extends AppController
         if (isset($this->request->data['pay_point'])) {
             $data['point'] = $this->request->data['point'];
             $data['payment_type'] += 2;
+        }
+        if (isset($this->request->data['id']) && !empty($this->request->data['id'])) {
+            $data['id'] = $this->request->data['id'];
         }
         if ($this->request->data['type'] == 0) {
             $target_members_id = isset($this->request->data['target_member']) ? $this->request->data['target_member'] : null;
@@ -302,8 +306,11 @@ class InformationsController extends AppController
             'conditions' => array('id' => $id)
         );
         $information = $this->Information->find('first', $params);
+        //是否朋友关系
+        $isFriend = $this->Friendship->find('count', array('members_id' => $this->_memberInfo['Member']['id'], 'friend_members_id' => $information['Information']['members_id']));
+        $isFriend = $isFriend > 0 ? true : false;
         
-        //history
+        //是否购买过
         $paid = false;
         $params = array(
             'conditions' => array('information_id' => $id, 'members_id'     => $this->_memberInfo['Member']['id'])
@@ -314,7 +321,7 @@ class InformationsController extends AppController
             $paid = true;
             
             
-            //zhan nei xin
+            //站内信
             $params = array(
                  'fields' => array('id', 'content', 'created'),
                  'conditions' => array('information_id' => $id),
@@ -326,7 +333,7 @@ class InformationsController extends AppController
         );
         $attributes = $this->InformationAttribute->find('all', $params);
         
-        //fa bu zhe
+        //发布者信息
         $this->Info->baseMemberInfo($information['Information']['members_id']);
         $this->set('type', 'need');
         
@@ -335,6 +342,7 @@ class InformationsController extends AppController
         $this->set('information', $information);
         $this->set('comments', $comments);
         $this->set('paid', $paid);
+        $this->set('isFriend', $isFriend);
     }
     
     public function ajax_payment()
@@ -1138,7 +1146,7 @@ class InformationsController extends AppController
             }
         }
         
-        if (isset($this->request->data['price'])) {
+        if (isset($this->request->data['price']) && !empty($this->request->data['price'])) {
             list($min, $max) = explode('-', $this->request->data['price']);
             $min = trim($min);
             $max = trim($max);

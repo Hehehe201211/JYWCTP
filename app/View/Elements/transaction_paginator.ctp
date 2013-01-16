@@ -2,11 +2,9 @@
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
 {if $paginatorParams['count'] > 0 || $isAjax}
-<div class="tableSort" style="clear: both;">
-      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complete'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.complete')}" name="status[]" class="inpRadio status">
-      <label for="position">交易完成</label>
-      <input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal_invalid'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal_invalid')}" name="status[]" class="inpRadio status">
-      <label for="time">无效的</label>
+<div class="tableSort" style="clear: both;">      
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complete'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.complete')}" name="status[]" class="inpRadio status">交易完成</label>      
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal_invalid'), $status)} checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal_invalid')}" name="status[]" class="inpRadio status">无效的</label>
 </div>
 {/if}
 {if $paginatorParams['count'] > 0}
@@ -28,7 +26,7 @@
 	                  <td><a href="/{$this->request->params['controller']}/detail/{$type}:{$info.PaymentTransaction.information_id}/mid:{$info.Member.id}" target="_blank">{$info.Information.title}</a></td>
 	                  <td>
     	                  {if $info.PaymentTransaction.payment_type == 1}
-                                聚客币：{$info.PaymentTransaction.number}元
+                                业务币：{$info.PaymentTransaction.number}元
                             {else if $info.PaymentTransaction.payment_type == 2}
                                 积分：{$info.PaymentTransaction.number}分
                         {/if}

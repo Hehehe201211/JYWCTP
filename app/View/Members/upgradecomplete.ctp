@@ -7,6 +7,16 @@
         <li>2.信息确认</li>
         <li>3.升级成功</li>
       </ul>
-      <p class="gongxi">您成功升级到高级会员，现在可以免费发布信息或寻找兼职！</p>
-      <p class="gongxiLink"><a href="/informations/create/need">发布业务&gt;&gt;</a><a href="/informations/create/has">发布需求&gt;&gt;</a><a href="new-wyjz.html">搜索兼职&gt;&gt;</a></p>
+      <p class="{if $error}failure {/if}gongxi">{$message}</p>
+      <p class="gongxiLink">
+      {if $type == 0}
+          <a href="/informations/create/need">发布业务&gt;&gt;</a>
+          <a href="/informations/create/has">发布需求&gt;&gt;</a>
+          <a href="/parttimes/listview?type=need">搜索兼职&gt;&gt;</a>
+      {else}
+          <a href="/services/home">完善公司主页&gt;&gt;</a>
+          <a href="/parttimes/create">发布兼职&gt;&gt;</a>
+          <a href="/fulltimes/create">发布招聘&gt;&gt;</a>
+      {/if}
+      </p>
     </div>

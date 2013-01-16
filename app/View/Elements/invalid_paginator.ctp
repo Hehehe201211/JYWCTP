@@ -20,7 +20,7 @@
 	                  <td><a href="javascript:void(0)">{$info.Information.title}</a></td>
 	                  <td>
     	                  {if $info.PaymentTransaction.payment_type == 1}
-                                聚客币：{$info.PaymentTransaction.number}元
+                                业务币：{$info.PaymentTransaction.number}元
                             {else if $info.PaymentTransaction.payment_type == 2}
                                 积分：{$info.PaymentTransaction.number}分
                         {/if}

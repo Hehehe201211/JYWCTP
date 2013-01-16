@@ -210,9 +210,10 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zy_z .primebInfo a{display:block;margin:3px auto;background:url(../img/hot007.gif) RIGHT top no-repeat;padding:14px 0 0;width:85px;font-size:14px;font-weight:bold;color:#F40;text-decoration:underline;}
 .zy_z .primebInfo a:hover{color:#F00;}
 .zy_z .primebInfo h3{font:bold 14px "宋体";color:#06E;}
-#informationList .tip a{margin-left:8px;color:#F50;}
-#informationList .tip a:after{content:">>"}
-#informationList .tip a:hover{color:#F00;}
+.zy_z .tip{width:605px;clear:both;}
+.zy_z .tip a{margin-left:8px;color:#F50;}
+.zy_z .tip a:after{content:">>"}
+.zy_z .tip a:hover{color:#F00;}
 
 .mebBaseinfo{border:1px solid #FFF;margin-bottom:12px;overflow:hidden;padding:12px 5px 8px;}
 .mebBaseinfo a{color:#F60;margin:0 3px;}
@@ -254,7 +255,6 @@ a.btnSearch:hover{background-position:0 -122px;}
 .divForm dd span{float:left;margin-right:8px;}
 .divForm dd select{width:100px;padding:2px 0;float:left;margin-right:8px;}
 .divForm dd textarea{height:100px;resize:vertical;width:332px;margin-right:8px;}
-.divForm dd .errorMsg{position:absolute;z-index:1;color:#F00;}
 .divForm dd .inpButton{margin-right:5px;}
 .divForm dd .inpCheckbox{vertical-align:text-bottom;*vertical-align:middle;}
 .divForm dd .inpTextBox{float:left;padding:3px 5px;width:218px;margin-right:8px;}
@@ -312,10 +312,8 @@ a.btnSearch:hover{background-position:0 -122px;}
 .txtTousu a{color:#F60;text-decoration:underline;padding:0 30px 0 6px;background:url(../img/sprites_jianli.gif) right -78px no-repeat;}
 .txtTousu .open{background-position:right -65px;}
 .tableSort{margin-bottom:3px;}
-.tableSort label{float:left;margin-right:8px;}
 .tableSort .inpButton{padding:0 3px\9;*padding:2px 2px 0;}
-.tableSort .inpRadio,.tableSort .inpCheckbox{margin:4px 3px 0 0;float:left;*margin-top:0;}
-.tableSort .inpRadio{*margin-top:0;}
+.tableSort .inpRadio,.tableSort .inpCheckbox{margin: 0 4px;vertical-align:text-bottom;*vertical-align:middle;}
 .tableSort select{height:18px;*height:20px;}
 
 .gongxi{background:url(../img/okBlue.gif) 0 0 no-repeat;font-size:17px;color:#2196FF;margin:20px 34px;padding-left:30px;font-weight:bold;height:24px;}
@@ -342,6 +340,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .xq_zl_xbxq table .portrait{border:1px #333 solid;width:115px;}
 
 .tableDetail{padding:0 12px;}
+.tableDetail table{margin-bottom:12px;}
 .tableDetail th{text-align:right;padding-right:8px;}
 .tableDetail td{line-height:24px;}
 .tableDetail .red{color:#F30;}
@@ -434,12 +433,10 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl .productKinds select{width:150px;margin-right:15px;}
 .sjle dl .select100 select{width:100px;margin-right:15px;}
 .sjle dl .productKinds input{width:90px;float:none;display:none;}
-.sjle dl dt .errorMsg{font-weight:normal;margin:0 8px;position:absolute;z-index:1;color:#F00;}
 .sjle dl dt ul li .errorMsg{right:28px;line-height:24px;top:0\9;}
 .sjle dl dt input.inpCheckbox{width:auto;}
 .sjle dl dt .products li label{text-align:left;font-weight:bold}
 .sjle dl dt .qyzlDoc li label{width:160px;}
-.sjle ul li .errorMsg{font-weight:normal;color:#F00;}
 
 .sjle dl dt .divSex label,.sjle ul li .divSex label{width:80px;text-align:left;}
 .sjle dl dt .divSex .inpRadio,.sjle ul li .divSex .inpRadio{margin:3px 3px 0;width:auto;}
@@ -586,11 +583,11 @@ a.btnSearch:hover{background-position:0 -122px;}
 .shur select{ float:left; width:150px; display:block;overflow:hidden;}
 .shur textarea{ width:440px;height:109px;display:block;float:left; overflow:hidden;resize:vertical;}
 
-.znx dl dt {margin: 10px 0;}
-.znx dl dt label{text-align:right;width:75px;}
-.znx dl dd label{float:left;}
+.znx dl dd{margin: 10px 0;}
+.znx dl dd label{float:left;width:48px;text-align:right;}
+.znx dl dd .inpTextBox{padding:3px 2px;width:450px;}
 .znx dl dt select {width: 100px;}
-.znx #textarea{resize:vertical;width:510px;height:84px;}
+.znx textarea{resize:vertical;width:450px;height:84px;padding:2px;}
 
 .znxTitle{height:29px;border-bottom:1px #ccc solid;}
 .znxTitle li{float:left;width:100px;height:28px;line-height:28px;margin:0 8px 0 6px;text-align:center;border:1px #ccc solid;border-bottom:0 none;position:relative;}
@@ -768,12 +765,11 @@ a.btnSearch:hover{background-position:0 -122px;}
 .friSortGroup{padding:1px 0;margin-right:3px;}
 .sort a{text-decoration:underline;}
 
-#goumaikuang{position:absolute;z-index:100;}
-#djbuz{background:#FFF;overflow:hidden;padding-bottom:8px;}
+#djbuz{background:#FFF;}
 .divDjbuz{position:absolute;z-index:99;display:none;background:#FFF;overflow:hidden;padding-bottom:8px;}
 .djbuzTit{height:33px;}
 .biaot{width:287px; background:url(../img/xc_tit.jpg) no-repeat; font-size:14px; font-weight:bold; height:33px; line-height:33px; display:block; float:left; color:#FFF; text-indent:8px;}
-.biaot_wz{margin:10px auto;text-align:center;}
+.biaot_wz{margin:10px 16px;}
 .biaot_wz strong{color:#F60;}
 .biaot_wzL{text-indent:20px;text-align:left;}
 .biaot_wzL .code .inpTextBox{padding:2px;width:30px;}

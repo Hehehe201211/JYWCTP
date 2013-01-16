@@ -24,8 +24,8 @@
           <li class="cor">
           <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="/informations/issue/?type=has" target="_blank">我有客源</a>
-                 <a href="/informations/issue/?type=need" target="_blank">我要客源</a>
+	             <a href="/informations/search/need" target="_blank">我有客源</a>
+                 <a href="/informations/search/has" target="_blank">我要客源</a>
                  <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
                  <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
@@ -43,8 +43,8 @@
           <li class="cor">
           <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="/informations/issue/?type=has" target="_blank">我有客源</a>
-                 <a href="/informations/issue/?type=need" target="_blank">我要客源</a>
+	             <a href="/informations/search/need" target="_blank">我有客源</a>
+                 <a href="/informations/search/has" target="_blank">我要客源</a>
                  <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
                  <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>

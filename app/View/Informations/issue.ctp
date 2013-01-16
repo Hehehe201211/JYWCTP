@@ -29,9 +29,9 @@ $(document).ready(function(){
         {$paginatorParams = $this->Paginator->params()}
         {if $paginatorParams['count'] > 0}
             <div class="tableSort" style="clear: both;">                  
-                  <label><input type="checkbox" checked="checked" value="{Configure::read('Information.status_code.active')}" name="status[]" class="inpRadio status">未交易</label>                  
-                  <label><input type="checkbox" value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="inpRadio status">已过期</label>                  
-                  <label><input type="checkbox" value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="inpRadio status">已撤销</label>
+                  <label><input type="checkbox" checked="checked" value="{Configure::read('Information.status_code.active')}" name="status[]" class="status">未交易</label>                  
+                  <label><input type="checkbox" value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="status">已过期</label>                  
+                  <label><input type="checkbox" value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="status">已撤销</label>
             </div>
             <table width="100%" cellspacing="0" cellpadding="0" border="0"
                 class="con_2_table">
@@ -53,11 +53,11 @@ $(document).ready(function(){
                             </td>
                             <td class="tr_td2">
                                 {if $info.Information.payment_type == 1}
-                                        聚客币：{$info.Information.price}元
+                                        业务币：{$info.Information.price}元
                                     {else if $info.Information.payment_type == 2}
                                         积分：{$info.Information.point}分
                                     {else}
-                                        聚客币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
+                                        业务币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
                                 {/if}
                             </td>
                             <td class="tr_td7">

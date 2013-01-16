@@ -79,7 +79,7 @@ $(document).ready(function(){
         <tr>
           <th>信息交易价格：</th>
           <td>{if $history.PaymentHistory.payment_type == 1}
-					聚客币：{$history.PaymentHistory.number/(1-Configure::read('Information.payment_platform'))}元
+					业务币：{$history.PaymentHistory.number/(1-Configure::read('Information.payment_platform'))}元
 				{else if $history.PaymentHistory.payment_type == 2}
 					积分：{$history.PaymentHistory.number/(1-Configure::read('Information.payment_platform'))}分
 				{/if}</td>

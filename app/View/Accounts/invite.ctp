@@ -55,7 +55,7 @@ $(document).ready(function(){
         <p><a href="javascript:void(0)">我的聚业务</a>&gt;&gt;<a href="javascript:void(0)">账号管理</a>&gt;&gt;<a href="javascript:void(0)">好友邀请</a></p>        
         <!--<div class="zy_zszl"></div>-->
     </div>    
-    <div class="biaotit"><a class="blue" href="hygl.html">查看已邀请的好友</a>邀请好友</div>
+    <div class="biaotit"><a class="blue" href="/accounts/friend">查看已邀请的好友</a>邀请好友</div>
     <div class="friInvite">
         <h3>方式一：便捷的方式，复制链接邀请QQ/MSN好友，第一时间得到响应</h3>
         <div class="con">
@@ -85,7 +85,15 @@ $(document).ready(function(){
                     <td colspan="3"><font color="#000000">邀请信：</font></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><textarea class="textarea" name="content">推荐一个不错的网站：举贤网 http://jukeyuan.com，举贤网是获得奖金概率最高的人才推荐平台！在举贤网，您可以通过为朋友推荐职位机会，在帮助他人同时，拓展自己的人脉资源，还可获得丰厚的推荐奖金。抓紧行动吧！</textarea></td>
+                    <td colspan="3">
+                    <textarea class="textarea" name="content">
+HI，我最近在聚业务（www.juyewu.com）这个网站上找到了不少客户，也参与了一些兼职工作，信息有效性高，兼职企业有认证，很不错的业务平台哦，现在注册还可以赠送50个积分。
+免费会员注册链接:
+{$sns_link}
+免费升级成功后，您也可以推荐好友参加，也有积分赠送哦。
+                    
+                    </textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="3"><a class="fl inp linkInvite" href="javascript:void(0);">邀请好友</a></td>

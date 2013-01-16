@@ -68,7 +68,14 @@ $(document).ready(function(){
           </tr>
           <tr>
             <td class="tdRight">营业执照：</td>
-            <td colspan="3" class="tdLeft"><img src="{$this->webroot}img/tx.jpg"></td>
+            <td class="tdLeft" colspan="3">
+                {if !empty($thumbnail)}
+                <img src="{$this->webroot}{$thumbnail}">
+                {else}
+                <img src="{$this->webroot}img/tx.jpg">
+                {/if}
+            </td>
+            <input type="hidden" name="license" value="{$thumbnail}" />
           </tr>
           {foreach $this->data['contact_method'] as $key => $value}
           <tr>

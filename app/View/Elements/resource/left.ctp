@@ -1,7 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-	//登陆验证吗
+	//登陆验证码
 	$('#getCheckNum').prepend('<img id="code" src="/members/image">');
     $('#getCheckNum').click(function(){
         var src = '/members/image/' + Math.random();
@@ -35,10 +35,8 @@ $(document).ready(function(){
             e.preventDefault();
             $('#loginWarning .question').html(msg);
             $("#loginWarning").fadeIn("fast");
-            var t=setTimeout("hideWarning()",10000);
-            
-        }
-        
+            var t=setTimeout("hideWarning()",10000);            
+        }        
         if(!error) {
              params = "nickname=" + nickname + "&password=" + password + "&checkNum=" + checkNum + "&type=" + type;
              $.ajax({
@@ -62,10 +60,11 @@ $(document).ready(function(){
                 }
              });
          }
-    });
-    
-    $('#search').click(function(){
-    	var params = "";
+    });    
+});
+function searchRe(event){
+	if (event.keyCode==13) {
+		var params = "";
     	if ($('#typeSel').val() != "") {
     		params = '?type=' + $('#typeSel').val();
     	}
@@ -77,8 +76,8 @@ $(document).ready(function(){
     		}
     	}
     	window.location.href = '/resources/search' + params
-    });
-});
+	}
+}
 {/literal}
 </script>
 <div class="sbResource">
@@ -113,7 +112,7 @@ $(document).ready(function(){
         </form>
       </div>
     <div class="shortcut">
-      <h3>快速通道</h3>
+      <h3>快速通道</h3>      
       <div>
       	<select id="typeSel" name="type">
       		  <option value="">选择分类</option>
@@ -124,8 +123,7 @@ $(document).ready(function(){
 		      <option value="5">总结计划</option>
 		      <option value="6">案例分析</option>
 	      </select>
-	      <input type="text" id="key_word" class="inpTextBox" name="key_word" />
-	      <input type="button" class="inpButton" id="search" value="搜索"/>
+	      <input type="text" id="key_word" class="inpTextBox" name="key_word" value="敲击enter键进行搜索" placeholder="敲击enter键进行搜索" onclick="this.select()" onkeypress="searchRe(event)"/>	      
       </div>
       <ul>
         <li><a href="/resources/search?type=1" target="_blank">入门成长</a></li>

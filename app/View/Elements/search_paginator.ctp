@@ -27,11 +27,11 @@
                 <td class="tr_td2">
 	                <a href="javascript:void(0)" >
 	                {if $info.Information.payment_type == 1}
-						聚客币：{$info.Information.price}元
+						业务币：{$info.Information.price}元
 					{else if $info.Information.payment_type == 2}
 						积分：{$info.Information.point}分
 					{else}
-						聚客币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
+						业务币：{$info.Information.price}元<br/>积分：{$info.Information.point}分
 					{/if}
 	                </a>
                 </td>

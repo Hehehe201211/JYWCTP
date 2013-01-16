@@ -26,10 +26,10 @@
 	          </td>
 	          <td class="tr_td2">
 		          <a target="_blank" href="{if $information.Information.status == Configure::read('Information.status_flg.cancel')}/informations/canceldetail/{$information.Information.id}{else}/informations/detail/{$information.Information.id}{/if}" >
-			          {if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元
+			          {if $information.Information.payment_type == 1}业务币：{$information.Information.price}元
 			          {else if $information.Information.payment_type == 2}积分：{$information.Information.point}点
 			          {else}
-			          	聚客币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
+			          	业务币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
 			          {/if}
 		          </a>
 	          </td>
@@ -71,10 +71,10 @@
 			          </td>
 			          <td class="tr_td2">
 				          <a target="_blank" href="/informations/payment/{$information.Information.id}" >
-					          {if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元
+					          {if $information.Information.payment_type == 1}业务币：{$information.Information.price}元
 					          {else if $information.Information.payment_type == 2}积分：{$information.Information.point}点
 					          {else}
-					          	聚客币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
+					          	业务币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
 					          {/if}
 				          </a>
 			          </td>
@@ -117,10 +117,10 @@
 			          </td>
 			          <td class="tr_td2">
 				          <a target="_blank" href="/informations/detail/{$information.Information.id}" >
-					          {if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元
+					          {if $information.Information.payment_type == 1}业务币：{$information.Information.price}元
 					          {else if $information.Information.payment_type == 2}积分：{$information.Information.point}点
 					          {else}
-					          	聚客币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
+					          	业务币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
 					          {/if}
 				          </a>
 			          </td>
@@ -163,10 +163,10 @@
 			          </td>
 			          <td class="tr_td2">
 				          <a target="_blank" href="/informations/create/{if $information.Information.type == 0}has{else}need{/if}/{$information.Information.id}" >
-					          {if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元
+					          {if $information.Information.payment_type == 1}业务币：{$information.Information.price}元
 					          {else if $information.Information.payment_type == 2}积分：{$information.Information.point}点
 					          {else}
-					          	聚客币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
+					          	业务币：{$information.Information.price}元<br/>积分：{$information.Information.point}点
 					          {/if}
 				          </a>
 			          </td>

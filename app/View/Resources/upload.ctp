@@ -1,6 +1,12 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+	$(".corFU .btnUpload").click(function(){
+		$(".titleFU .btnUpload").click();
+	});
+	$('.corFU .btnCommit').live('click', function(){		
+       if (!errorV()) $('#documentForm').submit();
+    })
     $(".corFU .divCorFU .deleFile").live("click",function(){
         if(confirm("确定删除该文档？")) $(this).parents(".corFU .divCorFU").slideUp("fast",function(){
             $(this).parents(".corFU .divCorFU").remove();
@@ -16,11 +22,10 @@ $(document).ready(function(){
         
     }); 
     $(".titleFU .btnUpload").click(function(){
-        $(" .fileUpload .corFU").append($(".corFU .divCorFU").eq(0).clone());
-        $(".corFU .divCorFU").last().show();
-        $("html,body").animate({scrollTop:$(".corFU .divCorFU").last().offset().top},"normal");
-    });
-    
+		$(" .corFU .divCorFU:last").after($(".fileUpload > .divCorFU").clone());
+		$(".corFU .divCorFU").last().show();
+		$("html,body").animate({scrollTop:$(".corFU .divCorFU").last().offset().top},"normal");
+	});    
     $('.btnInfo').live('click', function(){        
 		var errorMsg = '<span class="errorMsg">请输入此项目</span>';		
 		var error=0;
@@ -99,7 +104,7 @@ $(document).ready(function(){
             <div>
               <input type="text" name="keyword[]" class="keyword"/>
             </div>
-            <a href="javascript:;" class="btnInfo">提交信息</a> </div>
+            </div>
         </div>
       <form method="post" action="/resources/finish" id="documentForm" enctype="multipart/form-data">
       <div class="corFU">
@@ -142,11 +147,12 @@ $(document).ready(function(){
             <div>
                 <input type="text" name="keyword[]" class="keyword"/>
             </div>
-            <a href="javascript:void(0);" class="btnInfo">提交信息</a> </div>
+            </div>
         </div>
+        <div class="divBtnContainer" style="width:236px"><a href="javascript:;" class="fr btnCommit">完成上传</a><a href="javascript:;" class="fr btnUpload">添加文档</a></div>
       </div>
-    </div>
     </form>
+</div>
     <div class="uploadNotice">
       <dl class="mb10">
         <dt>上传须知</dt>

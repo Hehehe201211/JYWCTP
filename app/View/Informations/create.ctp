@@ -198,26 +198,7 @@ $(document).ready(function(){
 		} else {
 			$('#profit').parent().find('.errorMsg').remove();
 		}
-		$('#finished').parent().find('.errorMsg').remove();
-		if ($('#finished').val() != "") {
-	      var finished_str = $('#finished').val().replace('\/', '-');
-	      var finished = new Date(finished_str.split('-')[0], (parseInt(finished_str.split('-')[1]) - 1), finished_str.split('-')[2]);
-          var result = finished.getFullYear() + '-';
-             if (finished.getMonth() + 1 < 10) {
-                result += "0" + (finished.getMonth() + 1) + '-'
-            } else {
-                 result += (finished.getMonth() + 1) + '-'
-            }
-            if (finished.getDate() < 10) {
-                 result += "0" + finished.getDate();
-            } else {
-                 result += finished.getDate();
-            }
-             if (result != finished_str) {
-                 $('#finished_str').parent().append(dateEMsg);
-                 error=1;
-             }
-		}
+		
 		return error;
 	}
 	
@@ -395,7 +376,7 @@ $(document).ready(function(){
                 <ul class="payType">
                 {if !empty($target) && isset($targetInfo) && ($targetInfo.Information.payment_type == 1 || $targetInfo.Information.payment_type == 3)}
                 	<li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" checked="checked" />
+                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />
                     <label for="xianjinzhifu">现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{$targetInfo.Information.price}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>

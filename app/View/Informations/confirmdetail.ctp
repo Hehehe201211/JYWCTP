@@ -115,7 +115,7 @@ $(document).ready(function(){
         <tr>
           <th>信息交易价格：</th>
           <td>{if $paymentTransaction.PaymentTransaction.payment_type == 1}
-			聚客币：{$paymentTransaction.PaymentTransaction.number}元 
+			业务币：{$paymentTransaction.PaymentTransaction.number}元 
 			{else $paymentTransaction.PaymentTransaction.payment_type == 2}
 			积分：{$paymentTransaction.PaymentTransaction.number}分 
 			{/if}</td>

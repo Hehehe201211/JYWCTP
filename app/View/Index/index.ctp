@@ -171,9 +171,9 @@ $(document).ready(function(){
         <div class="ulLists">        
           <ul class="lists">
           {foreach $needTaskList as $information}
-            <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元{/if}
+            <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
 	          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
-	          	{if $information.Information.payment_type == 3}聚客币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
+	          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
 	          	{$city = $this->City->cityName({$information.Information.city})}
 	          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}</p></a></li>          	
           {/foreach}
@@ -185,9 +185,9 @@ $(document).ready(function(){
         <div class="ulLists">
           <ul class="lists">
 	          {foreach $hasTaskList as $information}
-                <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}聚客币：{$information.Information.price}元{/if}
+                <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
 		          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
-		          	{if $information.Information.payment_type == 3}聚客币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
+		          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
 		          	{$city = $this->City->cityName({$information.Information.city})}
 		          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/</p></a></li>	          	
 	          {/foreach}
