@@ -3,11 +3,13 @@
 {$paginatorParams = $this->Paginator->params()}
 
 {if $paginatorParams['count'] > 0}
-<div class="tableSort" style="clear: both;">     
-      <label><input type="checkbox" value="position" name="zjSort" class="inpRadio" checked="checked">未交易</label>      
-      <label><input type="checkbox" value="time" name="zjSort" class="inpRadio">已过期</label>      
-      <label><input type="checkbox" value="company" name="zjSort" class="inpRadio">已撤销</label>
-</div>
+{if $infoType != "received"}
+    <div class="tableSort" style="clear: both;">     
+          <label><input type="checkbox" value="position" name="zjSort" class="inpRadio" checked="checked">未交易</label>      
+          <label><input type="checkbox" value="time" name="zjSort" class="inpRadio">已过期</label>      
+          <label><input type="checkbox" value="company" name="zjSort" class="inpRadio">已撤销</label>
+    </div>
+{/if}
 <table width="100%" cellspacing="0" cellpadding="0" border="0"
     class="con_2_table">
     <thead>
@@ -51,7 +53,7 @@
                 <td class="tr_td5">{$info.Information.clicked}</td>
                 {if $infoType == "myself"}
                     <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
-                {else if $type == "received"}
+                {else if $infoType == "received"}
                     <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要</a><a  href="javascript:void(0)">忽略</a></td>
                 {else if $type == "need"}
                     <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要类似服务</a></td>

@@ -159,7 +159,7 @@ ul.sltSearch{position:absolute;border:1px #b7b7b7 solid;margin:0;width:85px;z-in
 ul.sltSearch li{float:none;width:85px;border:none;}
 ul.sltSearch li a:hover{background:#CCC !important;}
 .zysos{width:151px; height:26px; background:url(../img/zy_so.jpg) center no-repeat #FFF; float:left; margin:7px 0 0 4px;cursor:pointer;overflow:hidden;}
-.txtSearch{border:1px #b7b7b7 solid;height:24px;width:125px;margin-left:5px;float:left;line-height:24px;padding-left:3px;}
+.txtSearch{border:1px #b7b7b7 solid;height:24px;width:125px;margin-left:5px;float:left;line-height:24px;padding:0 3px;}
 a.btnSearch{width:21px;height:26px;background:url(../img/sprites_jianli.gif) 0 -96px no-repeat;float:left;}
 a.btnSearch:hover{background-position:0 -122px;}
 

@@ -48,10 +48,7 @@ $(document).ready(function(){
       <div class="serviceCon">
       <ul class="titleLists">
       {foreach $notices as $notice}
-        <li>
-            <span class="fr time">{$notice.Notice.modified|date_format:"%Y-%m-%d"}</span>
-            <p><a target="_blank" href="/notices/detail?id={$notice.Notice.id}">{$notice.Notice.title}</a></p>
-        </li>
+      <li><span class="fr time">{$notice.Notice.modified|date_format:"%Y-%m-%d"}</span><p><a target="_blank" href="/notices/detail?id={$notice.Notice.id}">{$notice.Notice.title}</a></p></li>        
       {/foreach}
       </ul>
       </div>

@@ -3,10 +3,14 @@
 $(document).ready(function(){
 	$('#btnSearch').click(function(){
 		//$('#jump').val('');
+		$("#key_word").val($(".searchBar .inpTextBox").val());
 		var searchOpt = $('#searchOpt').serializeArray();
 		$('#documents').load('/resources/search', searchOpt, function(){});
 	});
 });
+function searchBar(event){
+	if (event.keyCode==13) $('#btnSearch').click();
+}
 {/literal}
 </script>
 <div class="main">
@@ -31,7 +35,7 @@ $(document).ready(function(){
 		      <option value="5" {if isset($type) && $type == 5}selected="selected"{/if}>总结计划</option>
 		      <option value="6" {if isset($type) && $type == 6}selected="selected"{/if}>案例分析</option>
 	      	</select>
-	        	<input type="text" class="inpTextBox" name="key_word" value="{if isset($key_word)}{$key_word}{/if}" />        
+	        	<input type="text" class="inpTextBox" name="key_word" value="{if isset($key_word)}{$key_word}{/if}" onKeyDown="searchBar(event)"/>        
 	        	<a class="btnBar" id="btnSearch" href="javascript:void(0)">搜&nbsp;索</a>
         </div>
     <div class="clear">&nbsp;</div>    
@@ -93,8 +97,6 @@ $(document).ready(function(){
 {$this->Js->writeBuffer()}
 	</div>
 	</form>
-
-
   </div>
     {if !empty($memberInfo)}
   {$this->element('resource/left_logined')}

@@ -3,9 +3,11 @@
  * 和支付宝接口相关的控制器
  * @author lin deping
  */
-App::uses("AlipayService", "Lib");
+App::uses("Alipay", "Lib");
+App::uses('HttpSocket', 'Network/Http');
 class AlipaysController extends AppController
 {
+    var $uses = array('AlipayCharge');
     /**
      * 
      * 支付手段选择
@@ -22,8 +24,8 @@ class AlipaysController extends AppController
     public function send()
     {
         $this->autoRender = false;
-        $out_trade_no = md5(date(Ymdhms) . $this->request->params['id']);
-        $subject = $this->request->params['title'];
+        $out_trade_no = Alipay::makeOrderNo();
+        $subject = "聚业务 业务币充值";
         $body = "";
         $total_fee = $this->request->params['price'];
         
@@ -61,13 +63,25 @@ class AlipaysController extends AppController
             "body"              => $body,
             "total_fee"         => $total_fee,
             
-            "paymethod"         => $paymethod,
-            "defaultbank"       => $defaultbank,
+//            "paymethod"         => $paymethod,
+//            "defaultbank"       => $defaultbank,
             
             "anti_phishing_key" => $encrypt_key,
             "exter_invoke_ip"   => $exter_invoke_ip,
             
         );
+        $chargeData = array(
+            'members_id'    => $this->_memberInfo['Member']['id'],
+            'order_no'      => $out_trade_no,
+            'price'         => $total_fee,
+            'status'        => Configure::read('Alipay.status_confirm')
+        );
+        try {
+            $this->AlipayCharge->save($chargeData);
+            $request = new HttpSocket();
+        } catch (Exception $e) {
+            
+        }
         $alipay = new AlipayService($parameter, Configure::read("Alipay.security_code"), Configure::read("Alipay.sign_type"));
         
     }

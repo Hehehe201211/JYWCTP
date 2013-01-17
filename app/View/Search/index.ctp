@@ -32,9 +32,9 @@ $(document).ready(function(){
         <form id="searchOpt">
             {$this->element('common/keyuan-search-bar')}
 			{if $type=="need"}
-            <div class="biaotit">检索到客源信息</div>
+            <div class="biaotit">检索到悬赏信息</div>
 			{else}
-			<div class="biaotit">检索到悬赏信息</div>
+			<div class="biaotit">检索到客源信息</div>
 			{/if}
             {$this->element('common/keyuan-result')}
         </form>

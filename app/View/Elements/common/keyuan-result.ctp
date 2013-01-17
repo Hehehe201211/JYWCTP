@@ -8,9 +8,9 @@
         <tr class="con_2_tr con_2_xq_too">
             <th class="tr_td1">发布人</th>
             <th class="tr_td2">产品</th>
-            <th class="tr_td3">信息价格</th>
+            <th class="tr_td3">{if $type == "need"}悬赏金额{else}信息价格{/if}</th>
             <th class="tr_td4">城市</th>
-            <th class="tr_td5">状态</th>
+            <th class="tr_td5">点击次数</th>
             <th class="tr_td6">选择服务</th>
         </tr>
     </thead>
@@ -45,7 +45,7 @@
                 {/if}
             </a>
         </td>
-        <td class="tr_td5"><a href="/search/infodetail?id={$information.Information.id}">有效</a></td>
+        <td class="tr_td5"><a href="/search/infodetail?id={$information.Information.id}">{$information.Information.clicked}</a></td>
         <td class="con_2_xq_tofu tofu_anniu"><a href="/search/infodetail?id={$information.Information.id}" target="_blank">详情</a></td>
     </tr>
     {/foreach}    

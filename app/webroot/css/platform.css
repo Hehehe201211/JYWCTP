@@ -212,7 +212,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResource .downFile a:hover{text-decoration:none;color:#000;}
 .conResource .downFile .download{margin-left:108px;border-width:0;}
 .conResource .downFile .download a{background-position:88px -267px;}
-.conResource .downFile .describe{margin-left:88px;padding:0 10px;background:#EDFAF5;width:99px;border:1px solid #E3F3ED;border-left:0 none;}
+.conResource .downFile .describe{margin-left:88px;padding:0 10px;background:#EDFAF5;width:102px;border:1px solid #E3F3ED;border-left:0 none;}
 .conResource .downFile .download p{line-height:15px;height:15px;}
 .conResource .sbResource{background:none;border:0 none;float:none;width:auto;}
 .conResource .sbResource .inform{color:#F30;margin-left:16px;float:right;}
@@ -224,7 +224,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResource .searchBar .inpTextBox{float:left;font-size:14px;padding:5px 2px;width:425px;}
 .conResource .searchBar .btnBar,.ntcRight .searchBox .inpButton{display:block;width:87px;height:28px;font:bold 14px/28px "宋体";text-align:center;background:url(../img/btnbgs.gif) 0 -297px no-repeat;margin:0 3px 0 560px;text-decoration:none;}
 .conResource .searchBar .btnBar:hover,.ntcRight .searchBox .inpButton:hover{background-position:-87px -297px;color:#333;}
-.conResource .corResult .textEllipsis{font-size:16px;max-width:600px;padding-left:4px;float:left;}
+.conResource .corResult .textEllipsis{font-size:16px;max-width:600px;padding:0 8px 0 4px;float:left;}
 .conResource .corResult .result{padding:2px;margin:0 8px 8px 0;}
 .conResource .corResult .result:hover{background:#FFF;}
 .conResource .corResult .result em{font-size:16px;font-style:normal;color:#F30;}
@@ -329,7 +329,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .sbResource .userInfo .userData a{font-weight:bold;color:#F60;margin:0 3px;}
 .sbResource .userInfo .userData a:hover{text-decoration:underline;}
 .sbResource .userInfo ul li{margin:2px 0;width:216px;overflow:hidden;white-space:nowrap;list-style:inside disc;color:#999;}
-.sbResource .shortcut select{padding:1px 0;*vertical-align:top;}
+.sbResource .shortcut select{padding:1px 0;vertical-align:middle\9;*vertical-align:top;}
 .sbResource .shortcut .inpTextBox{margin:0 0 6px;width:127px;padding:2px;}
 .sbResource .shortcut ul li{float:left;width:72px;text-align:center;margin:1px 0;}
 .sbResource .notice ul li,.sbResource .hot ul li{background:url(../img/frmIcon.gif) 0 -303px no-repeat;padding-left:12px;}
@@ -468,7 +468,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .ntcRight .serviceCon ul,.ntcRight .serviceCon ul li{list-style:disc outside none;}
 .ntcRight .serviceCon p{line-height:24px;text-indent:2em;color:#000;}
 .ntcRight .serviceCon .titleLists{margin-left:0;}
-.ntcRight .serviceCon .titleLists li{list-style:none;padding:3px 12px 3px 24px;background:url("../img/tticon.gif") no-repeat 12px -34px;}
+.ntcRight .serviceCon .titleLists li{list-style:none;padding:3px 12px 3px 24px;background:url("../img/tticon.gif") no-repeat 12px -34px;*height:24px;}
 .ntcRight .serviceCon .titleLists li:hover{background-color:#F5F5F5;}
 .ntcRight .serviceCon .titleLists p{text-indent:0;width:600px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .ntcRight .serviceCon .titleLists .time{font-size:12px;color:#666;}

@@ -26,11 +26,11 @@ class SearchController extends AppController
             if ($this->request->query['type'] == 'has') {
                 $type = 'has';
                 $infoType = '0';
-                $this->set('title_for_layout', "我有客源");
+                $this->set('title_for_layout', "所有客源");
             } else {
                 $type = 'need';
                 $infoType = '1';
-                $this->set('title_for_layout', "我要客源");
+                $this->set('title_for_layout', "所有悬赏");
             }
         } else {
             $type = 'need';
@@ -99,7 +99,7 @@ class SearchController extends AppController
             }
         }
         
-        if (isset($this->request->data['price'])) {
+        if (isset($this->request->data['price']) && !empty($this->request->data['price'])) {
             list($min, $max) = explode('-', $this->request->data['price']);
             $min = trim($min);
             $max = trim($max);
@@ -129,7 +129,7 @@ class SearchController extends AppController
             $this->Info->search($conditions);
             $this->render('/Elements/common/keyuan-result');
         }
-        
+        $this->log(print_r($conditions, true));
     }
     /**
      * 

@@ -30,6 +30,7 @@ $(document).ready(function(){
 <div class="sjle">
 <div class="tableDetail">
 <form action="/informations/complete" method="post" id="form">
+<input type="hidden" name="id" id="id" value="{$this->data['id']}">
 <input type="hidden" name="type" id="type" value="{$this->data['type']}">
 <input type="hidden" name="target" value="{$this->data['target']}">
 <input type="hidden" name="parttime" value="{$this->data['parttime']}">
@@ -38,7 +39,14 @@ $(document).ready(function(){
       <table width="100%">
         <tr>       
           <th width="25%">所在区域：</th>
-          <td width="75%">{$provincial}<input type="hidden" value="{$this->data['provincial']}" name="provincial" />&nbsp;{$city}<input type="hidden" value="{$this->data['city']}" name="city" /></td>
+          <td width="75%">
+          {if $provincial != $city}
+          {$provincial}&nbsp;{$city}
+          {else}
+          {$provincial}
+          {/if}
+          <input type="hidden" value="{$this->data['provincial']}" name="provincial" />
+          <input type="hidden" value="{$this->data['city']}" name="city" /></td>
         </tr>
          <tr>
           <th>行业：</th>
@@ -133,9 +141,9 @@ $(document).ready(function(){
         </tr>
       </table>
       </form>
-      <div class="divProtocol"><label class="protocol" for="vehicle">
+      <div class="divProtocol"><label class="protocol" for="accept">
 <input type="checkbox" id="accept" name="accept" class="inpCheckbox"/>
-我接受 <a href="#">《聚业务服务协议（试行）》</a> </label></div>
+我接受 <a href="/static?tpl=mianze" target="_blank" >《聚业务服务协议（试行）》</a> </label></div>
       <div class="divBtnContainer" style="width:200px;">
 	<a class="zclan zclan7" href="javascript:void(0)" id="complete">发布</a> <a
 	class="zclan zclan7" href="javascript:void(0)" id="back">修改</a>

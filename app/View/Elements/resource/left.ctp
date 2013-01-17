@@ -123,7 +123,7 @@ function searchRe(event){
 		      <option value="5">总结计划</option>
 		      <option value="6">案例分析</option>
 	      </select>
-	      <input type="text" id="key_word" class="inpTextBox" name="key_word" value="敲击enter键进行搜索" placeholder="敲击enter键进行搜索" onclick="this.select()" onkeypress="searchRe(event)"/>	      
+	      <input type="text" id="key_word" class="inpTextBox" name="key_word" value="敲击回车键进行搜索" placeholder="敲击回车键进行搜索" onclick="this.select()" onkeydown="searchRe(event)"/>	      
       </div>
       <ul>
         <li><a href="/resources/search?type=1" target="_blank">入门成长</a></li>

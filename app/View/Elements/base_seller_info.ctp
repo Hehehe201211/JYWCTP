@@ -33,8 +33,9 @@ $(document).ready(function(){
               <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
               <td width="66%">
               {if !$isFriend}
-                <a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>{$author.Member.nickname}
+                <a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>
               {/if}
+              {$author.Member.nickname}
               </td>
             </tr>
             <tr>

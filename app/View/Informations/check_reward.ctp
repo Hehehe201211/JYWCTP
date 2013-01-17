@@ -30,12 +30,21 @@ $(document).ready(function(){
       <div class="sjle">
         <div class="tableDetail">
  <form action="/informations/complete" method="post" id="form">
-          <input type="hidden" name="type" value="{$this->data['type']}">
+            <input type="hidden" name="id" id="id" value="{$this->data['id']}">
+            <input type="hidden" name="type" value="{$this->data['type']}">
             <div class="biaotit">{$this->data['title']}<input type="hidden" value="{$this->data['title']}" name="title" /></div>
       <table width="100%">
         <tr>       
           <th width="25%">所在区域：</th>
-          <td width="75%">{$provincial}<input type="hidden" value="{$this->data['provincial']}" name="provincial" />&nbsp;{$city}<input type="hidden" value="{$this->data['city']}" name="city" /></td>
+          <td width="75%">
+              {if $provincial != $city}
+              {$provincial}&nbsp;{$city}
+              {else}
+              {$provincial}
+              {/if}
+              <input type="hidden" value="{$this->data['provincial']}" name="provincial" />
+              <input type="hidden" value="{$this->data['city']}" name="city" />
+          </td>
         </tr>
         <tr>
           <th>产品名称：</th>

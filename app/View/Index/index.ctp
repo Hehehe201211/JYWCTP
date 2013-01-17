@@ -170,7 +170,7 @@ $(document).ready(function(){
       <h3><a href="/search?type=need" target="_blank" class="fr">更多..</a>最新客源</h3>
         <div class="ulLists">        
           <ul class="lists">
-          {foreach $needTaskList as $information}
+          {foreach $hasTaskList as $information}
             <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
 	          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
 	          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
@@ -184,7 +184,7 @@ $(document).ready(function(){
       <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>最新悬赏</h3>
         <div class="ulLists">
           <ul class="lists">
-	          {foreach $hasTaskList as $information}
+	          {foreach $needTaskList as $information}
                 <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
 		          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
 		          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}

@@ -226,8 +226,8 @@
 <div id="navi">
     <ul class="nav">
         <li><a {if $currentTopBar == "index"}class="current"{/if} href="/">首&nbsp;&nbsp;页</a></li>
-        <li><a {if $currentTopBar == "need"}class="current"{/if} href="/search?type=need">我要客源</a></li>
-        <li><a {if $currentTopBar == "has"}class="current"{/if} href="/search?type=has">我有客源</a></li>
+        <li><a {if $currentTopBar == "has"}class="current"{/if} href="/search?type=has">所有客源</a></li>
+        <li><a {if $currentTopBar == "need"}class="current"{/if} href="/search?type=need">所有悬赏</a></li>
         <li><a {if $currentTopBar == "offer"}class="current"{/if} href="/search/offer">企业招聘</a></li>
         <li><a {if $currentTopBar == "parttime"}class="current"{/if} href="/search/parttime">兼职信息</a></li>
         <li><a {if $currentTopBar == "resource"}class="current"{/if} href="/resources">资源天地</a></li>

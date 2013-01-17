@@ -232,7 +232,6 @@ $(document).ready(function(){
 {/literal}
 </script>
 
-
 <div class="zy_z">
 <ul class="ulFormStep">
       <li>1.填写发布信息</li>
@@ -370,7 +369,7 @@ $(document).ready(function(){
                   </li>
                 </ul>
               </dt>
-              {if !isset($parttime) && !isset($this->data['parttime'])}
+              {if !isset($parttime) && !isset($this->data['parttime']) || empty($this->data['parttime'])}
               <dt>
                 <label><font class="facexh">*</font>买家付款方式：</label>
                 <ul class="payType">
@@ -488,6 +487,7 @@ $(document).ready(function(){
               </dt>
             </dl>
             <input type="hidden" name="type" value="{$type}">
+            <input type="hidden" name="id" value="{if isset($this->data['id'])}{$this->data['id']}{/if}" />
             <a class="zclan zclan4" href="javascript:void(0)" id="check">预览</a>
           </form>
       </div>

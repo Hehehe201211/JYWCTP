@@ -20,6 +20,24 @@ $(document).ready(function(){
             });
         }
     });
+    
+    $('.delete').click(function(){
+        if (confirm("你确定要删除此信息吗？")) {
+            $.ajax({
+                url : '/informations/ajax_delete',
+                type : 'post',
+                data : 'information_id=' + $('#information_id').val(),
+                success : function(data){
+                    var result = eval("("+data+")");
+                    if (result.result == 'OK') {
+                        location.href = "/informations/issue/?type=" + $('#info_type').val();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
 });
 {/literal}
 </script>
@@ -35,7 +53,15 @@ $(document).ready(function(){
       <table width="100%">
         <tr>
           <th width="25%">所在区域：</th>
-          <td width="75%">{$this->City->cityName({$information.Information.provincial})}&nbsp;{$this->City->cityName({$information.Information.city})}</td>
+          <td width="75%">
+          {$provincial = $this->City->cityName({$information.Information.provincial})}
+          {$city = $this->City->cityName({$information.Information.city})}
+          {if $provincial == $city}
+          {$provincial}
+          {else}
+          {$provincial}&nbsp;{$city}
+          {/if}
+          </td>
         </tr>
         {if $information.Information.type == 0}
          <tr>
@@ -111,7 +137,7 @@ $(document).ready(function(){
         <a class="zclan zclan7" href="/informations/edit?id={$information.Information.id}">修改</a>
         <a class="zclan zclan7 cancel" href="javascript:void(0)">撤销</a>
         {/if}
-        <a class="zclan zclan7" href="javascript:void(0)">删除</a>
+        <a class="zclan zclan7 delete" href="javascript:void(0)">删除</a>
         <input type="hidden" id="information_id" value="{$information.Information.id}" />                            
      </div>{/if}
  </div>

@@ -157,6 +157,7 @@ class InformationsController extends AppController
         if (isset($this->request->data['id']) && !empty($this->request->data['id'])) {
             $data['id'] = $this->request->data['id'];
         }
+        $success = false;
         if ($this->request->data['type'] == 0) {
             $target_members_id = isset($this->request->data['target_member']) ? $this->request->data['target_member'] : null;
             $target_information_id = null;
@@ -167,19 +168,22 @@ class InformationsController extends AppController
             } elseif (isset($this->request->data['target']) && !empty($this->request->data['target'])) {
                 $target_information_id = $this->request->data['target'];
             }
-            
-            if ($this->Information->insertInformation($data, $attributes, $type, $target_members_id, $target_information_id)) {
+            $result = $this->Information->insertInformation($data, $attributes, $type, $target_members_id, $target_information_id);
+            if ($result['result']) {
                 $message = "您已成功发布信息！";
             } else {
                 $message = "发布失败！请重新发布！";
             }
         } else {
-            if ($this->Information->insertRewardInformation($data)) {
+            $result = $this->Information->insertRewardInformation($data);
+            if ($result['result']) {
                 $message = "您已成功发布信息！";
             } else {
                 $message = "发布失败！请重新发布！";
             }
         }
+        $this->set('error', !$result['result']);
+        $this->set('id', $result['id']);
         $this->set('message', $message);
     }
     
@@ -202,6 +206,9 @@ class InformationsController extends AppController
                 if ($information['Information']['type'] != 1) {
                     $attributes = $this->InformationAttribute->find('all', array('conditions' => array('information_id' => $information['Information']['id'])));
                     $this->set('attributes', $attributes);
+                }
+                if ($information['Information']['type'] == Configure::read('Information.type.need')) {
+                    $this->render('edit_reward');
                 }
             }
         } else {
@@ -245,6 +252,35 @@ class InformationsController extends AppController
                     $this->Information->updateAll($up_info, array('id' => $id));
                     $reuslt = array('result'=> 'OK', 'msg' => 'OK');
                 } catch (Exception $e) {
+                    $reuslt = array('result'=> 'NG', 'msg' => '系统出错，请稍后重试！');
+                }
+            }
+        }
+        $this->_sendJson($reuslt);
+    }
+    
+    public function ajax_delete()
+    {
+        $this->autoRender = false;
+        if (!isset($this->request->data['information_id']) || empty($this->request->data['information_id'])) {
+            $reuslt = $reuslt = array('result'=> 'NG', 'msg' => '系统出错，请稍后重试！');
+        } else {
+            $id = $this->request->data['information_id'];
+            $params = array('conditions' => array('information_id' => $id));
+            $paid = $this->PaymentTransaction->find('count', $params);
+            if ($paid > 0) {
+                $reuslt = array('result'=> 'NG', 'msg' => '已经有人购买，不能撤销这条信息！');
+            } else {
+                try {
+                    $dataSource = $this->Information->getDataSource();
+                    $dataSource->begin();
+                    $this->InformationAttribute->deleteAll(array('information_id' => $id), false);
+                    $this->Information->delete($id);
+                    $reuslt = array('result'=> 'OK', 'msg' => 'OK');
+                    $dataSource->commit();
+                } catch (Exception $e) {
+                    $this->log($e->getMessage());
+                    $dataSource->rollback();
                     $reuslt = array('result'=> 'NG', 'msg' => '系统出错，请稍后重试！');
                 }
             }
@@ -307,7 +343,7 @@ class InformationsController extends AppController
         );
         $information = $this->Information->find('first', $params);
         //是否朋友关系
-        $isFriend = $this->Friendship->find('count', array('members_id' => $this->_memberInfo['Member']['id'], 'friend_members_id' => $information['Information']['members_id']));
+        $isFriend = $this->Friendship->find('count', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'], 'friend_members_id' => $information['Information']['members_id'])));
         $isFriend = $isFriend > 0 ? true : false;
         
         //是否购买过
@@ -728,6 +764,7 @@ class InformationsController extends AppController
         $this->set('pageSize', $pageSize);
         $this->set("informations", $this->paginate('MemberReceived'));
         $this->set("type", $type);
+        $this->set("infoType", "received");
         if ($this->RequestHandler->isAjax()) {
             if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
                 $this->set('jump', $page);
@@ -1085,13 +1122,20 @@ class InformationsController extends AppController
             'Information.price',
             'Information.point',
             'Information.status',
-            'Information.clicked'
+            'Information.clicked',
+            'Member.nickname'
         );
         $joinTransaction = array(
             'table' => 'payment_transactions',
             'alias' => 'Transaction',
             'type'  => 'left',
             'conditions' => 'Transaction.information_id = Information.id'
+        );
+        $joinMember = array(
+            'table' => 'members',
+            'alias' => 'Member',
+            'type'  => 'inner',
+            'conditions' => 'Information.members_id = Member.id'
         );
         $members_id = $this->_memberInfo['Member']['id'];
         
@@ -1111,7 +1155,7 @@ class InformationsController extends AppController
             ),
             $this->Information
         );
-        $subQuery = 'id NOT IN (' . $subQuery . ')';
+        $subQuery = 'Information.id NOT IN (' . $subQuery . ')';
         $subQueryExpression = $db->expression($subQuery);
         $conditions = array(
             'Information.members_id !=' => $this->_memberInfo['Member']['id'],
@@ -1175,6 +1219,7 @@ class InformationsController extends AppController
             'order' => array('Information.created' => 'DESC', 'Information.id' => 'ASC'),
             'conditions' => $conditions,
             'fields' => $fields,
+            'joins' => array($joinMember),
             'group' => array('Information.id')
         );
         $this->set('pageSize', $pageSize);
@@ -1185,8 +1230,7 @@ class InformationsController extends AppController
             }
             $this->render('/Elements/search_paginator');
         }
-//        $this->Information->printLog();
-$this->log($this->Information->lastQuery);
+        $this->log(print_r($conditions, true));
     }
     
     public function invalid($type)

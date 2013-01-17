@@ -46,16 +46,16 @@
 		            <span style="width:100%">&nbsp;100%&nbsp;</span>
 		            {else}
 		            <span>&nbsp;20%&nbsp;</span>
-		            {/if}</span><a href="#">完善资料</a>{if $memberInfo.Member.grade == 2}
-		             <a class="icon iconS iconH" href="javascript:void(0)" title="身份已认证"></a>
-		             <a class="icon iconM iconH" href="javascript:void(0)" title="已绑定邮箱"></a>
-		             <a class="icon iconT iconH" href="javascript:void(0)" title="已绑定手机"></a>
-		             <a class="icon iconB iconH" title="已绑定支付宝" href="javascript:void(0)"></a>
+		            {/if}</span><a href="/accounts/edit">完善资料</a>{if $memberInfo.Member.grade == 2}
+		             <a class="icon iconS iconH" href="/accounts/security" title="身份已认证"></a>
+		             <a class="icon iconM iconH" href="/accounts/security" title="已绑定邮箱"></a>
+		             <a class="icon iconT iconH" href="/accounts/security" title="已绑定手机"></a>
+		             <a class="icon iconB iconH" title="已绑定支付宝" href="/accounts/security"></a>
 		            {else}
-		             <a class="icon iconS" href="javascript:void(0)" title="身份未认证"></a>
-		             <a class="icon iconM iconH" href="javascript:void(0)" title="已绑定邮箱"></a>
-		             <a class="icon iconT iconH" href="javascript:void(0)" title="已绑定手机"></a>
-		             <a class="icon iconB" title="未绑定支付宝" href="javascript:void(0)"></a>
+		             <a class="icon iconS" href="/accounts/security" title="身份未认证"></a>
+		             <a class="icon iconM iconH" href="/accounts/security" title="已绑定邮箱"></a>
+		             <a class="icon iconT iconH" href="/accounts/security" title="已绑定手机"></a>
+		             <a class="icon iconB" title="未绑定支付宝" href="/accounts/security"></a>
 		            {/if}
             </td>
             </tr>
@@ -72,9 +72,7 @@
             <dd>待确认客源：<a href="javascript:void(0)">0</a>条</dd>
             <dd>待处理投诉：<a href="javascript:void(0)">0</a>条</dd>
             <dd>留言：<a href="javascript:void(0)">0</a>条</dd>
-            <dd>业务币余额：
-            <a href="javascript:void(0)">{$memberInfo.Attribute.virtual_coin}</a>元
-            ;&nbsp;&nbsp;积分：<a href="javascript:void(0)">{$memberInfo.Attribute.point}</a>分
+            <dd>业务币余额：<a href="javascript:void(0)">{$memberInfo.Attribute.virtual_coin}</a>元；积分：<a href="javascript:void(0)">{$memberInfo.Attribute.point}</a>分
 	         </dd>
             <dd>业务币：
                 <a href="/coins/balance">余额</a>
