@@ -105,7 +105,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人信息修改</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+      <a href="javascript:void(0)">个人信息修改</a>
+      </p>
     </div> 
 	<ul class="ulFormStep">
       <li>1.信息修改</li>
@@ -230,6 +234,21 @@ $(document).ready(function(){
           <li>
             <label>上传头像：</label>
             <input type="file" style="height:auto;height:22px;" size="20" id="face" name="face" class="inpFile">
+          </li>
+          <li class="avatar">
+            <label>&nbsp;</label>
+            {if isset($this->data['thumbnail'])}
+                {$thumbnail = Configure::read('Data.path')|cat:$this->data['thumbnail']}
+                {if !empty($this->data['thumbnail']) && file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$this->data['thumbnail']}">
+                {/if}
+            {else if !empty($memberAttribute.MemberAttribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberAttribute.MemberAttribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$memberAttribute.MemberAttribute.thumbnail}">
+                {/if}
+            {/if}
+            <input type="hidden" name="thumbnail" value="{if isset($this->data['thumbnail'])}{$this->data['thumbnail']}{else}{$memberAttribute.MemberAttribute.thumbnail}{/if}" />
           </li>
           <li><a class="zclan zclan4" href="javascript:void(0)" id="check">确定</a></li>
         </ul>      

@@ -111,7 +111,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="jltdjl.html">兼职管理</a>&gt;&gt;<a href="#">合作中的兼职详情</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">合作中的兼职详情</a>
+      </p>
     </div>
     <div class="biaotit">合作状态</div>
     {if $cooperation.Cooperation.status == Configure::read('Cooperation.status.cooperating')}

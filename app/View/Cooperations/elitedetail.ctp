@@ -10,7 +10,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-ypqq.html">平台兼职</a>&gt;&gt;<a href="#">业务精英检索详情</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">平台兼职</a>&gt;&gt;
+      <a href="javascript:void(0)">业务精英检索详情</a>
+      </p>
       <div class="zy_zszl enterpriseInfo">
         <div class="zy_zszl_z">
           <dl>

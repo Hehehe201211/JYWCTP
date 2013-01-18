@@ -243,7 +243,7 @@ $(document).ready(function(){
           </li>
           <li>
             <label>上传头像：</label>
-            <input type="file" style="height:auto;height:22px\9;" size="20" id="face" name="face">
+            <input type="file" style="height:auto;height:22px;" size="20" id="face" name="face">
           </li>
           <li style="text-align:left;">
             <label><font class="facexh">*</font>验证码：</label>

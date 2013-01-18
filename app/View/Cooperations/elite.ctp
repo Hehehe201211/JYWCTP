@@ -30,7 +30,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">信息概览</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">信息概览</a>
+      </p>
     </div>
     <div class="xxjs partTime" style="overflow-y:visible;min-height:460px;">
       <div class="biaotit">业务精英检索</div>

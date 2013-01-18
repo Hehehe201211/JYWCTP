@@ -15,7 +15,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-        <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html">账号管理</a>&gt;&gt;<a href="#">个人信息修改</a></p>
+        <p>
+        <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+        <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+        <a href="javascript:void(0)">个人信息修改</a>
+        </p>
     </div>
 <ul class="ulFormStep ulFormStep2">
       <li>1.信息修改</li>
@@ -41,7 +45,24 @@ $(document).ready(function(){
                     </tr>
                     <tr>
                         <td class="tdRight">我的头像：</td>
-                        <td class="tdLeft" colspan="3"><img src="{$this->webroot}img/tx.jpg"></td>
+                        <td class="tdLeft" colspan="3">
+                            {if !empty($thumbnail) && file_exists($thumbnail)}
+                                <img src="{$this->webroot}{$thumbnail}">
+                                <input type="hidden" id="thumbnail" name="thumbnail" value="{$thumbnail}">
+                            {elseif !empty($this->data['thumbnail'])}
+                                {$thumbnail = Configure::read('Data.path')|cat:$this->data['thumbnail']}
+                                {if file_exists($thumbnail)}
+                                    <img src="{$this->webroot}{$this->data['thumbnail']}">
+                                    <input type="hidden" id="thumbnail" name="thumbnail" value="{$this->data['thumbnail']}">
+                                {else}
+                                    <img src="{$this->webroot}img/tx.jpg">
+                                    <input type="hidden" id="thumbnail" name="thumbnail" value="">
+                                {/if}
+                            {else}
+                                <img src="{$this->webroot}img/tx.jpg">
+                                <input type="hidden" id="thumbnail" name="thumbnail" value="">
+                            {/if}
+                        </td>
                     </tr>
                     <tr>
                         <td class="tdRight">性别：</td>

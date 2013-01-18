@@ -58,24 +58,35 @@ $(document).ready(function(){
         <div class="mebBaseinfoL">
           <table width="100%" height="100%" border="0">
             <tr>
-              <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
+              <td width="34%" rowspan="6">
+              {if !empty($firend.Attribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$firend.Attribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$firend.Attribute.thumbnail}">
+                {else}
+                    <img src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+              <img src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </td>
               <td width="66%"><!--<a href="javascript:;" class="btnAddFri">修改备注</a>-->会员名称：{$firend.Member.nickname}</td>
             </tr>
             <tr>
-              <td>公司名称：{$firend.Member.company_name}</td>
+              <td>公司名称：{$firend.Attribute.name}</td>
             </tr>
             <tr>
-              <td>行业：互联网</td>
+              <td>行业：{$this->Category->getCategoryName($firend.Attribute.category_id)}</td>
             </tr>
             <tr>
-              <td>发布信息数：8次</td>
+              <td>发布信息数：{$sendCount}次</td>
             </tr>
             <tr>
-              <td>交易次数：8次</td>
+              <td>交易次数：{$transactionCount}次</td>
             </tr>
             <tr>
               <td>好评率：100%</td>
-            </tr>            
+            </tr>
           </table>
         </div>
         <div class="mebBaseinfoR">

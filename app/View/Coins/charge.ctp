@@ -1,6 +1,6 @@
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="javascript:void(0)">我的聚业务</a>&gt;&gt;<a href="javascript:void(0)">资金管理</a>&gt;&gt;<a href="javascript:void(0)">充值记录</a></p>
+      <p><a href="javascript:void(0)">我的聚业务</a>&gt;&gt;<a href="javascript:void(0)">业务币管理</a>&gt;&gt;<a href="javascript:void(0)">充值记录</a></p>
     </div>
      <div class="zhanghujil">
         <div class="zhanghujil_top">
@@ -12,7 +12,7 @@
          <div class="biaotit">给本账户充值</div>
         <form method="post" action="/alipays/check">
           <p>您的账户：{$memberInfo.Member.nickname} （请确认账号为您需要充值的账号）</p>
-          <p>充值金额:<input type="text" id="topupNum" name="money" class="inpTextBox">元&nbsp;（1元业务币=1元人民币）</p>
+          <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox">元&nbsp;（1元业务币=1元人民币）</p>
           <p>
             <label>
               <input type="checkbox" autocomplete="off" value="" name="iagree" class="inpCheckbox">我已仔细阅读过

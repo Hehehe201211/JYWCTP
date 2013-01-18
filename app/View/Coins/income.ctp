@@ -3,36 +3,26 @@
 $(document).ready(function(){
     datepIniChange("#date_begin","coins");
 	datepIniChange("#date_end","coins");
-	$("body").append($("#bgKuang"));	
-	$("body").append($("#goumaikuang"));	
+	$("body").append($(".divDjbuz"));	
 	$(".detail").live("click",function(e){
 		var information_id = $(this).parent().find('.information_id').val();
-		$('#goumaikuang').load('/coins/detail #djbuz', {'information_id' : information_id, 'type' : 'income'}, function(){
-			e.preventDefault();	
-			var bgW=$(document).width();
-			if ($(document).width()<screen.availWidth) bgW=screen.availWidth; 
-			$("#goumaikuang").show();			
-			$("#bgKuang").css({width:bgW,height:($(document).height()+$("#djbuz").height())});
-			$("#goumaikuang").css({"width":$("#djbuz").width(),"height":$("#djbuz").height()});	
-		    $("#goumaikuang").css({"top":$(window).scrollTop()+100+"px","left":($(document).width()-$("#goumaikuang").width())/2+"px"});
-			$("#bgKuang").fadeTo("fast",0.5);
-			var clicked = $('#goumaikuang').find('#clicked').val();
-			if (clicked == 1) {
-				num.find('a').text(parseInt(num.find('a').text())+1);
-			}
+		$('#divDjbuz1').load('/coins/detail', {'information_id' : information_id, 'type' : 'income'}, function(){
+			bgKuang("#divDjbuz1",".divDjbuz .closeKuang");			
 		});
 	});
-	$(".close").live("click",function(e){				
-		$("#bgKuang").fadeOut("fast");
-		$("#goumaikuang").hide();
-		if ($(this).attr("href")=="#"||$(this).attr("href")=="") e.preventDefault();
+	$(".divDjbuz .close").live("click",function(){				
+		$(".divDjbuz .closeKuang").click();
 	});
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-qbmx.html">资金管理</a>&gt;&gt;<a href="#">收入明细</a></p>    
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">业务币管理</a>&gt;&gt;
+      <a href="javascript:void(0)">收入明细</a>
+      </p>    
     </div>    
     <div class="zhanghujil">        
         <div class="rightBody">
@@ -60,6 +50,5 @@ $(document).ready(function(){
       </div>
       </div>	
 </div>
-<div id="bgKuang"></div>
-<div style="display: none;" id="goumaikuang">
+<div id="divDjbuz1" class="divDjbuz">
 </div>

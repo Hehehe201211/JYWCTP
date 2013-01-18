@@ -12,9 +12,9 @@ $(document).ready(function(){
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="new-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="new-wwtj.html">兼职管理</a>&gt;&gt;
-            <a href="#">我要工作</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+            <a href="javascript:void(0)">我要工作</a>
         </p>
     </div>
     <div class="xxjs partTime" style="overflow-y:visible;min-height:460px;">

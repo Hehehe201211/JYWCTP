@@ -78,11 +78,10 @@ class AlipaysController extends AppController
         );
         try {
             $this->AlipayCharge->save($chargeData);
-            $request = new HttpSocket();
+            $this->set('parameter', $parameter);
         } catch (Exception $e) {
-            
+            $this->log($e->getMessage());
         }
-        $alipay = new AlipayService($parameter, Configure::read("Alipay.security_code"), Configure::read("Alipay.sign_type"));
         
     }
     /**

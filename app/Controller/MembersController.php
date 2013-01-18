@@ -141,7 +141,7 @@ class MembersController extends AppController
                 $body = "
                 亲爱的" . $this->request->data['nickname'] .":
                 
-                聚客源真诚的欢迎你！
+                聚业务真诚的欢迎您！
                 这封邮件是为了核实会员身份的合法性，
                 请你通过下面的连接验证你的身份。
                 http://dev.jukeyuan.com/members/complete/?id=" . $this->TmpMember->getInsertID() . "&ps=" . $data['password'] . "&t=" . $data['type'] .
@@ -153,7 +153,7 @@ class MembersController extends AppController
                         ";
         
                 $email = new CakeEmail('default');
-                $email->from(array('norepeat@jukeyuan.com' => '聚客源'));
+                $email->from(array('norepeat@jukeyuan.com' => '聚业务'));
                 $email->to($this->request->data['email']);
                 $email->subject('会员身份认证');
                 $email->send($body);

@@ -52,7 +52,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-slijzky.html">平台兼职</a>&gt;&gt;<a href="#">被投诉的合作</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">平台兼职</a>&gt;&gt;
+      <a href="javascript:void(0)">被投诉的合作</a>
+      </p>
     </div>
     <div class="biaotit">投诉原因</div>
     <div class="zy_zszlB">

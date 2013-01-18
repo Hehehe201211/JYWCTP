@@ -2,9 +2,13 @@
     <div class="zy_zs">
       <p>
       {if $type == "send"}
-      <a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="jltdjl.html">兼职管理</a>&gt;&gt;<a href="#">客源提供记录</a>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">客源提供记录</a>
       {else}
-      <a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="jltdjl.html">兼职管理</a>&gt;&gt;<a href="#">客源提供记录</a>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">客源提供记录</a>
       {/if}
       </p>      
     </div>    

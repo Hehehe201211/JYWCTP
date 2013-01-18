@@ -23,7 +23,7 @@
           {else}
           	{$payment_type = Configure::read('Payment.payment_type_out')}
           {/if}
-          {if $this->request->params['controller'] == "coin"}
+          {if $this->request->params['controller'] == "coins"}
           {$unit = "元"}
           {else}
           {$unit = "点"}

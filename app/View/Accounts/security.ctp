@@ -180,9 +180,9 @@ String.prototype.trim = function () {
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="new-hyzy.html">我的聚业务</a>>>
-            <a href="grxxxg.html">账号管理</a>>>
-            <a href="#">账号安全</a>
+            <a href="javascript:void(0)">我的聚业务</a>>>
+            <a href="javascript:void(0)">账号管理</a>>>
+            <a href="javascript:void(0)">账号安全</a>
         </p>
         {$this->element('base_info')}
     </div>

@@ -76,7 +76,7 @@ $(document).ready(function(){
 </td>
         </tr>
         <tr>
-          <th>采购单位</th>
+          <th>采购单位：</th>
           <td class="red">{$information.Information.company}</td>
         </tr>               
         <tr>

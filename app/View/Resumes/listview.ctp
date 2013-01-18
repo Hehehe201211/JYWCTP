@@ -113,7 +113,7 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
   <div class="zy_zs">
-    <p> <a href="javascript:void(0)">我的聚业务</a>&gt;&gt; <a href="javascript:void(0)">兼职管理</a>&gt;&gt; <a href="javascript:void(0)">我的简历</a> </p>
+    <p> <a href="javascript:void(0)">我的聚业务</a>&gt;&gt; <a href="javascript:void(0)">常规招聘</a>&gt;&gt; <a href="javascript:void(0)">我的简历</a> </p>
   </div>
   <form id="searchOpt">
   <div style="margin:0 0 8px 3px;"> <span>我目前想要的工作性质：</span>

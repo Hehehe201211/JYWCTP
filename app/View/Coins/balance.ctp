@@ -1,6 +1,10 @@
 <div class="zy_z">
     <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-qbmx.html">资金管理</a>&gt;&gt;<a href="#">账户余额</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">业务币管理</a>&gt;&gt;
+      <a href="javascript:void(0)">账户余额</a>
+      </p>
     <!-- InstanceEndEditable -->
     </div>
     <!-- InstanceBeginEditable name="EditRegion5" --> 

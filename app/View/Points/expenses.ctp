@@ -8,7 +8,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-qbmx.html">积分管理</a>&gt;&gt;<a href="#">支出明细</a></p>    
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">积分管理</a>&gt;&gt;
+      <a href="javascript:void(0)">支出明细</a>
+      </p>    
     </div>    
     <div class="zhanghujil">        
         <div class="rightBody">

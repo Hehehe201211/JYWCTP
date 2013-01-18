@@ -352,7 +352,7 @@ function hideWarning(){
       <ul>
         <li>
           <label>用户名：</label>
-          <input type="text" onblur="txtBlur(this.id,'请输入用户名')" onfocus="txtFocus(this.id,'请输入用户名')" class="nickname" id="username" value="请输入用户名" name="nickname" style="color: rgb(153, 153, 153);">
+          <input type="text" onblur="txtBlur(this.id,'请输入用户名')" onfocus="txtFocus(this.id,'请输入用户名')" class="nickname" id="username" value="请输入用户名" name="nickname" >
         </li>
         <li>
           <label>密码：</label>
@@ -361,53 +361,16 @@ function hideWarning(){
         </li>
         <li>
           <label>验证码：</label>
-          <input type="text" onblur="txtBlur(this.id,'输入验证码')" onfocus="txtFocus(this.id,'输入验证码')" class="yanzhengma" id="yanzhengma" value="输入验证码" name="checkNum" style="color: rgb(153, 153, 153);">
+          <input type="text" onblur="txtBlur(this.id,'输入验证码')" onfocus="txtFocus(this.id,'输入验证码')" class="yanzhengma" id="yanzhengma" value="输入验证码" name="checkNum">
           <li style="text-align:right"><a href="javascript:void(0)" id="getCheckNum">看不清楚？换一个</a></li>
-        <li><span>
-          <label>类型：</label>
-            </span> <span style="width:60px; float:left;">
-            <input type="radio" id="person" class="login_input" checked="checked" value="0" name="type">
-            <label for="person" style="width:30px;">个人</label>
-            </span> <span style="width:60px; float:left;">
-            <input type="radio" id="enterprise" class="login_input" value="1" name="type">
-            <label for="enterprise" style="width:30px;">企业</label>
-          </span> </li>
+        <li><label>类型：</label>
+           <label class="tL"><input type="radio" id="person" class="inpRadio" checked="checked" value="0" name="type">个人</label> 
+           <label class="tL"><input type="radio" id="enterprise" class="inpRadio" value="1" name="type">企业</label>
+           </li>
         <li><a class="inp" id="btnLogin" href="javascript:void(0)"> 登录</a><a href="wangjimima.html" style="text-decoration:underline;">忘记密码</a></li>    
       </ul>
       </form>
-    </div>
-    <!--
-    <div class="login" style=" background:#f6f6f6; border:none;">
-      <h1>会员登录</h1>
-      <p><img src="/img/huiyx.jpg" style="width:200px; margin:0 auto 5px;"/></p>
-      <ul>
-      <form id="ajaxLogin">
-        <li>
-          <label>账号：</label>
-          <input type="text" name="nickname"/>
-        </li>
-        <li>
-          <label>密码：</label>
-          <input type="password" name="password">
-        </li>
-        <li>
-          <label>验证码：</label>
-          <input type="text"  value="" name="checkNum" id="checkNum"  class="txt2" style="height:20px; width:63px; line-height:20px; margin-right:5px;" />
-        </li>
-        <li style="text-align:right"><a href="javascript:void(0)" id="getCheckNum">看不清楚？换一个</a></li>
-        <li><span>
-          <label>类型：</label>
-          </span> <span style="width:60px; float:left;">
-          <input type="radio" name="type" value="0" class="login_input"/>
-          <label style="width:40px;">个人：</label>
-          </span> <span style="width:60px; float:left;">
-          <input type="radio" name="type" value="1" class="login_input" />
-          <label style="width:40px;">企业：</label>
-          </span> </li>
-        <li class="zinp"> <span class="inp"><a id="btnLogin" href="javascript:void(0)"> 登录</a></span> <span><a href="wangjimima.html" style="text-decoration:underline;">忘记密码</a></span></li>     
-      </ul>
-    </div>
-    -->
+    </div>    
     <div class="zcdt"><img src="/img/zc_dt.jpg" /></div>
     <div id="loginWarning">
     <div class="area">

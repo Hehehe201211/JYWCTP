@@ -226,7 +226,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .mebBaseinfoL .mebInfo a{float:left;}
 .mebBaseinfoL .mebInfo span{float:left;}
 .mebBaseinfoL .progressBar{background: url("../img/zy_wsdbg.gif") no-repeat  0 center;display:block;height:30px;margin-right:6px;width:79px;}
-.mebBaseinfoL .progressBar span{width:20%;height:30px;display:block;background:url(../img/zy_wsd.gif) 0 center no-repeat;text-align:center;}
+.mebBaseinfoL .progressBar span{width:25%;height:30px;display:block;background:url(../img/zy_wsd.gif) 0 center no-repeat;text-align:center;}
 .mebBaseinfoL .icon{background:url(../img/zy_yhIcons.gif) 0 0 no-repeat;display:block;height:20px;margin:3px 7px 0;}
 .mebBaseinfoL .icon:hover{border-bottom:2px #EF8202 solid;padding-bottom:2px;text-decoration:underline;}
 .mebBaseinfoL .iconH{background-image:url(../img/zy_yhIconsH.gif);}
@@ -381,13 +381,15 @@ a.btnSearch:hover{background-position:0 -122px;}
 .imgYanzhengma{height:22px;margin:0 8px;vertical-align:text-bottom;}
 .sjle ul li input{width:218px;height:20px;float:left;line-height:20px;padding:0px 5px;margin:0px 5px;}
 .sjle ul li button,.sjle dl dt button{height:22px\9;line-height:18px\9}
+.sjle ul li .inpTextBox,.sjle ul li .inpFile{margin-left:0}
 .sjle ul li .prompt,.sjle dl dt .prompt{position:absolute;left:385px;top:0;width:179px;border:#009900 1px solid;background:#F3FBFF;color:#333;font-weight:normal;text-align:left;padding:1px 3px 0;z-index:90;}
 .sjle ul.jianzhi li input{margin:0;}
 .sjle ul li p{ float:left; width:200px;}
 .sjle ul li p span{ color:#ff9900; font-size:12px; line-height:18px;}
-.sjle ul li select{width:81px;height:20px;padding: 1px;margin-left: 2px}
+.sjle ul li select{width:81px;height:20px;padding: 1px;}
 .sjle ul li textarea{ float:left; width:300px; height:85px;resize:vertical;margin-left: 5px;}
 .sjle ul li ul,.sjle dl dt ul{width:450px;float:right;}
+.sjle ul li.avatar img{max-width:350px;}
 .sjle ul .products{padding:0 5px;}
 .sjle ul .products label{text-align:left;margin:0 0 0 6px;}
 .sjle ul .products label .inpCheckbox{margin-right:6px;float:none;vertical-align:text-bottom;}
@@ -710,30 +712,30 @@ a.btnSearch:hover{background-position:0 -122px;}
 .login h1{color:#F7941D;font:bold 16px"";padding:10px 0;text-align:center;background:url(../img/huiyx.gif) center bottom no-repeat;margin-bottom:12px;}
 .login ul {margin: 0 auto 15px;overflow: hidden;padding: 0;width: 250px;position:relative;}
 .login ul li{height:22px;line-height: 22px;margin-bottom: 8px;width: 225px;}
-.login ul li label {float: left;line-height: 20px;text-align: right;width: 70px;}
-.login ul li input{float: left;height: 20px;line-height: 20px;width: 135px;padding-left:5px;color: #999999;}
+.login ul li label{float: left;line-height: 20px;text-align: right;width: 70px;}
 .login ul li img{float:left;height:22px;}
-.login ul li .login_input{background:none; border:none;float:left;width:10px;}
 .login ul li .inp{margin:0 15px 0 70px;_margin:0 15px 0 30px;}
-.login ul li input#password{color:#333;}
+.login ul li .inpRadio{float:left;margin:3px 6px 0 0;*margin-top:0;}
+.login ul li .inpTextBox{float: left;height: 20px;line-height: 20px;width:135px;padding-left:5px;color:#999;}
+.login ul li .tL{text-align:left;width:55px;}
+.login ul li #password{color:#333;}
 #passwordL{color:#999;left:67px;position:absolute;top:31px;*top:32px;_top:33px;}
 #loginWarning{right:250px;top:80px;}
 #yanzhengma{width:67px;margin-right:3px;}
 #getCheckNum,.getCheckNum{color:#187EE3;margin:0 0 0 4px;font-weight:normal;}
 #getCheckNum:hover,.getCheckNum:hover{color:#003EE3;}
-#djbuz #getCheckNum img{height:20px;vertical-align:middle;}
 
-.renzheng{color: #333;font-size: 14px;line-height: 2;width:900px;margin:0 auto 8px;padding-left:300px;}
+.renzheng{color: #333;font-size:14px;line-height: 2;width:900px;margin:0 auto 8px;padding-left:300px;}
 .RZsuccess,.RZfailure{padding-left:200px;}
 .renzheng h2{color:#090;font:25px/32px "微软雅黑","黑体",sans-serif;height:43px;margin:20px 0 20px 45px;}
 .renzheng h2 span.reg-email-icon{background:url(../img/reg-ok.png) 0 0 no-repeat;display:block;height:38px;float:left;margin: 0 5px 0 0;width:39px;}
+.renzheng p{font-size:14px;}
+.renzheng p a{font-size:14px;color:#F30;}
+.renzheng p a:hover{color:#F00;text-decoration:underline;}
+.renzheng p strong{font-size:16px;color:#333;}
 .RZfailure h2{color:#F30;}
 .RZfailure h2 span.reg-email-icon{background-position:0 -76px;}
-.renzheng .errorMsg{background:url(../img/binded.gif) 0 -24px no-repeat;padding:9px 0 3px 16px;color:#F00;}
-.renzheng .reg-email{font-size:14px;}
-.renzheng .reg-email a{font-size:14px;color:#F30;}
-.renzheng .reg-email a:hover{color:#F00;text-decoration:underline;}
-.renzheng .reg-email strong{font-size:16px;color:#333;}
+.renzheng .errorMsg{background:url(../img/binded.gif) 0 -24px no-repeat;padding:9px 0 3px 16px;color:#F00;position:static;}
 .renzheng .yanzhen-email{font-size:14px;}
 .pbut{padding-left:230px;}
 .my_but{background:url(../img/zy_fl.gif) repeat-x 0;color:#EDEDED;display:block;font-weight:bold;height:28px;text-align:center;width:132px;font-size:14px;border:1px #f60 solid;}
@@ -767,6 +769,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 
 #djbuz{background:#FFF;}
 .divDjbuz{position:absolute;z-index:99;display:none;background:#FFF;overflow:hidden;padding-bottom:8px;}
+.divDjbuz .payTable tr{background:none;}
+.divDjbuz .tableDetail{padding-top:6px;}
+.divDjbuz .zclan4{margin-bottom:4px;}
 .djbuzTit{height:33px;}
 .biaot{width:287px; background:url(../img/xc_tit.jpg) no-repeat; font-size:14px; font-weight:bold; height:33px; line-height:33px; display:block; float:left; color:#FFF; text-indent:8px;}
 .biaot_wz{margin:10px 16px;}
@@ -809,14 +814,14 @@ a.btnSearch:hover{background-position:0 -122px;}
 .fk_zfan a:hover{color:#000;}
 .fk_zfan1{ margin:0px 8px; width:410px; height:30px; padding-left:130px;display:none;}
 .fk_zfan1 img{ float:left; display:block; margin-right:47px;}
-.payTable{margin:6px auto;width:500px;}
+.payTable{margin:8px auto;width:500px;}
 .payTable a{display:block;width:103px;height:21px;background:url(../img/btnbgs.gif) 0 -60px no-repeat;text-align:center;margin:3px 0 0 12px;float:left;}
 .payTable a:hover{background-position:0 -81px;}
 .payTable span{font-size:14px;font-weight:bold;padding:0 3px;color:#F50;}
 .payTable tr{height:32px;}
 .payTable th{font-size:14px;background:#E2E2E2;padding-left:20px;text-align:left;}
 .payTable td{font-size:14px;}
-.payTable td #code{vertical-align:middle;}
+.payTable td #code{vertical-align:top;height:22px;}
 .payTable .payShortage{background-image:none;width:120px;text-decoration:underline;color:#F30}
 .payTableTil{text-align:right;padding-right:12px;width:100px;}
 .txtComment{text-align:center;height:20px;line-height:20px;margin-top:15px;}

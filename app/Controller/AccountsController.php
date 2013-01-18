@@ -3,8 +3,18 @@ App::uses('CakeEmail', 'Network/Email');
 class AccountsController extends AppController
 {
     var $layout = 'members';
-    var $uses = array('Member', 'MemberAttribute', 'AccountTmp', 'FriendGroup', 'Friendship', 'StationMessage', 'CompanyAttribute');
-    var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit');
+    var $uses = array(
+                    'Member', 
+                    'MemberAttribute', 
+                    'AccountTmp', 
+                    'FriendGroup', 
+                    'Friendship', 
+                    'StationMessage', 
+                    'CompanyAttribute',
+                    'PaymentTransaction',
+                    'Information'
+    );
+    var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit', 'Upload', 'Thumbnail');
     var $helpers = array('Js', 'City', 'Category');
     /**
      * 
@@ -53,7 +63,40 @@ class AccountsController extends AppController
     
     public function editCheck()
     {
-        
+        $thumbnail = '';
+        if (isset($_FILES['face'])) {
+            $filename = $this->_memberInfo['Member']['id'] . '_face_thumbnail';
+            $path = TMP;
+            $result = $this->Upload->upload($_FILES['face'], $path, $filename, "image");
+            if ($result['result'] == 'OK') {
+                $path = "thumbnail/" . 
+                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+                if (!file_exists($path)) {
+                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                    try {
+                        exec($command);
+                    } catch (Exception $e) {
+                        $this->log($e->getMessage());
+                    }
+                }
+                $srcParams = array(
+                    'path' => $result['path'],
+                    'name' => $result['name']
+                );
+                $descParams = array(
+                    'imagepath' => Configure::read('Data.path') . $path,
+                    'imagename'      => "face_thumbnail",
+                    'outx'      => 112,
+                    'outy'      => 124
+                );
+                if ($this->Thumbnail->resize($srcParams, $descParams)){
+                    $thumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
+                    @unlink($result['path'] . '/' . $result['name']);
+                }
+            }
+        }
+        $this->set('thumbnail', $thumbnail);
     }
     
     public function editComplete()
@@ -73,6 +116,7 @@ class AccountsController extends AppController
             'company'           => "'{$this->request->data['company']}'",
             'category_id'       => "'{$this->request->data['category_id']}'",
             'business_scope'    => "'{$this->request->data['business_scope']}'",
+            'thumbnail'         => "'{$this->request->data['thumbnail']}'",
             'service'           => "'{$service}'"
         );
         $this->Member->updateAll($baseInfo, array('id' => $this->_memberInfo['Member']['id']));
@@ -317,7 +361,23 @@ class AccountsController extends AppController
             if ($this->RequestHandler->isAjax()) {
                 $this->render('fdetail-paginator');
             } else {
-                $firend = $this->Member->find('first', array('conditions' => array('id' => $this->request->query['fid'])));
+                $this->set('title_for_layout', "好友详细");
+                $joinAttribute = array(
+                    'table' => 'member_attributes',
+                    'alias' => 'Attribute',
+                    'type'  => 'inner',
+                    'conditions' => 'Attribute.members_id = Member.id'
+                );
+                $params = array(
+                    'conditions' => array('id' => $this->request->query['fid']),
+                    'fields'     => array('Member.nickname', 'Attribute.name', 'Attribute.category_id', 'Attribute.thumbnail'),
+                    'joins'      => array($joinAttribute)
+                );
+                $firend = $this->Member->find('first', $params);
+                $sendCount = $this->Information->find('count', array('conditions' => array('members_id' => $this->request->query['fid'])));
+                $transactionCount = $this->PaymentTransaction->find('count', array('conditions' => array('members_id' => $this->request->query['fid'])));
+                $this->set('sendCount', $sendCount);
+                $this->set('transactionCount', $transactionCount);
                 $this->set('firend', $firend);
             }
         } else {

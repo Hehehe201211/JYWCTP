@@ -119,6 +119,7 @@ $(document).ready(function(){
             success : function(data) {
                 var result = eval("("+data+")");
                 if (result.result == "OK") {
+                    //$('#result').load('/accounts/friend', {'group':[friend_groups_id]}, function(){});
                     alert(result.msg);
                 } else {
                     alert(result.msg);
@@ -202,9 +203,9 @@ function addGroup(){
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="new-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="grxxxg.html.html">账号管理</a>&gt;&gt;
-            <a href="#">好友管理</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+            <a href="javascript:void(0)">好友管理</a>
         </p>
         <!--<div class="zy_zszl"></div>-->
     </div>
@@ -233,7 +234,16 @@ function addGroup(){
             <li class="contacts-item">
                 <div class="img">
                     <a href="/accounts/fdetail?fid={$friend.Friendship.friend_members_id}" title="好友资料">
-                        <img alt="好友" src="{$this->webroot}img/tx.jpg">
+                        {if !empty($friend.Attribute.thumbnail)}
+                            {$thumbnail = Configure::read('Data.path')|cat:$friend.Attribute.thumbnail}
+                            {if file_exists($thumbnail)}
+                                <img src="{$this->webroot}{$friend.Attribute.thumbnail}">
+                            {else}
+                                <img alt="好友" src="{$this->webroot}img/tx.jpg">
+                            {/if}
+                        {else}
+                            <img alt="好友" src="{$this->webroot}img/tx.jpg">
+                        {/if}
                     </a>
                 </div>
                 <div class="name">

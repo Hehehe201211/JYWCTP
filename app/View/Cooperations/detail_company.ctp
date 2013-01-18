@@ -43,7 +43,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
   <div class="zy_zs">
-    <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="jltdjl.html">兼职管理</a>&gt;&gt;<a href="#">客源提供记录详情</a></p>
+    <p>
+    <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+    <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+    <a href="javascript:void(0)">客源提供记录详情</a>
+    </p>
   </div>
   <div class="mebleft">
     <div class="biaotit"><strong>{$sender.MemberAttribute.name}的会员信息</strong></div>

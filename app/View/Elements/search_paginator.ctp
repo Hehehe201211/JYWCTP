@@ -7,8 +7,8 @@
     class="con_2_table">
       <thead>
         <tr class="con_2_tr con_2_xq_too">
-            <th class="tr_td1">发布人</th>
-          <th width="207" class="tr_td1">产品</th>
+          <th width="70" class="tr_td1">发布人</th>
+          <th width="190" class="tr_td1">产品</th>
           <th width="110" class="tr_td2">{if $type == "has"}信息价格{else}悬赏金额{/if}</th>
           <th width="76" class="tr_td7">城市</th>
           <th width="61" class="tr_td5">点击次数</th>

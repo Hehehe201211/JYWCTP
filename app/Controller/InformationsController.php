@@ -269,7 +269,7 @@ class InformationsController extends AppController
             $params = array('conditions' => array('information_id' => $id));
             $paid = $this->PaymentTransaction->find('count', $params);
             if ($paid > 0) {
-                $reuslt = array('result'=> 'NG', 'msg' => '已经有人购买，不能撤销这条信息！');
+                $reuslt = array('result'=> 'NG', 'msg' => '已经有人购买，不能删除这条信息！');
             } else {
                 try {
                     $dataSource = $this->Information->getDataSource();

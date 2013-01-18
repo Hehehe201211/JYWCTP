@@ -1,6 +1,10 @@
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-zwscj.html">常规招聘</a>&gt;&gt;<a href="#">{$title}</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+      <a href="javascript:void(0)">{$title}</a>
+      </p>
     </div>  
      <div class="biaotit">{$title}</div>
         <div class="tableSort">

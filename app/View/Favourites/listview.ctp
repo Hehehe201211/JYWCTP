@@ -1,6 +1,10 @@
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wyjz.html">兼职管理</a>&gt;&gt;<a href="#">兼职收藏夹</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职收藏夹</a>
+      </p>
     </div> 
     <div class="biaotit">兼职收藏夹</div>
       <div class="tableSort">

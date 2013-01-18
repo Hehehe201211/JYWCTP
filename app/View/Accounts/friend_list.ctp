@@ -7,8 +7,17 @@
 {foreach $friendships as $friend}
     <li class="contacts-item">
         <div class="img">
-            <a href="hylx.html" title="好友资料">
-                <img alt="好友" src="{$this->webroot}img/tx.jpg">
+            <a href="/accounts/fdetail?fid={$friend.Friendship.friend_members_id}" title="好友资料">
+                {if !empty($friend.Attribute.thumbnail)}
+                    {$thumbnail = Configure::read('Data.path')|cat:$friend.Attribute.thumbnail}
+                    {if file_exists($thumbnail)}
+                        <img src="{$this->webroot}{$friend.Attribute.thumbnail}">
+                    {else}
+                        <img alt="好友" src="{$this->webroot}img/tx.jpg">
+                    {/if}
+                {else}
+                    <img alt="好友" src="{$this->webroot}img/tx.jpg">
+                {/if}
             </a>
         </div>
         <div class="name">

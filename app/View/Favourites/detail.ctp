@@ -32,7 +32,11 @@ $(document).ready(function(){
 
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wwtj.html">兼职管理</a>&gt;&gt;<a href="#">兼职信息收藏详情</a></p>      
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职信息收藏详情</a>
+      </p>      
     </div>   
     <div class="biaotit">{$parttime.PartTime.title}</div>
     <div class="gongsichakan_jobs jsxxxq">

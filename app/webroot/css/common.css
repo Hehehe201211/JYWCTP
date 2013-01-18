@@ -18,7 +18,7 @@ textarea{letter-spacing:1px;}
 .clear{clear:both;display:block;}
 .clearfix{clear:both;display:block;height:1px;}
 .clr666{color:#666;}
-.errorMsg{font-weight:normal !important;margin:0 8px;position:absolute;z-index:1;color:#F00;}
+.errorMsg{font-weight:normal !important;margin:0 8px !important;position:absolute !important;z-index:1;color:#F00 !important;}
 .fl{FLOAT:left !important;}
 .fr{FLOAT:right !important;}
 #goToTop{position:absolute;right:3px;width:45px;height:45px;background:url(../img/arrowGreyT.gif) 0 0 no-repeat;cursor:pointer;}

@@ -4,15 +4,41 @@ $(document).ready(function(){
     $('.status').live('change', function(){
         $('#informationList').load('/informations/issue?type=' + $('#info_type').val(), $('#informationList').serializeArray(), function(){});
     });
+    
+    $('.delete').live('click', function(){
+        var information_id = $(this).next('.information_id').val();
+        $this = $(this);
+        if (confirm("你确定要删除此信息吗？")) {
+            $.ajax({
+                url : '/informations/ajax_delete',
+                type : 'post',
+                data : 'information_id=' + information_id,
+                success : function(data){
+                    var result = eval("("+data+")");
+                    if (result.result == 'OK') {
+                        //location.href = location.href;
+                        $this.parent().parent().remove();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
 });
 {/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="#">我的聚客源</a>&gt;&gt;
-            <a href="#">信息记录</a>&gt;&gt;
-            <a href="#">{$naviText}</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            {if $type == "has"}
+                <a href="javascript:void(0)">我有客源</a>&gt;&gt;
+                <a href="javascript:void(0)">我的客源</a>
+            {else}
+                <a href="javascript:void(0)">我要客源</a>&gt;&gt;
+                <a href="javascript:void(0)">我的悬赏</a>
+            {/if}
         </p>
     </div>
     {if $type=="need"}
@@ -38,7 +64,7 @@ $(document).ready(function(){
                 <thead>
                     <tr class="con_2_tr con_2_xq_too">
                       <th width="236" class="tr_td1">产品</th>
-                      <th width="93" class="tr_td2">信息价格</th>
+                      <th width="93" class="tr_td2">{if $type == "need"}悬赏金额{else}信息价格{/if}</th>
                       <th width="68" class="tr_td7">城市</th>
                       <th width="52" class="tr_td4">状态</th>
                       <th width="58" class="tr_td5">点击次数</th>
@@ -74,7 +100,11 @@ $(document).ready(function(){
                                 {$status[{$info.Information.status} - 1]}
                             </td>
                             <td class="tr_td5">{$info.Information.clicked}</td>
-                            <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>                           
+                            <td class="con_2_xq_tofu xiushan_anniu">
+                                <a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a>
+                                <a class="delete" href="javascript:void(0)">删除</a>
+                                <input type="hidden" class="information_id" name="information_id" value="{$info.Information.id}" />
+                            </td>
                         </tr>
                     {/foreach}
             </table>

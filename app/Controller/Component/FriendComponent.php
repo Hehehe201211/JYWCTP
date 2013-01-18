@@ -23,7 +23,8 @@ class FriendComponent extends Component
             'Friendship.friend_groups_id',
             'Member.nickname',
             'Attribute.name',
-            'Attribute.company'
+            'Attribute.company',
+            'Attribute.thumbnail'
         );
         $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;

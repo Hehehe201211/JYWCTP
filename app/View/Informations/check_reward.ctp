@@ -95,15 +95,14 @@ $(document).ready(function(){
       </table>
       </form>
       <div class="divProtocol">
-              <label for="vehicle" class="protocol">
-                <input type="checkbox" class="inpCheckbox" name="accept" id="accept" style="background: none repeat scroll 0% 0% transparent;">
+              <label class="protocol">
+                <input type="checkbox" class="inpCheckbox" name="accept" id="accept"/>
                 我接受 <a href="#">《聚业务服务协议（试行）》</a> </label>
             </div>
       <div class="divBtnContainer" style="width:200px;">
 	<a class="zclan zclan7" href="javascript:void(0)" id="complete">发布</a> 
-            <a class="zclan zclan7" href="javascript:void(0)" id="back">修改</a>
+    <a class="zclan zclan7" href="javascript:void(0)" id="back">修改</a>
     </div>
     </div>
-            
-          </div>
-      </div>
+</div>
+</div>

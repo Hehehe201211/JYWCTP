@@ -6,8 +6,8 @@ $("body").append($(".divDjbuz"));
 	$( "#slider-price" ).slider({
 		range: true,
 		min: 0,
-		max: 5000,
-		values: [ 0, 3000 ],
+		max: 500,
+		values: [ 0, 100 ],
 		slide: function( event, ui ) {
 			$( "#amount-jiage" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
 		}
@@ -44,7 +44,16 @@ $("body").append($(".divDjbuz"));
 <div class="zy_z" style="overflow: visible;">
 <form id="searchOpt">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;{if $type == "need"}<a href="new-sddsx.html">我有客源</a>&gt;&gt;<a href="#">所有悬赏</a>{else}<a href="new-sddsx.html">我要客源</a>&gt;&gt;<a href="#">所有客源</a>{/if}</p>      
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      {if $type == "need"}
+        <a href="javascript:void(0)">我有客源</a>&gt;&gt;
+        <a href="javascript:void(0)">所有悬赏</a>
+      {else}
+          <a href="javascript:void(0)">我要客源</a>&gt;&gt;
+          <a href="javascript:void(0)">所有客源</a>
+      {/if}
+      </p>      
     </div>
     <div style="overflow:visible;" class="xxjs">
       <div class="biaotit">{if $type=="has"}所有客源{else}所有悬赏{/if}</div>
@@ -161,7 +170,7 @@ $("body").append($(".divDjbuz"));
       <div class="clearfix"></div>
       <ul>
       <li class="lists" style="width:255px;height:40px;">
-        <label>信息价格：</label>
+        <label>{if $type == "has"}信息价格{else}悬赏金额{/if}：</label>
         <input type="text" id="amount-jiage" name="price" />
         <div id="slider-price" style="margin-left:66px"></div>
       </li>

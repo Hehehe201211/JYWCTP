@@ -87,7 +87,7 @@
         </div>  
         <div class="clear"></div>
       </div>
-    <a style="margin-top:12px;" href="javascript:;" class="zclan zclan4 linkLogin">我需要</a>
+        <a style="margin-top:12px;" href="/informations/payment/{$this->request->query['id']}" class="zclan zclan4 linkLogin">{if $information.Information.type == Configure::read('Information.type.has')}我需要{else}我有客源{/if}</a>
    </div>
   <div class="sider">
     <div class="fuwu">         
