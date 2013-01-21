@@ -511,9 +511,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 .xxjs ul li {display: block;float: left;padding-bottom: 10px;width: 280px;}
 .xxjs ul li label {display: block;float: left;line-height: 21px;padding: 0 5px;text-align: right;width: 70px;}
 .xxjs ul li select{width:100px;padding: 1px 0;}
-.xxjs ul li .inpTextBox{height:18px;padding-left:3px;width: 140px;}
-#amount-jiage,#amount-shouyi{color:#f6931f; font-weight:bold;margin-bottom:5px;}
-.ui-widget-content{border: 1px solid #AAAAAA;color: #222222;}
+.xxjs ul li .inpTextBox{padding:3px;width: 140px;}
+#amount-jiage,#amount-shouyi{color:#f6931f; font-weight:bold;margin-bottom:5px;line-height:23px\9;*line-height:16px;}
+.ui-widget-content{border: 1px solid #AAA;color: #222;}
 .ui-slider-horizontal {height: 0.8em;}
 .ui-slider {position: relative;text-align: left;}
 .ui-slider-horizontal .ui-slider-range {height: 100%;top: 0;}
@@ -539,12 +539,14 @@ a.btnSearch:hover{background-position:0 -122px;}
 
 .switchBox .ui-state-default,.switchBox .ui-widget-content .ui-state-default,.switchBox .ui-widget-header .ui-state-default{background:url(../img/jqueryUi/ui-bg_glass_75_FABB85_1x400.png) repeat-x scroll 50% 50% #FF9900;border: 1px solid #D3D3D3;}
 .switchBox .ulParttime{margin-top:0;}
+.dtSwitchBox .divTable{*left:0;}
 .dtSwitchBox .divTable dl{width:343px;padding:0;}
 .dtSwitchBox .divTable dt{width:331px;margin-bottom:0;}
 .dtSwitchBox ul{float:left !important;}
+.dtSwitchBox .inpCheckbox{*margin-top:0 !important;}
 .dtSwitchBox .selectedOpts{width:460px;}
 .dtSwitchBox .selectedOpts li{min-width:60px;width:auto;margin-right:8px;}
-.dtSwitchBox .inpButton{margin-left:0;padding-top:0;}
+.dtSwitchBox .inpButton{margin-left:0;padding-top:0;line-height:24px\9;}
 
 .xxjs ul.eliteR{border:1px #CCC solid;}
 .xxjs ul.eliteR li{width:115px;text-align:center;padding:0;height:175px;border:1px #ccc solid;}
@@ -664,6 +666,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zhanghujil_top a:hover{background-color:#da8607;}
 #dangq{background:#f03434;} 
 .rightBody {padding:10px;}
+.rightBody button{line-height:18px\9;}
 .rightBody p{line-height:30px; padding:0px 10px; }
 .rightBody p input{letter-spacing:1px;margin:0 4px;text-align:center;}
 .rightBody p .inpRadio{vertical-align:text-top;*vertical-align:middle;}
@@ -700,9 +703,8 @@ a.btnSearch:hover{background-position:0 -122px;}
 .le ul li {padding: 3px 0 0 8px;width:100px;float:left;}
 .le ul li label {float: left;line-height: 24px;text-align: right;width: 80px;}
 .le ul li select {float: left;width: 100px;padding:1px 0;height:20px;}
-.zcl{height: 18px;line-height: 18px;padding:0 0 8px 100px;width: 300px;}
-.zcl input {float: left; margin: 0 5px;}
-.zcl p {float: left;width: 200px;}
+.zcl{height: 18px;line-height: 18px;padding:0 0 8px 115px;}
+.zcl .inpCheckbox{float: left;margin:2px 5px 0;*margin-top:0;}
 .protocol{color:#F00;}
 
 #zccon .ri{ width:305px; height:485px; float:left;border:1px #DDD solid;border-left:0px;position:relative;}

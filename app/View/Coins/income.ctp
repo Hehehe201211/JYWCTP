@@ -50,5 +50,5 @@ $(document).ready(function(){
       </div>
       </div>	
 </div>
-<div id="divDjbuz1" class="divDjbuz">
+<div id="divDjbuz1" class="divDjbuz" style="width:550px;">
 </div>

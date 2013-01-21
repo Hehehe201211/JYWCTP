@@ -5,7 +5,7 @@
 a{color:#333;text-decoration:none;outline:none;}
 a:hover{color:#F50;}
 body{font-family:/*"微软雅黑",*/"宋体",Arial;color:#333;line-height: 22px;}
-button{padding-left:3px;padding-right:3px;margin:0 3px;}
+button{padding-left:3px;padding-right:3px;margin:0 3px;*padding-left:0;*padding-right:0;}
 h1,h2,h3,h4,h5{font-size:12px;margin:0;padding:0;font-weight:normal;}
 img{border: medium none;}
 option{margin:2px 3px;}
@@ -174,7 +174,7 @@ tbody .btnSingle a:hover{background-position:-50px -102px;}
 .switchBox .subOptions .dt{background:none;font-weight:normal;color:#06B;padding-left:0;width:343px;}
 .switchBox .subOptions .dt .inpCheckbox{margin-left:3px;}
 .switchBox .keyword{width:205px;}
-.switchBox .keyword .inpTextBox{width:197px;padding:1px 3px;}
+.switchBox .keyword .inpTextBox{width:197px;padding:3px;}
 
 .fanyea{margin:0 0 8px;text-align:center;border-top:1px #999 dashed;padding-top:6px;clear:both;}
 .fanyea input, .fanyea label {float: none !important;}

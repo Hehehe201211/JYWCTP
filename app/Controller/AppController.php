@@ -107,7 +107,8 @@ class AppController extends Controller {
             'accounts'      => array('eComplete'),
             'homes'         => array(),
             'resources'     => array('index', 'detail', 'listview', 'search'),
-            'notices'       => array()
+            'notices'       => array(),
+            'alipays'       => array('notify', 'callback')
         );
         $checkSession = true;
         $this->_memberInfo = $this->Session->read('memberInfo');

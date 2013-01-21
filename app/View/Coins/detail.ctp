@@ -56,7 +56,7 @@
                     </tr>
                 {/if}
                 <tr>
-                    <th>客户选择服务商因素：</th>
+                    <th>选择服务商因素：</th>
                     <td>{$information.Information.reason}</td>
                 </tr>                               
                 <tr>

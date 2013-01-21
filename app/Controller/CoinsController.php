@@ -9,14 +9,15 @@ class CoinsController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-	var $components = array('RequestHandler', 'Fund', 'Unit');
-	var $uses = array(
-	    'PaymentHistory',
-	    'MemberAttribute',
-	    'Information',
-	    'InformationTransaction'
-	);
-	var $paginate;
+      var $components = array('RequestHandler', 'Fund', 'Unit');
+      var $uses = array(
+          'PaymentHistory',
+          'MemberAttribute',
+          'Information',
+          'InformationTransaction',
+          'AlipayCharge'
+      );
+      var $paginate;
     /**
      * 
      * 聚客币余额
@@ -32,8 +33,61 @@ class CoinsController extends AppController
      */
     public function charge()
     {
-        
+        $conditions = array(
+            'members_id'    => $this->_memberInfo['Member']['id'],
+            'delete_flg'    => 0
+        );
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
+        $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
+        $this->paginate = array(
+            'AlipayCharge' => array('limit' => $pageSize,
+                'page'  => $page,
+                'order' => array('AlipayCharge.created' => 'DESC'),
+                'conditions' => $conditions,
+            )
+        );
+        $this->set('pageSize', $pageSize);
+        $this->set("charges", $this->paginate('AlipayCharge'));
+        if ($this->RequestHandler->isAjax()) {
+            if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
+                $this->set('jump', $page);
+            }
+            $this->render('charge-paginate');
+        }
     }
+    /**
+     * 
+     * 删除充值履历
+     */
+    public function delete()
+    {
+        if (isset($this->request->data['order_no']) && !empty($this->request->data['order_no'])) {
+            $conditions = array(
+                'order_no' => $this->request->data['order_no'],
+                'members_id' => $this->_memberInfo['Member']['id']
+            );
+            $updata = array('delete_flg' => 1);
+            try {
+                $this->AlipayCharge->updateAll($updata, $conditions);
+                $result = array(
+	                'result' => 'OK',
+	            );
+            } catch (Exception $e) {
+                $result = array(
+	                'result' => 'NG',
+	                'msg'    => '系统发生错误，请稍后再试！'
+	            );
+	            $this->log($e->getMessage());
+            }
+        } else {
+            $result = array(
+                'result' => 'NG',
+                'msg'    => '没有可以删除的对象！'
+            );
+        }
+        $this->_sendJson($result);
+    }
+    
     /**
      * 
      * 聚客币收入详细
@@ -85,9 +139,9 @@ class CoinsController extends AppController
         ) {
             $error = true;
         } else {
-	        $information_id = $this->request->data['information_id'];
-	        $type = $this->request->data['type'];
-	        $error = $this->Fund->detail($information_id, $type, Configure::read('Information.payment_type_coin'));
+              $information_id = $this->request->data['information_id'];
+              $type = $this->request->data['type'];
+              $error = $this->Fund->detail($information_id, $type, Configure::read('Information.payment_type_coin'));
         }
         
         $this->set('error', $error);

@@ -305,16 +305,17 @@ $(document).ready(function(){
                 <option value="座机">座机</option>
                 <option value="手机">手机</option>
                 <option value="QQ">QQ</option>
+                <option value="邮箱">邮箱</option>
                 <option value="MSN">MSN</option>
               </select>
             </div>
             <input type="text" name="contact_content[]" style="width:108px;" class="contact_content" onpaste="Emailstr(this)" onkeyup="Emailstr(this)"/>
             <button class="addContact">添加</button><button class="deleContact">删除</button>
           </dt>
-            <dt>
+            <!--<dt>
               <label>联系邮箱：</label>
               <input type="text" class="post" name="email" value="{if isset($this->data['email'])}{$this->data['email']}{/if}" />
-              （如果有多个邮箱，请以“,”隔开） </dt>
+              （如果有多个邮箱，请以“,”隔开） </dt>-->
             <dt>
               <label>联系地址：</label>
               <input type="text" name="address" class="contact_method" value="{if isset($this->data['address'])}{$this->data['address']}{/if}" />

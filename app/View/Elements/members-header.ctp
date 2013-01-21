@@ -105,8 +105,8 @@
         <ul>
           <li><a href="/" target="_blank">首页</a></li>
           <li><a href="/members">{if $memberInfo.Member.type == Configure::read('UserType.Personal')}个人主页{else}企业主页{/if}</a></li>
-          <li><a href="/accounts/friend">好友</a></li>
-          <li><a href="/parttime/listview?type=need">兼职</a></li>
+          <li>{if $memberInfo.Member.type == Configure::read('UserType.Personal')}<a href="/accounts/friend">好友</a>{else}<a href="/resumes/search">招聘</a>{/if}</li>
+          <li>{if $memberInfo.Member.type == Configure::read('UserType.Personal')}<a href="/parttime/listview?type=need">兼职</a>{else}<a href="/elites/listview">兼职</a>{/if}</li>
           <li><a href="/accounts/sms">站内信</a></li>
         </ul>
         <p><a href="#">搜索</a></p>

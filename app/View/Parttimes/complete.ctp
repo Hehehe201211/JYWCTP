@@ -2,7 +2,7 @@
     <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>     
     </div>   
-<ul class="ulFormStep">
+<ul class="ulFormStep ulFormStep3">
       <li>1.填写兼职信息</li>
       <li>2.确认兼职信息</li>
       <li>3.兼职发布成功</li>

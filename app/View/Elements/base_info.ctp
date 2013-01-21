@@ -1,3 +1,4 @@
+       {if $memberInfo.Member.grade == 2}
       <div class="mebBaseinfo">
         <div class="mebBaseinfoL">
           <table width="100%" height="100%" border="0">
@@ -42,21 +43,12 @@
               <td colspan="2" class="mebInfo">
                 <span>资料完整度：</span>
                 <span class="progressBar">
-                    {if $memberInfo.Member.grade == 2}
-		            <span style="width:100%">&nbsp;100%&nbsp;</span>
-		            {else}
-		            <span>&nbsp;20%&nbsp;</span>
-		            {/if}</span><a href="/accounts/edit">完善资料</a>{if $memberInfo.Member.grade == 2}
+                    <span style="width:100%">&nbsp;100%&nbsp;</span>
+                    </span><a href="/accounts/edit">完善资料</a>
 		             <a class="icon iconS iconH" href="/accounts/security" title="身份已认证"></a>
 		             <a class="icon iconM iconH" href="/accounts/security" title="已绑定邮箱"></a>
 		             <a class="icon iconT iconH" href="/accounts/security" title="已绑定手机"></a>
 		             <a class="icon iconB iconH" title="已绑定支付宝" href="/accounts/security"></a>
-		            {else}
-		             <a class="icon iconS" href="/accounts/security" title="身份未认证"></a>
-		             <a class="icon iconM iconH" href="/accounts/security" title="已绑定邮箱"></a>
-		             <a class="icon iconT iconH" href="/accounts/security" title="已绑定手机"></a>
-		             <a class="icon iconB" title="未绑定支付宝" href="/accounts/security"></a>
-		            {/if}
             </td>
             </tr>
           </table>
@@ -83,3 +75,49 @@
           </dl>
         </div>
       </div>
+      {else}
+      <div class="mebBaseinfo">
+  <div class="mebBaseinfoL">
+    <table width="100%" height="100%" border="0">
+      <tr>
+        <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
+        <td width="66%">会员昵称：{$memberInfo.Member.nickname}</td>
+      </tr>
+      <tr>
+        <td>会员等级：初级</td>
+      </tr>
+      <tr>
+        <td>绑定邮箱：{$memberInfo.Member.email}</td>
+      </tr>
+      <tr>
+        <td>绑定手机：<a style="float:none" href="/members/upgrade">完善资料</a></td>
+      </tr>
+      <tr>
+        <td>行业：<a style="float:none" href="/members/upgrade">完善资料</a></td>
+      </tr>
+      <tr>
+        <td>地址：<a style="float:none" href="/members/upgrade">完善资料</a></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="mebInfo"><span>资料完整度：</span><span class="progressBar"><span>&nbsp;25%&nbsp;</span></span><a href="/members/upgrade">完善资料</a>
+                <a title="未认证身份" href="/members/upgrade" class="icon iconS"></a>
+                <a title="已绑定邮箱" href="/members/upgrade" class="icon iconM iconH"></a>
+                <a title="未绑定手机" href="/members/upgrade" class="icon iconT"></a>
+                <a title="未绑定支付宝" href="/members/upgrade" class="icon iconB"></a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="mebBaseinfoR">
+    <dl>
+      <dd>客源总发布量：<strong>0</strong>条</dd>
+      <dd>悬赏总发布量：<strong>0</strong>条</dd>
+      <dd>常规招聘总职位：<strong>0</strong>个</dd>
+      <dd>平台兼职总职位：<strong>0</strong>个</dd>
+      <dd>高级个人会员：<strong>0</strong>位</dd>
+      <dd>高级企业会员：<strong>0</strong>家</dd>
+      <dd class="upgrade"><a href="/members/upgrade">·升级到高级会员</a></dd>
+    </dl>
+  </div>
+</div>
+      {/if}
+      

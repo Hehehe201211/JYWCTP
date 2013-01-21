@@ -19,7 +19,7 @@ $("body").append($(".divDjbuz"));
 		var id = $(this).parent().parent().attr('id');
 		var type = $('#detail_type').val();
 		var num = $(this).parent().parent().find('.tr_td5');
-		$('#divDjbuz1').load('/informations/ajax_payment #djbuz', {'id' : id, 'type' : type}, function(){			
+		$('#divDjbuz1').load('/informations/ajax_payment', {'id' : id, 'type' : type}, function(){			
 			bgKuang("#divDjbuz1",".divDjbuz .closeKuang");	
 			var clicked = $('#divDjbuz1').find('#clicked').val();
 			if (clicked == 1) {

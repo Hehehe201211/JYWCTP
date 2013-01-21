@@ -21,7 +21,7 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>      
     </div>    
-<ul class="ulFormStep">
+<ul class="ulFormStep ulFormStep2">
       <li>1.填写兼职信息</li>
       <li>2.确认兼职信息</li>
       <li>3.兼职发布成功</li>
@@ -136,13 +136,13 @@ $(document).ready(function(){
                 </td>
               </tr>
               {/foreach}
-              <tr>
+              <!--<tr>
                 <td class="tdRight">联系邮箱：</td>
                 <td class="tdLeft" colspan="3">
                 {$this->data['email']}
                 <input type="hidden" name="email" value="{$this->data['email']}">
                 </td>
-              </tr>
+              </tr>-->
               <tr>
                 <td class="tdRight">联系地址：</td>
                 <td class="tdLeft" colspan="3">

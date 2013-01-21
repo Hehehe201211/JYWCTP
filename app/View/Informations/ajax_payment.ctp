@@ -1,4 +1,3 @@
-<div style="width:550px;" id="djbuz">
 	<div class="djbuzTit">
 		<span class="fk_tit">{$information.Information.title}</span>
 		<a href="javascript:void(0)" title="关闭" class="closeKuang">
@@ -83,7 +82,7 @@
         {if $type=="has" && $memberInfo.Member.grade < 1}
 				<tr>
 					<th>&nbsp;</th>
-					<td><em>你的会员等级不足以购买此信息，是否立即<a target="_blank" href="/members/upgrade">提升会员等级</a>？</em></td>
+					<td><em>你的会员等级不足以购买此信息，是否立即<a target="_blank" href="/members/upgrade" style="text-decoration:underline;font-weight:bold;">提升会员等级</a>？</em></td>
 				</tr>
 				{/if}
         <tr>
@@ -96,13 +95,14 @@
         </tr>
       </table>
       <div class="divBtnContainer" style="width:200px;">
+      {if $memberInfo.Member.grade == 2}
 	{if $type=="has"}
 	<a target="_blank" href="/informations/payment/{$information.Information.id}" class="zclan zclan7 close">我要客源</a>
 	{else}
 	<a target="_blank" href="/informations/create/has/?target={$information.Information.id}&target_member={$information.Information.members_id}" class="zclan zclan7 close">我有客源</a>
 	{/if}
+    {/if}
 	<a href="javascript:void(0)" class="zclan zclan7 close">关闭详情</a>
     </div>
     </div> 	
-	<input type="hidden" value="{$clicked}" id="clicked" name="clicked">    
-</div>
+	<input type="hidden" value="{$clicked}" id="clicked" name="clicked">

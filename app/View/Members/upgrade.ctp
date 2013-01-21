@@ -53,7 +53,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#category').change(function(){
+	$('#category').change(function(){	
 		$('ul.products').html('');
 		if ($(this).val() != "") {
 			$.ajax({
@@ -69,6 +69,7 @@ $(document).ready(function(){
 				}
 			});
 		}
+		$('ul.products').parents('li').find('.errorMsg').remove();
 	});
 	
 	$('#captcha').click(function(){
@@ -77,69 +78,50 @@ $(document).ready(function(){
 	});
 	
 	$('a.zclan').click(function(){
+	    $(this).parents(".sjle").find(".errorMsg").remove();	
 		if(!checkData()) {
 			$('#member_upgread').submit();
 		}
 	});
    var checkTarget = ['name', 'mobile', 
-                    'telephone', 'business_scope',
+                    'business_scope',
                     'pay_account', 'pay_password', 'pay_password_check'
                     ];
-    var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>'
-    function checkData() 
-    {
+    var errorMsg = '<span class="errorMsg">请输入此项目</span>'	
+    function checkData() {
         var error=0;
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
-                if($('#' + this).parent('li').find('.errorMsg').length == 0) {
-                    $('#' + this).parent('li').append(errorMsg);
-                }
+                $('#' + this).parent('li').append(errorMsg);
                 error=1;
-            } else {
-                $('#' + this).parent('li').find('.errorMsg').remove();
-            }
+            } 
         });
         if ($('#provincial').val() == "请选择"||$('#city').val() == "")
         {
-        	if ($('#provincial').parent().parent().find('.errorMsg').length == 0) {
-        		$('#provincial').parent().parent().append(errorMsg);
-        	}
+        	$('#provincial').parent().parent().append(errorMsg);
         	error = 1;
-        } else {
-        	$('#provincial').parent().parent().find('.errorMsg').remove();
-        }
+        } 
         if ($('#category').val() == "")
         {
-        	if ($('#category').parent().parent().find('.errorMsg').length == 0) {
-        		$('#category').parent().parent().append(errorMsg);
-        	}
+        	$('#category').parent().parent().append(errorMsg);
         	error = 1;
-        } else {
-        	$('#category').parent().parent().find('.errorMsg').remove();
-        }
-        if ($("input.sub_category:checked").length == 0){
-        	if ($('.products').parent().find('.errorMsg').length == 0) {
-        		$('.products').parent().append(errorMsg);
-        	}
+        } 
+        if ($("input.sub_category:checked").length == 0) {
+        	$('.products').parent().append(errorMsg);
         	error = 1;
-        } else {
-        	$('.products').parent().find('.errorMsg').remove();
-        }
-        if($('#vehicle').attr('checked') != "checked") {
-			if ($('.protocol').children('span').length==0) $('.protocol').append('<span style="color:red">请接受协议内容</span>');
+        } 
+		if ($("#pay_password_check").val()!=""&&($("#pay_password_check").val()!==$("#pay_password").val())) {
+			$('#pay_password_check').after('<span class="errorMsg">两次密码输入不一致</span>');
 			error = 1
-		} else {
-			$('.protocol span').remove();
 		}
-		if ($('#checkNum').val() == "")
-        {
-        	if ($('#checkNum').parent().find('.errorMsg').length == 0) {
-        		$('#checkNum').parent().append(errorMsg);
-        	}
+        if($('#vehicle').attr('checked') != "checked") {
+			$('.protocol').append('<span class="errorMsg">请接受协议内容</span>');
+			error = 1
+		} 
+		if ($('#checkNum').val() == "") {
+        	$('#checkNum').parent().append(errorMsg);
         	error = 1;
-        } else {
-        	$('#checkNum').parent().parent().find('.errorMsg').remove();
-        }
+        } 
         return error;
     }
 });
@@ -243,7 +225,7 @@ $(document).ready(function(){
           </li>
           <li>
             <label>上传头像：</label>
-            <input type="file" style="height:auto;height:22px;" size="20" id="face" name="face">
+            <input type="file" style="height:22px;" size="20" id="face" name="face">
           </li>
           <li style="text-align:left;">
             <label><font class="facexh">*</font>验证码：</label>

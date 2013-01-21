@@ -23,36 +23,25 @@ class AlipaysController extends AppController
      */
     public function send()
     {
-        $this->autoRender = false;
+        $this->layout = 'alipay';
         $out_trade_no = Alipay::makeOrderNo();
         $subject = "聚业务 业务币充值";
         $body = "";
-        $total_fee = $this->request->params['price'];
-        
-        $pay_mode = $this->request->params['pay_bank'];
-        if ($pay_mode == "directPay"){
-            $paymethod = "directPay";
-            $defaultbank = "";
-        } else {
-            $paymethod = "bankPay";
-            $defaultbank = $pay_mode;
-        }
+        $total_fee = $this->request->data['price'];
         
         $encrypt_key = "";
         $exter_invoke_ip = "";
         if (Configure::read("Alipay.antiphishing") == 1){
-            $encrypt_key = Alipay::query_timestamp($partner);
-            $exter_invoke_ip = $this->_getClientIp();
         }
         
         $extra_common_param = "";
         $buyer_email = "";
         
         $parameter = array(
-            "servie"            => "create_direct_pay_by_user",
+            "service"            => "create_direct_pay_by_user",
             "payment_type"      => "1",
             "partner"           => Configure::read("Alipay.partner"),
-            "seller_email"      => Configure::read("Alipay.seller_email"),
+            "seller_id"      => Configure::read("Alipay.partner"),
             "return_url"        => Configure::read("Alipay.return_url"),
             "notify_url"        => Configure::read("Alipay.notify"),
             "_input_charset"    => Configure::read("Alipay._input_charset"),
@@ -62,10 +51,6 @@ class AlipaysController extends AppController
             "subject"           => $subject,
             "body"              => $body,
             "total_fee"         => $total_fee,
-            
-//            "paymethod"         => $paymethod,
-//            "defaultbank"       => $defaultbank,
-            
             "anti_phishing_key" => $encrypt_key,
             "exter_invoke_ip"   => $exter_invoke_ip,
             
@@ -78,7 +63,12 @@ class AlipaysController extends AppController
         );
         try {
             $this->AlipayCharge->save($chargeData);
-            $this->set('parameter', $parameter);
+            $para_filter = Alipay::paraFilter($parameter);
+            $para_sort = Alipay::argSort($para_filter);
+            $mySign = Alipay::makeRequestMySign($para_sort);
+            $para_sort['sign'] = $mySign;
+            $para_sort['sign_type'] = strtoupper(trim(Configure::read('Alipay.sign_type')));
+            $this->set('parameters', $para_sort);
         } catch (Exception $e) {
             $this->log($e->getMessage());
         }
@@ -91,6 +81,50 @@ class AlipaysController extends AppController
     public function notify()
     {
         $this->autoRender = false;
+        $this->autoLayout = false;
+        $data = $this->request->data;
+        $error = false;
+        $this->log(__FUNCTION__ . " This request params from alipay platform.\n" . print_r($data, true));
+        if (isset($data['notify_id']) && 
+            !empty($data['notify_id']) && 
+            isset($data['out_trade_no']) && 
+            !empty($data['out_trade_no']) &&
+            isset($data['sign']) &&
+            isset($data['sign_type'])
+        ) {
+            $sign = $data['sign'];
+            unset($data['sign']);
+            unset($data['sign_type']);
+            $para_filter = Alipay::paraFilter($data);
+            $para_sort = Alipay::argSort($para_filter);
+            if (Alipay::checkAlipaySign($para_sort, $sign)) {
+                if ($this->_isAlipayRequest($data['notify_id'])) {
+                    $alipayCharge = $this->AlipayCharge->find('first', array('conditions' => array('order_no' => $data['out_trade_no'])));
+                    if (!empty($alipayCharge)) {
+                        if ($alipayCharge['AlipayCharge']['status'] == Configure::read('Alipay.status_confirm')) {
+                            $error = !$this->AlipayCharge->updateStatus($data, $alipayCharge, 'notify');
+                        }
+                    } else {
+                        $this->log(__FUNCTION__ . " This order_no is not exist.\n" . print_r($data, true));
+                    }
+                } else {
+                    $this->log(__FUNCTION__ . " This request is not from alipay platform.\n" . print_r($data, true));
+                    $error = true;
+                }
+            } else {
+                $this->log(__FUNCTION__ . " This sign is wrong.\n" . print_r($data, true));
+                $error = true;
+            }
+        } else {
+            $this->log(__FUNCTION__ . " This request params are error from alipay platform.\n" . print_r($data, true));
+            $error = true;
+        }
+        if (!$error) {
+            echo 'success';
+        } else {
+            echo 'failure';
+        }
+        
     }
     /**
      * 
@@ -99,6 +133,47 @@ class AlipaysController extends AppController
     public function callback()
     {
         $this->autoRender = false;
+        $data = $this->request->query;
+        $error = false;
+        if (isset($data['notify_id']) && 
+            !empty($data['notify_id']) && 
+            isset($data['out_trade_no']) && 
+            !empty($data['out_trade_no']) &&
+            isset($data['sign']) &&
+            isset($data['sign_type'])
+        ) {
+            $sign = $data['sign'];
+            unset($data['sign']);
+            unset($data['sign_type']);
+            $para_filter = Alipay::paraFilter($data);
+            $para_sort = Alipay::argSort($para_filter);
+            if (Alipay::checkAlipaySign($para_sort, $sign)) {
+	            if ($this->_isAlipayRequest($data['notify_id'])) {
+		            $alipayCharge = $this->AlipayCharge->find('first', array('conditions' => array('order_no' => $data['out_trade_no'])));
+	               if (!empty($alipayCharge)) {
+                        if ($alipayCharge['AlipayCharge']['status'] == Configure::read('Alipay.status_confirm')) {
+                            $error = !$this->AlipayCharge->updateStatus($data, $alipayCharge);
+                        }
+                    } else {
+                        $this->log(__FUNCTION__ . " This order_no is not exist.\n" . print_r($data, true));
+                    }
+	            } else {
+	                $this->log(__FUNCTION__ . " This request is not from alipay platform.\n" . print_r($data, true));
+	                $error = true;
+	            }
+            } else {
+                $this->log(__FUNCTION__ . " This sign is wrong.\n" . print_r($data, true));
+                $error = true;
+            }
+        } else {
+            $this->log(__FUNCTION__ . " This request params are error from alipay platform.\n" . print_r($data, true));
+            $error = true;
+        }
+        if (!$error) {
+            $this->redirect('/coins/charge');
+        } else {
+            $this->redirect(array('controller' => 'coins', 'action' => 'error', 'order_no' => $data['out_trade_no']));
+        }
     }
     
     /**
@@ -108,6 +183,22 @@ class AlipaysController extends AppController
     public function cancel()
     {
         $this->autoRender = false;
+    }
+    /**
+     * 
+     * Enter description here ...
+     */
+    private function _isAlipayRequest($notify_id)
+    {
+        $request = new HttpSocket();
+        $url = Configure::read('Alipay.alipay_gateway_new');
+        $query = array(
+            'service'   => 'notify_verify',
+            'partner'   => Configure::read('Alipay.partner'),
+            'notify_id' => $notify_id
+        );
+        $request = $request->get($url, $query);
+        return $request;
     }
     
     public function beforeRender()
