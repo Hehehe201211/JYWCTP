@@ -27,41 +27,40 @@ $(document).ready(function(){
       <li>3.兼职发布成功</li>
     </ul>
       <div class="sjle">
-        <div class="xq_zl">
-          <div class="xq_zl_xbxq">
+<div class="tableDetail">
           <form method="post" action="" id="completeForm">
             <div class="biaotit">
             {$this->data['title']}
             <input type="hidden" name="title" value="{$this->data['title']}">
             </div>
-            <table width="570">
+            <table width="100%">
               <tbody>
               <tr>
-                <td class="tdRight connection">产品所属分类：</td>
-                <td class="tdLeft" colspan="3">
+                <th width="25%">产品所属分类：</th>
+                <td width="75%" class="red">
                 {$this->Category->getCategoryName($this->data['category'])} {$this->Category->getCategoryName($this->data['sub_category'])}
                 <input type="hidden" name="category" value="{$this->data['category']}">
                 <input type="hidden" name="sub_category" value="{$this->data['sub_category']}">
                 </td>
               </tr>
               <tr>
-                <td class="tdRight connection">产品具体名称：</td>
-                <td class="tdLeft" colspan="3">
+                <th>产品具体名称：</th>
+                <td>
                 {$this->data['sub_title']}
                 <input type="hidden" name="sub_title" value="{$this->data['sub_title']}">
                 </td>
               </tr>
               <tr>
-                <td class="tdRight">兼职时间：</td>
-                <td class="tdLeft" colspan="3">
+                <th>兼职时间：</th>
+                <td>
                 {$this->data['open']} - {$this->data['close']}
                 <input type="hidden" name="open" value="{$this->data['open']}">
                 <input type="hidden" name="close" value="{$this->data['close']}">
                 </td>
               </tr>
               <tr>
-                <td width="132" class="tdRight connection">客户区域范围：</td>
-                <td class="tdLeft" colspan="3">
+                <th>客户区域范围：</th>
+                <td class="red">
                 {foreach $this->data['citys'] as $id}
                 {$this->City->cityName($id)}
                 <input type="hidden" name="citys[]" value="{$id}">
@@ -69,8 +68,8 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight connection">兼职配合方式：</td>
-                <td class="tdLeft" colspan="3">
+                <th>兼职配合方式：</th>
+                <td class="red">
                 {if $this->data['method'] == 1}
                 提供客户信息
                 {elseif $this->data['method'] == 2}
@@ -82,8 +81,8 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight connection">报酬：</td>
-                <td class="tdLeft" colspan="3">
+                <th>报酬：</th>
+                <td class="red">
                 {if $this->data['pay'] == 1}
                 按合同金额百分比：{$this->data['pay_rate']}%
                 <input type="hidden" name="pay_rate" value="{$this->data['pay_rate']}">
@@ -97,8 +96,8 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight connection">报酬支付时间：</td>
-                <td class="tdLeft" colspan="3">
+                <th>报酬支付时间：</th>
+                <td class="red">
                 {if $this->data['pay_method'] == 1}
                 收款后{$this->data['pay_time']}个工作日内转账
                 {else}
@@ -109,8 +108,8 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight connection">兼职者推荐参与行业：</td>
-                <td class="tdLeft" colspan="3">
+                <th>兼职者推荐参与行业：</th>
+                <td>
                 {if isset($this->data['categorys'])}
                     {foreach $this->data['categorys'] as $id}
                     {$this->Category->getCategoryName($id)} 
@@ -120,16 +119,16 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight">联系人：</td>
-                <td class="tdLeft" colspan="3">
+                <th>联系人：</th>
+                <td>
                 {$this->data['contact']}
                 <input type="hidden" name="contact" value="{$this->data['contact']}">
                 </td>
               </tr>
               {foreach $this->data['contact_method'] as $key => $value}
               <tr>
-                <td class="tdRight">联系方式：</td>
-                <td class="tdLeft" colspan="3">
+                <th>联系方式：</th>
+                <td>
                 {$value} {$this->data['contact_content'][$key]}
                 <input type="hidden" name="contact_method[]" value="{$value}">
                 <input type="hidden" name="contact_content[]" value="{$this->data['contact_content'][$key]}">
@@ -137,22 +136,22 @@ $(document).ready(function(){
               </tr>
               {/foreach}
               <!--<tr>
-                <td class="tdRight">联系邮箱：</td>
-                <td class="tdLeft" colspan="3">
+                <th>联系邮箱：</th>
+                <td>
                 {$this->data['email']}
                 <input type="hidden" name="email" value="{$this->data['email']}">
                 </td>
               </tr>-->
               <tr>
-                <td class="tdRight">联系地址：</td>
-                <td class="tdLeft" colspan="3">
+                <th>联系地址：</th>
+                <td>
                 {$this->data['address']}
                 <input type="hidden" name="address" value="{$this->data['address']}">
                 </td>
               </tr>
               <tr>
-                <td class="tdRight">报酬支付说明：</td>
-                <td class="tdLeft" colspan="3">
+                <th>报酬支付说明：</th>
+                <td>
                 <p>
               {$this->data['pay_explanation']}
               <input type="hidden" name="pay_explanation" value="{$this->data['pay_explanation']}">
@@ -160,8 +159,8 @@ $(document).ready(function(){
                 </td>
               </tr>
               <tr>
-                <td class="tdRight">兼职补充说明：</td>
-                <td class="tdLeft" colspan="3">
+                <th>兼职补充说明：</th>
+                <td>
                 <p>
               {$this->data['additional']}
               <input type="hidden" name="additional" value="{$this->data['additional']}">
@@ -175,10 +174,11 @@ $(document).ready(function(){
               <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehiclePT">
               我接受 <a href="#">《聚业务兼职政策（试行）》</a> </label>
           </div>
-          <a href="javascript:void(0)" class="zclan zclan2" id="complete">提交</a>
-          <a href="javascript:void(0)" class="zclan zclan2" id="back">修改</a>
+          <div class="divBtnContainer" style="width:200px;">
+          <a href="javascript:void(0)" class="zclan zclan7" id="complete">提交</a>
+          <a href="javascript:void(0)" class="zclan zclan7" id="back">修改</a>
+          </div>
           </form>
           </div>
-        </div>
       </div>      
     </div>   

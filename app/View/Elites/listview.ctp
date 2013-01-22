@@ -1,29 +1,6 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    //边框
-    $(".xxjs .eliteR li").hover(function(){
-        if($(this).children("a").length!=0) $(this).css("border-color","#F50");
-    },function(){
-        $(this).css("border-color","#ccc");
-    });
-    
-    //地图检索
-    /*var strPosition;
-    $(".toggleMap").toggle(function(){
-        $(".divMapCon").show("fast",function(){
-           strPosition=new googlemapjsv3({lat:"",lng:"",strCompany:"",pChange:false});
-        });
-        $(this).text("隐藏地图检索");
-    },function(){
-        $(".divMapCon").hide("fast");
-        $(this).text("打开地图检索");
-        strPosition=null;
-    });
-    $("#codeAddress").click(function(){
-        var a=document.getElementById("geostrPosition").value;
-        strPosition.codeAddress(a);
-    });*/
     $('#searchBtn').click(function(){
         var conditionsArray = $('#search_conditions').serializeArray();
         $('#result').load('/elites/search', conditionsArray, function(){            
@@ -125,17 +102,6 @@ $(document).ready(function(){
             </li> 
     </ul>
   </div>
-        <!--<div class="divMap">
-          <div class="divMapCon">
-            <div class="divInput">
-              <input type="text" id="geostrPosition" value="输入地址查询"/>
-              <input type="button" value="搜索" id="codeAddress"/>
-              <input type="hidden" id="comlatlng" />
-            </div>
-            <div id="mapLayout"></div>
-          </div>
-        </div>
-        <div class="toggleMap">打开地图检索</div>-->
         <a class="zclan zclan4" href="javascript:void(0)" id="searchBtn">查询</a>
     </div>
     <div id="result">

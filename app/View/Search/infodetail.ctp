@@ -2,10 +2,10 @@
 <!-- InstanceBeginEditable name="EditRegion3" -->
 <div class="wmxxjs_left">
      <div class="biaotit">{$information.Information.title}</div>
-     <div class="gongsichakan_post">        
+     <div class="gongsichakan_post">
         <div class="fl">
         <div class="biaotit">基本信息</div>
-        <table width="100%" class="posInfo">          
+        <table width="100%" class="posInfo">
           <tbody><tr>
             <th width="132" class="tdRight">需求地区：</th>
             <td class="tdLeft" colspan="3">
@@ -18,14 +18,22 @@
         	{/if}
             </td>
           </tr>
-          <tr class="even">
-            <th width="132" class="tdRight">行业：</th>
-            <td class="tdLeft" colspan="3">{$this->Category->getCategoryName($information.Information.industries_id)}</td>
+          {if $information.Information.type == Configure::read('Information.type.has')}
+              <tr class="even">
+                <th width="132" class="tdRight">行业：</th>
+                <td class="tdLeft" colspan="3">{$this->Category->getCategoryName($information.Information.industries_id)}</td>
+              </tr>
+              
+              <tr>
+                <th class="tdRight connection">采购单位：</th>
+                <td class="tdLeft" colspan="3">******</td>
+              </tr>
+          {else}
+              <tr>
+                <th class="tdRight connection">产品提供单位：</th>
+                <td class="tdLeft" colspan="3">{$information.Information.company}</td>
           </tr>
-          <tr>
-            <th class="tdRight connection">采购单位：</th>
-            <td class="tdLeft" colspan="3">******</td>
-          </tr>
+          {/if}
           <tr class="even">
             <th class="tdRight">产品名称：</th>
             <td class="tdLeft" colspan="3">
@@ -34,11 +42,11 @@
 			</td>
           </tr>
           <tr>
-            <th class="tdRight">客源有效期：</th>
+            <th class="tdRight">{if $information.Information.type == Configure::read('Information.type.has')}客源有效期{else}悬赏有效期{/if}：</th>
             <td class="tdLeft" colspan="3">{$information.Information.open|date_format:"%Y-%m-%d"} - {$information.Information.close|date_format:"%Y-%m-%d"}</td>
           </tr>
           <tr class="even">
-            <th class="tdRight">信息交易价格：</th>
+            <th class="tdRight">{if $information.Information.type == Configure::read('Information.type.has')}信息交易价格{else}客源悬赏价格{/if}：</th>
             <td class="tdLeft" colspan="3">
             {if $information.Information.payment_type == 1}
 				业务币：{$information.Information.price}元
@@ -49,6 +57,7 @@
 			{/if}
             </td>
           </tr>
+          {if $information.Information.type == Configure::read('Information.type.has')}
           <tr>
             <th class="tdRight connection">联系人：</th>
             <td class="tdLeft" colspan="3">******</td>
@@ -73,6 +82,7 @@
             <th class="tdRight">预计合作时间：</th>
             <td class="tdLeft" colspan="3">{$information.Information.finished}</td>
           </tr>
+          {/if}
           <tr>
             <th class="tdRight">客户选择服务商因素：</th>
             <td class="tdLeft" colspan="3">{$information.Information.reason}</td>

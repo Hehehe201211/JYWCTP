@@ -158,12 +158,12 @@ $(document).ready(function(){
     </div>
     <div class="content_mid" >
         <div id="banners">
-		<a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner5a.jpg" alt="马上注册，体验聚业务为您精心打造的服务" /></a>
-            <a href="/static?tpl=about-us" target="_blank"><img src="{$this->webroot}img/banners/banner1a.jpg" alt="聚业务——为您提供业务生涯一站式服务" /></a>
-            <a href="/static?tpl=kehufuwu" target="_blank"><img src="{$this->webroot}img/banners/banner2b.jpg" alt="聚业务——助力您的企业" /></a>
-            <!--<a href="/static?tpl=SIndex" target="_blank"><img src="{$this->webroot}img/banners/banner3a.jpg" alt="强大的兼职服务功能，轻松领取兼职报酬" /></a>-->
-            <a href="/static?tpl=haoyou" target="_blank"><img src="{$this->webroot}img/banners/banner4a.jpg" alt="参加聚业务网站平台推广活动，轻松赚取积分" /></a>            
-            <a href="/static?tpl=youhui" target="_blank"><img src="{$this->webroot}img/banners/banner6a.jpg" alt="你有一条经验，我有一条经验，我们彼此交换，每人可拥有两条经验。" /></a>
+		   <a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner5a.jpg" alt="马上注册，体验聚业务为您精心打造的服务" /></a>
+           <a href="/static?tpl=about-us" target="_blank"><img src="{$this->webroot}img/banners/banner1a.jpg" alt="聚业务——为您提供业务生涯一站式服务" /></a>
+           <a href="/static?tpl=kehufuwu" target="_blank"><img src="{$this->webroot}img/banners/banner2b.jpg" alt="聚业务——助力您的企业" /></a>
+           <a href="/static?tpl=haoyou" target="_blank"><img src="{$this->webroot}img/banners/banner4a.jpg" alt="参加聚业务网站平台推广活动，轻松赚取积分" /></a>            
+           <a href="/static?tpl=youhui" target="_blank"><img src="{$this->webroot}img/banners/banner6a.jpg" alt="你有一条经验，我有一条经验，我们彼此交换，每人可拥有两条经验。" /></a>
+			<a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner7a.jpg" alt="聚业务——汇聚各行各业" /></a>
         </div>
         <div class="keyuan">
       <div class="fl"> 

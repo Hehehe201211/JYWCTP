@@ -549,8 +549,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 .dtSwitchBox .inpButton{margin-left:0;padding-top:0;line-height:24px\9;}
 
 .xxjs ul.eliteR{border:1px #CCC solid;}
-.xxjs ul.eliteR li{width:115px;text-align:center;padding:0;height:175px;border:1px #ccc solid;}
-.xxjs ul.eliteR li a{padding:3px 2px 0;display:block;}
+.xxjs ul.eliteR li{width:117px;text-align:center;padding:0;height:177px;}
+.xxjs ul.eliteR li a{padding:3px 2px 0;display:block;border:1px #ccc solid;}
+.xxjs ul.eliteR li a:hover{border-color:#F50;*border:1px #ccc solid;}
 .xxjs ul.eliteR li .avatar{width:111px;height:128px;}
 .xxjs ul.eliteR li .name{font-size:14px;font-weight:bold;}
 .xxjs ul.eliteR li img{max-height:128px;max-width:108px;}

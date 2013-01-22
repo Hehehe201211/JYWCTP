@@ -20,8 +20,14 @@ $(document).ready(function(){
             });
         }
     });
+	$("#submit").click(function(){
+		if (parseInt($('#topupNum').val())>500) {
+			alert("预充值金额超过500元。");
+			return false;
+		}
+	});
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
@@ -41,15 +47,15 @@ $(document).ready(function(){
          <div class="biaotit">给本账户充值</div>
         <form method="post" action="/alipays/check">
           <p>您的账户：{$memberInfo.Member.nickname} （请确认账号为您需要充值的账号）</p>
-          <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox">元&nbsp;（1元业务币=1元人民币）</p>
+          <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox" onkeyup="onlyNum(this)" onpaste="onlyNum(this)">元&nbsp;（1元人民币=1元业务币，每次充值金额不高于500元）</p>
           <p>
             <label>
-              <input type="checkbox" autocomplete="off" value="" name="iagree" class="inpCheckbox">我已仔细阅读过
+              <input type="checkbox" autocomplete="off" value="" name="iagree" class="inpCheckbox" checked="checked">我已仔细阅读过
               <a style="color:#f30;" target="_blank" href="#">《聚业务服务暂定协议》</a>。
             </label>
           </p>
         <div style="TEXT-ALIGN: center">
-          <button style="MARGIN: 5px 0px" type="submit">请勾选上述条款，进入下一步</button>
+          <button style="MARGIN: 5px 0px" type="submit" id="submit">请勾选上述条款，进入下一步</button>
         </div>
         </form>
         <div class="biaotit">充值记录</div>
@@ -95,6 +101,7 @@ $(document).ready(function(){
       </tbody>
       </table>
             {if $paginatorParams['pageCount'] > 1}
+
               <div class="fanyea">
                 <form id="searchOpt">
                         {if $paginatorParams['prevPage']}
