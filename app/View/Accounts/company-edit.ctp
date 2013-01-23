@@ -135,8 +135,8 @@ $(document).ready(function(){
           </li>          
           <li style="text-align: left;">
             <label><font class="facexh">*</font>验证码：</label>
-            <input type="text" name="" style="width:60px;" class="inpTextBox" id="id="checkNum" />
-            <a class="getCheckNum" id="getCheckNum" href="javascript:void(0)">看不清楚？换一个</a>
+            <input type="text" name="" style="width:60px;" class="inpTextBox" id="checkNum" />
+            <a class="getCheckNum" id="getCheckNum" href="javascript:void(0)">看不清楚？</a>
           </li> 
           <li><a href="javascript:void(0)" class="zclan zclan4">提交</a></li>
         </ul>

@@ -10,6 +10,7 @@ class StaticController extends AppController
     var $layout = 'static';
     var $uses = array('Template', 'TemplateTmp');
     var $helpers = array('Static');
+    var $components = array('SiteAnalyzes');
     
     /**
      * 
@@ -69,5 +70,8 @@ class StaticController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //网站平台分析信息
+        $siteAnalyze = $this->SiteAnalyzes->siteAnalyzeInfo();
+        $this->set('siteAnalyzes', $siteAnalyze);
     }
 }

@@ -39,8 +39,7 @@ $(document).ready(function(){
                       }
 		          }
 		      }
-		  });
-			
+		  });			
 		}
 	});
 	
@@ -48,25 +47,18 @@ $(document).ready(function(){
     var errorMsg = '<span class="errorMsg">请完善此项目</span>';
 	function checkData() {
 		var error=0;
+		$(".sjle").find('.errorMsg').remove();
 		$.each(checkTarget, function(target){		    
 			if($('#' + this).val() == "") {
-				if($('#' + this).parents(".sjle dl dt").find('.errorMsg').length == 0) {
-					$('#' + this).parents(".sjle dl dt").append(errorMsg);
-				}
+				$('#' + this).parents(".sjle dl dt").append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parents(".sjle dl dt").find('.errorMsg').remove();
-			}
+			} 
 		});
 		
 		if($('#sub_category').val() == "") {
-		   if ($('#sub_category').parent().next('.errorMsg').length == 0) {
-				  $('#sub_category').parents(".sjle dl dt").append(errorMsg);
-		      }
+		   $('#sub_category').parents(".sjle dl dt").append(errorMsg);
 			error = 1;			
-		} else {
-			$('#sub_category').parents(".sjle dl dt").find('.errorMsg').remove();
-		}
+		} 
 		
 		if($("#open").val()==""||$("#close").val()=="") {
 			$("#open").parents(".sjle dl dt").append(errorMsg);
@@ -74,50 +66,37 @@ $(document).ready(function(){
 			if($("#open").val()>$("#close").val()) {
 				$("#open").parents(".sjle dl dt").append(errorMsg);
 				error = 1;
-			} else {
-				$("#open").parents(".sjle dl dt").find(".errorMsg").remove();
-			}
+			} 
 		}
 		
 		if ($(".city .selectedOpts li").length == 0){
 			$('.city').parents(".dtSwitchBox").append('<span class="errorMsg" style="left: 240px;">请完善此项目</span>');        	
         	error = 1;
-        } else {
-        	$('.city').parents(".dtSwitchBox").find('.errorMsg').remove();
-        }
+        } 
 		
 		$(".divSex input:radio:checked").each(function(index,element) {
             if($(this).next().length !=0) {
 				if($(this).next().val()=="") {
 					$(this).parents(".sjle dl dt").append(errorMsg);
 					error = 1;
-				} else {
-					$(this).parents(".sjle dl dt").find(".errorMsg").remove();
-				}
-			} else {
-				$(this).parents(".sjle dl dt").find(".errorMsg").remove();
-			}
+				} 
+			} 
         });			
 
 		$('.contact_content').each(function(){
 			if ($(this).val() == "") {
-				if($(this).parent().find('.errorMsg').length == 0) {
-					$(this).parent().append(errorMsg);
-				}
+				$(this).parent().append(errorMsg);
 				error=1;
-			} else {
-				$(this).parent().find('.errorMsg').remove();
-			}
+			} 
 		});
-		
-		if (!error) {
-		  if ($("#checkNum").val().trim() == "") {
+		 if ($("#vehicle").attr("checked")!="checked") {
 		      error = 1;
-		      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
-		          $("#checkNum").parent().append(errorMsg);
-		      }
-		  }
-		}		
+		      $("#vehicle").parent().append('<span class="errorMsg">请接受协议</span>');
+		  }		
+		 if ($("#checkNum").val().trim() == "") {
+		      error = 1;
+		      $("#checkNum").parent().append(errorMsg);
+		  }	
 		return error;
 	}
     //结束
@@ -139,7 +118,7 @@ $(document).ready(function(){
         $('#code').attr('src', src);
     });
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
@@ -331,6 +310,12 @@ $(document).ready(function(){
           </dt>
           </dl>
           <div class="clearfix"></div>
+          <div class="divProtocol">
+            <label for="vehicle" class="protocol">
+                <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehicle">我接受 <a target="_blank" href="#">《聚业务服务协议（试行）》</a>
+            </label>
+        </div>
+        <div class="clearfix"></div>
           <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
         </form>
       </div>

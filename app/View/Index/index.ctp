@@ -1,16 +1,11 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    $("ul.nav li a:eq(0)").addClass("current");
-    $(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"});
+    $("ul.nav li a:eq(0)").addClass("current");   
     $(".content_mid .keyuan .ulLists").Scroll({line:2,speed:200,timer:3000,up:"",down:"",selector:".content_mid .keyuan .ulLists"});
     $(".keyuan .fr .ulLists").Scroll({line:2,speed:200,timer:3000,up:"",down:"",selector:".keyuan .fr .ulLists"});
     $("#banners").KinSlideshow({moveStyle:"left",intervalTime:6,mouseEvent:"click",titleFont:{TitleFont_size:14,TitleFont_color:"#FFF"}});
     $(".duwu_bottm_con").imageScroller({next: "duwu_bottm_left",prev: "duwu_bottm_right",frame:"bookListCon",child: "li",auto: true,num:6,timer:5000,moveDistance:-95});
-	
-	$(".header_top_search .test2").keypress(function(e){
-		if ($(this).val()!=""&&e.keyCode==13) $(this).next().click();
-	});
     
     //选项卡切换
     $("#myTab1 li").mouseenter(function(){

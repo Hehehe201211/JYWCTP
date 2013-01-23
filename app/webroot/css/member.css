@@ -195,6 +195,8 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zy_zs p{line-height:30px;padding:0 8px;}
 .zy_zs p a{margin:0 5px;}
 .hx{border-bottom:1px solid #FFF;border-top: 1px solid #DDD;height:1px;width:599px;margin:10px 0;}
+#result .resumeT{ table-layout:fixed;} 
+#result .resumeT a{font-weight:bold;}
 
 .zy_z .bottomRcdPos{width:605px;height:112px;clear:both;}
 .zy_z .bottomRcd{position:absolute;bottom:0;width:605px;overflow:hidden;}
@@ -337,7 +339,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 .xq_zl_xbxq .connection label{display:inline;float:none;width:auto;}
 .xq_zl_xbxq .deal label{color:#F30;}
 .xq_zl_xbxq table td.top{ vertical-align:top;}
+.xq_zl_xbxq table tr{background:none;}
 .xq_zl_xbxq table .portrait{border:1px #333 solid;width:115px;}
+.xq_zl_xbxq table .invite{padding-left:3px\9;padding-right:3px\9;*padding:0;*line-height:15px;}
 
 .tableDetail{padding:0 12px;}
 .tableDetail table{margin-bottom:12px;}

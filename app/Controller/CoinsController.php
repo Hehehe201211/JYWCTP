@@ -15,7 +15,8 @@ class CoinsController extends AppController
           'MemberAttribute',
           'Information',
           'InformationTransaction',
-          'AlipayCharge'
+          'AlipayCharge',
+          'AlipayExpend'
       );
       var $paginate;
     /**
@@ -122,7 +123,27 @@ class CoinsController extends AppController
      */
     public function expend()
     {
-        
+        $conditions = array(
+            'members_id'    => $this->_memberInfo['Member']['id'],
+            'delete_flg'    => 0
+        );
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
+        $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
+        $this->paginate = array(
+            'AlipayExpend' => array('limit' => $pageSize,
+                'page'  => $page,
+                'order' => array('AlipayExpend.created' => 'DESC'),
+                'conditions' => $conditions,
+            )
+        );
+        $this->set('pageSize', $pageSize);
+        $this->set("expends", $this->paginate('AlipayExpend'));
+        if ($this->RequestHandler->isAjax()) {
+            if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
+                $this->set('jump', $page);
+            }
+            $this->render('expend-paginate');
+        }
     }
     
     public function detail()

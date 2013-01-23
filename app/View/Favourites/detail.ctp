@@ -3,21 +3,23 @@
 $(document).ready(function(){
     $("body").append($('.jsxxxqB'));
     $('#delete').click(function(){
-        $.ajax({
-            url : '/favourites/delete',
-            type : 'post',
-            data : 'id=' + $('#favourite_id').val(),
-            success : function(data){
-                var result = eval("("+data+")");
-                if (result.result == 'OK') {
-                    location.href = '/favourites/listview';
-                } else {
-                    alter(result.msg);
-                }
-            }
-        });
+		if  (confirm("确定删除该收藏？")) {
+		  $.ajax({
+			  url : '/favourites/delete',
+			  type : 'post',
+			  data : 'id=' + $('#favourite_id').val(),
+			  success : function(data){
+				  var result = eval("("+data+")");
+				  if (result.result == 'OK') {
+					  location.href = '/favourites/listview';
+				  } else {
+					  alter(result.msg);
+				  }
+			  }
+		  });
+		}
     });
-    //sidebarSF(3);
+
     $(".btnDeliverR").click(function(e){
         e.preventDefault();
         var category = $('#category').val();
@@ -49,7 +51,7 @@ $(document).ready(function(){
                 <a class="red" target="_blank" href="gsqt-index.html">上海昊航货物运输代理有限公司</a>
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">营业执照：</th>
             <td><font color="#FF0000">已验证</font></td>
           </tr>
@@ -60,7 +62,7 @@ $(document).ready(function(){
             {$this->Category->getCategoryName($parttime.PartTime.sub_category)}
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">产品具体名称：</th>
             <td>{$parttime.PartTime.sub_title}</td>
           </tr>
@@ -68,7 +70,7 @@ $(document).ready(function(){
             <th scope="row">兼职时间：</th>
             <td>{$parttime.PartTime.open|date_format:"%Y-%m-%d"} 至 {$parttime.PartTime.close|date_format:"%Y-%m-%d"}</td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">客户区域范围：</th>
             <td>
             {$citys = explode(',', $parttime.PartTime.area)}
@@ -89,7 +91,7 @@ $(document).ready(function(){
             {/if}
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">报酬：</th>
             <td>
                 {if $parttime.PartTime.pay == 1}
@@ -109,7 +111,7 @@ $(document).ready(function(){
             {/if}
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">报酬支付补充说明：</th>
             <td>
             {$parttime.PartTime.pay_explanation}
@@ -126,7 +128,7 @@ $(document).ready(function(){
             {/if}
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">联系人：</th>
             <td>{$parttime.PartTime.contact}</td>
           </tr>
@@ -139,7 +141,7 @@ $(document).ready(function(){
             {/foreach}
             </td>
           </tr>
-          <tr class="even">
+          <tr>
             <th scope="row">联系邮箱：</th>
             <td>{$parttime.PartTime.email}</td>
           </tr>
@@ -155,19 +157,17 @@ $(document).ready(function(){
         <div class="xxContent">{$parttime.PartTime.additional}</div>
       </div>  
 	  <div class="divBtnContainer" style="width:200px;">
-      <a href="javascript:void(0)" class="zclan zclan2 btnDeliverR">我有客源</a>
+      <a href="javascript:void(0)" class="zclan zclan7 btnDeliverR">我有客源</a>
       <input type="hidden" id="favourite_id" value="{$this->request->query['id']}">
-      <a href="javascript:void(0)" class="zclan zclan2" id="delete">删除</a>
+      <a href="javascript:void(0)" class="zclan zclan7" id="delete">删除</a>
 	  </div>
     </div>    
   </div>
-
 <input type="hidden" id="category" value="{$parttime.PartTime.sub_category}">
 <input type="hidden" id="parttime_id" value="{$parttime.PartTime.id}">
 <input type="hidden" id="target_member" value="{$parttime.PartTime.members_id}">
 <div class="jsxxxq jsxxxqB">
     <a href="#" class="closeDiv">&nbsp;</a>
-    <div class="sjle">
-    
+    <div class="sjle">    
     </div>
 </div>

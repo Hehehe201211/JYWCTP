@@ -11,7 +11,7 @@ class SearchController extends AppController
 {
     public $uses = array('Category', 'Information', 'PartTime', 'Homepage', 'Fulltime');
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Info', 'Parttime');
+    var $components = array('RequestHandler', 'Info', 'Parttime', 'SiteAnalyzes');
     var $paginate;
     /**
      * 
@@ -42,24 +42,24 @@ class SearchController extends AppController
         if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['grade'] == 2) {
             $conditions['Information.members_id != '] = $this->_memberInfo['Member']['id'];
             $conditionsSubQuery['members_id'] = $this->_memberInfo['Member']['id'];
-	        $db = $this->Information->getDataSource();
-	        $subQuery = $db->buildStatement(
-	            array(
-	                'fields'     => array('information_id'),
-	                'table'      => 'payment_transactions',
-	                'alias'      => 'PaymentTransaction',
-	                'limit'      => null,
-	                'offset'     => null,
-	                'joins'      => array(),
-	                'conditions' => $conditionsSubQuery,
-	                'order'      => null,
-	                'group'      => null
-	            ),
-	            $this->Information
-	        );
-	        $subQuery = 'Information.id NOT IN (' . $subQuery . ')';
-	        $subQueryExpression = $db->expression($subQuery);
-	        $conditions[] = $subQueryExpression;
+            $db = $this->Information->getDataSource();
+            $subQuery = $db->buildStatement(
+                array(
+                    'fields'     => array('information_id'),
+                    'table'      => 'payment_transactions',
+                    'alias'      => 'PaymentTransaction',
+                    'limit'      => null,
+                    'offset'     => null,
+                    'joins'      => array(),
+                    'conditions' => $conditionsSubQuery,
+                    'order'      => null,
+                    'group'      => null
+                ),
+                $this->Information
+            );
+            $subQuery = 'Information.id NOT IN (' . $subQuery . ')';
+            $subQueryExpression = $db->expression($subQuery);
+            $conditions[] = $subQueryExpression;
         }
         
         //检索条件
@@ -122,9 +122,9 @@ class SearchController extends AppController
         $this->set('type', $type);
         if (!$this->RequestHandler->isAjax()) {
             $menuList = $this->Category->getMenuList();
-	        $this->set("menuList", $menuList);
-	        $this->currentTopBar = $type;
-	        $this->Info->search($conditions);
+            $this->set("menuList", $menuList);
+            $this->currentTopBar = $type;
+            $this->Info->search($conditions);
         } else {
             $this->Info->search($conditions);
             $this->render('/Elements/common/keyuan-result');
@@ -140,14 +140,21 @@ class SearchController extends AppController
         if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['type'] == Configure::read('UserType.company')){
             $this->redirect('/members');
         }
-    	if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['grade'] == 2) {
-    		//TODO 已经登陆，跳转到会员主页
-    		$this->redirect('/informations/payment/' . $this->request->query['id']);
-    	}
-    	if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
-    		$this->Info->detail($this->request->query['id']);
-    	}
-    	
+        if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['grade'] == 2) {
+            //TODO 已经登陆，跳转到会员主页
+            $this->redirect('/informations/payment/' . $this->request->query['id']);
+        }
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            $info = $this->Info->detail($this->request->query['id']);
+            if ($info['Information']['type'] == Configure::read('Information.type.has')) {
+                $this->currentTopBar = 'has';
+                $this->set('title_for_layout', "客源详细");
+            } else {
+                $this->currentTopBar = 'need';
+                $this->set('title_for_layout', "悬赏详细");
+            }
+        }
+        
     }
     
     /**
@@ -170,18 +177,18 @@ class SearchController extends AppController
      */
     public function _graphicOffer()
     {
-    	$now = date('Y-m-d');
-    	$params = array(
-    		'conditions' => array(
-    			'graphic_flg' => 1,
-    			'start <='		=> $now,
-    			'end >='		=> $now
-    		),
-    		'limit'	=> 60,
-    		'order' => array('modified DESC')
-    	);
-    	$graphics = $this->Homepage->find('all', $params);
-    	$this->set('graphics', $graphics);
+        $now = date('Y-m-d');
+        $params = array(
+            'conditions' => array(
+                'graphic_flg' => 1,
+                'start <='        => $now,
+                'end >='        => $now
+            ),
+            'limit'    => 60,
+            'order' => array('modified DESC')
+        );
+        $graphics = $this->Homepage->find('all', $params);
+        $this->set('graphics', $graphics);
     }
     /**
      * 
@@ -190,37 +197,37 @@ class SearchController extends AppController
     
     public function _linkOffer()
     {
-    	$now = date('Y-m-d');
-    	$conditions = array(
-    		'Fulltime.begin <= ' => $now,
-    		'Fulltime.end >='   => $now
-    	);
-    	$fields = array(
-    		'DISTINCT(Member.id)',
-    		'Fulltime.post',
-    		'Fulltime.company',
-    		'Fulltime.id'
-    	);
-    	$joinMember = array(
-    		'table' => 'members',
+        $now = date('Y-m-d');
+        $conditions = array(
+            'Fulltime.begin <= ' => $now,
+            'Fulltime.end >='   => $now
+        );
+        $fields = array(
+            'DISTINCT(Member.id)',
+            'Fulltime.post',
+            'Fulltime.company',
+            'Fulltime.id'
+        );
+        $joinMember = array(
+            'table' => 'members',
             'alias' => 'Member',
             'type'  => 'inner',
             'conditions' => 'Fulltime.members_id = Member.id'
-    	);
-    	$params = array(
-//    		'conditions' => $conditions,
-    		'fields' => $fields,
-    		'limit' => 30,
-    		'order' => array('Member.modified DESC'),
-    		'joins' => array($joinMember)
-    	);
-    	$links = $this->Fulltime->find('all', $params);
-    	$this->set('links', $links);
+        );
+        $params = array(
+//            'conditions' => $conditions,
+            'fields' => $fields,
+            'limit' => 30,
+            'order' => array('Member.modified DESC'),
+            'joins' => array($joinMember)
+        );
+        $links = $this->Fulltime->find('all', $params);
+        $this->set('links', $links);
     }
     
     public function odetail()
     {
-    	
+        
     }
     
     /**
@@ -288,12 +295,15 @@ class SearchController extends AppController
     public function beforeRender()
     {
         $css = array(
-	        'common',
-	        'platform',
+            'common',
+            'platform',
         );
         $js = array('platform', 'jquery-ui', 'retrieval');
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
+        //网站平台分析信息
+        $siteAnalyze = $this->SiteAnalyzes->siteAnalyzeInfo();
+        $this->set('siteAnalyzes', $siteAnalyze);
     }
 }

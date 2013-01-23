@@ -148,17 +148,17 @@ $(document).ready(function(){
             {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
             {$this->Paginator->options($options)}
             {$paginatorParams = $this->Paginator->params()}
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="con_2_table">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="con_2_table resumeT">
                 <thead>
                     <tr class="con_2_tr con_2_xq_too">
-                        <th width="100">姓名</th>
-                        <th width="50">性别</th>
-                        <th width="105">学历</th>
-                        <th width="85">期望行业</th>
-                        <th width="73">期望城市</th>
-                        <th width="75">岗位</th>
-                        <th width="80">简历更新时间</th>
-                        <th width="30">操作</th>
+                        <th width="77">姓名</th>
+            <th width="30">性别</th>
+            <th width="96">学历</th>
+            <th width="113">期望行业</th>
+            <th width="98">期望城市</th>
+            <th width="48">岗位</th>
+            <th width="79">简历更新时间</th>
+            <th width="55">操作</th>
                     </tr>
                 </thead>
                 {$educate = Configure::read('Fulltime.educated')}
@@ -170,17 +170,13 @@ $(document).ready(function(){
                     <td>
                     <a href="/resumes/detail?id={$resume.Resume.id}" target="_blank">
                       {$categories = explode(',', $resume.Resume.category)}
-                      {foreach $categories as $id}
-                        {$this->Category->getCategoryName($id)}
-                      {/foreach}
+                      {foreach $categories as $id}{$this->Category->getCategoryName($id)},{/foreach}
                     </a>
                     </td>
                     <td>
                     <a href="/resumes/detail?id={$resume.Resume.id}" target="_blank">
                       {$cities = explode(',', $resume.Resume.city)}
-                      {foreach $cities as $id}
-                        {$this->City->cityName($id)}
-                      {/foreach}
+					  {foreach $cities as $id}{$this->City->cityName($id)},{/foreach}
                     </a>
                     </td>
                     <td><a href="/resumes/detail?id={$resume.Resume.id}" target="_blank">{$resume.Resume.nature}</a></td>

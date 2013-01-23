@@ -1,3 +1,13 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+	$(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"});
+	$(".header_top_search .test2").keydown(function(e){
+		if ($(this).val()!=""&&e.keyCode==13) $(this).next().click();
+	});    
+});
+//{/literal}
+</script>
 <div class="header">
   <div class="toplist">
     <ul>
@@ -123,13 +133,13 @@
                   <td width="11%">兼职</td>
                 </tr>
                 <tr>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.personSum)}{$siteAnalyzes.all.SiteAnalyze.personSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.companySum)}{$siteAnalyzes.all.SiteAnalyze.companySum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.hasSum)}{$siteAnalyzes.all.SiteAnalyze.hasSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.needSum)}{$siteAnalyzes.all.SiteAnalyze.needSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.resumeSum)}{$siteAnalyzes.all.SiteAnalyze.resumeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.fulltimeSum)}{$siteAnalyzes.all.SiteAnalyze.fulltimeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.all.SiteAnalyze.parttimeSum)}{$siteAnalyzes.all.SiteAnalyze.parttimeSum}{else}0{/if}</td>
                 </tr>
               </table>
             </li>
@@ -146,13 +156,13 @@
                   <td width="11%">兼职</td>
                 </tr>
                 <tr>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.personSum)}{$siteAnalyzes.yester.SiteAnalyze.personSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.companySum)}{$siteAnalyzes.yester.SiteAnalyze.companySum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.hasSum)}{$siteAnalyzes.yester.SiteAnalyze.hasSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.needSum)}{$siteAnalyzes.yester.SiteAnalyze.needSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.resumeSum)}{$siteAnalyzes.yester.SiteAnalyze.resumeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.fulltimeSum)}{$siteAnalyzes.yester.SiteAnalyze.fulltimeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.yester.SiteAnalyze.parttimeSum)}{$siteAnalyzes.yester.SiteAnalyze.parttimeSum}{else}0{/if}</td>
                 </tr>
               </table>
             </li>
@@ -169,13 +179,13 @@
                   <td width="11%">兼职</td>
                 </tr>
                 <tr>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.personSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.personSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.companySum)}{$siteAnalyzes.lastWeek.SiteAnalyze.companySum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.hasSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.hasSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.needSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.needSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.resumeSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.resumeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.fulltimeSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.fulltimeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastWeek.SiteAnalyze.parttimeSum)}{$siteAnalyzes.lastWeek.SiteAnalyze.parttimeSum}{else}0{/if}</td>
                 </tr>
               </table>
             </li>
@@ -192,13 +202,13 @@
                   <td width="11%">兼职</td>
                 </tr>
                 <tr>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
-                  <td>999999</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.personSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.personSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.companySum)}{$siteAnalyzes.lastMonth.SiteAnalyze.companySum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.hasSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.hasSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.needSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.needSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.resumeSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.resumeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.fulltimeSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.fulltimeSum}{else}0{/if}</td>
+                  <td>{if !empty($siteAnalyzes.lastMonth.SiteAnalyze.parttimeSum)}{$siteAnalyzes.lastMonth.SiteAnalyze.parttimeSum}{else}0{/if}</td>
                 </tr>
               </table>
             </li>

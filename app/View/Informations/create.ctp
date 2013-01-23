@@ -452,8 +452,9 @@ $(document).ready(function(){
 	              <select name="mode[]">
 	                <option value="座机">座机</option>
 	                <option value="手机">手机</option>
+					<option value="E-mail">E-mail</option>
 	                <option value="QQ">QQ</option>
-	                <option value="MSN">MSN</option>
+	                <option value="MSN">MSN</option>					
 	              </select>
 	            </div>
 	            <input type="text" style="width:108px;" name="contact_method[]" class="contact_method" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">

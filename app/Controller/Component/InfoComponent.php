@@ -82,6 +82,7 @@ class InfoComponent extends Component
         }
         $this->controller->set('information', $baseInfo);
         $this->information_attr($information_id);
+        return $baseInfo;
     }
     /**
      * 

@@ -63,20 +63,15 @@ $(document).ready(function(){
 	var checkTarget = ['title','post','company','number','contact','salary','require','checkNum', 'provincial', 'city', 'category', 'educated', 'continued'];
 	var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>';	
 	var dateEMsg = '<span style="color:red" class="errorMsg">请正确输入时间</span>';
-	function checkData() 
-	{
+	function checkData() 	{
 		var error=0;
+		$(".sjle").find(".errorMsg").remove();
 		$.each(checkTarget, function(target){
 			if($('#' + this).val() == "") {
-				if($('#' + this).parent('dt').find('.errorMsg').length == 0) {
-					$('#' + this).parent('dt').append(errorMsg);
-				}
+				$('#' + this).parent('dt').append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parent('dt').find('.errorMsg').remove();
-			}
-		});
-		
+			} 
+		});		
 		if($('#open').val() == "" || $('#close').val() == "") {
 			$('#open').parent().parent().append(errorMsg);
 			error=1;
@@ -84,23 +79,16 @@ $(document).ready(function(){
 			if ($('#close').val() < $('#open').val()) {
 			     $('#open').parent().parent().append(dateEMsg);
                  error=1;
-			} else {
-				$('#open').parent().parent().find('.errorMsg').remove();
-			}
-		}
-		
-		if($('#vehicle:checked').length == 0) {
-			if($('#vehicle').parent().find('.errorMsg').length == 0) {
-			    $('#vehicle').parent().append("<span class='errorMsg'>请接受协议</span>");
-			}
-			error=1;
-		} else {
-			$('#vehicle').parent().find('.errorMsg').remove();
+			} 
 		}		
+		if($('#vehicle:checked').length == 0) {
+			$('#vehicle').parent().append("<span class='errorMsg'>请接受协议</span>");
+			error=1;
+		} 
 		return error;
 	}
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
@@ -331,7 +319,7 @@ $(document).ready(function(){
         <div class="clearfix"></div>
         <div class="divProtocol">
             <label class="protocol" for="vehicle">
-                <input type="checkbox" id="vehicle" name="vehicle" class="inpCheckbox"/>我接受 <a href="#" target="_blank">《聚业务服务协议（试行）》</a>
+                <input type="checkbox" id="vehicle" name="vehicle" class="inpCheckbox"/>我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务服务协议（试行）》</a>
             </label>
         </div>
 		<div class="clearfix"></div>
