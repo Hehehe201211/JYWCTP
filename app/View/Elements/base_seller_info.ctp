@@ -30,7 +30,18 @@ $(document).ready(function(){
         <div class="mebBaseinfoL">
           <table width="100%" height="100%" border="0">
             <tr>
-              <td width="34%" rowspan="6"><img src="{$this->webroot}img/tx.jpg"></td>
+              <td width="34%" rowspan="6">
+              {if !empty($author.MemberAttribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$author.MemberAttribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$author.MemberAttribute.thumbnail}">
+                {else}
+                    <img src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+              <img src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </td>
               <td width="66%">
               {if !$isFriend}
                 <a href="javascript:void(0)" class="btnAddFri fr">加为好友</a>

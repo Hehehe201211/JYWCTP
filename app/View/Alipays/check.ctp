@@ -1,7 +1,18 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+	$("body").append($(".divDjbuz"));
+	$("#submit").click(function(){
+		bgKuang("#divDjbuz","");		
+		$("#alipays").submit();		
+	});
+});
+//{/literal}
+</script>
 <div class="zhifu">
     <div class="cashier-box-min">
         <h4>账户充值</h4>
-        <form action="/alipays/send" method="post">
+        <form action="/alipays/send" method="post" target="_blank" id="alipays">
             <table width="100%" class="user-account">
                 <tbody>
                     <tr>
@@ -33,10 +44,14 @@
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
-                        <td><input type="submit" value="下一步" class="inpButton"></td>
+                        <td><input type="submit" value="下一步" class="inpButton" id="submit"></td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </div>  
+</div>
+<div class="jsxxxqB" id="divDjbuz" style="width:274px;"> <a class="closeDiv" href="/coins/charge">&nbsp;</a>
+  <div class="biaotit">充值完成后点击关闭按钮</div>
+  <a class="zclan zclan4" href="/coins/charge">关闭</a>
 </div>

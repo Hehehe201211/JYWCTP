@@ -20,8 +20,20 @@ $(document).ready(function(){
             });
         }
     });
+	$("#submit").click(function(){
+		if (parseInt($('#topupNum').val()) ==0||$('#topupNum').val()=="") {
+			alert("请输入充值积分。");
+			return false;
+		} else	if (parseInt($('#topupNum').val())>5000) {
+			alert("充值积分超过5000分。");
+			return false;
+		} else if ($("#iagree").attr("checked")!="checked") {
+			alert("请接受协议。");
+			return false;
+		}
+	});
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
@@ -33,18 +45,22 @@ $(document).ready(function(){
     </div>
      <div class="zhanghujil">
         <div class="rightBody">
-         <div class="biaotit">给本账户充值</div>
+         <div class="zhanghujil_top">
+            <a href="/points/balance">账户余额</a>
+            <a id="dangq" href="javascript:void(0)">账户充值</a>
+           <!--<a href="new-qbmx.html">账户明细</a>-->
+        </div>
         <form method="post" action="/points/check">
           <p>您的账户：{$memberInfo.Member.nickname} （请确认账号为您需要充值的账号）</p>
-          <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox">元&nbsp;（1业务币=10积分）</p>
+          <p>充值积分:<input type="text" id="topupNum" name="price" class="inpTextBox" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">点&nbsp;（1业务币=10点，每次充值额度不高于5000点。）</p>
           <p>
             <label>
-              <input type="checkbox" autocomplete="off" value="" name="iagree" class="inpCheckbox">我已仔细阅读过
-              <a style="color:#f30;" target="_blank" href="#">《聚业务服务暂定协议》</a>。
+              <input type="checkbox" autocomplete="off" value="" name="iagree" id="iagree" class="inpCheckbox" checked="checked">我已仔细阅读过
+              <a style="color:#f30;" target="_blank" href="/static?tpl=mianze">《聚业务服务暂定协议》</a>。
             </label>
           </p>
         <div style="TEXT-ALIGN: center">
-          <button style="MARGIN: 5px 0px" type="submit">请勾选上述条款，进入下一步</button>
+          <button style="MARGIN: 5px 0px" type="submit" id="submit">请勾选上述条款，进入下一步</button>
         </div>
         </form>
         <div class="biaotit">充值记录</div>
@@ -58,7 +74,7 @@ $(document).ready(function(){
         <tr class="con_2_tr con_2_xq_too"> 
           <th class="tr_td5">途径 </th>
           <th class="tr_td2">交易号 </th>
-          <th class="tr_td2">金额 </th>
+          <th class="tr_td2">充值积分 </th>
           <th class="tr_td7">时间 </th>
           <th class="tr_td4">状态 </th>
           <th class="tr_td8">选择操作 </th>
@@ -69,7 +85,7 @@ $(document).ready(function(){
         <tr class="con_2_tr">
           <td class="tr_td5">{if $charge.PointCharge.payment_type == 1}支付宝{else}未知{/if}</td>
           <td class="tr_td5 order_no">{$charge.PointCharge.order_no}</td>
-          <td class="tr_td2">{$charge.PointCharge.price}元</td>
+          <td class="tr_td2">{$charge.PointCharge.price*10}点</td>
           <td class="tr_td7">{$charge.PointCharge.created}</td>
           <td class="tr_td4">
           {if $charge.PointCharge.status == Configure::read('Alipay.status_confirm')}

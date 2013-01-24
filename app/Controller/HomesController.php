@@ -110,7 +110,7 @@ class HomesController extends AppController
             $clicked = 0;
             $session = $this->Session->read('PartTime_' . "_" . $id);
             if (empty($session)) {
-                if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['id'] != $detail['Partime']['members_id']) {
+                if (!empty($this->_memberInfo) && $this->_memberInfo['Member']['id'] != $detail['Parttime']['members_id']) {
 	                $this->PartTime->updateClickCount($id);
 	                $this->Session->write('PartTime_' . $id, $id);
 	                $clicked = 1;

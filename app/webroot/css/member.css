@@ -619,7 +619,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .znxContent .znxMesCon{border:1px #999 solid;background-color:#f0f0f0;padding:6px;margin:6px 0;clear:both;display:none;}
 .znxContent .znxMesCon a{color:#F60;}
 .pagesMag{height:32px;padding-left:6px;clear:both;}
-.znxContent .fanye{float:right;}
+.znxContent .fanyea{float:right;border-top:0 none;clear:none;margin-right:8px;padding-top:2px;}
 .znxContent .trader{font-size:14px;color:#f60;margin:0 12px 0 3px;font-weight:bold;}
 .znxContent .result{color:#F30;float:right;*float:left;padding-right:6px;}
 .znxConTrade .title,.znxContent .titleNo{background:none;}
@@ -848,9 +848,10 @@ a.btnSearch:hover{background-position:0 -122px;}
 .user-account td{font-size:14px;font-weight:bold;font-size:14px;}
 .user-account td span {color: #06A;margin:0 3px;font-size:14px;}
 .ui-list-icons{width:700px;}
-.ui-list-icons li{float:left;width:180px;margin:0 8px 0 0;height:38px;}
-.ui-list-icons .icon-box{border:1px #999 solid;width:180px;height:36px;cursor:pointer;display:block;background:url(../img/combo.png) 16px 0 no-repeat;}
+.ui-list-icons li{float:left;width:145px;margin:0 8px 0 0;height:38px;}
+.ui-list-icons .icon-box{border:1px #999 solid;width:145px;height:36px;cursor:pointer;display:block;background:url(../img/combo.png) 16px 0 no-repeat;}
 .ui-list-icons .inpRadio{float:left;margin:12px 0 0 3px;}
+.ui-list-icons .points{background-position:16px -36px;}
 
 .payProblem{padding:10px;border:1px #A5B9CE solid;background-color:#FFFFFF;overflow:hidden;}
 .payProblem h3{background:url(../img/reg-ok.png) 0 -152px no-repeat;height:38px;line-height:38px;padding-left:50px;margin-bottom:20px;font-size:20px;font-weight:bold;}

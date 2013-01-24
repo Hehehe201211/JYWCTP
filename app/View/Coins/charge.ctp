@@ -21,8 +21,15 @@ $(document).ready(function(){
         }
     });
 	$("#submit").click(function(){
+		if (parseInt($('#topupNum').val()) ==0||$('#topupNum').val()=="") {
+			alert("请输入充值金额。");
+			return false;
+		}
 		if (parseInt($('#topupNum').val())>500) {
-			alert("预充值金额超过500元。");
+			alert("充值金额超过500元。");
+			return false;
+		} else if ($("#iagree").attr("checked")!="checked") {
+			alert("请接受协议。");
 			return false;
 		}
 	});
@@ -50,8 +57,8 @@ $(document).ready(function(){
           <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox" onkeyup="onlyNum(this)" onpaste="onlyNum(this)">元&nbsp;（1元人民币=1元业务币，每次充值金额不高于500元）</p>
           <p>
             <label>
-              <input type="checkbox" autocomplete="off" value="" name="iagree" class="inpCheckbox" checked="checked">我已仔细阅读过
-              <a style="color:#f30;" target="_blank" href="#">《聚业务服务暂定协议》</a>。
+              <input type="checkbox" autocomplete="off" value="" name="iagree" id="iagree" class="inpCheckbox" checked="checked">我已仔细阅读过
+              <a style="color:#f30;" target="_blank" href="/static?tpl=mianze">《聚业务服务暂定协议》</a>。
             </label>
           </p>
         <div style="TEXT-ALIGN: center">

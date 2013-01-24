@@ -263,8 +263,16 @@ class InfoComponent extends Component
     {
         $mHistory = ClassRegistry::init('PaymentHistory');
         $mMember = ClassRegistry::init('Member');
+        $joinAttribute = array(
+            'table' => 'member_attributes',
+            'alias' => 'MemberAttribute',
+            'type'  => 'inner',
+            'conditions' => 'MemberAttribute.members_id = Member.id'
+        );
         $params = array(
-                'conditions' => array('id' => $members_id)
+                'conditions' => array('id' => $members_id),
+                'joins'      => array($joinAttribute),
+                'fields'     => array('Member.id', 'Member.nickname', 'Member.grade', 'Member.lastlogin', 'MemberAttribute.thumbnail')
             );
         $author = $mMember->find('first', $params);
         

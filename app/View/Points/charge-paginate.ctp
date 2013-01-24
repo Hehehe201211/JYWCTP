@@ -18,7 +18,7 @@
     <tr class="con_2_tr">
       <td class="tr_td5">{if $charge.PointCharge.payment_type == 1}支付宝{else}未知{/if}</td>
       <td class="tr_td5">{$charge.PointCharge.order_no}</td>
-      <td class="tr_td2">{$charge.PointCharge.price}元</td>
+      <td class="tr_td2">{$charge.PointCharge.price}点</td>
       <td class="tr_td7">{$charge.PointCharge.created}</td>
       <td class="tr_td4">
       {if $charge.PointCharge.status == Configure::read('Alipay.status_confirm')}

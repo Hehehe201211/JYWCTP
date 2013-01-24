@@ -73,7 +73,7 @@ $(document).ready(function(){
     <div class="zy_zs">
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-cpzlsc.html">企业服务</a>&gt;&gt;<a href="#">公司简介</a></p>
     </div>    
-    <div class="biaotit"><a href="gsqt-index.html" target="_blank" class="mebgszyT">查看公司首页</a>公司主页设置</div>
+    <div class="biaotit"><a href="/homes/index/{$homepage.Homepage.domain}" target="_blank" class="mebgszyT">查看公司首页</a>公司主页设置</div>
     <div class="sjle"> 
     <form id="servicesForm" method="post" action="/services/saveHome" enctype="multipart/form-data">
     {if !empty($homepage)}

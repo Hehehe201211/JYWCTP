@@ -20,7 +20,11 @@
 	{$this->element('members-left-company')}
 	{/if}
 	{$this->fetch('content')}
-	{$this->element('members-right')}
+	{if $memberInfo.Member.type == Configure::read('UserType.Personal')}
+	   {$this->element('members-right')}
+	{else}
+	   {$this->element('company-members-right')}
+	{/if}
     <div class="clearfix"></div>
   </div>
 {$this->element('members-footer')}

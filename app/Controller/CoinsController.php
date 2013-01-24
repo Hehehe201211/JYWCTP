@@ -5,6 +5,7 @@
  * @author deping_lin
  *
  */
+App::uses("Alipay", "Lib");
 class CoinsController extends AppController
 {
     var $layout = 'members';
@@ -123,6 +124,7 @@ class CoinsController extends AppController
      */
     public function expend()
     {
+        $this->set('title_for_layout', "提现申请");
         $conditions = array(
             'members_id'    => $this->_memberInfo['Member']['id'],
             'delete_flg'    => 0
@@ -144,6 +146,30 @@ class CoinsController extends AppController
             }
             $this->render('expend-paginate');
         }
+    }
+    
+    public function expend_send()
+    {
+        $data = $this->request->data;
+        if (isset($data['pay_account']) &&
+            !empty($data['pay_account']) &&
+            isset($data['price']) &&
+            !empty($data['price'])
+        ) {
+            $out_trade_no = Alipay::makeOrderNo();
+            $result = $this->AlipayCharge->expendAlipay($data, $this->_memberInfo['Member']['id'], $out_trade_no);
+            if ($result['result'] == 'OK') {
+                $this->_memberInfo['Attribute']['virtual_coin'] = $this->_memberInfo['Attribute']['virtual_coin'] - $data['price'];
+                $this->Session->write('memberInfo', $this->_memberInfo);
+            }
+        } else {
+            $result = array(
+                'result'    => 'NG',
+                'msg'       => '参数错误，系统无法处理当前提现处理！'
+            );
+            $this->log(__CLASS__ . "::" . __FUNCTION__ . "() params error! " . print_r($data, true));
+        }
+        $this->_sendJson($result);
     }
     
     public function detail()

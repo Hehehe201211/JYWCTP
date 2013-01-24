@@ -1,5 +1,32 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+    $(".zclan4").click(function(){
+        if ($("#price").val()=="") {
+            alert("请输入预提现金额。");
+        }else if($("#price").val()>500) {
+            alert("请输入小于500的数值。");
+        } else {
+            $.ajax({
+                url  : '/coins/expend_send',
+                type : 'post',
+                data : 'price=' + $('#price').val() + '&pay_account=' + $('#pay_account').val(),
+                async : false,
+                success : function(data) {
+                    var result = eval("("+data+")");
+                    if (result.result != 'OK') {
+                        alert(result.msg);
+                    }
+                    location.href = location.href;
+                }
+            });
+        }
+    });
+});
+{/literal}
+</script>
 <div class="zy_z">
-    <div class="zy_zs"><!-- InstanceBeginEditable name="EditRegion7" -->
+    <div class="zy_zs">
         <p>
             <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
             <a href="javascript:void(0)">聚客币管理</a>&gt;&gt;
@@ -15,15 +42,15 @@
             </li>
             <li>
                 <label><font class="facexh">*</font>核对您的支付宝账号：</label>
-                <input type="text" value="{$memberInfo.Attribute.pay_account}" readonly="readonly" class="inpTextBox" id="acpro_inp1">
-                <a class="inp modAccount" href="new-xiugaizfb.html">修改支付宝账号</a>
+                <input type="text" value="{$memberInfo.Attribute.pay_account}" readonly="readonly" class="inpTextBox" id="pay_account">
+                <a class="inp modAccount" href="javascript:void(0)">修改支付宝账号</a>
             </li>
             <li>
                 <label><font class="facexh">*</font>本次提现金额：</label>
-                <input type="text" class="sum inpTextBox" id="price" name="price" />元
-            </li>          
+                <input type="text" class="sum inpTextBox" id="price" name="price" onkeyup="onlyNum(this)" onpaste="onlyNum(this)"/>元
+            </li>
             <li>
-                <a href="javascript:void(0);" class="zclan">确定</a>
+                <a href="javascript:void(0);" class="zclan zclan4">确定</a>
             </li>
         </ul>
     </div>
@@ -35,8 +62,9 @@
         {$paginatorParams = $this->Paginator->params()}
         <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
             <thead>
-                <tr class="con_2_tr con_2_xq_too"> 
-                    <th class="tr_td5">ID </th>
+                <tr class="con_2_tr con_2_xq_too">
+                    <th class="tr_td2">交易号</th>
+                    <th class="tr_td5">提现账号</th>
                     <th class="tr_td2">金额 </th>
                     <th class="tr_td7">时间 </th>
                     <th class="tr_td4">状态 </th>
@@ -46,10 +74,21 @@
             <tbody>
             {foreach $expends as $expend}
                 <tr class="con_2_tr">
-                    <td class="tr_td5 id">{$expend.AlipayExpend.id}</td>
+                    <td class="tr_td2 order_no">{$expend.AlipayExpend.order_no}</td>
+                    <td class="tr_td5">{$expend.AlipayExpend.pay_account}</td>
                     <td class="tr_td2">{$expend.AlipayExpend.price}元</td>
                     <td class="tr_td7">{$expend.AlipayExpend.created|date_format:"%Y-%m-%d"}</td>
-                    <td class="tr_td4">{$expend.AlipayExpend.status}</td>
+                    <td class="tr_td4">
+                    {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')} 
+                    &nbsp;处理中
+                    {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_success')}
+                    &nbsp;提现成功
+                    {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_failure')}
+                    &nbsp;提现失败
+                    {else}
+                    &nbsp;未知
+                    {/if}
+                    </td>
                     <td class="con_2_xq_tofu tofu_anniu">
                         <a href="javascript:void(0)" class="delete">删除记录</a>
                     </td>

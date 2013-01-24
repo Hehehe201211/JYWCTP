@@ -170,6 +170,8 @@ class AlipaysController extends AppController
             $error = true;
         }
         if (!$error) {
+            $this->_memberInfo['Attribute']['virtual_coin'] = $this->_memberInfo['Attribute']['virtual_coin'] + $data['total_fee'];
+            $this->Session->write('memberInfo', $this->_memberInfo);
             $this->redirect('/coins/charge');
         } else {
             $this->redirect(array('controller' => 'coins', 'action' => 'error', 'order_no' => $data['out_trade_no']));

@@ -99,7 +99,7 @@ textarea{letter-spacing:1px;}
 .toplist .loginInfo a:hover{color:#F60;text-decoration:underline;}
 .toplist .loginInfo .fr{*width:360px;}
 .toplist .loginInfo .fr a{padding:0 6px;line-height:16px;}
-.toplist .loginInfo .fr li{float:right;background:none;height:16px;margin-top:2px;position:relative;}
+.toplist .loginInfo .fr li{float:right;background:none;height:16px;margin-top:2px;margin-top:4px\9;*margin-top:2px;position:relative;}
 .toplist .loginInfo .fr li.line{background:#F90;width:1px;height:15px;margin:5px 4px 0;}
 .toplist .loginInfo .fr li.cor{border:1px #F5F5F5 solid;border-bottom:0 none;}
 .toplist .loginInfo .fr li.cor:hover{background:#FFF;border-color:#ccc;}

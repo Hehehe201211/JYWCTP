@@ -3,7 +3,7 @@
 class FulltimesController extends AppController
 {
     var $layout = 'members';
-    var $uses = array('Fulltime', 'FulltimeFavourite');
+    var $uses = array('Fulltime', 'FulltimeFavourite', 'Homepage');
     var $components = array('RequestHandler', 'Ft', 'Unit');
     var $helpers = array('Js', 'City', 'Category');
     public function create()
@@ -165,6 +165,9 @@ class FulltimesController extends AppController
                 } else {
                     $showFavourite = 'add';
                 }
+                $conditions = array('members_id' => $fulltime['Fulltime']['members_id']);
+		        $homepage = $this->Homepage->find('first',array('conditions' => $conditions, 'fields' => array('domain')));
+		        $this->set('homepage', $homepage);
             } else {
                 $showFavourite = 'no';
                 $isAuthor = true;

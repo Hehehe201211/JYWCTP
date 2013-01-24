@@ -7,11 +7,13 @@
     <table width="492" cellspacing="0" cellpadding="0" border="0" class="posInfo">
       <tr>
         <th width="119" scope="row">公司名称：</th>
-        <td width="373"><a href="gsqt-index.html" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
+        <td width="373">
+        {$parttime.Member.company_name}
+        </td>
       </tr>
       <tr>
         <th width="119" scope="row">营业执照：</th>
-        <td width="373"><font color="#FF0">已验证</font></td>
+        <td width="373"><font color="#F00">已验证</font></td>
       </tr>
       <tr>
         <th width="25%" scope="row">产品所属分类：</th>

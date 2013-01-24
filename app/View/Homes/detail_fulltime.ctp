@@ -7,7 +7,9 @@
       <table width="492" cellspacing="0" cellpadding="0" border="0" class="posInfo">
         <tr>
           <th width="119" scope="row">公司名称：</th>
-          <td width="373"><a target="_blank" href="gsqt-index.html">{$fulltime.Fulltime.company}</a></td>
+          <td width="373">
+          {$fulltime.Fulltime.company}
+          </td>
         </tr>
         <tr>
           <th width="119" scope="row">营业执照：</th>

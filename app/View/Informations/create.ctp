@@ -23,7 +23,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#category').change(function(){
+	$('#category').change(function() {
 		$('#sub_category').find('option:gt(0)').remove();
 		if ($(this).val() != "") {
 			$.ajax({
@@ -44,8 +44,7 @@ $(document).ready(function(){
 	datepIniChange("#open","indate");
 	datepIniChange("#close","indate");
 	datepIniChange("#finished","indate");	
-	
-	//
+	if ($('#parttime').val() != "") $(".payType").parent().hide();
 	$('#check').click(function(){
 		if (!checkData()) {
 			$("#information").submit();
@@ -60,145 +59,53 @@ $(document).ready(function(){
 	var re = /^[0-9]*$/;
 	var intEMsg = '<span class="errorMsg">请输入数字</span>';
 	var dateEMsg = '<span class="errorMsg">请正确输入时间</span>';
-	function checkData() 
-	{
+	function checkData() 	{
+		$(".sjle").find(".errorMsg").remove();
 		var error=0;
 		$.each(checkTarget, function(target){
 			if($('#' + this).val() == "") {
-				if($('#' + this).parent('dt').find('.errorMsg').length == 0) {
-					$('#' + this).parent('dt').append(errorMsg);
-				}
+				$('#' + this).parent('dt').append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parent('dt').find('.errorMsg').remove();
-			}
+			} 
 		});
-		if ($('#city').val() == "") {
-			if($('#city').parent('dt').find('.errorMsg').length == 0) {
-				$('#city').parent('dt').append(errorMsg);
-			}
+		if ($('#city').val() == ""||$('#provincial').val() == "") {
+			$('#city').parent('dt').append(errorMsg);
 			error=1;
-		} else if($('#provincial').val() != ""){
-			$('#city').parent('dt').find('.errorMsg').remove();
-		}
-		$('#open,#close').parent().parent().find('.errorMsg').remove();
-		if($('#open').val() == "" || $('#close').val() == "") {
+		} 
+		if($('#open').val() == "" || $('#close').val() == ""||$('#open').val()>$('#close').val()) {
 			$('#open,#close').parent().parent().append(errorMsg);
 			error=1;
-		} else if($('#open').val() != "" && $('#close').val() != "") {
-			var open_str = $('#open').val().replace('\/', '-');
-			var close_str = $('#close').val().replace('\/', '-');
-			var open = new Date(open_str.split('-')[0], (parseInt(open_str.split('-')[1]) - 1), open_str.split('-')[2]);
-			var result1 = open.getFullYear() + '-';
-			var result2;
-			if (open.getMonth() + 1 < 10) {
-			     result1 += "0" + (open.getMonth() + 1) + '-'
-			} else {
-			     result1 += (open.getMonth() + 1) + '-'
-			}
-			if (open.getDate() < 10) {
-			     result1 += "0" + open.getDate();
-			} else {
-			     result1 += open.getDate();
-			}
-			if (result1 != open_str) {
-			     $('#open,#close').parent().parent().append(dateEMsg);
-			     error=1;
-			} else {
-			     var close = new Date(close_str.split('-')[0], (parseInt(close_str.split('-')[1]) - 1), close_str.split('-')[2]);
-			     result2 = close.getFullYear() + '-';
-			     if (close.getMonth() + 1 < 10) {
-                    result2 += "0" + (close.getMonth() + 1) + '-'
-                } else {
-                     result2 += (close.getMonth() + 1) + '-'
-                }
-                if (close.getDate() < 10) {
-                     result2 += "0" + close.getDate();
-                } else {
-                     result2 += close.getDate();
-                }
-			     if (result2 != close_str) {
-			         $('#open,#close').parent().parent().append(dateEMsg);
-			         error=1;
-			     }
-			}
-			if (result2 < result1) {
-			     $('#open,#close').parent().parent().append(dateEMsg);
-                 error=1;
-			}
-		}
-		
+		} 		
 		$('.contact, .post, .address, .contact_method').each(function(){
 			if ($(this).val() == "") {
-				if($(this).parent().find('.errorMsg').length == 0) {
-					$(this).parent().append(errorMsg);
-				}
+				$(this).parent().append(errorMsg);
 				error=1;
-			} else {
-				$(this).parent().find('.errorMsg').remove();
-			}
+			} 
 		});
 		var priceErr = false;
-		if ($('#parttime').val() == "")
-		{
+		if ($('#parttime').val() == "") {
     		if($('#pay_coin').attr('checked') == "checked") {
     			if ($('#price').val() == "") {
-    				if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-    					$('#price').parent().parent().append(errorMsg);
-    				} else {
-    					$('#price').parent().parent().find('.errorMsg').html("请输入此项目")
-    				}
+					$('#price').parent().parent().append(errorMsg);    				
     				error = 1;
     				priceErr = true;
-    			} else if (!re.test($('#price').val())){
-    				if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-    					$('#price').parent().parent().append(intEMsg);
-    				} else {
-    					$('#price').parent().parent().find('.errorMsg').html("请输入数字")
-    				}
-    				error = 1;
-    				priceErr = true;
-    			} else {
-    				$('#price').parent().parent().find('.errorMsg').remove();
-    			}
+    			} 
     		}
     		if(!priceErr && $('#pay_point').attr('checked') == "checked") {
     			if ($('#point').val() == "") {
-    				if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-    					$('#point').parent().parent().append(errorMsg);
-    				} else {
-    					$('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-    				}
+    				$('#point').parent().parent().append(errorMsg);
     				error = 1;
-    			} else if (!re.test($('#point').val())){
-    				if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-    					$('#point').parent().parent().append(intEMsg);
-    				} else {
-    					$('#point').parent().parent().find('.errorMsg').html("请输入数字")
-    				}
-    				error = 1;
-    			} else {
-    				$('#point').parent().parent().find('.errorMsg').remove();
-    			}
+    			} 
     		}
     		if ($('#pay_coin').attr('checked') != "checked" && $('#pay_point').attr('checked') != "checked") {
-    			if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-    				$('#point').parent().parent().append(errorMsg);
-    			} else {
-    				$('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-    			}
+    			$('#point').parent().parent().append(errorMsg);
     			error = 1;
     		}
 		}
 		if (!re.test($('#profit').val())) {
-			if ($('#profit').parent().find('.errorMsg').length == 0) {
-				$('#profit').parent().append(intEMsg);
-			}
+			$('#profit').parent().append(intEMsg);
 			error = 1;
-		} else {
-			$('#profit').parent().find('.errorMsg').remove();
-		}
-		
+		} 
 		return error;
 	}
 	
@@ -458,7 +365,7 @@ $(document).ready(function(){
 	              </select>
 	            </div>
 	            <input type="text" style="width:108px;" name="contact_method[]" class="contact_method" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
-	            <button class="addContact">添加</button><button class="deleContact">删除</button>
+	            <button class="addContact" type="button">添加</button><button class="deleContact" type="button">删除</button>
 	          </dt>
               {/if}
 			  <dt>

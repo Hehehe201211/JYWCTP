@@ -19,8 +19,8 @@
           </tr>
           {if $information.Information.type == Configure::read('Information.type.has')}
               <tr>
-                <th>行业：</th>
-                <td>{$this->Category->getCategoryName($information.Information.industries_id)}</td>
+                <th width="40%">行业：</th>
+                <td width="60%">{$this->Category->getCategoryName($information.Information.industries_id)}</td>
               </tr>
               
               <tr>

@@ -14,7 +14,8 @@ class ConfirmController extends AppController
     	'InformationAttribute', 
 		'Member',
         'InformationComment',
-        'InformationComplaint'
+        'InformationComplaint',
+        'Friendship'
 	);
     var $helpers = array('Js', 'City', 'Category');
 	var $components = array('RequestHandler', 'Info', 'Unit');
@@ -117,9 +118,21 @@ class ConfirmController extends AppController
 		        );
 		        $complainted = $this->InformationComplaint->find('count', $params);
 		        $this->set('complainted', $complainted > 0 ? true : false);
+		        $friendCond = array(
+		          'members_id' => $this->_memberInfo['Member']['id'], 
+		          'friend_members_id' => $transaction['PaymentTransaction']['author_members_id']
+		        );
 	        } else {
 	            $this->set('complainted', true);
+	            $friendCond = array(
+                  'members_id' => $this->_memberInfo['Member']['id'], 
+                  'friend_members_id' => $transaction['PaymentTransaction']['members_id']
+                );
 	        }
+	        //是否朋友关系
+	        $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
+	        $isFriend = $isFriend > 0 ? true : false;
+	        $this->set('isFriend', $isFriend);
         } else {
 	        if ($this->RequestHandler->isAjax()) {
 	            if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {

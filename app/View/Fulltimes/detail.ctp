@@ -62,9 +62,9 @@ $(document).ready(function(){
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="new-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="cgypjl.html">兼职管理</a>&gt;&gt;
-            <a href="#">常规职位详情</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+            <a href="javascript:void(0)">常规职位详情</a>
         </p>
     </div>    
     <div class="biaotit" id="title">{$fulltime.Fulltime.title}</div>
@@ -76,7 +76,11 @@ $(document).ready(function(){
           <tr>
             <th width="119" scope="row">公司名称：</th>
             <td width="373">
-                <a href="gsqt-index.html" target="_blank" class="red">{$fulltime.Fulltime.company}</a>
+                {if !empty($homepage.Homepage.domain)}
+                <a href="/homes/index/{$homepage.Homepage.domain}" target="_blank" class="red">{$fulltime.Fulltime.company}</a>
+                {else}
+                {$fulltime.Fulltime.company}
+                {/if}
             </td>
           </tr>
           <tr>

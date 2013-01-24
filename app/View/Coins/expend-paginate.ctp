@@ -4,8 +4,9 @@
 {$paginatorParams = $this->Paginator->params()}
 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
     <thead>
-        <tr class="con_2_tr con_2_xq_too"> 
-            <th class="tr_td5">ID </th>
+        <tr class="con_2_tr con_2_xq_too">
+            <th class="tr_td2">交易号</th>
+            <th class="tr_td5">提现账号</th>
             <th class="tr_td2">金额 </th>
             <th class="tr_td7">时间 </th>
             <th class="tr_td4">状态 </th>
@@ -15,10 +16,20 @@
     <tbody>
         {foreach $expends as $expend}
             <tr class="con_2_tr">
-                <td class="tr_td5 id">{$expend.AlipayExpend.id}</td>
+                <td class="tr_td5 id">{$expend.AlipayExpend.pay_account}</td>
                 <td class="tr_td2">{$expend.AlipayExpend.price}元</td>
                 <td class="tr_td7">{$expend.AlipayExpend.created|date_format:"%Y-%m-%d"}</td>
-                <td class="tr_td4">{$expend.AlipayExpend.status}</td>
+                <td class="tr_td4">
+                {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')} 
+                &nbsp;处理中
+                {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_success')}
+                &nbsp;提现成功
+                {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_failure')}
+                &nbsp;提现失败
+                {else}
+                &nbsp;未知
+                {/if}
+                </td>
                 <td class="con_2_xq_tofu tofu_anniu">
                     <a href="javascript:void(0)" class="delete">删除记录</a>
                 </td>
