@@ -27,17 +27,18 @@ $(document).ready(function(){
       </li>
       <li>
         <label><font class="facexh">*</font>验证码：</label>
-        <input type="text" onblur="txtBlur(this.id,'输入验证码')" onfocus="txtFocus(this.id,'输入验证码')" class="yanzhengma" id="yanzhengma" value="输入验证码" name="checkNum" style="width:60px; color: rgb(153, 153, 153);">
+        <input type="text" txt="输入验证码" class="yanzhengma" id="yanzhengma" value="输入验证码" name="checkNum">
         <a href="javascript:void(0)" id="getCheckNum">看不清楚？换一个</a>
     </li>
-    </ul>    
+    </ul>   
+    <div class="clear">&nbsp;</div> 
     <a href="javascript:void(0);" id="candidate" class="zclan zclan2">马上投递</a> 
     <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan2">不在现有中</a>
     {else}
     <ul class="products keyuan">
-            没有现有的客源可以选择，请点击【不在现有中】按钮！
+            没有相关行业的客源可以选择，请点击【不在现有中】按钮！
     </ul>
-    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan2">不在现有中</a>
-    {/if}
     <div class="clear">&nbsp;</div>
+    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan4">不在现有中</a>
+    {/if}    
   </div>

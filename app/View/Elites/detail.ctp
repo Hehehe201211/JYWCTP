@@ -18,8 +18,7 @@ $(document).ready(function(){
                 }
             });
         }
-    })
-    
+    })    
 });
 
 {/literal}
@@ -29,52 +28,52 @@ $(document).ready(function(){
       <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-ypqq.html">平台兼职</a>&gt;&gt;<a href="#">业务精英检索详情</a></p>      
     </div>   
      <div class="biaotit">{$member.Member.nickname}的会员信息</div>
-    <div class="xq_zl_xbxq">
+    <div class="tableDetail tableDetail1">
       <table width="100%">
         <tr>
-          <th width="114" class="tdRight">真实姓名：</th>
-          <td width="221">{$member.MemberAttribute.name}</td>
-          <td width="221" rowspan="7" class="top">
+          <th width="20%">真实姓名：</th>
+          <td width="50%">{$member.MemberAttribute.name}</td>
+          <td width="30%" rowspan="7" class="top">
             <img class="portrait" src="{$this->webroot}img/tx.jpg" />
-            <p>&nbsp;</p>
+            <div class="clear">&nbsp;</div>
             {if $showInviteBtn}
             <input class="invite" type="button" value="邀请兼职" />
             {/if}
           </td>           
         </tr>
         <tr>
-          <th class="tdRight">性别：</th>
+          <th>性别：</th>
           <td>{if $member.MemberAttribute.sex == 1}男{else}女{/if}</td>
         </tr>
         <tr>
-          <th class="tdRight">行业：</th>
+          <th>行业：</th>
           <td>{$this->Category->getCategoryName($member.MemberAttribute.category_id)}</td>
         </tr>  
         <tr>
-          <th class="tdRight">联系方式：</th>
+          <th>联系方式：</th>
           <td>{$member.MemberAttribute.mobile}</td>
         </tr>
         <tr>
-          <th class="tdRight">所在城市：</th>
+          <th>所在城市：</th>
           <td>福建省厦门市</td>
         </tr>
         <tr>
-          <th class="tdRight">联系地址：</th>
+          <th>联系地址：</th>
           <td>
           {$this->City->cityName($member.MemberAttribute.provincial_id)} 
           {$this->City->cityName($member.MemberAttribute.city_id)}
           </td>
         </tr>  
         <tr>
-          <th class="tdRight">业务范围：</th>
+          <th>业务范围：</th>
           <td>{$member.MemberAttribute.business_scope}</td>
         </tr> 
         <tr>
-          <th class="tdRight">与公司合作：</th>
+          <th>与公司合作：</th>
           <td>12次</td>
         </tr> 
         <tr>
-          <th class="tdRight">成功合作：</th>
+          <th>成功合作：</th>
           <td>3次</td>
         </tr>       
       </table>
@@ -113,7 +112,7 @@ $(document).ready(function(){
             </td>
             <td><a target="_blank" href="/cooperations/detail">{$cooperation.Cooperation.created}</a></td>
             <td><a target="_blank" href="/cooperations/detail">{$status[$cooperation.Cooperation.status]}</a></td>
-            <td class="con_2_xq_tofu xiushan_anniu">
+            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a href="/cooperations/detail" target="_blank">详情</a>
             </td>
           </tr>
@@ -152,7 +151,7 @@ $(document).ready(function(){
       </div>
     <div class="clear">&nbsp;</div>
     {if $showInviteBtn}
-     <a class="zclan zclan4 btnDeliverR invite" href="javascript:void(0)">邀请参与</a>
+     <a class="zclan zclan4 invite" href="javascript:void(0)">邀请参与</a>
     {/if}   
 </div>
 

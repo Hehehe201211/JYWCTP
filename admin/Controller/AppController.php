@@ -120,7 +120,7 @@ class AppController extends Controller {
         $conditions = array('link' => $this->request->params['controller'] . "/" . $this->request->params['action']);
         $current = $this->SubMenu->find('first', array('conditions' => $conditions));
         $conditions = array('menu_id' => $current['SubMenu']['menu_id'], 'display' => 1);
-        $sub_menus = $this->SubMenu->find('all', array('conditions' => $conditions));
+        $sub_menus = $this->SubMenu->find('all', array('conditions' => $conditions, 'order' => array('SubMenu.priority ASC')));
         /*
         
         $joins = array(

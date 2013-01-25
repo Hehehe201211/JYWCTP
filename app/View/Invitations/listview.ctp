@@ -7,13 +7,10 @@
       </p>     
     </div>    
     <div class="biaotit">收到的邀请</div>
-    <div class="tableSort">
-      <input type="radio" id="position" value="position" name="zjSort" class="inpRadio">
-      <label for="position">客源标题</label>
-      <input type="radio" checked="checked" id="time" value="time" name="zjSort" class="inpRadio">
-      <label for="time">时间</label>
-      <input type="radio" value="company" id="company" name="zjSort" class="inpRadio">
-      <label for="company">单位名称</label>
+    <div class="tableSort">      
+      <label><input type="radio" value="position" name="zjSort" class="inpRadio">客源标题</label>      
+      <label><input type="radio" checked="checked" value="time" name="zjSort" class="inpRadio">时间</label>      
+      <label><input type="radio" value="company" name="zjSort" class="inpRadio">单位名称</label>
       <select>
         <option>降序</option>
         <option>升序</option>
@@ -56,7 +53,7 @@
             {/if}
             </a>
         </td>
-        <td class="con_2_xq_tofu xiushan_anniu">
+        <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">详情</a>
         </td>
       </tr>

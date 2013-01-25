@@ -41,8 +41,8 @@
         <div class="zy_lt"><span>业务币管理</span><img src="{$this->webroot}img/{if $currentMenu == Configure::read('Menu.coinManager')}jian.png{else}jia.png{/if}"  alt=""/></div>
         <div class="zy_lx" {if $currentMenu != Configure::read('Menu.coinManager')}style="display: none;"{else}{/if}>
             <ul>
-                <li><a href="/coins/balance">账户余额</a></li>
-                <li><a href="/coins/charge">充值记录</a></li>
+                <!--<li><a href="/coins/balance">账户余额</a></li>-->
+                <li><a href="/coins/charge">余额充值</a></li>
                 <li><a href="/coins/income">收入明细</a></li>
                 <li><a href="/coins/expenses">支出明细</a></li>
                 <li><a href="/coins/expend">提现明细</a></li>
@@ -53,8 +53,8 @@
         <div class="zy_lt"><span>积分管理</span> <img src="{$this->webroot}img/{if $currentMenu == Configure::read('Menu.pointManager')}jian.png{else}jia.png{/if}"  alt=""/></div>
         <div class="zy_lx" {if $currentMenu != Configure::read('Menu.pointManager')}style="display: none;"{else}{/if}>
             <ul>
-                <li><a href="/points/balance">积分查询</a></li>
-                <li><a href="/points/charge">积分充值</a></li>
+                <!--<li><a href="/points/balance">积分查询</a></li>-->
+                <li><a href="/points/charge">余额充值</a></li>
                 <li><a href="/points/income">收入明细</a></li>
                 <li><a href="/points/expenses">支出明细</a></li>
             </ul>

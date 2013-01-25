@@ -7,13 +7,10 @@
       </p>
     </div> 
     <div class="biaotit">兼职收藏夹</div>
-      <div class="tableSort">
-          <input type="radio" checked="checked" id="time" value="time" name="zjSort" class="inpRadio">
-          <label for="time">发布时间</label>
-          <input type="radio" value="company" id="company" name="zjSort" class="inpRadio">
-          <label for="company">单位名称</label>
-          <input type="radio" id="position" value="position" name="zjSort" class="inpRadio">
-          <label for="position">职位</label>
+      <div class="tableSort">          
+          <label><input type="radio" checked="checked" value="time" name="zjSort" class="inpRadio">发布时间</label>          
+          <label><input type="radio" value="company" name="zjSort" class="inpRadio">单位名称</label>          
+          <label><input type="radio" value="position" name="zjSort" class="inpRadio">职位</label>
           <select>
               <option>降序</option>
               <option>升序</option>

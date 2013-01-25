@@ -55,6 +55,9 @@ class PointsController extends AppController
                 $this->set('jump', $page);
             }
             $this->render('charge-paginate');
+        } else {
+            $balance = $this->Fund->balance();
+            $this->set('balance', $balance);
         }
     }
     

@@ -40,18 +40,22 @@ $(document).ready(function(){
       <p>
       <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
       <a href="javascript:void(0)">积分管理</a>&gt;&gt;
-      <a href="javascript:void(0)">积分充值记录</a>
+      <a href="javascript:void(0)">余额充值</a>
       </p>
     </div>
-     <div class="zhanghujil">
+    <div class="zhanghujil">        
         <div class="rightBody">
-         <div class="zhanghujil_top">
-            <a href="/points/balance">账户余额</a>
-            <a id="dangq" href="javascript:void(0)">账户充值</a>
-           <!--<a href="new-qbmx.html">账户明细</a>-->
+        <div class="biaotit">余额</div>
+          <p>当前账户：<span class="zwzi">{$memberInfo.Member.nickname} </span></p>
+          <p>业务币余额：￥<span class="zwzi">{$balance.MemberAttribute.virtual_coin}</span> 元&nbsp;&nbsp;<a class="rightBody_a" href="/coins/charge">充值&gt;&gt;</a>&nbsp;&nbsp;<a class="rightBody_a" href="/coins/expend">提现&gt;&gt;</a></p>
+          <p>聚业务积分：<span class="zwzi">{$balance.MemberAttribute.point}</span> 点</p>
         </div>
+      </div>
+     <div class="zhanghujil">
+        <div class="rightBody">  
+        <div class="biaotit">充值</div>       
         <form method="post" action="/points/check">
-          <p>您的账户：{$memberInfo.Member.nickname} （请确认账号为您需要充值的账号）</p>
+          <p>您的账户：<font color="#FF0000">{$memberInfo.Member.nickname}</font> （请确认账号为您需要充值的账号）</p>
           <p>充值积分:<input type="text" id="topupNum" name="price" class="inpTextBox" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">点&nbsp;（1业务币=10点，每次充值额度不高于5000点。）</p>
           <p>
             <label>

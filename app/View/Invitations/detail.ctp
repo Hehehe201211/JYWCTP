@@ -13,49 +13,58 @@ $(document).ready(function(){
       </p>
     </div>
      <div class="biaotit">的会员信息</div>
-    <div class="xq_zl_xbxq">
+    <div class="tableDetail tableDetail1">
       <table width="100%">
         <tr>
-          <th width="114" class="tdRight">真实姓名：</th>
-          <td width="221"></td>
-          <td width="221" rowspan="7" class="top">
+          <th width="20%">公司名称：</th>
+          <td width="50%">{$company.CompanyAttribute.full_name}</td>
+          <td width="30%" rowspan="7" class="top">
             <img class="portrait" src="{$this->webroot}img/tx.jpg" />
-            <p>&nbsp;</p>
           </td>
         </tr>
         <tr>
-          <th class="tdRight">性别：</th>
-          <td></td>
+          <th>行业：</th>
+          <td>{$this->Category->getCategoryName($company.CompanyAttribute.category_id)}</td>
         </tr>
         <tr>
-          <th class="tdRight">行业：</th>
-          <td></td>
-        </tr>  
-        <tr>
-          <th class="tdRight">联系方式：</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th class="tdRight">所在城市：</th>
-          <td>福建省厦门市</td>
-        </tr>
-        <tr>
-          <th class="tdRight">联系地址：</th>
+          <th>所在城市：</th>
           <td>
+          {$provincial = $this->City->cityName($company.CompanyAttribute.provincial_id)}
+          {$city = $this->City->cityName($company.CompanyAttribute.city_id)}
+          {if $provincial == $city}
+            {$provincial}
+          {else}
+            {$provincial} {$city}
+          {/if}
           </td>
-        </tr>  
+        </tr>
         <tr>
-          <th class="tdRight">业务范围：</th>
-          <td></td>
-        </tr> 
+          <th>联系人：</th>
+          <td>{$company.CompanyAttribute.contact}</td>
+        </tr>
         <tr>
-          <th class="tdRight">与公司合作：</th>
+          <th>联系方式：</th>
+          {$methods = json_decode($company.CompanyAttribute.contact_method, true)}
+          {foreach $methods as $method}
+            <td>{$method.method} {$method.content}</td>
+          {/foreach}
+        </tr>
+        <tr>
+          <th>联系地址：</th>
+          <td>{$company.CompanyAttribute.address}</td>
+        </tr>
+        <tr>
+          <th>业务范围：</th>
+          <td>{$company.CompanyAttribute.business_scope}</td>
+        </tr>
+        <tr>
+          <th>与公司合作：</th>
           <td>12次</td>
-        </tr> 
+        </tr>
         <tr>
-          <th class="tdRight">成功合作：</th>
+          <th>成功合作：</th>
           <td>3次</td>
-        </tr>       
+        </tr>
       </table>
     </div>
     <div class="biaotit">发布的兼职</div>
@@ -105,7 +114,7 @@ $(document).ready(function(){
             </a>
             </td>
             <td><a target="_blank" href="/parttimes/detail?id={$parttime.PartTime.id}">{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</a></td>
-            <td class="con_2_xq_tofu xiushan_anniu">
+            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a href="/parttimes/detail?id={$parttime.PartTime.id}" target="_blank">详情</a>
             </td>
           </tr>

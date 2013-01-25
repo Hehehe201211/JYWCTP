@@ -4,7 +4,8 @@ class InvitationsController extends AppController
     var $layout = 'members';
     var $uses = array(
         'Invitation',
-        'PartTime'
+        'PartTime',
+        'CompanyAttribute'
     );
     var $helpers = array('Js', 'City', 'Category');
     var $components = array('RequestHandler', 'Info', 'Unit');
@@ -13,6 +14,7 @@ class InvitationsController extends AppController
     
     public function listview()
     {
+        $this->set('title_for_layout', "收到的邀请");
         $conditions = array(
             'receiver'  => $this->_memberInfo['Member']['id'],
             'status'    => Configure::read('Invitation.inviting')
@@ -56,6 +58,7 @@ class InvitationsController extends AppController
     
     public function detail()
     {
+        $this->set('title_for_layout', "收到的邀请详情");
         if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
             $id = $this->request->query['id'];
             $conditions = array(
@@ -94,6 +97,13 @@ class InvitationsController extends AppController
                         $this->set('jump', $page);
                     }
                     $this->render('parttimes');
+                } else {
+                    //企业会员信息
+                    $conditions = array(
+                        'members_id' => $invitation['Invitation']['sender']
+                    );
+                    $company = $this->CompanyAttribute->find('first', array('conditions' => $conditions));
+                    $this->set('company', $company);
                 }
             } else {
                 $this->_sysDisplayErrorMsg('没有此信息！');

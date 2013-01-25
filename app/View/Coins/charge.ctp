@@ -41,19 +41,22 @@ $(document).ready(function(){
       <p>
       <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
       <a href="javascript:void(0)">业务币管理</a>&gt;&gt;
-      <a href="javascript:void(0)">充值记录</a>
+      <a href="javascript:void(0)">余额充值</a>
       </p>
     </div>
-     <div class="zhanghujil">
-        <div class="zhanghujil_top">
-            <a href="/coins/balance">账户余额</a>
-            <a id="dangq" href="javascript:void(0)">账户充值</a>
-           <!--<a href="new-qbmx.html">账户明细</a>-->
-        </div>
+    <div class="zhanghujil">        
         <div class="rightBody">
-         <div class="biaotit">给本账户充值</div>
+        <div class="biaotit">余额</div>
+          <p>当前账户：<span class="zwzi">{$memberInfo.Member.nickname}</span></p>
+          <p>业务币余额：￥<span class="zwzi">{$balance.MemberAttribute.virtual_coin}</span> 元&nbsp;&nbsp;<a class="rightBody_a" href="/coins/expend">提现&gt;&gt;</a></p>
+          <p>聚业务积分：<span class="zwzi">{$balance.MemberAttribute.point}</span> 点&nbsp;&nbsp;<a class="rightBody_a" href="/points/charge">充值&gt;&gt;</a></p>
+        </div>
+      </div>
+     <div class="zhanghujil">        
+        <div class="rightBody">
+         <div class="biaotit">充值</div>
         <form method="post" action="/alipays/check">
-          <p>您的账户：{$memberInfo.Member.nickname} （请确认账号为您需要充值的账号）</p>
+          <p>您的账户：<font color="#FF0000">{$memberInfo.Member.nickname}</font> （请确认账号为您需要充值的账号）</p>
           <p>充值金额:<input type="text" id="topupNum" name="price" class="inpTextBox" onkeyup="onlyNum(this)" onpaste="onlyNum(this)">元&nbsp;（1元人民币=1元业务币，每次充值金额不高于500元）</p>
           <p>
             <label>
@@ -108,7 +111,6 @@ $(document).ready(function(){
       </tbody>
       </table>
             {if $paginatorParams['pageCount'] > 1}
-
               <div class="fanyea">
                 <form id="searchOpt">
                         {if $paginatorParams['prevPage']}

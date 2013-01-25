@@ -128,7 +128,7 @@ h3.gongsichakan_spanNM{margin-bottom:0;}
 .jsxxxq .divDeliverRe .sjle .inpButton{width:100px;margin:12px -150px 12px 160px;float:left\9;padding-top:3px\9;}
 .sjle img#code{height:22px;margin:0 8px;vertical-align:text-bottom}
 
-.jsxxxqB{position:absolute;z-index:99;width:605px;display:none;background:#FFF;border:1px #999 dashed;padding:8px 12px;}
+.jsxxxqB{position:absolute;z-index:99;width:605px;display:none;background:#FFF;border:1px #999 dashed;padding:12px;}
 .jsxxxqB .closeDiv{display:block;position:absolute;width:22px;height:22px;background:url(../img/xc_r.gif) -37px -6px no-repeat;top:-10px;right:-8px;}
 .jsxxxqB .closeDiv:hover{background-position:-37px -38px;}
 .jsxxxqB .divBtnContainer{*padding-top:8px;}
@@ -316,7 +316,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .tableSort{margin-bottom:3px;}
 .tableSort .inpButton{padding:0 3px\9;*padding:2px 2px 0;}
 .tableSort .inpRadio,.tableSort .inpCheckbox{margin: 0 4px;vertical-align:text-bottom;*vertical-align:middle;}
-.tableSort select{height:18px;*height:20px;}
+.tableSort select{*height:20px;}
 
 .gongxi{background:url(../img/okBlue.gif) 0 0 no-repeat;font-size:17px;color:#2196FF;margin:20px 34px;padding-left:30px;font-weight:bold;height:24px;}
 .gongxiLink{text-align:center;}
@@ -338,18 +338,18 @@ a.btnSearch:hover{background-position:0 -122px;}
 .xq_zl_xbxq .connection span{display: inline;width: auto;margin-right:16px;}
 .xq_zl_xbxq .connection label{display:inline;float:none;width:auto;}
 .xq_zl_xbxq .deal label{color:#F30;}
-.xq_zl_xbxq table td.top{ vertical-align:top;}
 .xq_zl_xbxq table tr{background:none;}
-.xq_zl_xbxq table .portrait{border:1px #333 solid;width:115px;}
-.xq_zl_xbxq table .invite{padding-left:3px\9;padding-right:3px\9;*padding:0;*line-height:15px;}
 
 .tableDetail{padding:0 12px;}
 .tableDetail table{margin-bottom:12px;}
+.tableDetail table .portrait{border:1px #333 solid;width:115px;}
 .tableDetail th{text-align:right;padding-right:8px;}
 .tableDetail td{line-height:24px;}
+.tableDetail td.top{ vertical-align:top;}
 .tableDetail .red{color:#F30;}
 .tableDetail p{width:395px\9;}
 .tableDetail .divBtnContainer{margin:12px auto;}
+.tableDetail1 tr:hover{background:none;}
 
 .moreInfo{margin-top:6px;}
 .xxContent{margin-bottom:8px;}
@@ -670,17 +670,18 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zhanghujil_top a{ color:#fff;font-size:14px;font-weight:bold;display:block;float:left;width:100px;height:35px;line-height:35px;text-align:center;}
 .zhanghujil_top a:hover{background-color:#da8607;}
 #dangq{background:#f03434;} 
-.rightBody {padding:10px;}
+.rightBody {padding:8px;}
 .rightBody button{line-height:18px\9;}
+.rightBody label a:hover{text-decoration:underline;}
 .rightBody p{line-height:30px; padding:0px 10px; }
 .rightBody p input{letter-spacing:1px;margin:0 4px;text-align:center;}
 .rightBody p .inpRadio{vertical-align:text-top;*vertical-align:middle;}
 #date_begin,#date_end{width:100px;padding:2px 0;}
 .rightBody p #topupNum{width:50px;padding:2px 0;}
 .rightBody p #topupQuery{padding:0 2px\9;*padding:2px 0 0;}
-.rightBody_a{ color:#000;font-weight:bold;}
+.rightBody_a{color:#333;font-weight:bold;}
 .zwzi {font-size: 26px;}
-.huangs_zit{ color:#ff9900;}
+.huangs_zit{color:#F90;}
 
 .tishi{display:block; border:1px solid #c0c0c0;width:570px;padding:6px;background:#ffffd1; margin-bottom:10px;}
 .tishi h1{color:#ff9900; font-weight:bold;}

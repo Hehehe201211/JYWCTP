@@ -11,6 +11,7 @@ class FavouritesController extends AppController
     var $paginate;
     public function listview()
     {
+        $this->set('title_for_layout', "我收藏的兼职");
         $fields = array(
             'PartTimeFavourite.id',
             'PartTime.title',
@@ -57,6 +58,7 @@ class FavouritesController extends AppController
     
     public function detail()
     {
+        $this->set('title_for_layout', "我收藏的兼职详情");
         if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
             $id = $this->request->query['id'];
             $conditions = array(
@@ -65,7 +67,18 @@ class FavouritesController extends AppController
             );
             $favourite = $this->PartTimeFavourite->find('first', array('conditions' => $conditions));
             if (!empty($favourite)) {
-                $parttime = $this->PartTime->find('first', array('conditions' => array('id' => $favourite['PartTimeFavourite']['part_times_id'])));
+                $joinMember = array(
+                    'table' => 'members',
+                    'alias' => 'Member',
+                    'type'  => 'inner',
+                    'conditions' => 'Member.id = PartTime.members_id'
+                );
+                $params = array(
+                    'conditions' => array('PartTime.id' => $favourite['PartTimeFavourite']['part_times_id']),
+                    'fields'     => array('PartTime.*', 'Member.company_name'),
+                    'joins'      => array($joinMember)
+                );
+                $parttime = $this->PartTime->find('first', $params);
                 $this->set('parttime', $parttime);
             } else {
                 $this->_sysDisplayErrorMsg("没有此信息！");

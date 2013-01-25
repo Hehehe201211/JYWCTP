@@ -6,6 +6,10 @@ $(document).ready(function(){
 			$(".con_2_table tbody tr:odd,.conTable3 tbody tr:odd").addClass("even");
 	}},1000);	
 	
+	$("#jump,#comment_content").live("keydown",function(e){
+		return e.keyCode==13 ? false : true;
+	});
+	
 	$("#myTab2 li").mouseenter(function(){
 		var tabIndex=$("#myTab2 li").index(this);
 		tabSwitching(tabIndex,"#myTab2 li",".myTab1_Content2","active3");

@@ -8,9 +8,7 @@ $(document).ready(function(){
        var parttime_id = $(this).parent().find('.parttime_id').val();
        $('.jsxxxq').load('/homes/detailParttime', {'id':parttime_id}, function(){
             bgKuang(".jsxxxq",".jsxxxq .closeDiv");
-       });
-        
-        
+       });        
        /*
         var n=$(".hyxzyemian22 tbody tr").index($(this).parent());
         if ($(this).find(".btnDeliverR").length==1)    bgKuang(".jsxxxqBR:eq("+n+")",".jsxxxqB .closeDiv");
@@ -24,7 +22,6 @@ $(document).ready(function(){
 });
 //{/literal}
 </script>
-
 <div class="main">
   <div class="left">
     <div class="divnavLeft">
@@ -83,7 +80,7 @@ $(document).ready(function(){
             <form id="searchOpt">
             <div class="dd_ym">
                 {if $paginatorParams['prevPage']}
-                    <div style="margin-left:30px;" class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                    <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                 {/if}
                 <label>每页显示：</label>
                 <select name="pageSize" id="pageSize">
@@ -99,7 +96,7 @@ $(document).ready(function(){
                 <div class="dd_span1"><a href="" id="jumpButton">跳转</a></div>
             </div>
             {if $paginatorParams['nextPage']}
-                <div style="float:left; margin-left:6px;" class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
             {/if}
             </form>
         </div>

@@ -14,7 +14,7 @@ $(document).ready(function(){
     $('#favorite').click(function(){
         var $this = $(this);
         if ($this.hasClass('add')) {
-            if(confirm('真的要把此职位信息添加到收藏？')){
+            if(confirm('确定收藏此职位信息？')){
                 var fulltime_id = $('#fulltime_id').val();
                 $.ajax({
                     url : '/fulltimes/addFavourite',
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 });
             }
         } else if ($this.hasClass('del')){
-            if(confirm('真的要把此职位信息从收藏中删除吗？')){
+            if(confirm('确定从收藏中删除此职位信息？')){
                 var fulltime_id = $('#fulltime_id').val();
                 $.ajax({
                     url : '/fulltimes/delFavourite',
@@ -53,8 +53,7 @@ $(document).ready(function(){
                     }
                 });
             }
-        }
-        
+        }        
     });
 });
 {/literal}
@@ -68,14 +67,13 @@ $(document).ready(function(){
         </p>
     </div>    
     <div class="biaotit" id="title">{$fulltime.Fulltime.title}</div>
-    <div class="gongsichakan_jobs jsxxxq">
-      <div class="gongsichakan_post">
+    <div class="tableDetail">
         <p class="jinggao">发布时间：{$fulltime.Fulltime.created|date_format:"%Y-%m-%d"} 信息编号：{$fulltime.Fulltime.id}  该信息被浏览 7 次 </p>
         <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
           {if !$isAuthor}
           <tr>
-            <th width="119" scope="row">公司名称：</th>
-            <td width="373">
+            <th width="25%">公司名称：</th>
+            <td width="75%">
                 {if !empty($homepage.Homepage.domain)}
                 <a href="/homes/index/{$homepage.Homepage.domain}" target="_blank" class="red">{$fulltime.Fulltime.company}</a>
                 {else}
@@ -84,31 +82,31 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <th width="119" scope="row">营业执照：</th>
-            <td width="373"><font color="#FF0000">已验证</font></td>
+            <th>营业执照：</th>
+            <td class="red">已验证</td>
           </tr>
           {/if}
           <tr>
-            <th width="119" scope="row">工作性质：</th>
-            <td width="373">{$fulltime.Fulltime.type}</td>
+            <th>工作性质：</th>
+            <td>{$fulltime.Fulltime.type}</td>
           </tr>
           <tr>
-            <th scope="row">薪资待遇：</th>
+            <th>薪资待遇：</th>
             <td>{$fulltime.Fulltime.salary}元</td>
           </tr>
           <tr>
-            <th scope="row">学历要求：</th>
+            <th>学历要求：</th>
             <td>
             {$educateds = Configure::read('Fulltime.educated')}
             {$educateds[$fulltime.Fulltime.educated]}
             </td>
           </tr>
           <tr>
-            <th scope="row">经验要求：</th>
+            <th>经验要求：</th>
             <td>1-3年</td>
           </tr>
           <tr>
-            <th scope="row">性别要求：</th>
+            <th>性别要求：</th>
             <td>
             {if $fulltime.Fulltime.sex == 1} 男
             {elseif $fulltime.Fulltime.sex ==2}女
@@ -117,18 +115,18 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <th scope="row">招聘人数：</th>
+            <th>招聘人数：</th>
             <td>{$fulltime.Fulltime.number}人</td>
           </tr>
           <tr>
-            <th scope="row">职位行业：</th>
+            <th>职位行业：</th>
             <td>
                 {$this->Category->getCategoryName($fulltime.Fulltime.category)}
                 <input type="hidden" name="category" id="category" value="{$fulltime.Fulltime.category}" />
             </td>
           </tr>
           <tr>
-            <th scope="row">工作区域：</th>
+            <th>工作区域：</th>
             <td>
             {$provincial = $this->City->cityName($fulltime.Fulltime.provincial)}
             {$city = $this->City->cityName($fulltime.Fulltime.city)}
@@ -140,26 +138,25 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <th scope="row">联系人：</th>
+            <th>联系人：</th>
             <td>{$fulltime.Fulltime.contact}</td>
           </tr>
           {$contacts = json_decode($fulltime.Fulltime.contact_method, true)}
           {foreach $contacts as $contact}
           <tr>
-            <th scope="row">联系方式：</th>
+            <th>联系方式：</th>
             <td>{$contact.method} {$contact.number}</td>
           </tr>
           <tr>
-            <th scope="row">职位要求：</th>
+            <th>职位要求：</th>
             <td><p>{$fulltime.Fulltime.require}</p></td>
           </tr>
           <tr>
-            <th scope="row">补充说明：</th>
+            <th>补充说明：</th>
             <td><p>{$fulltime.Fulltime.additional}</p></td>
           </tr>
           {/foreach}
-        </table>
-      </div>       
+        </table>      
         {if !$isAuthor}
 			   <div style="width:200px;" class="divBtnContainer">
                 <a class="zclan zclan7 btnDeliverR" href="javascript:void(0)" id="candidate">投递简历</a>
@@ -176,6 +173,6 @@ $(document).ready(function(){
 </div>
 <input type="hidden" name="fulltime_id" id="fulltime_id" value="{$fulltime.Fulltime.id}" />
 <input type="hidden" name="receiver" id="receiver" value="{$fulltime.Fulltime.members_id}" />
-<div class="jsxxxq jsxxxqB" style="height:179px;">
+<div class="jsxxxq jsxxxqB" style="width:605px;">
     
 </div>
