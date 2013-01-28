@@ -44,7 +44,7 @@
             </a>
             </td>
             <td><a target="_blank" href="/parttimes/detail?id={$parttime.PartTime.id}">{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</a></td>
-            <td class="con_2_xq_tofu xiushan_anniu">
+            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a href="/parttimes/detail?id={$parttime.PartTime.id}" target="_blank">详情</a>
             </td>
           </tr>

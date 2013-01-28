@@ -6,17 +6,11 @@ $(document).ready(function(){
     $(".btnSaftMod").click(function(){
        $('#jsxxxq1').load('/accounts/load', {'name':'company-password'}, function(){})
         bgKuang("#jsxxxq1","#jsxxxq1 .closeDiv");
-    });
-    
+    });    
     $('#epasswordBtb').live('click', function(){
         if ($('#new_password').val().trim() != "" && $('#new_re_password').val().trim() != "") {
             if ($('#new_password').val() != $('#new_re_password').val()) {
-                if ($('#jsxxxq1 span').length == 0) {
-                    var msg = '<span class="errorMsg">确认密码不一致！</span>';
-                    $('.biaotit').after(msg);
-                } else {
-                    $('#jsxxxq1 span').html('确认密码不一致！');
-                }
+				$('.errorMsg').html('确认密码不一致！');
             } else {
                 $.ajax({
                     url : '/accounts/editSecurity',
@@ -36,12 +30,7 @@ $(document).ready(function(){
                 });
             }
         } else {
-            if ($('#jsxxxq1 span').length == 0) {
-                var msg = '<span class="errorMsg">请输入密码和确认密码！</span>';
-                $('.biaotit').after(msg);
-            } else {
-                $('#jsxxxq1 span').html('请输入密码和确认密码！');
-            }
+			$('.errorMsg').html('请输入密码和确认密码！'); 
         }
     });
 });

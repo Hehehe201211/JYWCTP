@@ -1,8 +1,13 @@
 <a href="#" class="closeDiv">&nbsp;</a>
 <div class="biaotit">支付密码修改</div>
-<div class="sjle sjleBold">
+<div class="sjle sjleBold" style="margin-top:0;">
+<div class="info">&nbsp;<span class="errorMsg"></span></div>
 <form id="epay_password">
     <ul>
+    <li>
+        <label><font class="facexh">*</font>请输入登录密码：</label>
+        <input type="password" name="old_password" id="old_password" />
+      </li>
       <li>
         <label><font class="facexh">*</font>请输入旧密码：</label>
         <input type="password" name="old_password" id="old_password" />
@@ -23,4 +28,3 @@
     <a class="zclan zclan7" href="javascript:void(0)" id="epay_passwordBtb">确定</a>
     <a class="zclan zclan7" href="javascript:void(0)" onclick="var a=$('.jsxxxqB .closeDiv').click();">关闭</a>
 </div>
-<div class="clear">&nbsp;</div>

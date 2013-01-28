@@ -18,7 +18,13 @@
     <div class="width1000 header"> 
         <div class="divH left">&nbsp;</div>
         <div class="divH middle">
-            <div><img src="{$this->webroot}img/logo.png" /></div>
+            <div>
+            {if isset($company_thumbnail) && !empty($company_thumbnail)}
+            <img src="{$this->webroot}{$company_thumbnail}" />
+            {else}
+            <img src="{$this->webroot}img/logo.png" />
+            {/if}
+            </div>
         </div>
         <div class="divH right">
             <table width="100%" height="100%" border="0">

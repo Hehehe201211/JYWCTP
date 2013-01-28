@@ -21,17 +21,23 @@
                 <td class="tr_td7">{$expend.AlipayExpend.created|date_format:"%Y-%m-%d"}</td>
                 <td class="tr_td4">
                 {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')} 
-                &nbsp;处理中
+                &nbsp;等待处理
                 {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_success')}
                 &nbsp;提现成功
                 {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_failure')}
                 &nbsp;提现失败
+                {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_report')}
+                &nbsp;提现处理中
                 {else}
                 &nbsp;未知
                 {/if}
                 </td>
                 <td class="con_2_xq_tofu tofu_anniu">
+                    {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')}
+                    <a href="javascript:void(0)" class="cancel">取消提现</a>
+                    {elseif $expend.AlipayExpend.status != Configure::read('Alipay.status_report')}
                     <a href="javascript:void(0)" class="delete">删除记录</a>
+                    {/if}
                 </td>
             </tr>
         {/foreach}

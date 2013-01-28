@@ -588,22 +588,31 @@ $(document).ready(function(){
     </div>
     <div class="sider">
         <div class="fuwu">
-            <h1><a href="plt-jzxx.html"><span class="fr">更多...</span>最新企业会员认证</a></h1>
+            <h1><a href="javascript:void(0)"><span class="fr">更多...</span>最新企业会员认证</a></h1>
+            {foreach $newCompanies as $company}
             <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
-                <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
-                <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
+                <dt>
+                    <a href="/homes/index/{$company.Homepage.domain}" target="_blank">
+                    {if !empty($company.CompanyAttribute.thumbnail)}
+                        {$thumbnail = Configure::read('Data.path')|cat:$company.CompanyAttribute.thumbnail}
+                        {if file_exists($thumbnail)}
+                            <img src="{$this->webroot}{$company.CompanyAttribute.thumbnail}">
+                        {else}
+                            <img src="{$this->webroot}img/tx.jpg">
+                        {/if}
+                      {else}
+                      <img src="{$this->webroot}img/tx.jpg">
+                      {/if}
+                    </a>
+                </dt>
+                <dd class="title">
+                    <a href="/homes/index/{$company.Homepage.domain}" target="_blank" title="{$company.CompanyAttribute.full_name}">{$company.CompanyAttribute.full_name}</a>
+                </dd>
+                <dd class="content">
+                    <a href="/homes/index/{$company.Homepage.domain}" target="_blank">{$company.CompanyAttribute.business_scope}</a>
+                </dd>
             </dl>
-            <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
-                <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
-                <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
-            </dl>
-            <dl class="imgParttime">
-                <dt><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒"><img src="{$this->webroot}img/tx.jpg" width="77" height="73" alt="" /></a></dt>
-                <dd class="title"><a href="gsqt-index.html" target="_blank" title="猪八戒猪八戒猪八戒猪八戒猪八戒">猪八戒猪八戒猪八戒猪八戒猪八戒</a></dd>
-                <dd class="content"><a href="jzxxxq2.html" target="_blank">中国最大的威客网站600万服务商随您选中国最大的威客网站600万威客0万站600万威客0万威客</a></dd>
-            </dl>
+            {/foreach}
         </div>
     </div>
 

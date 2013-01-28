@@ -2,15 +2,20 @@
 {literal}
 $(document).ready(function(){
     $(".zclan4").click(function(){
-        if ($("#price").val()=="") {
+		var price=parseInt($("#price").val());
+        if (typeof(price)==true) {
             alert("请输入预提现金额。");
-        }else if($("#price").val()>500) {
-            alert("请输入小于500的数值。");
+		} else if (price<50) {
+			alert("请输入不小于50的数值。");
+        } else if ($("#price").val()>500) {
+            alert("请输入不超过500的数值。");
+		} else if ($("#pay_accountN").val()=="") {
+            alert("请输入与支付宝账号对应的真实姓名。");
         } else {
             $.ajax({
                 url  : '/coins/expend_send',
                 type : 'post',
-                data : 'price=' + $('#price').val() + '&pay_account=' + $('#pay_account').val(),
+                data : 'price=' + $('#price').val() + '&pay_account=' + $('#pay_account').val() + '&pay_name=' + $('#pay_accountN').val(),
                 async : false,
                 success : function(data) {
                     var result = eval("("+data+")");
@@ -22,6 +27,18 @@ $(document).ready(function(){
             });
         }
     });
+	$("#pay_account").focus(function(){
+		$(this).after($(".errorMsg"));
+		$(".errorMsg").text("若需要变动支付宝账号，请到账户安全中心修改后操作提现。").width(174);
+	});
+	$("#pay_accountN").focus(function(){
+		$(this).after($(".errorMsg"));
+		$(".errorMsg").text("请确认支付宝真实姓名与账号对应，避免提现失败。").width(174);
+	});
+	$("#price").focus(function(){
+		$(this).after($(".errorMsg"));
+		$(".errorMsg").text("50元起提，提现金额为整数，不超过500元。").width(234);
+	});
 });
 {/literal}
 </script>
@@ -43,11 +60,15 @@ $(document).ready(function(){
             <li>
                 <label><font class="facexh">*</font>核对您的支付宝账号：</label>
                 <input type="text" value="{$memberInfo.Attribute.pay_account}" readonly="readonly" class="inpTextBox" id="pay_account">
-                <a class="inp modAccount" href="javascript:void(0)">修改支付宝账号</a>
+                <span class="errorMsg" style="width:174px;">若需要变动支付宝账号，请到账户安全中心修改后操作提现。</span>
             </li>
+			<li>
+          <label><font class="facexh">*</font>请输入支付宝的真实姓名：</label>
+          <input type="text" value="" class="inpTextBox" name="pay_name" id="pay_accountN">
+          </li>
             <li>
-                <label><font class="facexh">*</font>本次提现金额：</label>
-                <input type="text" class="sum inpTextBox" id="price" name="price" onkeyup="onlyNum(this)" onpaste="onlyNum(this)"/>元
+                <label><font class="facexh">*</font>本次提现金额（元）：</label>
+                <input type="text" class="sum inpTextBox" id="price" name="price" onkeyup="onlyNum(this)" onpaste="onlyNum(this)"/>
             </li>
             <li>
                 <a href="javascript:void(0);" class="zclan zclan4">确定</a>
@@ -80,17 +101,23 @@ $(document).ready(function(){
                     <td class="tr_td7">{$expend.AlipayExpend.created|date_format:"%Y-%m-%d"}</td>
                     <td class="tr_td4">
                     {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')} 
-                    &nbsp;处理中
+                    &nbsp;等待处理
                     {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_success')}
                     &nbsp;提现成功
                     {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_failure')}
                     &nbsp;提现失败
+                    {elseif $expend.AlipayExpend.status == Configure::read('Alipay.status_report')}
+                    &nbsp;提现处理中
                     {else}
                     &nbsp;未知
                     {/if}
                     </td>
                     <td class="con_2_xq_tofu tofu_anniu">
+                        {if $expend.AlipayExpend.status == Configure::read('Alipay.status_confirm')}
+                        <a href="javascript:void(0)" class="cancel">取消提现</a>
+                        {elseif $expend.AlipayExpend.status != Configure::read('Alipay.status_report')}
                         <a href="javascript:void(0)" class="delete">删除记录</a>
+                        {/if}
                     </td>
                 </tr>
             {/foreach}

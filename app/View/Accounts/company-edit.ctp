@@ -1,6 +1,45 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+
+    $('#category_id').change(function(){
+        $('ul.products').html('');
+        if ($(this).val() != "") {
+            $.ajax({
+                'type'  : 'Get',
+                'url'   : '/informations/getCategoryList/' + $(this).val(),
+                'success':function(data) {
+                    var dataobj=eval("("+data+")");
+                    var liStr = "";
+                    $.each(dataobj, function(idx, item){
+                        liStr += '<li><input type="checkbox" class="sub_category" name="service[]" value="' + item.Category.id + '" id="service[]' + item.Category.id + '"><label for="service[]' + item.Category.id + '">' + item.Category.name + '</label></li>'
+                    });
+                    $('ul.products').html(liStr);
+                }
+            });
+        }
+    });
+    $('#provincial_id').change(function(){
+        if ($(this).val() != "") {
+            $.ajax({
+                'type' : 'Get',
+                'url'  : '/informations/getCityList/' + $(this).val(),
+                'success':function(data){
+                    var dataobj=eval("("+data+")");
+                    if (dataobj.length > 1) {
+                        $('#city_id').find('option:gt(0)').remove();
+                    } else {
+                        $('#city_id').find('option').remove();
+                    }
+                    var optionStr = "";
+                    $.each(dataobj, function(idx, item){
+                        optionStr += '<option value="'+item.City.id+'">' + item.City.name + '</option>'
+                    });
+                    $('#city_id').append(optionStr);
+                }
+            })
+        }
+    });
     $("button.addContact").live("click",function(e){
         e.preventDefault();
         $(this).parent().after($(this).parent().clone());
@@ -15,15 +54,25 @@ $(document).ready(function(){
         var src = '/members/image/' + Math.random();
         $('#code').attr('src', src);
     });
+    $('#check').click(function(){
+        if (!checkData()) {
+            $("#editForm").submit();
+        }
+    });
+    
+    function checkData()
+    {
+        return false;
+    }
 });
-//{/literal}
+{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="qy-slijzky.html">平台兼职</a>&gt;&gt;
-            <a href="#">兼职发布详情</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+            <a href="javascript:void(0)">完善资料</a>
         </p>
     </div>    
 <ul class="ulFormStep">
@@ -32,84 +81,184 @@ $(document).ready(function(){
       <li>3.修改成功</li>
     </ul>
     <div class="sjle">
-       <form method="post" action="#">
+       <form id="editForm" action="/accounts/editCheck" method="post" enctype="multipart/form-data">
         <ul>   
           <li>
             <label><font class="facexh">*</font>公司全名：</label>
-            <input type="text" class="inpTextBox" name="full_name" id="full_name" value="{$memberAttribute.CompanyAttribute.full_name}">
+            <input type="text" class="inpTextBox" name="full_name" id="full_name" value="{if isset($this->data['full_name'])}{$this->data['full_name']}{else}{$memberAttribute.CompanyAttribute.full_name}{/if}">
           </li> 
           <li>
              <label>成立时间：</label>
-             <input type="text" readonly="readonly" id="established" name="established" value="{$memberAttribute.CompanyAttribute.established}">
+             <input type="text" readonly="readonly" id="established" name="established" value="{if isset($this->data['established'])}{$this->data['established']}{else}{$memberAttribute.CompanyAttribute.established|date_format:"%Y-%m-%d"}{/if}">
+          </li>
+          <li>
+            <label>营业执照：</label>
+          </li>
+          <li class="avatar">
+            <label>&nbsp;</label>
+            {if isset($this->data['license'])}
+                {$thumbnail = Configure::read('Data.path')|cat:$this->data['license']}
+                {if !empty($this->data['license']) && file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$this->data['license']}">
+                {/if}
+            {else if !empty($memberAttribute.CompanyAttribute.license)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberAttribute.CompanyAttribute.license}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$memberAttribute.CompanyAttribute.license}">
+                {/if}
+            {/if}
+            <input type="hidden" name="license" value="{if isset($this->data['license'])}{$this->data['license']}{else}{$memberAttribute.CompanyAttribute.license}{/if}" />
+          </li>
+          <li>
+            <label>公司LOGO：</label>
+            <input type="file" style="height:auto;height:22px;" size="20" id="logo" name="logo" class="inpFile">
+          </li>
+          <li class="avatar">
+            <label>&nbsp;</label>
+            {if isset($this->data['thumbnail'])}
+                {$thumbnail = Configure::read('Data.path')|cat:$this->data['thumbnail']}
+                {if !empty($this->data['thumbnail']) && file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$this->data['thumbnail']}">
+                {/if}
+            {else if !empty($memberAttribute.CompanyAttribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberAttribute.CompanyAttribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$memberAttribute.CompanyAttribute.thumbnail}">
+                {/if}
+            {/if}
+            <input type="hidden" name="thumbnail" value="{if isset($this->data['thumbnail'])}{$this->data['thumbnail']}{else}{$memberAttribute.CompanyAttribute.thumbnail}{/if}" />
           </li>
           <li>
              <label><font class="facexh">*</font>联系人：</label>
-             <input type="text" class="inpTextBox" id="contact" name="contact" value="{$memberAttribute.CompanyAttribute.contact}">
-          </li>      
-          <li>
-            <label><font class="facexh">*</font>联系方式：</label>
-            <div class="area1">
-              <select name="contact_method[]">
-                <option value="座机">座机</option>
-                <option value="手机">手机</option>
-                <option value="QQ">QQ</option>
-                <option value="MSN">MSN</option>
-              </select>
-            </div>
-            <input type="text" style="width:128px;" class="contact_method">
-            <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
-          </li>  
+             <input type="text" class="inpTextBox" id="contact" name="contact" value="{if isset($this->data['contact'])}{$this->data['contact']}{else}{$memberAttribute.CompanyAttribute.contact}{/if}">
+          </li>
+          {if isset($this->data['contact_method'])}
+            {foreach $this->data['contact_method'] as $key => $method}
+                  <li>
+                    <label><font class="facexh">*</font>联系方式：</label>
+                    <div class="area1">
+                      <select name="contact_method[]">
+                        <option value="座机" {if $method == "座机"}selected="selected"{/if}>座机</option>
+                        <option value="手机" {if $method == "手机"}selected="selected"{/if}>手机</option>
+                        <option value="QQ" {if $method == "QQ"}selected="selected"{/if}>QQ</option>
+                        <option value="MSN" {if $method == "MSN"}selected="selected"{/if}>MSN</option>
+                      </select>
+                    </div>
+                    <input type="text" style="width:128px;" value="{$this->data['contact_content'][$key]}" name="contact_content[]">
+                    <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
+                  </li>
+              {/foreach}
+          {else}
+              {$contacts = json_decode($memberAttribute.CompanyAttribute.contact_method, true)}
+              {foreach $contacts as $contact}
+                  <li>
+                    <label><font class="facexh">*</font>联系方式：</label>
+                    <div class="area1">
+                      <select name="contact_method[]">
+                        <option value="座机" {if $contact.method == "座机"}selected="selected"{/if}>座机</option>
+                        <option value="手机" {if $contact.method == "手机"}selected="selected"{/if}>手机</option>
+                        <option value="QQ" {if $contact.method == "QQ"}selected="selected"{/if}>QQ</option>
+                        <option value="MSN" {if $contact.method == "MSN"}selected="selected"{/if}>MSN</option>
+                      </select>
+                    </div>
+                    <input type="text" style="width:128px;" value="{$contact.content}" name="contact_content[]">
+                    <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
+                  </li>
+              {/foreach}
+          {/if}
           <li>
             <label><font class="facexh">*</font>传真：</label>
-            <input type="text" name="fax" class="inpTextBox" id="fax" value="{$memberAttribute.CompanyAttribute.fax}">
+            <input type="text" name="fax" class="inpTextBox" id="fax" value="{if isset($this->data['fax'])}{$this->data['fax']}{else}{$memberAttribute.CompanyAttribute.fax}{/if}">
           </li>        
           <li>
             <label><font class="facexh">*</font>所在城市：</label>
             <div class="area1">
-              <select name="provincial_id" id="provincial">
+              <select name="provincial_id" id="provincial_id">
                 <option value="">请选择</option>
                 {foreach $this->City->parentCityList() as $city}
-                    <option value="{$city.City.id}">{$city.City.name}</option>
+                <option value="{$city.City.id}" 
+                {if isset($this->data['provincial_id']) && $this->data['provincial_id'] == $city.City.id}
+                selected="selected"
+                {elseif isset($memberAttribute.CompanyAttribute.provincial_id) && $memberAttribute.CompanyAttribute.provincial_id == $city.City.id}
+                selected="selected"
+                {/if}>{$city.City.name}
+                </option>
                 {/foreach}
               </select>
             </div>
             <div class="area1">
-              <select name="city_id" id="city">
+              <select name="city_id" id="city_id">
                 <option value="">请选择</option>
+                {if isset($this->data['provincial_id'])}
+                    {$parent_id = $this->data['provincial_id']}
+                {else}
+                    {$parent_id = $memberAttribute.CompanyAttribute.provincial_id}
+                {/if}
+                {foreach $this->City->childrenCityList($parent_id) as $child}
+                    <option value="{$child.City.id}" 
+                    {if isset($this->data['city_id']) && $this->data['city_id'] == $child.City.id}
+                        selected="selected"
+                    {elseif isset($memberAttribute.CompanyAttribute.city_id) && $memberAttribute.CompanyAttribute.city_id == $child.City.id}
+                        selected="selected"
+                    {/if}>{$child.City.name}
+                    </option>
+                {/foreach}
               </select>
             </div>
           </li>
           <li>
             <label><font class="facexh">*</font>公司详细地址：</label>
-            <input type="text" name="address" id="address" value="{$memberAttribute.CompanyAttribute.address}">
+            <input type="text" name="address" id="address" value="{if isset($this->data['address'])}{$this->data['address']}{else}{$memberAttribute.CompanyAttribute.address}{/if}">
           </li>
           <li>
             <label><font class="facexh">*</font>公司性质：</label>
             <div class="select150">
               <select id="company_type" name="company_type">
-                <option value="民营/私营公司">民营/私营公司</option>
-                <option value="外企代表处">外企代表处</option>
-                <option value="外企代表处">事业单位</option>
-                <option value="外资（欧美）">外资（欧美）</option>
-                <option value="外资（非欧美如日资）">外资（非欧美如日资）</option>
-                <option value="台资、港资">台资、港资</option>
-                <option value="合资（欧美）">合资（欧美）</option>
-                <option value="合资（非欧美）">合资（非欧美）</option>
-                <option value="国营企业">国营企业</option>
-                <option value="上市公司">上市公司</option>
-                <option value="私营股份制">私营股份制</option>
-                <option value="其他">其他</option>
+                {if isset($this->data['company_type'])}
+                    <option value="民营/私营公司" {if $this->data['company_type'] == "民营/私营公司"}selected="selected"{/if}>民营/私营公司</option>
+                    <option value="外企代表处" {if $this->data['company_type'] == "外企代表处"}selected="selected"{/if}>外企代表处</option>
+                    <option value="事业单位" {if $this->data['company_type'] == "事业单位"}selected="selected"{/if}>事业单位</option>
+                    <option value="外资（欧美）" {if $this->data['company_type'] == "外资（欧美）"}selected="selected"{/if}>外资（欧美）</option>
+                    <option value="外资（非欧美如日资）" {if $this->data['company_type'] == "外资（非欧美如日资）"}selected="selected"{/if}>外资（非欧美如日资）</option>
+                    <option value="台资、港资" {if $this->data['company_type'] == "台资、港资"}selected="selected"{/if}>台资、港资</option>
+                    <option value="合资（欧美）" {if $this->data['company_type'] == "合资（欧美）"}selected="selected"{/if}>合资（欧美）</option>
+                    <option value="合资（非欧美）" {if $this->data['company_type'] == "合资（非欧美）"}selected="selected"{/if}>合资（非欧美）</option>
+                    <option value="国营企业" {if $this->data['company_type'] == "国营企业"}selected="selected"{/if}>国营企业</option>
+                    <option value="上市公司" {if $this->data['company_type'] == "上市公司"}selected="selected"{/if}>上市公司</option>
+                    <option value="私营股份制" {if $this->data['company_type'] == "私营股份制"}selected="selected"{/if}>私营股份制</option>
+                    <option value="其他" {if $this->data['company_type'] == "其他"}selected="selected"{/if}>其他</option>
+                {else}
+                    <option value="民营/私营公司" {if $memberAttribute.CompanyAttribute.company_type == "民营/私营公司"}selected="selected"{/if}>民营/私营公司</option>
+                    <option value="外企代表处" {if $memberAttribute.CompanyAttribute.company_type == "外企代表处"}selected="selected"{/if}>外企代表处</option>
+                    <option value="外企代表处" {if $memberAttribute.CompanyAttribute.company_type == "外企代表处"}selected="selected"{/if}>事业单位</option>
+                    <option value="外资（欧美）" {if $memberAttribute.CompanyAttribute.company_type == "外资（欧美）"}selected="selected"{/if}>外资（欧美）</option>
+                    <option value="外资（非欧美如日资）" {if $memberAttribute.CompanyAttribute.company_type == "外资（非欧美如日资）"}selected="selected"{/if}>外资（非欧美如日资）</option>
+                    <option value="台资、港资" {if $memberAttribute.CompanyAttribute.company_type == "台资、港资"}selected="selected"{/if}>台资、港资</option>
+                    <option value="合资（欧美）" {if $memberAttribute.CompanyAttribute.company_type == "合资（欧美）"}selected="selected"{/if}>合资（欧美）</option>
+                    <option value="合资（非欧美）" {if $memberAttribute.CompanyAttribute.company_type == "合资（非欧美）"}selected="selected"{/if}>合资（非欧美）</option>
+                    <option value="国营企业" {if $memberAttribute.CompanyAttribute.company_type == "国营企业"}selected="selected"{/if}>国营企业</option>
+                    <option value="上市公司" {if $memberAttribute.CompanyAttribute.company_type == "上市公司"}selected="selected"{/if}>上市公司</option>
+                    <option value="私营股份制" {if $memberAttribute.CompanyAttribute.company_type == "私营股份制"}selected="selected"{/if}>私营股份制</option>
+                    <option value="其他" {if $memberAttribute.CompanyAttribute.company_type == "其他"}selected="selected"{/if}>其他</option>
+                {/if}
               </select>
             </div>
           </li>
           <li>
             <label><font class="facexh">*</font>从事行业：</label>
             <div class="area1">
-            <select name="category_id" id="category">
+            <select name="category_id" id="category_id">
             <option value="">请选择</option>
-            {foreach $this->Category->parentCategoryList() as $value}
-                <option value="{$value.Category.id}">{$value.Category.name}</option>
-            {/foreach}
+                {foreach $this->Category->parentCategoryList() as $value}
+                    <option value="{$value.Category.id}"
+                    {if isset($this->data['category_id']) && $this->data['category_id'] == $value.Category.id}
+                        selected="selected"
+                    {elseif isset($memberAttribute.CompanyAttribute.category_id) && $memberAttribute.CompanyAttribute.category_id == $value.Category.id}
+                        selected="selected"
+                    {/if}>
+                    {$value.Category.name}
+                    </option>
+                {/foreach}
             </select>
             </div>
           </li>
@@ -120,25 +269,35 @@ $(document).ready(function(){
           <li>
             <label><font class="facexh">*</font>提供产品或服务：</label>
             <ul class="products">
+            {if isset($this->data['service'])}
+                {$services = $this->data['service']}
+                {$sub_categories = $this->Category->childrenCategoryList($this->data['category_id'])}
+                {foreach $sub_categories as $category}
+                    <li>
+                        <label><input type="checkbox" name="service[]" class="inpCheckbox" value="{$category.Category.id}" {if in_array($category.Category.id, $services)}checked="checked"{/if}>{$category.Category.name}</label>
+                    </li>
+                {/foreach}
+            {else}
                 {$services = explode(',', $memberAttribute.CompanyAttribute.service)}
                 {$sub_categories = $this->Category->childrenCategoryList($memberAttribute.CompanyAttribute.category_id)}
                 {foreach $sub_categories as $category}
-                    <li>                      
-                        <label><input type="checkbox" class="inpCheckbox" value="{$category.Category.id}" {if in_array($category.Category.id, $services)}checked="checked"{/if}>{$category.Category.name}</label>
+                    <li>
+                        <label><input type="checkbox" name="service[]" class="inpCheckbox" value="{$category.Category.id}" {if in_array($category.Category.id, $services)}checked="checked"{/if}>{$category.Category.name}</label>
                     </li>
                 {/foreach}
+            {/if}
             </ul>
           </li>
           <li>
             <label><font class="facexh">*</font>业务范围：</label>
-            <textarea name="business_scope" id="business_scope" cols="45" rows="5">{$memberAttribute.CompanyAttribute.business_scope}</textarea>
+            <textarea name="business_scope" id="business_scope" cols="45" rows="5">{if isset($this->data['business_scope'])}{$this->data['business_scope']}{else}{$memberAttribute.CompanyAttribute.business_scope}{/if}</textarea>
           </li>          
           <li style="text-align: left;">
             <label><font class="facexh">*</font>验证码：</label>
             <input type="text" name="" style="width:60px;" class="inpTextBox" id="checkNum" />
             <a class="getCheckNum" id="getCheckNum" href="javascript:void(0)">看不清楚？</a>
           </li> 
-          <li><a href="javascript:void(0)" class="zclan zclan4">提交</a></li>
+          <li><a href="javascript:void(0)" class="zclan zclan4" id="check">确定</a></li>
         </ul>
        </form>
       </div>

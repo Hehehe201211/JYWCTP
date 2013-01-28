@@ -65,14 +65,25 @@
             </div>
         </div>
     </div>
-    <div class="zy_rzj"><strong>推荐兼职</strong> <span><a href="#">更多&gt;&gt;</a></span> </div>
+    <div class="zy_rzj">
+        <strong>推荐兼职</strong>
+        <span><a href="/parttimes/listview?type=need">更多&gt;&gt;</a></span>
+    </div>
     <div class="zy_rzj_tt">
         <ul>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
+        {foreach $recommendParttimes as $parttime}
+            <li>
+            <a href="/parttimes/detail?id={$parttime.PartTime.id}">
+            {$areas = explode(',', $parttime.PartTime.area)}
+            {foreach $areas as $area}
+            {$this->City->cityName($area)}
+            {/foreach}
+            /{$this->Category->getCategoryName($parttime.PartTime.category)}
+            /{if $parttime.PartTime.method == 1}提供客户信息{elseif $parttime.PartTime.method == 2}协助跟单{else}独立签单{/if}
+            /{if $parttime.PartTime.pay == 1}按合同金额：{$parttime.PartTime.pay_rate}%{else}协商确定{/if}
+            </a>
+            </li>
+        {/foreach}
         </ul>
     </div>
 </div>

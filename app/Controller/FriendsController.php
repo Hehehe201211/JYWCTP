@@ -168,9 +168,9 @@ class FriendsController extends AppController
             foreach ($this->request->data['emails'] as $key => $emailaddress) {
                 $body = "";
                 $body .= $this->request->data['names'][$key] . "\n" . $this->request->data['content'];
-                $body .= "\nHI，我最近在聚业务（www.juyewu.com）这个网站上找到了不少客户，也参与了一些兼职工作，信息有效性高，兼职企业有认证，很不错的业务平台哦，现在注册还可以赠送" . Configure::read('Register.point') . "个积分。\n免费会员注册链接: http://";
-                $body .= $_SERVER['SERVER_NAME'] . "/members/register?mid=" . $this->_memberInfo['Member']['id'] . "&key=" . md5($this->_memberInfo['Member']['id']);
-                $body .= "\n免费升级成功后，您也可以推荐好友参加，也有积分赠送哦。";
+//                $body .= "\nHI，我最近在聚业务（www.juyewu.com）这个网站上找到了不少客户，也参与了一些兼职工作，信息有效性高，兼职企业有认证，很不错的业务平台哦，现在注册还可以赠送" . Configure::read('Register.point') . "个积分。\n免费会员注册链接: http://";
+//                $body .= $_SERVER['SERVER_NAME'] . "/members/register?mid=" . $this->_memberInfo['Member']['id'] . "&key=" . md5($this->_memberInfo['Member']['id']);
+//                $body .= "\n免费升级成功后，您也可以推荐好友参加，也有积分赠送哦。";
                 $email = new CakeEmail('default');
                 $email->from(array($this->_memberInfo['Member']['email'] => '聚客源'));
                 $email->to($emailaddress);

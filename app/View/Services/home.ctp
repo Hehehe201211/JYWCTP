@@ -86,8 +86,8 @@ $(document).ready(function(){
           <dt>
             <label><font class="facexh">*</font>系统检索：</label>
             <div class="divSex">              
-              <label><input type="radio" name="display" class="inpRadio" checked="checked" />开启</label>              
-              <label><input type="radio" name="display" class="inpRadio"/>关闭</label>
+              <label><input type="radio" value="1" name="display" class="inpRadio" checked="checked" />开启</label>
+              <label><input type="radio" value="0" name="display" class="inpRadio"/>关闭</label>
             </div>
             <span class="spanValue">开启</span>
           </dt>
@@ -106,7 +106,7 @@ $(document).ready(function(){
             <input type="text" name="post" id="post" value="{$homepage.Homepage.post}" class="post" />
             <span class="spanValue">{$homepage.Homepage.post}</span>
           </dt>
-          {$contact_methods = json_decode($homepage.Homepage.contact_method, true)}
+          {$contact_methods = json_decode(trim($homepage.Homepage.contact_method, "'"), true)}
           {foreach $contact_methods as $method}
           <dt>
             <label><font class="facexh">*</font>联系方式：</label>
@@ -197,9 +197,9 @@ $(document).ready(function(){
 		  <dt>
             <label>企业招聘图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
+            <input type="file" name="thumbnail_job"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
             </div>
-            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail_job)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail_job}" />{/if}</span>
           </dt>
           <dt>
             <label><font class="facexh">*</font>公司简介：</label>

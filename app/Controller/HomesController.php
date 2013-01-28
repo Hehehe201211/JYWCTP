@@ -141,13 +141,14 @@ class HomesController extends AppController
             return 0;
         }
         $params = array(
-            'fields' => 'full_name',
+            'fields' => array('full_name', 'thumbnail'),
             'conditions' => array('members_id' => $homepage['Homepage']['members_id'])
         );
         $companyName = $this->CompanyAttribute->find('first', $params);
         
         $this->set('homepage', $homepage);
         $this->set('title_for_layout', $companyName['CompanyAttribute']['full_name']);
+        $this->set('company_thumbnail', $companyName['CompanyAttribute']['thumbnail']);
         $this->set('domain', $domain);
         return $homepage;
     }

@@ -11,11 +11,14 @@ $(document).ready(function(){
   <div class="ntcLeft">
     <div class="suckerdiv">
       <h3>通知中心</h3>
-      {foreach $noticeParents as $parent}
+      {foreach $noticeParents as $key => $parent}
       <div class="category">
         <a href="javascript:void(0);" class="catHx"></a>
         <p><a href="/notices/listview?pid={$parent.Notice.id}">{$parent.Notice.title}</a></p>
       </div>
+        {if !empty($memberInfo) && $memberInfo.Member.type == Configure::read('UserType.company') && $key == 1}
+        {break}
+        {/if}
       {/foreach}
     </div>
     <div class="otherLinks">

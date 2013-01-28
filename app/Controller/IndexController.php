@@ -8,7 +8,7 @@
 class IndexController extends AppController
 {
     public $uses = array('Category', 'Information', 'Notice', 'Blog', 'Question', 'Document', 'PartTime');
-    var $components = array('Unit', 'SiteAnalyzes');
+    var $components = array('Unit', 'SiteAnalyzes', 'Recommend');
     public function index()
     {
         $this->set('title_for_layout', "聚业务");
@@ -59,6 +59,7 @@ class IndexController extends AppController
         //网站平台分析信息
         $siteAnalyze = $this->SiteAnalyzes->siteAnalyzeInfo();
         $this->set('siteAnalyzes', $siteAnalyze);
+        $this->Recommend->newCompany();
     }
     /**
      * 

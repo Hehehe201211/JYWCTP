@@ -103,7 +103,7 @@ $(document).ready(function(){
           </tr>
           <tr>
             <th>经验要求：</th>
-            <td>1-3年</td>
+            <td>{$continued = Configure::read('Fulltime.continued')}{$continued[$fulltime.Fulltime.continued]}</td>
           </tr>
           <tr>
             <th>性别要求：</th>

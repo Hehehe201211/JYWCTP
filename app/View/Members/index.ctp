@@ -53,12 +53,12 @@
            <div class="biaotit"><a class="atitle" href="new-sddxq.html">最近收到的客源</a></div>
         <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
           <tbody>
-                <tr class="con_2_tr con_2_xq_too">
-          <th class="tr_td5">发布人</th>
+        <tr class="con_2_tr con_2_xq_too">
           <th class="tr_td1">产品 </th>
           <th class="tr_td2">信息价格 </th>
           <th class="tr_td7">城市 </th>
           <th class="tr_td4">状态 </th>
+          <th class="tr_td5">点击次数 </th>
           <th class="tr_td8">选择操作</th>
         </tr>                
                 {foreach $newReceivedInformations as $information}

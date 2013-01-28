@@ -136,7 +136,7 @@ $(document).ready(function(){
 		if ($("button.deleContact").length>1) $(this).parent().remove(); 
 	});
 });
-{/literal}
+//{/literal}
 </script>
 
 <div class="zy_z">
@@ -154,67 +154,6 @@ $(document).ready(function(){
               <dt>
                 <label><font class="facexh">*</font>信息标题：</label>
                 <input type="text" name="title" id="title" value="{if isset($this->data['title'])}{$this->data['title']}{else}{/if}">
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>省份：</label>
-                <select name="provincial" id="provincial">
-                  <option value="">请选择</option>
-                  
-                  {if !empty($target) && isset($targetInfo)}
-	                  {foreach $this->City->parentCityList() as $city}
-	                  	<option value="{$city.City.id}" {if $targetInfo.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
-	                  {/foreach}
-                  {else}
-	                  {foreach $this->City->parentCityList() as $city}
-						<option value="{$city.City.id}" {if isset($this->data['provincial']) && $this->data['provincial'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
-					  {/foreach}
-				  {/if}
-				
-                </select>
-
-                <label><font class="facexh">*</font>城市：</label>
-                {if isset($this->data['provincial'])}
-                	<select name="city" id="city">
-	                  <option value="">请选择</option>
-	                  {foreach $this->City->childrenCityList($this->data['provincial']) as $child}
-						<option value="{$child.City.id}" {if isset($this->data['city']) && {$child.City.id} == $this->data['city']}selected="selected"{/if}>{$child.City.name}</option>
-	                  {/foreach}
-	                </select>
-                {elseif !empty($target) && isset($targetInfo)}
-                	<select name="city" id="city">
-	                  <option value="">请选择</option>
-	                  {foreach $this->City->childrenCityList($targetInfo.Information.provincial) as $child}
-						<option value="{$child.City.id}" {if $child.City.id == $targetInfo.Information.city}selected="selected"{/if}>{$child.City.name}</option>
-	                  {/foreach}
-	                </select>
-                {else}
-	                <select name="city" id="city">
-	                  <option value="">请选择</option>
-	                </select>
-                {/if}
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>行业：</label>
-                <select name="industries_id" id="industries_id">
-	                <option value="">请选择</option>
-	              	{if !empty($target) && isset($targetInfo)}
-		              	{foreach $this->Category->parentCategoryList() as $value}
-		              		<option value="{$value.Category.id}" {if $value.Category.id == $targetInfo.Information.industries_id}selected="selected"{/if}>{$value.Category.name}</option>
-		              	{/foreach}
-	              	{elseif isset($parttime)}
-	              	    {foreach $this->Category->parentCategoryList() as $value}
-                            <option value="{$value.Category.id}" {if $value.Category.id == $parttime.PartTime.category}selected="selected"{/if}>{$value.Category.name}</option>
-                        {/foreach}
-	              	{else}
-		              	{foreach $this->Category->parentCategoryList() as $value}
-		               		<option value="{$value.Category.id}" {if isset($this->data['industries_id']) && $value.Category.id == $this->data['industries_id']}selected="selected"{/if}>{$value.Category.name}</option>
-		               	{/foreach}
-	               	{/if}
-                </select>
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>采购单位：</label>
-                <input type="text" name="company" id="company" value="{if isset($this->data['company'])}{$this->data['company']}{/if}">
               </dt>
               <dt class="productKinds">
                 <label><font class="facexh">*</font>产品名称：</label>
@@ -265,7 +204,64 @@ $(document).ready(function(){
                 -->
               </dt>
               <dt>
-              <label><font class="facexh">*</font>有效期：</label>
+                <label><font class="facexh">*</font>采购单位：</label>
+                <input type="text" name="company" id="company" value="{if isset($this->data['company'])}{$this->data['company']}{/if}">
+              </dt>     
+              <dt>
+                <label><font class="facexh">*</font>单位所在区域：</label>
+                <select name="provincial" id="provincial">
+                  <option value="">请选择省份</option>                  
+                  {if !empty($target) && isset($targetInfo)}
+	                  {foreach $this->City->parentCityList() as $city}
+	                  	<option value="{$city.City.id}" {if $targetInfo.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
+	                  {/foreach}
+                  {else}
+	                  {foreach $this->City->parentCityList() as $city}
+						<option value="{$city.City.id}" {if isset($this->data['provincial']) && $this->data['provincial'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
+					  {/foreach}
+				  {/if}				
+                </select>               
+                {if isset($this->data['provincial'])}
+                	<select name="city" id="city">
+	                  <option value="">请选择城市</option>
+	                  {foreach $this->City->childrenCityList($this->data['provincial']) as $child}
+						<option value="{$child.City.id}" {if isset($this->data['city']) && {$child.City.id} == $this->data['city']}selected="selected"{/if}>{$child.City.name}</option>
+	                  {/foreach}
+	                </select>
+                {elseif !empty($target) && isset($targetInfo)}
+                	<select name="city" id="city">
+	                  <option value="">请选择城市</option>
+	                  {foreach $this->City->childrenCityList($targetInfo.Information.provincial) as $child}
+						<option value="{$child.City.id}" {if $child.City.id == $targetInfo.Information.city}selected="selected"{/if}>{$child.City.name}</option>
+	                  {/foreach}
+	                </select>
+                {else}
+	                <select name="city" id="city">
+	                  <option value="">请选择城市</option>
+	                </select>
+                {/if}
+              </dt>
+              <dt>
+                <label><font class="facexh">*</font>单位所属行业：</label>
+                <select name="industries_id" id="industries_id">
+	                <option value="">请选择行业</option>
+	              	{if !empty($target) && isset($targetInfo)}
+		              	{foreach $this->Category->parentCategoryList() as $value}
+		              		<option value="{$value.Category.id}" {if $value.Category.id == $targetInfo.Information.industries_id}selected="selected"{/if}>{$value.Category.name}</option>
+		              	{/foreach}
+	              	{elseif isset($parttime)}
+	              	    {foreach $this->Category->parentCategoryList() as $value}
+                            <option value="{$value.Category.id}" {if $value.Category.id == $parttime.PartTime.category}selected="selected"{/if}>{$value.Category.name}</option>
+                        {/foreach}
+	              	{else}
+		              	{foreach $this->Category->parentCategoryList() as $value}
+		               		<option value="{$value.Category.id}" {if isset($this->data['industries_id']) && $value.Category.id == $this->data['industries_id']}selected="selected"{/if}>{$value.Category.name}</option>
+		               	{/foreach}
+	               	{/if}
+                </select>
+              </dt>                       
+              <dt>
+              <label><font class="facexh">*</font>客源有效期：</label>
               <ul class="validity">
                   <li>
                     <input type="text" name="open" id="open" value="{if !empty($target) && isset($targetInfo)}{$targetInfo.Information.open|date_format:"%Y-%m-%d"}{elseif isset($this->data['open'])}{$this->data['open']}{/if}" readonly="readonly"/>
@@ -301,8 +297,7 @@ $(document).ready(function(){
                     <input type="text" name="price" id="price" class="text" value="" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>
                     </li>
-                {/if}
-                
+                {/if}                
                 {if !empty($target) && isset($targetInfo) && ($targetInfo.Information.payment_type == 2 || $targetInfo.Information.payment_type == 3)}
                 	<li>
                     <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" checked="checked" />
@@ -344,8 +339,11 @@ $(document).ready(function(){
 		              <select name="mode[]">
 		                <option value="座机" {if $contact == "座机"}selected="selected"{/if}>座机</option>
 		                <option value="手机" {if $contact == "手机"}selected="selected"{/if}>手机</option>
+						<option value="E-mail" {if $contact == "E-mail"}selected="selected"{/if}>E-mail</option>
 		                <option value="QQ" {if $contact == "QQ"}selected="selected"{/if}>QQ</option>
 		                <option value="MSN" {if $contact == "MSN"}selected="selected"{/if}>MSN</option>
+						<option value="Skype" {if $contact == "Skype"}selected="selected"{/if}>Skype</option>
+						<option value="其他" {if $contact == "其他"}selected="selected"{/if}>其他</option>
 		              </select>
 		            </div>
 		            <input type="text" style="width:108px;" name="contact_method[]" class="contact_method" value="{$this->data['contact_method'][$key]}" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
@@ -357,11 +355,13 @@ $(document).ready(function(){
 	            <label><font class="facexh">*</font>联系方式：</label>
 	            <div class="area1">
 	              <select name="mode[]">
-	                <option value="座机">座机</option>
-	                <option value="手机">手机</option>
-					<option value="E-mail">E-mail</option>
-	                <option value="QQ">QQ</option>
-	                <option value="MSN">MSN</option>					
+	               <option value="座机">座机</option>
+                <option value="手机">手机</option>
+		<option value="E-mail">E-mail</option>
+                <option value="QQ">Q Q</option>                
+                <option value="MSN">MSN</option>
+		<option value="Skype">Skype</option>
+		<option value="其他">其他</option>
 	              </select>
 	            </div>
 	            <input type="text" style="width:108px;" name="contact_method[]" class="contact_method" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
@@ -371,14 +371,13 @@ $(document).ready(function(){
 			  <dt>
 	                <label><font class="facexh">*</font>单位详细地址：</label>
 	                <input type="text" id="address" class="address" name="address" value="{if isset($this->data['address'])}{$this->data['address']}{/if}">
-	              </dt>
-			  
+	              </dt>			  
               <dt>
                 <label><font class="facexh">*</font>采购需求描述：</label>
                 <textarea name="introduction" id="introduction" cols="45" rows="5">{if isset($this->data['introduction'])}{$this->data['introduction']}{/if}</textarea>
               </dt>
               <dt>
-                <label>预计合作金额:</label>
+                <label>预计合作金额：</label>
                 <input type="text" name="profit" id="profit" value="{if isset($this->data['profit'])}{$this->data['profit']}{/if}" onpaste="coinNum(this)" onkeyup="coinNum(this)">
               </dt>
               <dt>

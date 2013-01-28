@@ -37,23 +37,7 @@ $(document).ready(function(){
 <input type="hidden" name="target_member" value="{$this->data['target_member']}">
 <div class="biaotit">{$this->data['title']}<input type="hidden" value="{$this->data['title']}" name="title" /></div>
       <table width="100%">
-        <tr>       
-          <th width="25%">所在区域：</th>
-          <td width="75%">
-          {if $provincial != $city}
-          {$provincial}&nbsp;{$city}
-          {else}
-          {$provincial}
-          {/if}
-          <input type="hidden" value="{$this->data['provincial']}" name="provincial" />
-          <input type="hidden" value="{$this->data['city']}" name="city" /></td>
-        </tr>
-         <tr>
-          <th>行业：</th>
-          <td>{$industry}
-			<input type="hidden" value="{$this->data['industries_id']}" name="industries_id" /></td>
-        </tr>
-        <tr>
+      <tr>
           <th>采购产品：</th>
           <td>{$this->Category->getCategoryName($this->data['category'])}
 			{$this->Category->getCategoryName($this->data['sub_category'])}
@@ -68,6 +52,22 @@ $(document).ready(function(){
           <th>采购单位：</th>
           <td class="red">{$this->data['company']}<input type="hidden" value="{$this->data['company']}" name="company" /></td>
         </tr>
+        <tr>       
+          <th width="25%">单位所在区域：</th>
+          <td width="75%">
+          {if $provincial != $city}
+          {$provincial}&nbsp;{$city}
+          {else}
+          {$provincial}
+          {/if}
+          <input type="hidden" value="{$this->data['provincial']}" name="provincial" />
+          <input type="hidden" value="{$this->data['city']}" name="city" /></td>
+        </tr>
+         <tr>
+          <th>单位所属行业：</th>
+          <td>{$industry}
+			<input type="hidden" value="{$this->data['industries_id']}" name="industries_id" /></td>
+        </tr>         
         {if empty($this->data['parttime'])}
 	<tr>
 		<th>信息交易价格：</th>
@@ -86,8 +86,8 @@ $(document).ready(function(){
 	</tr>
 	{/if}
        <tr>
-          <th>有效期：</th>
-          <td>{$this->data['open']} - {$this->data['close']}
+          <th>客源有效期：</th>
+          <td>{$this->data['open']} 至 {$this->data['close']}
 			<input type="hidden" value="{$this->data['open']}" name="open" /> 
 			<input type="hidden" value="{$this->data['close']}" name="close" /></td>
         </tr>

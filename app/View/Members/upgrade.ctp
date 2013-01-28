@@ -1,39 +1,18 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){	
+     datepIniChange("#birthday","birth");
 	//提示信息
-	$(".sjle>form>ul>li>input:eq(0)").focus(function(){
-		$(this).after("<div class='prompt'>真实姓名用于后续充值提现出现问题时的身份认证，请准确填写。</div>");
+	$(".sjle input").focus(function(){
+		var id=$(this).attr("id");
+		var pro=$(".prompt");
+		if (id=="name") {$(this).after(pro);pro.text("真实姓名用于后续充值提现出现问题时的身份认证，请准确填写。");pro.show();}
+		else if (id=="mobile") {$(this).after(pro);pro.text("该号码用于后续信息交易联系，请务必准确填写。");pro.show();}
+		else if (id=="pay_account") {$(this).after(pro);pro.text("该支付宝账户用于网站业务币提现时，只能转到该支付宝账号，请准确填写。");pro.show();}
+		else if (id=="pay_password") {$(this).after(pro);pro.html("站内支付密码是聚业务平台中进行付款、交易确认、提现等重要操作时身份确认。<br/>为了安全，请勿设置跟登录密码及支付宝密码一样。");pro.show();}
+		else if (id=="face") {$(this).after(pro);pro.text("仅支持JPG、JPEG、PNG格式，文件大小不大于200k。");pro.show();}
+		else pro.hide();
 	});
-	$(".sjle>form>ul>li>input:eq(0)").blur(function(){
-		$(this).next().remove();
-	});
-	$(".sjle>form>ul>li>input:eq(2)").focus(function(){
-		$(this).after("<div class='prompt'>该号码用于后续信息交易联系，请务必准确填写。</div>");
-	});
-	$(".sjle>form>ul>li>input:eq(2)").blur(function(){
-		$(this).next().remove();
-	});
-	$(".sjle>form>ul>li>input:eq(7)").focus(function(){
-		$(this).after("<div class='prompt'>该支付宝账户用于网站业务币提现时，只能转到该支付宝账号，请准确填写。</div>");
-	});
-	$(".sjle>form>ul>li>input:eq(7)").blur(function(){
-		$(this).next().remove();
-	});
-	$(".sjle>form>ul>li>input:eq(8)").focus(function(){
-		$(this).after("<div class='prompt'>站内支付密码是聚业务平台中进行付款、交易确认、提现等重要操作时身份确认。<br/>为了安全，请勿设置跟登录密码及支付宝密码一样。</div>");
-	});
-	$(".sjle>form>ul>li>input:eq(8)").blur(function(){
-		$(this).next().remove();
-	});
-	$(".sjle>form>ul>li>input:file").focus(function(){
-		$(this).after("<div class='prompt'>仅支持JPG、JPEG、PNG格式，文件大小不大于200k。</div>");
-	});
-	$(".sjle>form>ul>li>input:file").blur(function(){
-		$(this).next().remove();
-	});
-	
-	datepIniChange("#birthday","birth");
 	
 	$('#provincial').change(function(){
 		$('#city').find('option:gt(0)').remove();
@@ -89,6 +68,7 @@ $(document).ready(function(){
                     ];
     var errorMsg = '<span class="errorMsg">请输入此项目</span>'	
     function checkData() {
+		$(".prompt").hide();
         var error=0;
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
@@ -98,16 +78,16 @@ $(document).ready(function(){
         });
         if ($('#provincial').val() == "请选择"||$('#city').val() == "")
         {
-        	$('#provincial').parent().parent().append(errorMsg);
+        	$('#provincial').parent().append(errorMsg);
         	error = 1;
         } 
         if ($('#category').val() == "")
         {
-        	$('#category').parent().parent().append(errorMsg);
+        	$('#category').parent().append('<span class="errorMsg">请选择项目</span>');
         	error = 1;
         } 
         if ($("input.sub_category:checked").length == 0) {
-        	$('.products').parent().append(errorMsg);
+        	$('.products').parent().append('<span class="errorMsg" style="right:0">请选择项目</span>');
         	error = 1;
         } 
 		if ($("#pay_password_check").val()!=""&&($("#pay_password_check").val()!==$("#pay_password").val())) {
@@ -125,7 +105,7 @@ $(document).ready(function(){
         return error;
     }
 });
-{/literal}
+//{/literal}
 </script>
 
 <div class="zy_z">
@@ -146,11 +126,9 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>性别：</label>
-            <div class="divSex">
-              <input type="radio" checked="checked" class="inpRadio" id="sex1" name="sex" value="1">
-              <label for="sex1">男</label>
-              <input type="radio" class="inpRadio" id="sex2" name="sex" value="0">
-              <label for="sex2">女</label>
+            <div class="divSex">              
+              <label><input type="radio" checked="checked" class="inpRadio" id="sex1" name="sex" value="1">男</label>              
+              <label><input type="radio" class="inpRadio" id="sex2" name="sex" value="0">女</label>
             </div>
           </li>
           <li>
@@ -167,19 +145,15 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>所在城市：</label>
-            <div class="area1">
-              <select name="provincial" id="provincial">
+            <select name="provincial" id="provincial">
                 <option>请选择</option>
                 {foreach $cities as $city}
                 	<option value="{$city.City.id}">{$city.City.name}</option>
                 {/foreach}
               </select>
-            </div>
-            <div class="area1">
-              <select name="city" id="city">
+            <select name="city" id="city">
                 <option value="">请选择</option>
               </select>
-            </div>
           </li>
           <li>
             <label>公司名称：</label>
@@ -187,14 +161,12 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>从事行业：</label>
-            <div class="area1">
             <select id="category" name="category">
                   <option value="">请选择</option>
                   {foreach $category as $cate}
                   	<option value="{$cate.Category.id}">{$cate.Category.name}</option>
                   {/foreach}
                 </select>
-              </div>
           </li>
           <li>
             <label>其他行业：</label>
@@ -243,3 +215,4 @@ $(document).ready(function(){
         </form>        
       </div>
     </div> 
+    <div class='prompt' style="display:none">真实姓名用于后续充值提现出现问题时的身份认证，请准确填写。</div>

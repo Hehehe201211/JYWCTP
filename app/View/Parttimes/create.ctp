@@ -283,9 +283,11 @@ $(document).ready(function(){
               <select name="contact_method[]">
                 <option value="座机">座机</option>
                 <option value="手机">手机</option>
-                <option value="QQ">QQ</option>
-                <option value="邮箱">邮箱</option>
+				<option value="E-mail">E-mail</option>
+                <option value="QQ">Q Q</option>                
                 <option value="MSN">MSN</option>
+				<option value="Skype">Skype</option>
+				<option value="其他">其他</option>
               </select>
             </div>
             <input type="text" name="contact_content[]" style="width:108px;" class="contact_content" onpaste="Emailstr(this)" onkeyup="Emailstr(this)"/>

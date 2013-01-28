@@ -33,12 +33,12 @@ $(document).ready(function(){
     </ul>   
     <div class="clear">&nbsp;</div> 
     <a href="javascript:void(0);" id="candidate" class="zclan zclan2">马上投递</a> 
-    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan2">不在现有中</a>
+    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan2" onclick='$(".jsxxxqB .closeDiv").click();'>不在现有中</a>
     {else}
     <ul class="products keyuan">
             没有相关行业的客源可以选择，请点击【不在现有中】按钮！
     </ul>
     <div class="clear">&nbsp;</div>
-    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan4">不在现有中</a>
+    <a href="/informations/create/has/?parttime={$this->request->data['parttime_id']}&target_member={$this->request->data['target_member']}" target="_blank" class="zclan zclan4" onclick='$(".jsxxxqB .closeDiv").click();'>不在现有中</a>
     {/if}    
   </div>

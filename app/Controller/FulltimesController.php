@@ -4,7 +4,7 @@ class FulltimesController extends AppController
 {
     var $layout = 'members';
     var $uses = array('Fulltime', 'FulltimeFavourite', 'Homepage');
-    var $components = array('RequestHandler', 'Ft', 'Unit');
+    var $components = array('RequestHandler', 'Ft', 'Unit', 'Recommend');
     var $helpers = array('Js', 'City', 'Category');
     public function create()
     {
@@ -317,5 +317,13 @@ class FulltimesController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
     }
 }

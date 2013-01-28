@@ -57,6 +57,38 @@ class ServicesController extends AppController
                 }
             }
         }
+        if (isset($_FILES['thumbnail_job'])) {
+            $filename = $this->_memberInfo['Member']['id'] . '_company_thumbnail_job';
+            $path = TMP;
+            $result = $this->Upload->upload($_FILES['thumbnail_job'], $path, $filename, "image");
+            if ($result['result'] == 'OK') {
+                $path = "thumbnail/" . 
+                        substr(md5(($this->_memberInfo['Member']['id'] / 30000 + 1)), 0, 10) . "/" . 
+                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+                if (!file_exists($path)) {
+                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                    try {
+                        exec($command);
+                    } catch (Exception $e) {
+                        $this->log($e->getMessage());
+                    }
+                }
+                $srcParams = array(
+                    'path' => $result['path'],
+                    'name' => $result['name']
+                );
+                $descParams = array(
+                    'imagepath' => Configure::read('Data.path') . $path,
+                    'imagename'      => "company_job",
+                    'outx'      => 300,
+                    'outy'      => 200
+                );
+                if ($this->Thumbnail->resize($srcParams, $descParams)){
+                    $data['thumbnail_job'] = $path . "/company_job." .  $this->Upload->getExt($_FILES['thumbnail_job']);
+                    @unlink($result['path'] . '/' . $result['name']);
+                }
+            }
+        }
         $contact_method = array();
         foreach ($data['contact_methods'] as $key => $value) {
             $contact_method[] = array('method' => $value, 'number' => $data['contact_numbers'][$key]);

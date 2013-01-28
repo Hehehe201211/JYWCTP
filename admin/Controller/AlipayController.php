@@ -7,7 +7,7 @@
  */
 class AlipayController extends AppController
 {
-    var $components = array('Grid');
+    var $components = array('Grid', 'File');
     /**
      * 
      * 支付宝批量付款时间预约
@@ -121,6 +121,26 @@ class AlipayController extends AppController
         }
         $jdata['rows'] = $rows;
         $this->_sendJson($jdata);
+    }
+    
+    
+    public function report()
+    {
+        $this->autoRender = FALSE;
+        $this->uses = array('Reservation');
+        $sequence = $this->request->query['sequence'];
+        $conditions = array(
+            'sequence'  => $sequence
+        );
+        $exist = $this->Reservation->find('count', array('conditions' => $conditions));
+        $this->log("ll" . $exist);
+        if ($exist > 0) {
+            $this->log($exist);
+            $filePath = Configure::read('Alipay.report_path') . $sequence . ".xlsx";
+            if (file_exists($filePath)) {
+                $this->File->download($filePath, 'alipay_report_' . $sequence . ".xlsx");
+            }
+        }
     }
     
     /**

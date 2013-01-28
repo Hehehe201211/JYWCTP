@@ -1,18 +1,18 @@
 <div class="zy_r">
     <ul>
-      <li class="friend"><a href="/accounts/friend">好友</a></li>
+      <li class="friend"><a href="/elites/listview">精英检索</a></li>
       <li class="znx"><a href="/accounts/sms" class="aZNXSpan">站内信</a></li>
     </ul>
     <div class="adRcd"><a href="/accounts/invite"><img src="{$this->webroot}img/ads/20110615175842023378.jpg"/></a></div>
     <div class="change2">
         <div class="nTab3"> 
             <div class="TabTitle3">
-                <ul id="myTab2">
+                <ul id="myTab2" class="qyMyTab2">
                     {foreach $notices as $key => $notice}
                         {if $key == 0}
-                            <li class="active3 long">{$notice.Notice.title}</li>
+                            <li class="active3">{$notice.Notice.title}</li>
                         {else if $key <= 1}
-                            <li class="long">{$notice.Notice.title}</li>
+                            <li>{$notice.Notice.title}</li>
                         {/if}
                     {/foreach}
                 </ul>
@@ -52,14 +52,14 @@
             </div>
         </div>
     </div>
-    <div class="zy_rzj"><strong>推荐兼职</strong> <span><a href="#">更多&gt;&gt;</a></span> </div>
+    <div class="zy_rzj"> <strong>推荐简历</strong> <span><a href="#">更多>></a></span> </div>
     <div class="zy_rzj_tt">
-        <ul>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-            <li><a href="#">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-        </ul>
+      <ul>
+        <li><a href="#">张伟/3年以上/齐齐哈尔市&nbsp;张伟/3年以上/齐齐哈尔市</a></li>
+        <li><a href="#">张伟/3年以上/齐齐哈尔市&nbsp;张伟/3年以上/齐齐哈尔市</a></li>
+        <li><a href="#">张伟/3年以上/齐齐哈尔市&nbsp;张伟/3年以上/齐齐哈尔市</a></li>
+        <li><a href="#">张伟/3年以上/齐齐哈尔市&nbsp;张伟/3年以上/齐齐哈尔市</a></li>
+        <li><a href="#">张伟/3年以上/齐齐哈尔市&nbsp;张伟/3年以上/齐齐哈尔市</a></li>
+      </ul>
     </div>
 </div>

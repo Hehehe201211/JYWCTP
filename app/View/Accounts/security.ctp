@@ -26,12 +26,7 @@ $(document).ready(function(){
     $('#epasswordBtb').live('click', function(){
         if ($('#new_password').val().trim() != "" && $('#new_re_password').val().trim() != "") {
             if ($('#new_password').val() != $('#new_re_password').val()) {
-                if ($('#jsxxxq1 span').length == 0) {
-                    var msg = '<span class="errorMsg">确认密码不一致！</span>';
-                    $('.biaotit').after(msg);
-                } else {
-                    $('#jsxxxq1 span').html('确认密码不一致！');
-                }
+				$('.errorMsg').html('确认密码不一致！');
             } else {
                 $.ajax({
                     url : '/accounts/editSecurity',
@@ -51,24 +46,14 @@ $(document).ready(function(){
                 });
             }
         } else {
-            if ($('#jsxxxq1 span').length == 0) {
-                var msg = '<span class="errorMsg">请输入密码和确认密码！</span>';
-                $('.biaotit').after(msg);
-            } else {
-                $('#jsxxxq1 span').html('请输入密码和确认密码！');
-            }
+			$('.errorMsg').html('请输入密码和确认密码！');            
         }
     });
     
     $('#epay_passwordBtb').live('click', function(){
         if ($('#new_password').val().trim() != "" && $('#new_re_password').val().trim() != "") {
             if ($('#new_password').val() != $('#new_re_password').val()) {
-                if ($('#jsxxxq1 span').length == 0) {
-                    var msg = '<span class="errorMsg">确认密码不一致！</span>';
-                    $('.biaotit').after(msg);
-                } else {
-                    $('#jsxxxq1 span').html('确认密码不一致！');
-                }
+                $('.errorMsg').html('确认密码不一致！');
             } else {
                 $.ajax({
                     url : '/accounts/editSecurity',
@@ -88,12 +73,7 @@ $(document).ready(function(){
                 });
             }
         } else {
-            if ($('#jsxxxq1 span').length == 0) {
-                var msg = '<span class="errorMsg">请输入密码和确认密码！</span>';
-                $('.biaotit').after(msg);
-            } else {
-                $('#jsxxxq1 span').html('请输入密码和确认密码！');
-            }
+			$('.errorMsg').html('请输入密码和确认密码！');            
         }
     });
     
@@ -117,20 +97,10 @@ $(document).ready(function(){
                     }
                 });
             } else {
-                if ($('#jsxxxq1 span').length == 0) {
-                    var msg = '<span class="errorMsg">请输入新支付宝！</span>';
-                    $('.biaotit').after(msg);
-                } else {
-                    $('#jsxxxq1 span').html('请输入新支付宝！');
-                }
+                $('.errorMsg').html('请输入新支付宝！');
             }
         } else {
-            if ($('#jsxxxq1 span').length == 0) {
-                var msg = '<span class="errorMsg">请输入旧支付宝！</span>';
-                $('.biaotit').after(msg);
-            } else {
-                $('#jsxxxq1 span').html('请输入旧支付宝！');
-            }
+			$('.errorMsg').html('请输入旧支付宝！');
         }
     });
     
@@ -154,20 +124,10 @@ $(document).ready(function(){
                     }
                 });
             } else {
-                if ($('#jsxxxq1 span').length == 0) {
-                    var msg = '<span class="errorMsg">请输入新认证手机！</span>';
-                    $('.biaotit').after(msg);
-                } else {
-                    $('#jsxxxq1 span').html('请输入新认证手机！');
-                }
+				$('.errorMsg').html('请输入新认证手机！');               
             }
         } else {
-            if ($('#jsxxxq1 span').length == 0) {
-                var msg = '<span class="errorMsg">请输入旧认证手机！</span>';
-                $('.biaotit').after(msg);
-            } else {
-                $('#jsxxxq1 span').html('请输入旧认证手机！');
-            }
+			$('.errorMsg').html('请输入旧认证手机！');            
         }
     });
 });

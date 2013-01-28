@@ -10,7 +10,7 @@ class PointsController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Fund', 'Unit');
+    var $components = array('RequestHandler', 'Fund', 'Unit', 'Recommend');
     var $uses = array(
         'PaymentHistory',
         'MemberAttribute',
@@ -208,5 +208,13 @@ class PointsController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
     }
 }

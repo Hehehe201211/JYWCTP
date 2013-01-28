@@ -1,6 +1,7 @@
 <a href="#" class="closeDiv">&nbsp;</a>
 <div class="biaotit">账号密码修改</div>
-<div class="sjle sjleBold">
+<div class="sjle sjleBold" style="margin-top:0;">
+<div class="info">&nbsp;<span class="errorMsg"></span></div>
 <form id="epassword">
     <ul>
       <li>
@@ -23,4 +24,3 @@
     <a class="zclan zclan7" href="javascript:void(0)" id="epasswordBtb">确定</a>
     <a class="zclan zclan7" href="javascript:void(0)" onclick="var a=$('.jsxxxqB .closeDiv').click();">关闭</a>
 </div>
-<div class="clear">&nbsp;</div>

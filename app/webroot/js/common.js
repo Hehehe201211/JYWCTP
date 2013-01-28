@@ -372,29 +372,6 @@ function sidebarSF(n){
 	});
 }
 
-//登录框提示
-function txtFocus(selector,txt) {	
-	inpText=document.getElementById(selector);
-	inpText.style.color="#333";
-	if (inpText.value==txt) {
-		inpText.value="";
-	}
-}
-function txtBlur(selector,txt) {
-	inpText=document.getElementById(selector);
-	if (inpText.value=="") {
-		inpText.value=txt;
-		inpText.style.color="#999";
-	}
-}
-function pwFocus() {
-	document.getElementById("passwordL").style.display="none";	
-}
-function pwBlur() {
-	if ($("#password").val()=="") {
-		document.getElementById("passwordL").style.display="block";
-	}
-}
 //隐藏DIV弹出层
 function bgKuang(divS,btnC,divOffset){	
     if ($("#bgKuang").length==1) {				
@@ -477,5 +454,5 @@ function letterNum(Selector){
 	Selector.value=Selector.value.replace(/[^0-9A-Za-z]/g,'')
 }
 function Emailstr(Selector){
-	Selector.value=Selector.value.replace(/[^0-9A-Za-z\.\-\_\@]/g,'')
+	Selector.value=Selector.value.replace(/[^0-9A-Za-z\.\-\_\@\:]/g,'')
 }

@@ -1,8 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    datepIniChange("#established","EPbirth");
-    
+    datepIniChange("#established","EPbirth");    
     $('#provincial').change(function(){
         $('#city').find('option:gt(0)').remove();
         if ($(this).val() != "") {
@@ -28,6 +27,7 @@ $(document).ready(function(){
     $('#category').change(function(){
         $('ul.products').html('');
         if ($(this).val() != "") {
+		$('ul.products').parent().find(".errorMsg").remove();
             $.ajax({
                 'type'  : 'Get',
                 'url'   : '/informations/getCategoryList/' + $(this).val(),
@@ -35,7 +35,7 @@ $(document).ready(function(){
                     var dataobj=eval("("+data+")");
                     var liStr = "";
                     $.each(dataobj, function(idx, item){
-                        liStr += '<li><input type="checkbox" class="sub_category" name="service[]" value="' + item.Category.id + '" id="products' + item.Category.id + '"><label for="products"' + item.Category.id + '>' + item.Category.name + '</label></li>'
+                        liStr += '<li><input type="checkbox" class="sub_category" name="service[]" value="' + item.Category.id + '" id="products' + item.Category.id + '"><label for="products' + item.Category.id + '">' + item.Category.name + '</label></li>'
                     });
                     $('ul.products').html(liStr);
                 }
@@ -58,52 +58,35 @@ $(document).ready(function(){
 
 	function checkData() {
 		var error=0;
+		$(".sjle").find(".errorMsg").remove();
 		$.each(checkTarget, function(target){
 			if($('#' + this).val() == "") {
-				if($('#' + this).parents(".sjle ul li").find('.errorMsg').length == 0) {
-					$('#' + this).parents(".sjle ul li").append(errorMsg);
-				}
+				$('#' + this).parents(".sjle ul li").append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parents(".sjle ul li").find('.errorMsg').remove();
-			}
+			} 
 		});
 		
 		$('.contact_method').each(function(){
 			if ($(this).val() == "") {
-				if($(this).parent().find('.errorMsg').length == 0) {
-					$(this).parent().append(errorMsg);
-				}
+				$(this).parent().append(errorMsg);
 				error=1;
-			} else {
-				$(this).parent().find('.errorMsg').remove();
-			}
-		});
-		
+			} 
+		});		
 		if($('#category').val() == "") {
-		   if ($('#category').parent().next('.errorMsg').length == 0) {
-				  $('#category').parents(".sjle ul li").append(errorMsg);
-		      }
+		    $('#category').parents(".sjle ul li").append(errorMsg);
 			error = 1;			
-		} else {
-			$('#category').parents(".sjle ul li").find('.errorMsg').remove();
-		}		
+		} 
 		if ($("input.sub_category:checked").length == 0){
-        	if ($('.products').parent().find('.errorMsg').length == 0) {
-        		$('.products').parent().append(errorMsg);
-        	}
+        	$('.products').parent().append(errorMsg);
         	error = 1;
-        } else {
-        	$('.products').parent().find('.errorMsg').remove();
-        }		
+        }	
 		if($('#vehicle').attr('checked') != "checked") {
-		  if ($('.protocol').find('.errorMsg').length == 0) {
-			$('.protocol').append('<span class="errorMsg">请接受协议内容</span>');
-		  }
+		     $('.protocol').append('<span class="errorMsg">请接受协议内容</span>');
 			error = 1
-		} else {
-			$('.protocol span').remove();
-		}
+		} 
+		$("input:file").each(function(index, element) {
+            if ($(this).next().length==0&&$(this).val()=="") $(this).after('<span class="errorMsg">（文件大小不超过500K）</span>');
+        });
 		return error;
 	}
     
@@ -119,14 +102,17 @@ $(document).ready(function(){
     $("#codeAddress").click(function(){
         var a=document.getElementById("geostrPosition").value;
         strPosition.codeAddress(a);
-    });
-        
+    });        
 });
 {/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="apep-zhaq.html">账号管理</a>&gt;&gt;<a href="#">企业会员升级</a></p>      
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+      <a href="javascript:void(0)">企业会员升级</a>
+      </p>      
     </div>
     <ul class="ulFormStep">
         <li>1.填写企业资料</li>
@@ -153,34 +139,33 @@ $(document).ready(function(){
             <label><font class="facexh">*</font>联系方式：</label>
             <div class="area1">
               <select name="contact_method[]">
-                <option>座机</option>
-                <option>手机</option>
-                <option>QQ</option>
-                <option>MSN</option>
+                <option value="座机">座机</option>
+                <option value="手机">手机</option>
+		<option value="E-mail">E-mail</option>
+                <option value="QQ">Q Q</option>                
+                <option value="MSN">MSN</option>
+		<option value="Skype">Skype</option>
+		<option value="其他">其他</option>
               </select>
             </div>
-            <input type="text" style="width:128px;" name="contact_content[]" class="contact_method">
+            <input type="text" style="width:128px;" name="contact_content[]" class="contact_method" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
             <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
           </li>  
           <li>
             <label><font class="facexh">*</font>传真：</label>
-            <input type="text" name="fax" id="fax"/>
+            <input type="text" name="fax" id="fax" onpaste="phoneNum(this)" onkeyup="phoneNum(this)"/>
           </li>
           <li>
             <label><font class="facexh">*</font>所在城市：</label>
-            <div class="area1">
-              <select name="provincial_id" id="provincial">
+            <select name="provincial_id" id="provincial">
                 <option value="">请选择</option>
                 {foreach $this->City->parentCityList() as $city}
                     <option value="{$city.City.id}">{$city.City.name}</option>
                 {/foreach}
               </select>
-            </div>
-            <div class="area1">
-              <select name="city_id" id="city">
+            <select name="city_id" id="city">
                 <option value="">请选择</option>
               </select>
-            </div>
           </li>
           <li>
             <label><font class="facexh">*</font>公司详细地址：</label>
@@ -188,8 +173,7 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>公司性质：</label>
-            <div class="select150">
-              <select name="company_type" >
+            <select name="company_type" >
                 <option value="民营/私营公司">民营/私营公司</option>
                 <option value="外企代表处">外企代表处</option>
                 <option value="外企代表处">事业单位</option>
@@ -203,18 +187,15 @@ $(document).ready(function(){
                 <option value="上市公司">上市公司</option>
                 <option value="私营股份制">私营股份制</option>
               </select>
-            </div>
           </li>
           <li>
             <label><font class="facexh">*</font>从事行业：</label>
-            <div class="area1">
             <select name="category_id" id="category">
             <option value="">请选择</option>
             {foreach $this->Category->parentCategoryList() as $value}
                 <option value="{$value.Category.id}">{$value.Category.name}</option>
             {/foreach}
             </select>
-              </div>
           </li>
           <li>
             <label>其他行业：</label>
@@ -231,24 +212,21 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>上传企业营业执照：</label>
-            <input name="face" type="file" id="license"/><p style="width:150px;" class="imgfilesize">（文件大小不超过500K）</p>
+            <input name="face" type="file" id="license"/><span class="errorMsg">（文件大小不超过500K）</span>
           </li>
-          <!--<li>
-             <div class="divMapContainer">
-               <div class="divInput"><input type="text" id="geostrPosition" value="输入地址查询"/><input type="button" value="搜索" id="codeAddress"/><input type="hidden" id="comlatlng" /></div>
-               <div id="mapLayout"></div>
-             </div>  
-             <a href="#" id="tglMap">启用地图标记</a>
-          </li>-->
-          <li style="text-align: left;">
+          <li>
+            <label>上传企业Logo：</label>
+            <input name="logo" type="file" id="logo"/><span class="errorMsg">（文件大小不超过500K）</span>
+          </li>
+          <li>
             <label><font class="facexh">*</font>验证码：</label>
-            <input type="text" name="verificationCode" id="verificationCode" style="width:60px;" class="inpTextBox">
+            <input type="text" name="verificationCode" id="verificationCode" style="width:40px;" class="inpTextBox">
             <a href="#"><img class="imgYanzhengma" src="{$this->webroot}img/num_03.jpg">看不清楚？换一个</a> 
           </li>
           <li>
             <label for="vehicle" class="protocol">
               <input type="checkbox" name="vehicle" id="vehicle"/>
-              我接受 <a href="/static?tpl=mianze">《聚业务服务协议（试行）》</a>
+              我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务服务协议（试行）》</a>
             </label>
           </li>
           <li><a class="zclan zclan4" href="javascript:void(0)">提交</a></li>

@@ -289,7 +289,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zy_r ul li a:hover{color:#ff9900;text-decoration:underline;}
 .zy_r ul li .aZNXSpan span{margin:0 6px;}
 
-.zy_r .change2{width:183px;border:#2196FF solid 1px;overflow:hidden;margin-top:5px;background:#FFF;}
+.zy_r .change2{width:183px;border:#2196FF solid 1px;overflow:hidden;margin-top:12px;background:#FFF;}
 .zy_r .nTab3 .TabTitle3{height:30px;line-height:30px;background:#2196FF;}
 .zy_r .nTab3 .TabTitle3 ul li{float:left;width:35px;cursor:pointer;font-size:14px;text-align:center;color:#FFF;height:30px;line-height:30px;}
 .zy_r .nTab3 .TabTitle3 ul li.long{width:78px;}
@@ -303,7 +303,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .zy_r .con_3 span{width:64px;height:18px;line-height:18px;display:block;position:absolute;right:0;top:0;background:#FFF;padding:0 3px;color:#666;}
 .zy_r .con_3 h5{text-align:right;padding-right:8px;;}
 
-.zy_rzj{ width:185px; height:31px; background:#2196FF; margin-top:5px;}
+.zy_rzj{ width:185px; height:31px; background:#2196FF; margin-top:12px;}
 .zy_rzj strong{ width:135px;color:#FFF; line-height:31px; text-indent:8px; display:block;float:left;}
 .zy_rzj span{line-height:31px;color:#000; float:left; display:block;}
 .zy_rzj span a{line-height:31px;color:#FFF;}
@@ -377,21 +377,22 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle .area{width:240px;float:left;}
 .sjle .area label{width:120px;}
 .sjle .area1{float:left;width:90px;} 
+.sjle .area1 select{width:81px;}
 .sjle .area115 select{float:left;width:115px;} 
-.sjle .select150 select{width:150px;float:left;margin-left: 5px;}
 .sjle ul{width:100%;height:auto;}
 .sjle ul li{line-height:24px;display:block;margin:0 0 10px;float:left;width:100%;text-indent:0;position:relative;}
 .sjle ul li label{color:#333;width:145px; float:left;text-align:right;}
 .imgYanzhengma{height:22px;margin:0 8px;vertical-align:text-bottom;}
-.sjle ul li input{width:218px;height:20px;float:left;line-height:20px;padding:0px 5px;margin:0px 5px;}
+.sjle ul li input{float:left;margin:0px 5px;}
 .sjle ul li button,.sjle dl dt button{height:22px\9;line-height:18px\9}
-.sjle ul li .inpTextBox,.sjle ul li .inpFile{margin-left:0}
+.sjle ul li .inpTextBox{width:218px;height:20px;line-height:20px;padding:0px 5px;margin-left:0}
+.sjle ul li .inpFile{margin-left:0}
 .sjle ul li .prompt,.sjle dl dt .prompt{position:absolute;left:385px;top:0;width:179px;border:#009900 1px solid;background:#F3FBFF;color:#333;font-weight:normal;text-align:left;padding:1px 3px 0;z-index:90;}
 .sjle ul.jianzhi li input{margin:0;}
 .sjle ul li p{ float:left; width:200px;}
 .sjle ul li p span{ color:#ff9900; font-size:12px; line-height:18px;}
-.sjle ul li select{width:81px;height:20px;padding: 1px;}
-.sjle ul li textarea{ float:left; width:300px; height:85px;resize:vertical;margin-left: 5px;}
+.sjle ul li select{width:111px;height:20px;padding:1px 0;float:left;margin-right:8px;}
+.sjle ul li textarea{ float:left; width:300px; height:85px;resize:vertical;}
 .sjle ul li ul,.sjle dl dt ul{width:450px;float:right;}
 .sjle ul li.avatar img{max-width:350px;}
 .sjle ul .products{padding:0 5px;}
@@ -402,29 +403,28 @@ a.btnSearch:hover{background-position:0 -122px;}
 
 .sjle ul li ul li{width:133px;margin:0px;}
 .sjle ul li ul li label {width:114px;}
-.sjle ul li ul li input{width:13px;padding:0;margin:0;}
+.sjle ul li ul li input{margin:4px 0 0;*margin-top:0;}
 .sjle ul li ul.chkbox2 li{width:60px;}
 .sjle ul li ul.chkbox2 li label{width:40px;}
 .sjle ul li .protocol{padding-left:160px;width:400px;color:#666;text-align:left;}
-.sjle ul li .protocol input{width:13px;}
 .sjle ul li .protocol a{color:#F60;}
 .sjle ul li .protocol a:hover{color:#F40;text-decoration:underline;}
+.sjle ul li .protocol .inpCheckbox{margin:4px 6px 0;*margin-top:0;}
 .sjle ul li .inpRadio label{width:60px;}
 .sjle ul li .inpRadio input{width:15px;}
-.sjle ul li .inpFile{width:auto;height:22px\9 !important;}
-.sjle p.imgfilesize{color:#F30;font-weight:normal;margin-left:-12px;float:left;}
 #captcha{color:#06E;font-weight:normal;}
 #captcha:hover{text-decoration:underline}
 
 .sjle dl {padding-left:5px;width: 590px;}
 .sjle dl dt{line-height:24px;margin-bottom:12px;overflow:hidden;width:590px;}
 .sjle dl dt label{float:left;line-height:24px;padding: 0 5px 0 0;text-align:right;width:125px;}
-.sjle dl dt select{width:100px;padding:2px 0;float:left}
-.sjle dl dt input{float:left;height: 20px;line-height: 20px;padding: 0 5px;width: 218px;}
+.sjle dl dt select{width:111px;padding:2px 0;float:left;margin-right:8px;}
+.sjle dl dt input{float:left;height: 20px;line-height: 20px;padding: 0 5px;}
 .sjle dl dt .inpFile{padding:6px 3px 0\9;margin-right:12px\9;}
 .sjle dl dt .addCon,.sjle dl dt .deleCon{margin-left:12px;width:45px\9;height:22px\9;line-height:20px\9;}
 .sjle dl dt .addConL{margin-left:100px;position:absolute;}
 .sjle dl dt .deleConL{margin-left:150px;position:absolute;}
+.sjle dl dt .inpTextBox{width: 218px;margin-right:8px;}
 .sjle dl dt .youxiaoqi select{width:50px;padding:1px 0;}
 .sjle dl dt input.addCon{height:24px;width:40px;}
 .sjle dl dt textarea{float: left;height:100px;resize: vertical;width:332px;}
@@ -436,7 +436,6 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl dt ul li .inpCheckbox{margin-top:3px;}
 .sjle dl dt .privacy li{width:110px;}
 .sjle dl dt .privacy li label{width:80px;text-align:left;}
-.sjle dl .productKinds select{width:150px;margin-right:15px;}
 .sjle dl .select100 select{width:100px;margin-right:15px;}
 .sjle dl .productKinds input{width:90px;float:none;display:none;}
 .sjle dl dt ul li .errorMsg{right:28px;line-height:24px;top:0\9;}
@@ -445,7 +444,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl dt .qyzlDoc li label{width:160px;}
 
 .sjle dl dt .divSex label,.sjle ul li .divSex label{width:80px;text-align:left;}
-.sjle dl dt .divSex .inpRadio,.sjle ul li .divSex .inpRadio{margin:3px 3px 0;width:auto;}
+.sjle dl dt .divSex .inpRadio,.sjle ul li .divSex .inpRadio{margin:5px 3px 0;*margin-top:0;}
 .sjle dl dt .cooperationWay label{width:auto;}
 .sjle dl dt .cooperationWay .inpTextBox{width:36px;margin:0 3px;float:none;}
 .sjle dl dt .divExpect select{width:170px;height:183px;}
@@ -455,6 +454,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl dt .divExpect .sel2211{height:20px;}
 .sjle dl dt .divExpect .sel2212{height:163px;}
 .sjle dl dt .area1{width:110px;}
+.sjle dl dt .area1 select{width:100px;}
 .sjle dl dt ul.industry li{width:98px;}
 .sjle dl dt ul.industry li input{width:auto;}
 .sjle dl dt ul.industry li label{width:60px;padding:0;text-align:left;}

@@ -5,10 +5,11 @@ class InvitationsController extends AppController
     var $uses = array(
         'Invitation',
         'PartTime',
-        'CompanyAttribute'
+        'CompanyAttribute',
+        'Cooperation'
     );
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Info', 'Unit');
+    var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
     var $paginate;
     
     
@@ -104,6 +105,31 @@ class InvitationsController extends AppController
                     );
                     $company = $this->CompanyAttribute->find('first', array('conditions' => $conditions));
                     $this->set('company', $company);
+                    //和企业的兼职合作
+                    $cooperationCond = array(
+                        'sender'    => $this->_memberInfo['Member']['id'],
+                        'receiver'  => $invitation['Invitation']['sender'],
+                        'status'    => array()
+                    );
+                    $cooperationCond['status'] = array(
+                        Configure::read('Cooperation.status.cooperating'),
+                        Configure::read('Cooperation.status.waitpay'),
+                        Configure::read('Cooperation.status.failure'),
+                        Configure::read('Cooperation.status.complaint'),
+                        Configure::read('Cooperation.status.paid'),
+                        Configure::read('Cooperation.status.complete'),
+                        Configure::read('Cooperation.status.platform_company'),
+                        Configure::read('Cooperation.status.platform_personal')
+                    );
+                    $cooperationNum = $this->Cooperation->find('count', array('conditions' => $cooperationCond));
+                    
+                    $cooperationCond['status'] = array(
+                        Configure::read('Cooperation.status.paid'),
+                        Configure::read('Cooperation.status.complete'),
+                    );
+                    $cooperationSuccess = $this->Cooperation->find('count', array('conditions' => $cooperationCond));
+                    $this->set('cooperationNum', $cooperationNum);
+                    $this->set('successNum', $cooperationSuccess);
                 }
             } else {
                 $this->_sysDisplayErrorMsg('没有此信息！');
@@ -159,5 +185,13 @@ class InvitationsController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
     }
 }

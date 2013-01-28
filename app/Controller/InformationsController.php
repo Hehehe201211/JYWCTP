@@ -19,7 +19,7 @@ class InformationsController extends AppController
         'Friendship'
     );
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Info', 'Unit');
+    var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
     var $paginate;
     
     public function index()
@@ -1380,6 +1380,14 @@ class InformationsController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
     }
     
     

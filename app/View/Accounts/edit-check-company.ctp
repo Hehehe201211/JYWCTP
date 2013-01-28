@@ -1,52 +1,34 @@
 <script type="text/javascript">
+{literal}
 $(document).ready(function(){
-    $('#upgradeBtn').click(function(){
-        $('#upgrade').attr('action', '/members/upgradecomplete');
-        $('#upgrade').submit();
+    $('#complete').click(function(){
+        $('#edit').attr('action', '/accounts/editComplete');
+        $('#edit').submit();
     });
     
     $('#backBtn').click(function(){
-        $('#upgrade').attr('action', '/members/upgrade');
-        $('#upgrade').submit();
-    });    
+        $('#edit').attr('action', '/accounts/edit');
+        $('#edit').submit();
+    });
 });
+{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p>
-      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
-      <a href="javascript:void(0)">账号管理</a>&gt;&gt;
-      <a href="javascript:void(0)">企业会员升级</a>
-      </p>
-      <div class="zy_zszl enterpriseInfo">
-        <div class="zy_zszl_z">
-          <dl>
-            <dt>
-              <dl>
-                <dt><img src="{$this->webroot}img/tx.jpg"></dt>
-                <dd class="mebInfo"><span>会员昵称：聚业务</span><span>公司名称：厦门有限公司厦门有限公司</span><span>绑定邮箱：ya*****@qq.com</span><span>行业：互联网</span><span>地址：福建省厦门市</span></dd>
-              </dl>
-            </dt>
-            <dd><span>账户有效期：2012-09-20&nbsp;至&nbsp;2013-09-20</span></dd>
-            <!--<dd><span>资料完整度：</span><span class="progressBar"><span>&nbsp;20%&nbsp;</span></span><a href="#">完善资料</a><a class="icon iconZ" href="#" title="营业执照已认证"></a><a class="icon iconM" href="#" title="未绑定邮箱"></a></dd>-->
-          </dl>
-        </div>
-        <div class="zy_zszl_r">
-          <dl>            
-            <dd><span>简历总量：<strong>0</strong>份</span><span>常规招聘总职位：<strong>0</strong>个</span><span>平台兼职总职位：<strong>0</strong>个</span><span>高级个人会员：<strong>0</strong>位</span><span>高级企业会员：<strong>0</strong>家</span><span><a class="upgrade" href="apep-hysj1.html">升级到高级会员</a></span></dd>
-          </dl>
-        </div>
-      </div>
+        <p>
+        <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+        <a href="javascript:void(0)">账号管理</a>&gt;&gt;
+        <a href="javascript:void(0)">完善资料</a>
+        </p>
     </div>
-    <div class="hysj hysj_fb">
-      <ul>
-        <li>1.填写企业资料</li>
-        <li>2.信息确认</li>
-        <li>3.升级成功</li>
-      </ul>
-      <div class="sjle">
-      <div class="xq_zl_xbxq">
-      <form id="upgrade" action="" method="post" >
+<ul class="ulFormStep ulFormStep2">
+      <li>1.信息修改</li>
+      <li>2.信息确认</li>
+      <li>3.修改成功</li>
+    </ul> 
+        <div class="sjle">
+        <div class="xq_zl_xbxq">
+            <form id="edit" action="" method="post" >
       <input type="hidden" name="type" value="1">
         <table width="570">
         <tbody><tr>
@@ -73,24 +55,34 @@ $(document).ready(function(){
           <tr>
             <td class="tdRight">营业执照：</td>
             <td class="tdLeft" colspan="3">
-                {if !empty($thumbnail)}
-                <img src="{$this->webroot}{$thumbnail}">
+                {if !empty($this->data['license'])}
+                <img src="{$this->webroot}{$this->data['license']}">
                 {else}
                 <img src="{$this->webroot}img/tx.jpg">
                 {/if}
+                <input type="hidden" id="license" name="license" value="{$this->data['license']}">
             </td>
-            <input type="hidden" name="thumbnail" value="{$thumbnail}" />
           </tr>
           <tr>
             <td class="tdRight">公司LOGO：</td>
             <td class="tdLeft" colspan="3">
-                {if !empty($logo)}
-                <img src="{$this->webroot}{$logo}">
+                {if !empty($thumbnail) && file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$thumbnail}">
+                    <input type="hidden" id="thumbnail" name="thumbnail" value="{$thumbnail}">
+                {elseif !empty($this->data['thumbnail'])}
+                    {$thumbnail = Configure::read('Data.path')|cat:$this->data['thumbnail']}
+                    {if file_exists($thumbnail)}
+                        <img src="{$this->webroot}{$this->data['thumbnail']}">
+                        <input type="hidden" id="thumbnail" name="thumbnail" value="{$this->data['thumbnail']}">
+                    {else}
+                        <img src="{$this->webroot}img/tx.jpg">
+                        <input type="hidden" id="thumbnail" name="thumbnail" value="">
+                    {/if}
                 {else}
-                <img src="{$this->webroot}img/tx.jpg">
+                    <img src="{$this->webroot}img/tx.jpg">
+                    <input type="hidden" id="thumbnail" name="thumbnail" value="">
                 {/if}
             </td>
-            <input type="hidden" name="logo" value="{$logo}" />
           </tr>
           {foreach $this->data['contact_method'] as $key => $value}
           <tr>
@@ -165,8 +157,7 @@ $(document).ready(function(){
         </table>
         </form>
         </div>
-        <a class="zclan zclan2" id="upgradeBtn" href="javascript:void(0)">升级</a>
-        <a class="zclan zclan2" id="backBtn" href="javascript:void(0)">上一步</a>
-      </div>
-    </div>
+        <a href="javascript:void(0)" id="complete" class="zclan zclan2">提交</a>
+        <a href="javascript:void(0)" id="backBtn" class="zclan zclan2">上一步</a>
+        </div>
 </div>

@@ -14,9 +14,12 @@ class MembersController extends AppController
         'MemberAttribute',
         'CompanyAttribute',
         'PartTime',
-        'Cooperation'
+        'Fulltime',
+        'Cooperation',
+        'Audition',
+    
     );
-    var $components = array('ImageCheck', 'Unit', 'Upload', 'Thumbnail');
+    var $components = array('ImageCheck', 'Unit', 'Upload', 'Thumbnail', 'Recommend');
     var $helpers = array('City', 'Category');
     public function index()
     {
@@ -38,6 +41,9 @@ class MembersController extends AppController
                 $this->set('newRewards', $newReward);
                 $this->set('newReceivedRewards', $newReceivedReward);
                 $this->set('historyInfo', $historyInfo);
+                
+                //
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
             }
         } else {//企业会员
             $this->currentMenu = Configure::read('Menu.parttimeManager');
@@ -53,11 +59,34 @@ class MembersController extends AppController
                 );
                 $parttimes = $this->PartTime->find('all', $params);
                 
+                $fields = array(
+                    'id',
+                    'post',
+                    'company',
+                    'modified',
+                    'provincial',
+                    'city',
+                    'salary',
+                    'educated',
+                    'continued',
+                    'require',
+                    'category',
+                    'type',
+                    'number',
+                );
+                $params = array(
+                    'conditions' => array('members_id' => $this->_memberInfo['Member']['id']),
+                    'fields'     => $fields,
+                    'order'      => array('created DESC'),
+                    'limit'      => 5
+                );
+                $fulltimes = $this->Fulltime->find('all', $params);
+                
                 $joinMember = array(
                     'table' => 'members',
-		            'alias' => 'Member',
-		            'type'  => 'inner',
-		            'conditions' => 'Member.id = Cooperation.sender'
+                    'alias' => 'Member',
+                    'type'  => 'inner',
+                    'conditions' => 'Member.id = Cooperation.sender'
                 );
                 
                 $joinInformation = array(
@@ -66,32 +95,80 @@ class MembersController extends AppController
                     'type'  => 'inner',
                     'conditions' => 'Information.id = Cooperation.information_id'
                 );
-                
                 $params = array(
                     'conditions' => array('Cooperation.receiver' => $this->_memberInfo['Member']['id'], 'Cooperation.status' => Configure::read('Cooperation.status.posting')),
                     'fields'     => array(
-	                    'Cooperation.id', 
+                        'Cooperation.id', 
                         'Cooperation.status', 
                         'Cooperation.created', 
-	                    'Member.nickname', 
-	                    'Information.provincial', 
-	                    'Information.city', 
-	                    'Information.category', 
-	                    'Information.sub_category'
-	                ),
+                        'Member.nickname', 
+                        'Information.provincial', 
+                        'Information.city', 
+                        'Information.category', 
+                        'Information.sub_category'
+                    ),
                     'order'      => array('Cooperation.created DESC'),
                     'joins'      => array($joinMember,$joinInformation),
                     'limit'      => 5
                 );
                 
                 $newReceived = $this->Cooperation->find('all', $params);
+                $this->getNewReceiveAudition();
                 
                 $this->set('newParttimes', $parttimes);
+                $this->set('newFulltimes', $fulltimes);
                 $this->set('newReceived', $newReceived);
                 $this->render('index-company');
             }
         }
     }
+    
+    private function getNewReceiveAudition()
+    {
+        $joinResume = array(
+            'table' => 'resumes',
+            'alias' => 'Resume',
+            'type'  => 'left',
+            'conditions' => 'Resume.id = Audition.resumes_id'
+        );
+        $joinResumeBase = array(
+            'table' => 'resume_bases',
+            'alias' => 'ResumeBase',
+            'type'  => 'left',
+            'conditions' => 'ResumeBase.members_id = Audition.sender'
+        );
+        $fields = array(
+            'Audition.id',
+            'Audition.created',
+            'ResumeBase.name',
+            'Fulltime.post',
+            'Resume.educated',
+            'Resume.continued',
+            'ResumeBase.provincial_now',
+            'ResumeBase.city_now',
+        );
+        $joinFulltime = array(
+            'table' => 'fulltimes',
+            'alias' => 'Fulltime',
+            'type'  => 'left',
+            'conditions' => 'Fulltime.id = Audition.fulltimes_id'
+        );
+        $conditions = array(
+            'Audition.status' => Configure::read('Audition.status_active'), 
+            'Audition.receiver' => $this->_memberInfo['Member']['id']
+        );
+        $params = array(
+            'conditions'    => $conditions,
+            'fields'    => $fields,
+            'joins'     => array($joinFulltime, $joinResume, $joinResumeBase),
+            'limit'     => 5,
+            'order'     => array('Audition.created' => 'DESC'),
+        );
+        $newAuditions = $this->Audition->find('all', $params);
+        $this->set('newAuditions', $newAuditions);
+    }
+    
+    
     public function login()
     {
         $css = array(
@@ -119,6 +196,17 @@ class MembersController extends AppController
         $this->set('cityList', $city);
         $this->set('categoryList', $category);
         $this->set("cssClass", '');
+        $fromMember = false;
+        if (
+            isset($this->request->query['mid']) &&
+            !empty($this->request->query['mid']) &&
+            isset($this->request->query['key']) &&
+            !empty($this->request->query['key']) &&
+            $this->request->query['key'] == md5($this->request->query['mid'])
+            ) {
+                $fromMember = true;
+            }
+        $this->set('fromMember', $fromMember);
     }
     
     public function check()
@@ -133,7 +221,10 @@ class MembersController extends AppController
                 'email'        => $this->request->data['email'],
                 'password'    => md5($this->request->data['password']),
                 'type'      => $this->request->data['type']
-            );
+             );
+            if (isset($this->request->data['mid'])) {
+                $data['mid'] = $this->request->data['mid'];
+             }
             if ($this->request->data['type'] == 1) {
               $data['company_name'] = $this->request->data['company_name'];
             }
@@ -190,6 +281,7 @@ class MembersController extends AppController
                 'email'            => $memberInfo['TmpMember']['email'],
                 'type'          => $memberInfo['TmpMember']['type'],
                 'company_name'          => $memberInfo['TmpMember']['company_name'],
+                'mid'               => $memberInfo['TmpMember']['mid']
             );
             if ($this->Member->save($member)) {
                 $this->TmpMember->delete(array('id' => $this->request->query['id']));
@@ -241,7 +333,7 @@ class MembersController extends AppController
     
     public function upgradecheck()
     {
-        $thumbnail = '';
+        $facethumbnail = '';
         if (isset($_FILES['face'])) {
             $filename = $this->_memberInfo['Member']['id'] . '_face_thumbnail';
             $path = TMP;
@@ -269,12 +361,46 @@ class MembersController extends AppController
                     'outy'      => 124
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
-                    $thumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
+                    $facethumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
                     @unlink($result['path'] . '/' . $result['name']);
                 }
             }
         }
-        $this->set('thumbnail', $thumbnail);
+        $logo = '';
+        if (isset($_FILES['logo'])) {
+            $filename = $this->_memberInfo['Member']['id'] . '_logo_thumbnail';
+            $path = TMP;
+            $result = $this->Upload->upload($_FILES['logo'], $path, $filename, "image");
+            if ($result['result'] == 'OK') {
+                $path = "thumbnail/" . 
+                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+                if (!file_exists($path)) {
+                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                    try {
+                        exec($command);
+                    } catch (Exception $e) {
+                        $this->log($e->getMessage());
+                    }
+                }
+                $srcParams = array(
+                    'path' => $result['path'],
+                    'name' => $result['name']
+                );
+                $descParams = array(
+                    'imagepath' => Configure::read('Data.path') . $path,
+                    'imagename'      => "logo_thumbnail",
+                    'outx'      => 112,
+                    'outy'      => 124
+                );
+                if ($this->Thumbnail->resize($srcParams, $descParams)){
+                    $logo = $path . "/logo_thumbnail." .  $this->Upload->getExt($_FILES['logo']);
+                    @unlink($result['path'] . '/' . $result['name']);
+                }
+            }
+        }
+        $this->set('thumbnail', $facethumbnail);
+        $this->set('logo', $logo);
         if (isset($this->request->data['type']) && isset($this->request->data['type']) == 1) {
             $this->render('upgradecheck-company');
         }
@@ -284,9 +410,9 @@ class MembersController extends AppController
         $error = false;
         $member_id = $this->_memberInfo['Member']['id'];
         if (isset($this->request->data['type']) && isset($this->request->data['type']) == 1) {
-	        if ($this->CompanyAttribute->find('count', array('conditions' => array('members_id' => $member_id))) > 0) {
-	            $this->redirect('/members');
-	        }
+            if ($this->CompanyAttribute->find('count', array('conditions' => array('members_id' => $member_id))) > 0) {
+                $this->redirect('/members');
+            }
             $contact_methods = array();
             foreach ($this->request->data['contact_method'] as $key => $value) {
                 $method = array(
@@ -309,7 +435,8 @@ class MembersController extends AppController
                 'category_id'   => $this->request->data['category_id'],
                 'service'       => implode(",", $this->request->data['service']),
                 'business_scope'=> $this->request->data['business_scope'],
-                'license'       => $this->request->data['license']
+                'license'       => $this->request->data['thumbnail'],
+                'thumbnail'     => $this->request->data['logo']
             );
             if ($this->Member->upgradeCompany($data)) {
                 $message = "您成功升级到高级会员！请等待聚业务平台工作人员的审核。你可以发布相关资料！";
@@ -320,9 +447,10 @@ class MembersController extends AppController
             $this->set('message', $message);
             $type = 1;
         } else {
-	        if ($this->MemberAttribute->find('count', array('conditions' => array('members_id' => $member_id))) > 0) {
-	            $this->redirect('/members');
-	        }
+            if ($this->MemberAttribute->find('count', array('conditions' => array('members_id' => $member_id))) > 0) {
+                $this->redirect('/members');
+            }
+            
             $data = array(
                 'members_id'    => $member_id,
                 'name'            => $this->request->data['name'],

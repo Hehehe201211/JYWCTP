@@ -114,7 +114,7 @@ class NoticesController extends AppController
         $this->_appendJs($js);
         parent::beforeRender();
         //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
+//        $notices = $this->Unit->notice();
+//        $this->set('notices', $notices);
     }
 }

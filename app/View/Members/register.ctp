@@ -273,6 +273,9 @@ function hideWarning(){
         </dl>
         <div class="zcl">
           <input type="hidden" name="type" value="0"/>
+          {if $fromMember}
+          <input type="hidden" name="mid" value="{$this->request->query['mid']}"/>
+          {/if}
           <label>
             <input type="checkbox" name="personal" id="personal_accept"/>
             我接受 <a href="/static?tpl=mianze" class="protocol" target="_blank">《聚业务服务协议（试行）》</a></label>

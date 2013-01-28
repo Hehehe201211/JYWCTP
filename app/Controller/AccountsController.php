@@ -14,7 +14,7 @@ class AccountsController extends AppController
                     'PaymentTransaction',
                     'Information'
     );
-    var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit', 'Upload', 'Thumbnail');
+    var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit', 'Upload', 'Thumbnail', 'Recommend');
     var $helpers = array('Js', 'City', 'Category');
     /**
      * 
@@ -45,19 +45,19 @@ class AccountsController extends AppController
         $this->_appendJs($js);
         if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.company')) {
             if (!$this->request->is('post')) {
-	            $memberBase = $this->Member->find('first', array('conditions' => array('id' => $this->_memberInfo['Member']['id'])));
-	            $memberAttribute = $this->CompanyAttribute->find('first', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'])));
-	            $this->set('memberBase', $memberBase);
-	            $this->set('memberAttribute', $memberAttribute);
+                $memberBase = $this->Member->find('first', array('conditions' => array('id' => $this->_memberInfo['Member']['id'])));
+                $memberAttribute = $this->CompanyAttribute->find('first', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'])));
+                $this->set('memberBase', $memberBase);
+                $this->set('memberAttribute', $memberAttribute);
             }
             $this->render('company-edit');
         } else {
             if (!$this->request->is('post')) {
-	            $memberBase = $this->Member->find('first', array('conditions' => array('id' => $this->_memberInfo['Member']['id'])));
-	            $memberAttribute = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'])));
-	            $this->set('memberBase', $memberBase);
-	            $this->set('memberAttribute', $memberAttribute);
-	        }
+                $memberBase = $this->Member->find('first', array('conditions' => array('id' => $this->_memberInfo['Member']['id'])));
+                $memberAttribute = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'])));
+                $this->set('memberBase', $memberBase);
+                $this->set('memberAttribute', $memberAttribute);
+            }
         }
     }
     
@@ -96,31 +96,97 @@ class AccountsController extends AppController
                 }
             }
         }
+        if (isset($_FILES['logo'])) {
+            $filename = $this->_memberInfo['Member']['id'] . '_logo_thumbnail';
+            $path = TMP;
+            $result = $this->Upload->upload($_FILES['logo'], $path, $filename, "image");
+            if ($result['result'] == 'OK') {
+                $path = "thumbnail/" . 
+                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+                if (!file_exists($path)) {
+                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                    try {
+                        exec($command);
+                    } catch (Exception $e) {
+                        $this->log($e->getMessage());
+                    }
+                }
+                $srcParams = array(
+                    'path' => $result['path'],
+                    'name' => $result['name']
+                );
+                $descParams = array(
+                    'imagepath' => Configure::read('Data.path') . $path,
+                    'imagename'      => "logo_thumbnail",
+                    'outx'      => 112,
+                    'outy'      => 124
+                );
+                if ($this->Thumbnail->resize($srcParams, $descParams)){
+                    $thumbnail = $path . "/logo_thumbnail." .  $this->Upload->getExt($_FILES['logo']);
+                    @unlink($result['path'] . '/' . $result['name']);
+                }
+            }
+            echo $thumbnail;
+        }
         $this->set('thumbnail', $thumbnail);
+        if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.company')) {
+            $this->render('edit-check-company');
+        }
     }
     
     public function editComplete()
     {
-        $baseInfo = array(
-            'nickname'  => "'{$this->request->data['nickname']}'"
-        );
-        $service = implode(',', $this->request->data['service']);
-        $attributeInfo = array(
-            'name'              => "'{$this->request->data['name']}'",
-            'sex'               => "'{$this->request->data['sex']}'",
-            'birthday'          => "'{$this->request->data['birthday']}'",
-            'provincial_id'     => "'{$this->request->data['provincial_id']}'",
-            'city_id'           => "'{$this->request->data['city_id']}'",
-            'mobile'            => "'{$this->request->data['mobile']}'",
-            'telephone'         => "'{$this->request->data['telephone']}'",
-            'company'           => "'{$this->request->data['company']}'",
-            'category_id'       => "'{$this->request->data['category_id']}'",
-            'business_scope'    => "'{$this->request->data['business_scope']}'",
-            'thumbnail'         => "'{$this->request->data['thumbnail']}'",
-            'service'           => "'{$service}'"
-        );
-        $this->Member->updateAll($baseInfo, array('id' => $this->_memberInfo['Member']['id']));
-        $this->MemberAttribute->updateAll($attributeInfo, array('members_id' => $this->_memberInfo['Member']['id']));
+        if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.company')) {
+            $contact_methods = array();
+            foreach ($this->request->data['contact_method'] as $key => $value) {
+                $method = array(
+                    'method' => $value,
+                    'content' => $this->request->data['contact_content'][$key]
+                );
+                $contact_methods[] = $method;
+            }
+            $contact_methods = json_encode($contact_methods);
+            $service = implode(',', $this->request->data['service']);
+            $attributeInfo = array(
+                'full_name'         => "'{$this->request->data['full_name']}'",
+                'established'       => "'{$this->request->data['established']}'",
+                'contact'           => "'{$this->request->data['contact']}'",
+                'fax'               => "'{$this->request->data['fax']}'",
+                'provincial_id'     => "'{$this->request->data['provincial_id']}'",
+                'city_id'           => "'{$this->request->data['city_id']}'",
+                'address'           => "'{$this->request->data['address']}'",
+                'company_type'      => "'{$this->request->data['company_type']}'",
+                'category_id'       => "'{$this->request->data['category_id']}'",
+                'business_scope'    => "'{$this->request->data['business_scope']}'",
+                'thumbnail'         => "'{$this->request->data['thumbnail']}'",
+                'service'           => "'{$service}'",
+                'business_scope'    => "'{$this->request->data['business_scope']}'",
+                'contact_method'    => "'{$contact_methods}'"
+            );
+            $this->CompanyAttribute->updateAll($attributeInfo, array('members_id' => $this->_memberInfo['Member']['id']));
+        } else {
+            $baseInfo = array(
+                'nickname'  => "'{$this->request->data['nickname']}'"
+            );
+            $service = implode(',', $this->request->data['service']);
+            $attributeInfo = array(
+                'name'              => "'{$this->request->data['name']}'",
+                'sex'               => "'{$this->request->data['sex']}'",
+                'birthday'          => "'{$this->request->data['birthday']}'",
+                'provincial_id'     => "'{$this->request->data['provincial_id']}'",
+                'city_id'           => "'{$this->request->data['city_id']}'",
+                'mobile'            => "'{$this->request->data['mobile']}'",
+                'telephone'         => "'{$this->request->data['telephone']}'",
+                'company'           => "'{$this->request->data['company']}'",
+                'category_id'       => "'{$this->request->data['category_id']}'",
+                'business_scope'    => "'{$this->request->data['business_scope']}'",
+                'thumbnail'         => "'{$this->request->data['thumbnail']}'",
+                'service'           => "'{$service}'"
+            );
+            $this->Member->updateAll($baseInfo, array('id' => $this->_memberInfo['Member']['id']));
+            $this->MemberAttribute->updateAll($attributeInfo, array('members_id' => $this->_memberInfo['Member']['id']));
+        }
     }
     
     /**
@@ -149,7 +215,7 @@ class AccountsController extends AppController
     public function invite()
     {
         $this->set('title_for_layout', "好友邀请");
-        $sns_link = "http//" . $_SERVER['SERVER_NAME'] . "/members/register?mid=" . $this->_memberInfo['Member']['id'] . "&key=" . md5($this->_memberInfo['Member']['id']);
+        $sns_link = "http://" . $_SERVER['SERVER_NAME'] . "/members/register?mid=" . $this->_memberInfo['Member']['id'] . "&key=" . md5($this->_memberInfo['Member']['id']);
         $this->set('sns_link', $sns_link);
     }
     /**
@@ -398,6 +464,14 @@ class AccountsController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
     }
     
 }

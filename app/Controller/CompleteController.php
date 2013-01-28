@@ -9,21 +9,21 @@ class CompleteController extends AppController
 {
     var $layout = 'members';
     var $uses = array(
-    	'Information', 
-    	'PaymentTransaction', 
-    	'InformationAttribute', 
-		'Member',
+        'Information', 
+        'PaymentTransaction', 
+        'InformationAttribute', 
+        'Member',
         'InformationComment',
         'InformationComplaint'
-	);
+    );
     var $helpers = array('Js', 'City', 'Category');
-	var $components = array('RequestHandler', 'Info', 'Unit');
-	var $paginate;
-	
-	public function listview()
-	{
-	    $this->set("msg", "没有已交易信息");
-	    $this->set('title_for_layout', "已交易");
+    var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
+    var $paginate;
+    
+    public function listview()
+    {
+        $this->set("msg", "没有已交易信息");
+        $this->set('title_for_layout', "已交易");
         if (isset($this->request->query['type'])) {
             $type = $this->request->query['type'];
             if ($type != "has" && $type != "need") {
@@ -33,7 +33,7 @@ class CompleteController extends AppController
         } else {
             $type = "has";
         }
-	   if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+       if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
             $status = array();
             foreach ($this->request->data['status'] as $sta) {
                 if ($sta == Configure::read('Transaction.status_code.complete')) {
@@ -94,10 +94,10 @@ class CompleteController extends AppController
         
         if ($type == "has") {
             $transactionP = array(
-				'information_id' => $information_id,
+                'information_id' => $information_id,
                 'members_id' => $query['mid'],
                 'author_members_id' => $this->_memberInfo['Member']['id'],
-				'status' => array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'))
+                'status' => array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'))
             );
             $conditionsAppraisal = array(
                 'information_id' => $information_id,
@@ -105,10 +105,10 @@ class CompleteController extends AppController
             );
         } else {
             $transactionP = array(
-				'information_id' => $information_id,
+                'information_id' => $information_id,
                 'members_id' => $this->_memberInfo['Member']['id'],
                 'author_members_id' => $query['mid'],
-				'status' => array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'))
+                'status' => array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'))
             );
             $conditionsAppraisal = array(
                 'information_id' => $information_id,
@@ -125,15 +125,15 @@ class CompleteController extends AppController
         $this->set('type', $type);
         if (!$this->RequestHandler->isAjax()){
             $this->Info->detail($information_id);
-	        $this->Info->baseMemberInfo($query['mid']);
-	        //评价
-	        $showAppraisal = false;
+            $this->Info->baseMemberInfo($query['mid']);
+            //评价
+            $showAppraisal = false;
             $appraisal = $this->Info->appraisal($conditionsAppraisal);
             if (empty($appraisal)) {
                 $showAppraisal = true;
             }
-	        if ($type == "has") {
-	            $showAppraisal = false;
+            if ($type == "has") {
+                $showAppraisal = false;
             }
             $this->set('showAppraisal', $showAppraisal);
             
@@ -151,27 +151,35 @@ class CompleteController extends AppController
             
             
         } else {
-	        if ($this->RequestHandler->isAjax()) {
-	            if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
-	                $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
-	                $this->set('jump', $page);
-	            }
-	            $this->render('/Elements/comments_paginator');
-	        }
+            if ($this->RequestHandler->isAjax()) {
+                if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
+                    $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
+                    $this->set('jump', $page);
+                }
+                $this->render('/Elements/comments_paginator');
+            }
         }
     }
     
     public function beforeRender()
-	{
-		$css = array(
-    	'member'
-    	);
-    	$js = array('member');
+    {
+        $css = array(
+        'member'
+        );
+        $js = array('member');
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
-	}
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
+    }
 }

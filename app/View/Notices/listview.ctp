@@ -13,11 +13,14 @@ $(document).ready(function(){
   <div class="ntcLeft">
     <div class="suckerdiv">
       <h3>通知中心</h3>
-      {foreach $noticeParents as $parent}
+      {foreach $noticeParents as $key => $parent}
       <div class="category">
         <a href="javascript:void(0);" class="catHx"></a>
         <p><a href="/notices/listview?pid={$parent.Notice.id}">{$parent.Notice.title}</a></p>
       </div>
+      {if !empty($memberInfo) && $memberInfo.Member.type == Configure::read('UserType.company') && $key == 1}
+      {break}
+      {/if}
       {/foreach}
     </div>
     <div class="otherLinks">
@@ -47,8 +50,11 @@ $(document).ready(function(){
       <div class="crumbs">通知中心&nbsp;&gt;&nbsp;<a href="/notices/listview?pid={$this->request->query['pid']}">{if $this->request->query['pid']==7}公告{else if $this->request->query['pid']==8}规则{else if $this->request->query['pid']==9}提现{else if $this->request->query['pid']==10}交易安全{/if}</a></div>
       <div class="serviceCon">
       <ul class="titleLists">
-      {foreach $notices as $notice}
-      <li><span class="fr time">{$notice.Notice.modified|date_format:"%Y-%m-%d"}</span><p><a target="_blank" href="/notices/detail?id={$notice.Notice.id}">{$notice.Notice.title}</a></p></li>        
+      {foreach $notices as $key => $notice}
+      <li>
+      <span class="fr time">{$notice.Notice.modified|date_format:"%Y-%m-%d"}</span>
+      <p><a target="_blank" href="/notices/detail?id={$notice.Notice.id}">{$notice.Notice.title}</a></p>
+      </li>
       {/foreach}
       </ul>
       </div>

@@ -19,7 +19,16 @@ $(document).ready(function(){
           <th width="20%">公司名称：</th>
           <td width="50%">{$company.CompanyAttribute.full_name}</td>
           <td width="30%" rowspan="7" class="top">
-            <img class="portrait" src="{$this->webroot}img/tx.jpg" />
+          {if !empty($company.CompanyAttribute.license)}
+                {$thumbnail = Configure::read('Data.path')|cat:$company.CompanyAttribute.license}
+                {if file_exists($thumbnail)}
+                    <img class="portrait" src="{$this->webroot}{$company.CompanyAttribute.license}">
+                {else}
+                    <img class="portrait" src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+              <img class="portrait" src="{$this->webroot}img/tx.jpg">
+          {/if}
           </td>
         </tr>
         <tr>
@@ -59,11 +68,11 @@ $(document).ready(function(){
         </tr>
         <tr>
           <th>与公司合作：</th>
-          <td>12次</td>
+          <td>{if empty($cooperationNum)}0{else}{$cooperationNum}{/if}次</td>
         </tr>
         <tr>
           <th>成功合作：</th>
-          <td>3次</td>
+          <td>{if empty($successNum)}0{else}{$successNum}{/if}次</td>
         </tr>
       </table>
     </div>

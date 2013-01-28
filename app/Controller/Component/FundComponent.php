@@ -62,19 +62,20 @@ class FundComponent extends Component
                     array('PaymentHistory.payment_type' => Configure::read('Payment.type_normal_point')),
                     array('PaymentHistory.payment_type' => Configure::read('Payment.type_back_point')),
                     array('PaymentHistory.payment_type' => Configure::read('Payment.type_appraisal_point')),
+                    array('PaymentHistory.payment_type' => Configure::read('Payment.type_sns_point')),
                 )
             );
         }
         $joinMember = array(
     		'table' => 'members',
     		'alias' => 'Member',
-    		'type'  => 'inner',
+    		'type'  => 'left',
     		'conditions' => 'PaymentHistory.collaborator = Member.id'
 	    );
 	    $joinInformation = array(
 			'table' => 'information',
             'alias' => 'Information',
-            'type'  => 'inner',
+            'type'  => 'left',
             'conditions' => 'Information.id = PaymentHistory.information_id'
 		);
 	    $fields = array('Member.*', 'PaymentHistory.*', 'Information.title');

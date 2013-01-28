@@ -172,10 +172,10 @@ $(document).ready(function(){
             <td>{$value.method} {$value.number}</td>
           </tr>
           {/foreach}
-          <tr>
+          <!--<tr>
             <th>联系邮箱：</th>
             <td>{$parttime.PartTime.email}</td>
-          </tr>
+          </tr>-->
           <tr>
             <th>公司地址：</th>
             <td>{$parttime.PartTime.address}</td>
