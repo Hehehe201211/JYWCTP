@@ -173,11 +173,11 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .tg_message .OLService tr a{text-decoration:underline;}
 .tg_message .OLService tr img{margin-right:6px;vertical-align:top;*vertical-align:middle}
 .tg_message .OLService .th{font-weight:bold;}
-.tg_message ul{ float:right; padding:30px 10px 0px 0px;}
+.tg_message ul{float:right;margin:30px 10px 0 0;background:url(../img/su_03.gif) 0 0 no-repeat;}
 .tg_message ul li{ width:150px; float:left; overflow:hidden;}
 .tg_message ul li.list{height:160px; overflow:hidden;}
-.tg_message ul li.list h3{font-weight:bold;text-align:center;font-size:14px;}
-.tg_message ul .list .detail{ padding:0px;width:150px; margin:0 auto; padding-top:10px; }
+.tg_message ul li.list h3{font-weight:bold;text-align:center;font-size:14px;margin-top:3px;}
+.tg_message ul .list .detail{ padding:0px;width:150px; margin:0 auto; padding-top:10px;background:none;}
 .tg_message ul .list .detail li{height:22px;line-height:22px; padding:0px;border:none;width:100px; text-align:left; float:left;text-indent:32px; margin-left:14px;}
 .tg_message ul .list .detail li a{color:#666666;}
 .tg_message ul .list .detail li a:hover{color:#f7951e}

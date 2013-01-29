@@ -13,7 +13,7 @@ $(document).ready(function(){
     <ul>
       <li class="back"><a href="#" target="_blank">低投入高回报</a></li>
       <li class="loginInfo"> <ul class="fr">
-          <li><a href="zhuce.html" target="_blank">网站说明</a></li>
+          <li><a href="/members/register" target="_blank">网站说明</a></li>
           <li class="line"></li>
           {if empty($memberInfo) || $memberInfo.Member.type == Configure::read('UserType.Personal')}
           <li><a href="/accounts/invite" target="_blank">好友推荐</a></li>
@@ -222,12 +222,11 @@ $(document).ready(function(){
         <input id="inpSearch" class="test2" type="text" name="input"/>
         <input class="image2" width="22" type="image" height="26" src="{$this->webroot}img/topsearch_04.gif" name="inpSearch" />
         <ul id="topSearchUl" class="select_list" style="display:none;">
-          <li><a href="#">任务标题</a></li>
-          <li><a href="#">任务号</a></li>
-          <li><a href="#">任务发布者</a></li>
-          <li><a href="#">稿件编号</a></li>
-          <li><a href="#">会员名</a></li>
-          <li><a href="#">人才技能</a></li>
+          <li><a href="javascript:;">客源</a></li>
+          <li><a href="javascript:;">悬赏</a></li>
+          <li><a href="javascript:;">职位</a></li>
+          <li><a href="javascript:;">兼职</a></li>
+          <li><a href="javascript:;">公司</a></li>
         </ul>
       </div>
     </div>

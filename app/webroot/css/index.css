@@ -21,7 +21,7 @@
 .login li{*margin:0 0 8px;}
 .login ul li .inpTextBox{width:140px;padding-left:22px;background:url(../img/iconLogin.png) no-repeat #FFF;_background-image:url(../img/iconLogin.gif);}
 .login ul li input.password{background-position:0 -20px;color:#333;}
-#passwordL{left:43px;top:48px;*top:51px;}
+#passwordL{left:43px;top:48px;}
 .login ul li input.yanzhengma{background-position:0 -39px;width:37px;}
 .login ul li label{line-height:20px;} 
 .login ul li label .inpRadio{margin-right:5px;*vertical-align:middle;*margin-right:0;}

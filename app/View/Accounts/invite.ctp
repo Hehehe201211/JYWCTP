@@ -2,27 +2,21 @@
 {literal}
 $(document).ready(function(){
     $(".zy_zs .zy_zszl").show();
-    
-    $(".btnCopyUrl").click(function () {
-        copyToClipboard($(".tbMyDistUrl").val());
-    });
     $(".linkRemoveItem").live("click",function(){
         if ($(this).parents(".conEmail table").find(".contacts").length>1) $(this).parent().parent().remove();
         else alert("至少保留一组");
     });
     $(".linkAddItem").click(function(){
-        $(this).parent().parent().before($(this).parents(".conEmail table").find(".contacts").eq(0).clone());
+        $(this).parent().parent().before('<tr class="contacts"><td><input type="text" class="name inpTextBox" name="names[]"/></td><td><input type="text" class="email inpTextBox" name="emails[]" ></td><td><a class="linkRemoveItem" href="javascript:void(0);"><b style="color:#f30;margin-right:2px;">x</b>删除</a></td></tr>');
     });
     $(".linkInvite").click(function(){
         var s=$(".conEmail table").find(".contacts");
         for (i=0;i<s.length;i++) {
-            if (s.eq(i).find(".name").val()!=""&&s.eq(i).find(".email").val()!="") {
-                
+            if (s.eq(i).find(".name").val()!=""&&s.eq(i).find(".email").val()!="") {                
             } else {
                 alert("被邀请人部分信息未填写完整。");
                 return;
-            }
-            
+            }            
         }
         $.ajax({
             url : '/friends/sendRecommendMail',
@@ -47,8 +41,18 @@ $(document).ready(function(){
             alert("信息为空。");
         }
     });
+	//Zero Clipboard
+	ZeroClipboard.setMoviePath($("#webroot").val()); 
+	var clip = new ZeroClipboard.Client();
+	clip.setHandCursor(true); 
+	clip.setCSSEffects(true);
+	clip.setText($(".tbMyDistUrl").val());
+	clip.glue("btnCopyUrl");
+	clip.addEventListener( "complete", function(){
+		alert("复制成功！");
+	});
 });
-{/literal}
+//{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
@@ -59,8 +63,9 @@ $(document).ready(function(){
     <div class="friInvite">
         <h3>方式一：便捷的方式，复制链接邀请QQ/MSN好友，第一时间得到响应</h3>
         <div class="con">
-            <input type="text" readonly="readonly" value="{$sns_link}" class="inpTextBox tbMyDistUrl"/>
-            <a class="inp btnCopyUrl" href="javascript:void(0)">复制链接</a>
+            <input type="text" readonly value="{$sns_link}" class="inpTextBox tbMyDistUrl"/>
+            <a class="inp btnCopyUrl" id="btnCopyUrl" href="javascript:void(0)">复制链接</a>
+            <input type="hidden" id="webroot" value="{$this->webroot|cat:'js/ZeroClipboard.swf'} "/>
         </div>
         <div class="clearfix"></div>
         <h3>方式二：直接发送邮件邀请好友</h3>
@@ -90,8 +95,7 @@ $(document).ready(function(){
 HI，我最近在聚业务（www.juyewu.com）这个网站上找到了不少客户，也参与了一些兼职工作，信息有效性高，兼职企业有认证，很不错的业务平台哦，现在注册还可以赠送50个积分。
 免费会员注册链接:
 {$sns_link}
-免费升级成功后，您也可以推荐好友参加，也有积分赠送哦。
-                    
+免费升级成功后，您也可以推荐好友参加，也有积分赠送哦。                    
                     </textarea>
                     </td>
                 </tr>
@@ -102,26 +106,5 @@ HI，我最近在聚业务（www.juyewu.com）这个网站上找到了不少客�
             </form>
         </div>
     </div>
-    <div class="clear">&nbsp;</div>       
-    <!--  
-    <div class="bottomRcd">
-      <div class="fl">
-        <h3>热门悬赏<a class="more" href="#">更多...</a></h3>
-        <ul>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-      <div class="fl fr">
-        <h3>最新客源<a class="more" href="#">更多...</a></h3>
-        <ul>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元&nbsp;厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        <li><a href="#" class="li">厦门市/装修装饰 家庭装修/聚客币：10元</a></li>
-        </ul>
-      </div>
-    </div>  
-    <div class="bottomRcdPos"></div>
-    -->
+    <div class="clear">&nbsp;</div>    
 </div>

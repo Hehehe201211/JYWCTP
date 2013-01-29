@@ -1,7 +1,6 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-
     $('#category_id').change(function(){
         $('ul.products').html('');
         if ($(this).val() != "") {
@@ -74,7 +73,96 @@ $(document).ready(function(){
             <a href="javascript:void(0)">账号管理</a>&gt;&gt;
             <a href="javascript:void(0)">完善资料</a>
         </p>
-    </div>    
+    </div> 
+	<div class="mebBaseinfo epmebBaseinfo">
+        <div class="mebBaseinfoL">
+          <table width="100%" height="100%" border="0">
+          {if $memberInfo.Member.grade == 2}
+            <tr>
+              <td width="34%" rowspan="6">
+              {if !empty($memberInfo.Attribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberInfo.Attribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$memberInfo.Attribute.thumbnail}">
+                {else}
+                    <img src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+              <img src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </td>
+              <td width="66%">会员昵称：{$memberInfo.Member.nickname}</td>
+            </tr>
+            <tr>
+              <td>公司名称：{$memberInfo.Member.company_name}</td>
+            </tr>
+            <tr>
+              <td>绑定邮箱：{$memberInfo.Member.email}</td>
+            </tr>
+            <tr>
+              <td>行业：{$this->Category->getCategoryName($memberInfo.Attribute.category_id)}</td>
+            </tr>
+            <tr>
+              <td>地址：{$memberInfo.Attribute.address}</td>
+            </tr>
+            <tr>
+              <td>账户有效期：2012-09-20&nbsp;至&nbsp;2013-09-20</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="mebInfo">
+              <span>资料完整度：</span>
+              <span class="progressBar">
+              <span style="width:100%">&nbsp;100%&nbsp;</span>
+              </span>
+              <a class="icon iconZ iconH" href="/accounts/edit" title="营业执照已认证"></a>
+              <a class="icon iconM iconH" href="/accounts/edit" title="已绑定邮箱"></a>
+              </td>
+            </tr>
+            {else}
+            <tr>
+              <td width="34%" rowspan="6"><img src="img/tx.jpg" /></td>
+              <td width="66%">会员昵称：{$memberInfo.Member.nickname}</td>
+            </tr>
+            <tr>
+              <td>公司名称：{$memberInfo.Member.company_name}<a  href="/members/upgrade">完善资料</a></td>
+            </tr>
+            <tr>
+              <td>绑定邮箱：{$memberInfo.Member.email}</td>
+            </tr>
+            <tr>
+              <td>行业：<a  href="/members/upgrade">完善资料</a></td>
+            </tr>
+            <tr>
+              <td>地址：<a  href="/members/upgrade">完善资料</a></td>
+            </tr>
+            <tr>
+              <td>账户有效期：2012-09-20&nbsp;至&nbsp;2013-09-20</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="mebInfo">
+              <span>资料完整度：</span>
+              <span class="progressBar">
+              <span style="width:30%">&nbsp;100%&nbsp;</span>
+              </span>
+              <a href="/accounts/edit">完善资料</a>
+              <a class="icon iconZ iconH" href="/accounts/edit" title="营业执照已认证"></a>
+              <a class="icon iconM iconH" href="/members/upgrade" title="已绑定邮箱"></a>
+              </td>
+            </tr>
+            {/if}
+          </table>
+        </div>
+        <div class="mebBaseinfoR">
+          <dl>
+            <dd>已发布岗位：<a href="/fulltimes/listview">0</a>个全职&nbsp;&nbsp;<a href="/parttimes/listview?type=send">0</a>个兼职</dd>
+            <dd>已收到简历到：<a href="/auditions/listview?type=receive">0</a>封</dd>
+            <dd>已收到合作信息：<a href="/cooperations/listview/?type=receiver">0</a>条</dd>
+            <dd>合作中的信息：<a href="/cooperations/waitlist/?type=receiver">0</a>条</dd>            
+            <dd>待付款的信息：<a href="/cooperations/waitlist/?type=receiver">0</a>条</dd>
+            <dd>留言：<a href="/accounts/sms">0</a>条</dd>
+          </dl>
+        </div>
+      </div>  
 <ul class="ulFormStep">
       <li>1.完善资料</li>
       <li>2.信息确认</li>

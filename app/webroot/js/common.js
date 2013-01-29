@@ -5,6 +5,11 @@
 	$("input:text,input:password").addClass("inpTextBox");
 	$("input:file").addClass("inpFile");
 	
+	$("body").css("min-height",$(window).height()+1);
+	$(window).resize(function(){
+		$("body").css("min-height",$(window).height()+1);
+	});
+	
 	var tableTrH=".posInfo tbody tr:odd,.tableJobInfo tbody tr:odd";
 	$(tableTrH).addClass("even");
 	var tClass=window.setInterval(function(){
@@ -405,39 +410,6 @@ function bgKuang(divS,btnC,divOffset){
 			if ($(window).scrollTop()>wST) $("html,body").animate({scrollTop:wST},"normal");
 		}
 	});
-}
-//复制到剪贴板
-function copyToClipboard(txt,selector) {
-	if (window.clipboardData) {
-		window.clipboardData.clearData();
-		window.clipboardData.setData("text", txt);
-	} else if (navigator.userAgent.indexOf("Opera") != -1) {
-		window.location = txt;
-	}
-	else if (window.netscape) {
-		try {
-			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");$(selector).select();
-		}
-		catch (e) {
-			alert("复制链接操作被浏览器拒绝！\n请使用鼠标或键盘复制。");
-			return;
-		}
-		var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
-		if (!clip) return;
-		var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
-		if (!trans) return;
-		trans.addDataFlavor('text/unicode');
-		var str = new Object();
-		var len = new Object();
-		var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-		var copytext = txt;
-		str.data = copytext;
-		trans.setTransferData("text/unicode", str, copytext.length * 2);
-		var clipid = Components.interfaces.nsIClipboard;
-		if (!clip) return false;
-		clip.setData(trans, null, clipid.kGlobalClipboard);
-		alert("复制成功")
-	}
 }
 
 //输入字符验证

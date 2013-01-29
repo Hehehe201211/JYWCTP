@@ -4,7 +4,7 @@
     </div>
     <div class="biaotit">
     {if count($products) < 5}
-    <a href="/services/editProduct" target="_blank" class="mebgszyT">新增产品</a>产品图片
+    <a href="/services/editProduct" class="mebgszyT">新增产品</a>产品图片（产品数量不超过5个）
     {/if}
     </div>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
@@ -19,20 +19,20 @@
       </thead>
       {foreach $products as $product}
       <tr class="con_2_tr">
-        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}" style="font-weight: bold;">{$product.Product.title}</a></td>
-        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}" style="font-weight: bold;">{$product.Product.name}</a></td>
-        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}" style="font-weight: bold;">{$product.Product.clicked}次</a></td>
-        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}" style="font-weight: bold;">{$product.Product.created|date_format:"%Y-%m-%d"}</a></td>
+        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}">{$product.Product.title}</a></td>
+        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}">{$product.Product.name}</a></td>
+        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}">{$product.Product.clicked}次</a></td>
+        <td><a target="_blank" href="/services/editProduct?id={$product.Product.id}">{$product.Product.created|date_format:"%Y-%m-%d"}</a></td>
         <td class="con_2_xq_tofu xiushan_anniu">
-            <a target="_blank" href="/services/editProduct?id={$product.Product.id}" style="font-weight: normal;">编辑</a>
-            <a href="javascript:void(0)" style="font-weight: normal;">删除</a>
+            <a target="_blank" href="/services/editProduct?id={$product.Product.id}">编辑</a>
+            <a href="javascript:void(0)">删除</a>
         </td>
       </tr> 
       {/foreach}
     </table>
     <div class="biaotit">
     {if count($services) < 5}
-    <a href="/services/editDocument" target="_blank" class="mebgszyT">新增资料</a>文档资料
+    <a href="/services/editDocument" class="mebgszyT">新增资料</a>文档资料（文档数量不超过5个）
     {/if}
     </div>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
@@ -47,13 +47,13 @@
       </thead>
       {foreach $services as $service}
       <tr class="con_2_tr">
-        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}" style="font-weight: bold;">{$service.Service.title}</a></td>
-        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}" style="font-weight: bold;">{$service.Service.size}k</a></td>
-        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}" style="font-weight: bold;">{$service.Service.download_cnt}次</a></td>
-        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}" style="font-weight: bold;">{$service.Service.created|date_format:"%Y-%m-%d"}</a></td>
+        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}">{$service.Service.title}</a></td>
+        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}">{$service.Service.size}k</a></td>
+        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}">{$service.Service.download_cnt}次</a></td>
+        <td><a target="_blank" href="/services/editDocument?id={$service.Service.id}">{$service.Service.created|date_format:"%Y-%m-%d"}</a></td>
         <td class="con_2_xq_tofu xiushan_anniu">
-        <a target="_blank" href="/services/editDocument?id={$service.Service.id}" style="font-weight: normal;">编辑</a>
-        <a href="javascript:void(0)" style="font-weight: normal;">删除</a>
+        <a target="_blank" href="/services/editDocument?id={$service.Service.id}">编辑</a>
+        <a href="javascript:void(0)">删除</a>
         </td>
       </tr>
       {/foreach}

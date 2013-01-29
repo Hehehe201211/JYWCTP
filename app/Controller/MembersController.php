@@ -229,25 +229,40 @@ class MembersController extends AppController
               $data['company_name'] = $this->request->data['company_name'];
             }
             if ($this->TmpMember->save($data)) {
-                $body = "
-                亲爱的" . $this->request->data['nickname'] .":
-                
-                聚业务真诚的欢迎您！
-                这封邮件是为了核实会员身份的合法性，
-                请你通过下面的连接验证你的身份。
-                http://dev.jukeyuan.com/members/complete/?id=" . $this->TmpMember->getInsertID() . "&ps=" . $data['password'] . "&t=" . $data['type'] .
-                "
-                这封邮件不需要你回复。
-                如果你有什么意见和建议请你在会员主页的
-                【我要提建议】页面和我联系。我们会非常
-                珍惜用户提的每一个宝贵意见和建议。
-                        ";
-        
-                $email = new CakeEmail('default');
-                $email->from(array('norepeat@jukeyuan.com' => '聚业务'));
-                $email->to($this->request->data['email']);
-                $email->subject('会员身份认证');
-                $email->send($body);
+//                $body = "
+//                亲爱的" . $this->request->data['nickname'] .":
+//                
+//                聚业务真诚的欢迎您！
+//                这封邮件是为了核实会员身份的合法性，
+//                请你通过下面的连接验证你的身份。
+//                http://dev.jukeyuan.com/members/complete/?id=" . $this->TmpMember->getInsertID() . "&ps=" . $data['password'] . "&t=" . $data['type'] .
+//                "
+//                这封邮件不需要你回复。
+//                如果你有什么意见和建议请你在会员主页的
+//                【我要提建议】页面和我联系。我们会非常
+//                珍惜用户提的每一个宝贵意见和建议。
+//                        ";
+//        
+//                $email = new CakeEmail('default');
+//                $email->from(array('norepeat@jukeyuan.com' => '聚业务'));
+//                $email->to($this->request->data['email']);
+//                $email->subject('会员身份认证');
+//                $email->send($body);
+                $checkLink = "http://" . $_SERVER['SERVER_NAME'] . '/members/complete/?id=' . $this->TmpMember->getInsertID() . "&ps=" . $data['password'] . "&t=" . $data['type'];
+                $email = new CakeEmail();
+                $params = array(
+                    'domain' => 'http://' . $_SERVER['SERVER_NAME'], 
+                    'name' => $this->request->data['nickname'],
+                    'password'  => $this->request->data['password'],
+                    'checkLink' => $checkLink
+                );
+                $email->template('register-check', 'register')
+                ->viewVars($params)
+                ->emailFormat('html')
+                ->to($this->request->data['email'])
+                ->from(array('norepeat@jukeyuan.com' => '聚业务'))
+                ->subject('会员身份认证')
+                ->send();
                 $error = false;
             } else {
                 $error = true;
@@ -580,7 +595,7 @@ class MembersController extends AppController
         if (strtolower($this->request->data['checkNum']) == strtolower($this->Session->read("checkNum"))) {
             unset($this->request->data['checkNum']);
             $this->request->data['password'] = md5($this->request->data['password']);
-            $memberInfo = $this->Member->getMemberInfo($this->request->data);
+            $memberInfo = $this->Member->getMemberInfo($this->request->data, $this->request->data['type']);
             if (empty($memberInfo)) {
                 echo "用户名或密码有误，请重新输入！";
             } else {

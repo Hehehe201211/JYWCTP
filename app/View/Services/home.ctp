@@ -29,27 +29,19 @@ $(document).ready(function(){
             span.hide();
             $("#dtCheckNum").show();
             $("html,body").animate({scrollTop:0},"normal");
-        } else {            
+        } else {    
+		$(".sjle").find(".errorMsg").remove();        
         $.each(checkTarget, function(target){            
             if($('#' + this).val() == "") {
-                if($('#' + this).parents(".sjle dl dt").find('.errorMsg').length == 0) {
-                    $('#' + this).parents(".sjle dl dt").append(errorMsg);
-                }
+                $('#' + this).parents(".sjle dl dt").append(errorMsg);
                 error=1;
-            } else {
-                $('#' + this).parents(".sjle dl dt").find('.errorMsg').remove();
-            }
+            } 
         });        
-        
         $('.contact_content').each(function(){
             if ($(this).val() == "") {
-                if($(this).parent().find('.errorMsg').length == 0) {
-                    $(this).parent().append(errorMsg);
-                }
+                $(this).parent().append(errorMsg);
                 error=1;
-            } else {
-                $(this).parent().find('.errorMsg').remove();
-            }
+            } 
         });
             
         if (!error) {
@@ -76,6 +68,7 @@ $(document).ready(function(){
     <div class="biaotit"><a href="/homes/index/{$homepage.Homepage.domain}" target="_blank" class="mebgszyT">查看公司首页</a>公司主页设置</div>
     <div class="sjle"> 
     <form id="servicesForm" method="post" action="/services/saveHome" enctype="multipart/form-data">
+    {*var_dump($homepage.Homepage)*}
     {if !empty($homepage)}
         <dl>
           <dt>
@@ -106,7 +99,7 @@ $(document).ready(function(){
             <input type="text" name="post" id="post" value="{$homepage.Homepage.post}" class="post" />
             <span class="spanValue">{$homepage.Homepage.post}</span>
           </dt>
-          {$contact_methods = json_decode(trim($homepage.Homepage.contact_method, "'"), true)}
+          {$contact_methods = json_decode($homepage.Homepage.contact_method, true)}
           {foreach $contact_methods as $method}
           <dt>
             <label><font class="facexh">*</font>联系方式：</label>
@@ -142,7 +135,7 @@ $(document).ready(function(){
           </dt>          
           <dt>
             <label><font class="facexh">*</font>公司类型：</label>
-            <div class="select150">
+            <div>
               <select name="company_type" id="company_type">
                 <option value="">请选择</option>
                 <option value="民营/私营公司" {if $homepage.Homepage.company_type == "民营/私营公司"}selected="selected" {/if}>民营/私营公司</option>
@@ -163,7 +156,7 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>公司规模：</label>
-            <div class="area1">
+            <div>
               <select name="scale" id="scale">
                 <option value="">请选择</option>
                 <option value="1" {if $homepage.Homepage.scale == 1}selected="selected"{$scale="10人以下"}{/if}>10人以下</option>
@@ -181,23 +174,16 @@ $(document).ready(function(){
             <span class="spanValue">{$homepage.Homepage.url}</span>
           </dt>
           <dt>
-            <label>公司首页图片：</label>
+            <label>公司简介图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片文件大小不超过300K。）</p>
+            <input type="file" name="thumbnail"><p class="advise">（图片文件大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
           </dt>
-		 <!-- <dt>
-            <label>企业招聘图片（大）：</label>
-            <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
-            </div>
-            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
-          </dt>-->
 		  <dt>
             <label>企业招聘图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail_job"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
+            <input type="file" name="thumbnail_job"><p class="advise">（图片分辨率为159x60px，大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail_job)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail_job}" />{/if}</span>
           </dt>
@@ -230,6 +216,7 @@ $(document).ready(function(){
           <dt>
             <label>公司名称：</label>
             <input type="text" name="company_name" />
+
             <span class="spanValue">无</span>
           </dt>
           <dt>
@@ -275,7 +262,7 @@ $(document).ready(function(){
           </dt>          
           <dt>
             <label><font class="facexh">*</font>公司类型：</label>
-            <div class="select150">
+            <div>
               <select name="company_type" id="company_type">
                 <option value="">请选择</option>
                 <option value="民营/私营公司">民营/私营公司</option>
@@ -296,7 +283,7 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>公司规模：</label>
-            <div class="area1">
+            <div>
               <select name="scale" id="scale">
                 <option value="">请选择</option>
                 <option value="1">10人以下</option>
@@ -314,25 +301,18 @@ $(document).ready(function(){
             <span class="spanValue">无</span>
           </dt>
           <dt>
-            <label>公司首页图片：</label>
+            <label>公司简介图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片文件大小不超过300K。）</p>
+            <input type="file" name="thumbnail"><p class="advise">（图片文件大小不超过300K。）</p>
             </div>
             <span class="spanValue spanValueI">无</span>
-          </dt>
-		 <!-- <dt>
-            <label>企业招聘图片（大）：</label>
-            <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为326x60px，大小不超过300K。）</p>
-            </div>
-            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
-          </dt>-->
+          </dt>		 
 		  <dt>
             <label>企业招聘图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="imgfilesize">（图片分辨率为159x60px，大小不超过300K。）</p>
+            <input type="file" name="thumbnail_job"><p class="advise">（图片分辨率为159x60px，大小不超过300K。）</p>
             </div>
-            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}</span>
+            <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail_job)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail_job}" />{/if}</span>
           </dt>
           <dt>
             <label><font class="facexh">*</font>公司简介：</label>

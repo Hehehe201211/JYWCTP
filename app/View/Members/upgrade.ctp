@@ -2,6 +2,7 @@
 {literal}
 $(document).ready(function(){	
      datepIniChange("#birthday","birth");
+	 $("#pay_password,#pay_account").val("");
 	//提示信息
 	$(".sjle input").focus(function(){
 		var id=$(this).attr("id");

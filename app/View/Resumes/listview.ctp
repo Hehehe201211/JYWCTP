@@ -331,11 +331,11 @@ $(document).ready(function(){
             </dt>
             <dt>
               <label><font class="facexh">*</font>联系电话：</label>
-              <input type="text" name="telephone" id="telephone" value="{$resumeBase.ResumeBase.telephone}"/>
+              <input type="text" name="telephone" id="telephone" value="{$resumeBase.ResumeBase.telephone}" onkeyup="phoneNum(this)" onpaste="phoneNum(this)"/>
             </dt>
             <dt>
               <label><font class="facexh">*</font>E-mail：</label>
-              <input type="text" name="email" id="email" value="{$resumeBase.ResumeBase.email}"/>
+              <input type="text" name="email" id="email" value="{$resumeBase.ResumeBase.email}" onkeyup="Emailstr(this)" onpaste="Emailstr(this)"/>
             </dt>
             <dt>
               <label><font class="facexh">*</font>联系地址：</label>

@@ -7,8 +7,8 @@ $(document).ready(function(){
             alert("请输入预提现金额。");
 		} else if (price<50) {
 			alert("请输入不小于50的数值。");
-        } else if ($("#price").val()>500) {
-            alert("请输入不超过500的数值。");
+        } else if ($("#price").val()>$("#balance").val()) {
+            alert("请输入不超过业务币余额的数值。");
 		} else if ($("#pay_accountN").val()=="") {
             alert("请输入与支付宝账号对应的真实姓名。");
         } else {
@@ -37,7 +37,7 @@ $(document).ready(function(){
 	});
 	$("#price").focus(function(){
 		$(this).after($(".errorMsg"));
-		$(".errorMsg").text("50元起提，提现金额为整数，不超过500元。").width(234);
+		$(".errorMsg").text("50元起提，提现金额为整数，不超过业务币余额。").width(264);
 	});
 });
 {/literal}
@@ -55,7 +55,8 @@ $(document).ready(function(){
         <ul>
             <li>
                 <label><font class="facexh">*</font>我的账户余额：</label>
-                <span class="red14Bold">￥{$memberInfo.Attribute.virtual_coin}元</span>  
+                <span class="red14Bold">￥{$memberInfo.Attribute.virtual_coin}元</span>
+				<input type="hidden" id="balance" value="{$memberInfo.Attribute.virtual_coin}"/>
             </li>
             <li>
                 <label><font class="facexh">*</font>核对您的支付宝账号：</label>

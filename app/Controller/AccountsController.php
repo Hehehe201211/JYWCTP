@@ -217,6 +217,8 @@ class AccountsController extends AppController
         $this->set('title_for_layout', "好友邀请");
         $sns_link = "http://" . $_SERVER['SERVER_NAME'] . "/members/register?mid=" . $this->_memberInfo['Member']['id'] . "&key=" . md5($this->_memberInfo['Member']['id']);
         $this->set('sns_link', $sns_link);
+		$js = array('zeroclipboard');
+        $this->_appendJs($js);
     }
     /**
      * 

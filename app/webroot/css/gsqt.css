@@ -13,7 +13,7 @@ body{background:#50574f;}
 .pcontent h2{font-size:18px;font-weight:bold;text-align:center;padding:12px 12px 0;text-shadow:2px 2px 2px #999;}
 .pcontent h3{text-align:center;font-size:12px;font-weight:bold;margin:5px 0 10px;}
 .pcontent .proInfo p{text-indent:1em;margin:6px 0;}
-.pcontent .img{margin:3px auto;display:block;max-width:650px;max-height:400px;min-height:300px;_width:533px;_height:400px;}
+.pcontent .img{margin:3px auto;display:block;max-width:550px;max-height:400px;min-height:300px;_width:533px;_height:400px;}
 .zhucrig{text-align:right;padding:0 12px;width:976px;}
 .zhucrig a{color:#ccc;}
 .zhucrig a:hover{color:#FFF;}
@@ -110,10 +110,6 @@ body{background:#50574f;}
 .djbuz .getCheckNum img{height:20px;vertical-align:middle;}
 .imgYanzhengma{height:22px;margin:0 8px;}
 
-.footer{background:#a8580f;height:150px;}
-.footer .left{margin:20px 0 0 113px;width:387px;float:left;color:#fff;}
-.footer a{text-decoration:underline;font-size:14px;color:#f0be5d;}
+.footer{background:#a8580f;height:90px;padding:20px 0;color:#DDD;}
+.footer a{text-decoration:none;font-size:12px;color:#f0be5d;}
 .footer a:hover{color:#FF0;}
-.footer p{text-align:left;font-size:14px;}
-.footer span{color:#CCC;font-size:14px;}
-.footer .right{margin:20px 0 0;}

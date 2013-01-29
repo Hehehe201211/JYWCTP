@@ -9,10 +9,11 @@ body{background:url(../img/zc_bj.jpg) top repeat-x #f5f5f5;}
 .inp:hover{background-position:-103px -81px;}
 
 .friInvite h3{font:bold 14px/2em "微软雅黑";color:#F50;margin:3px;}
-.friInvite .inpTextBox{font-size:14px;padding:6px 3px;float:left;width:390px;margin:3px 8px 12px 20px;}
+.friInvite .inpTextBox{font-size:14px;padding:4px 3px;float:left;width:390px;margin:3px 8px 12px 20px;}
 .friInvite .con .inpTextBox{color:#666;}
-.friInvite .inp{margin:5px 8px 0 0;width:81px;height:28px;line-height:28px;color:#FFF;background-position:-2px -208px;}
+.friInvite .inp{margin:3px 8px 0 0;width:81px;height:28px;line-height:28px;color:#FFF;background-position:-2px -208px;}
 .friInvite .inp:hover{background-position:-87px -208px;}
+.friInvite .inp.hover{background-position:-87px -208px;}
 .friInvite .clearfix{border-bottom:1px #06e dashed;margin:60px 0 10px;}
 .friInvite .conEmail{margin-left:20px;}
 .friInvite .conEmail tr{background:none;}
@@ -420,6 +421,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl dt label{float:left;line-height:24px;padding: 0 5px 0 0;text-align:right;width:125px;}
 .sjle dl dt select{width:111px;padding:2px 0;float:left;margin-right:8px;}
 .sjle dl dt input{float:left;height: 20px;line-height: 20px;padding: 0 5px;}
+.sjle dl dt .advise{clear:both;}
 .sjle dl dt .inpFile{padding:6px 3px 0\9;margin-right:12px\9;}
 .sjle dl dt .addCon,.sjle dl dt .deleCon{margin-left:12px;width:45px\9;height:22px\9;line-height:20px\9;}
 .sjle dl dt .addConL{margin-left:100px;position:absolute;}
@@ -458,7 +460,6 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle dl dt ul.industry li{width:98px;}
 .sjle dl dt ul.industry li input{width:auto;}
 .sjle dl dt ul.industry li label{width:60px;padding:0;text-align:left;}
-.sjle dl dt .select150 select{margin:0;}
 .sjle dl.dlPartTime{border:1px #666 dashed;padding-top:8px;margin-bottom:8px;width:570px;overflow:hidden;background:#FFF;}
 .sjle dl dt .validity{width:450px;float:left;}
 .sjle dl dt .validity li{width:97px;}

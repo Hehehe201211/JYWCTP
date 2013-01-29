@@ -10,12 +10,12 @@ class SiteAnalyzesComponent extends Component
     var $name = "SiteAnalyzes";
     public function siteAnalyzeInfo()
     {
-        $tomorrow   = date('Y-m-d', strtotime("+1 day"));
-        $today      = date('Y-m-d');
-        $yesterday  = date('Y-m-d', strtotime("-1 day"));
-        $lastWeek   = date('Y-m-d', strtotime("-1 week"));
-        $lastMonth  = date('Y-m-d', strtotime("-1 month"));
-        $mSiteAnalyze = ClassRegistry::init('SiteAnalyze');
+        $tomorrow       = date('Y-m-d', strtotime("+1 day"));
+        $today          = date('Y-m-d');
+        $yesterday      = date('Y-m-d', strtotime("-1 day"));
+        $currentWeek    = date("Y-m-d",mktime(0, 0 , 0,date("m"),date("d")-date("w"),date("Y")));
+        $currentMonth   = date('Y-m') . '-01';
+        $mSiteAnalyze   = ClassRegistry::init('SiteAnalyze');
         $mSiteAnalyze->virtualFields = array(
             'personSum' => 'SUM(person)',
             'companySum' => 'SUM(company)',
@@ -26,15 +26,14 @@ class SiteAnalyzesComponent extends Component
             'parttimeSum' => 'SUM(parttime)'
         );
         $yesterdayConditions = array(
-            'target_date >= ' => $yesterday,
-            'target_date <= ' => $today
+            'target_date' => $yesterday,
         );
         $lastWeekConditions = array(
-            'target_date >= ' => $lastWeek,
-            'target_date <= ' => $today
+            'target_date >= ' => $currentWeek,
+            'target_date < ' => $today
         );
         $lastMonthConditions = array(
-            'target_date >= ' => $lastMonth,
+            'target_date >= ' => $currentMonth,
             'target_date <= ' => $today
         );
         $allConditions = array(
@@ -46,7 +45,7 @@ class SiteAnalyzesComponent extends Component
         $allInfo        = $mSiteAnalyze->find('first', array('conditions' => $allConditions));
         return array(
             'yester'    => $yesterdayInfo,
-            'lasWeek'   => $lastWeekInfo,
+            'lastWeek'   => $lastWeekInfo,
             'lastMonth' => $lastMonthInfo,
             'all'       => $allInfo
         );

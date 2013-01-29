@@ -113,12 +113,10 @@
         <div class="zylb"> <span class="spanSearchWrap">
           <div class="sltSearchTil"> <a class="x_selected" href="#" hidefocus="true"><span class="mbSearchR">请选择类别</span></a> </div>
           <ul class="sltSearch">
-            <li><a href="/informations/issue/has">已发布客源</a></li>
-            <li><a href="/informations/received/has">已收到客源</a></li>
-            <li><a href="informations/issue/need">已发布悬赏</a></li>
-            <li><a href="/informations/received/need">已收到悬赏</a></li>
-            <li><a href="#">站内信</a></li>
-            <li><a href="#">全部</a></li>
+            <li><a href="#">已发布职位</a></li>
+            <li><a href="#">已发布兼职</a></li>
+            <li><a href="#">已收到合作</a></li>
+            <li><a href="#">已收到简历</a></li>
           </ul>
           </span>
           <input type="text" class="txtSearch" />
