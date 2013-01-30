@@ -13,7 +13,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wwtj.html">兼职管理</a>&gt;&gt;<a href="wdjj.html">我的简历</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">我的简历</a>
+      </p>
     </div>
 <ul class="ulFormStep ulFormStep2">
       <li>1.填写简历信息</li>
@@ -39,7 +43,20 @@ $(document).ready(function(){
             {else}
                 {$provincial_local} {$city_local}
             {/if}</td>
-              <td width="16%" rowspan="2"><div align="center"><img width="112" height="124" alt="portrait" src="{$this->webroot}img/tx.jpg"></div></td>
+              <td width="16%" rowspan="2">
+              <div align="center">
+              {if !empty($memberInfo.Attribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberInfo.Attribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img width="112" height="124" src="{$this->webroot}{$memberInfo.Attribute.thumbnail}">
+                {else}
+                    <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+                <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </div>
+              </td>
             </tr>
             <tr>
               <td class="tlt tltL">国籍：</td>

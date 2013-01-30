@@ -9,7 +9,7 @@ class ResumesController extends AppController
 {
     var $layout = 'members';
     var $helpers = array('Js', 'City', 'Category');
-    var $uses = array('ResumeBase', 'Resume', 'ResumeWork', 'ResumeEducation', 'Fulltime');
+    var $uses = array('ResumeBase', 'Resume', 'ResumeWork', 'ResumeEducation', 'Fulltime', 'MemberAttribute');
     var $components = array('RequestHandler', 'Resumes', 'Unit', 'Recommend');
     var $paginate;
     public function create()
@@ -76,10 +76,10 @@ class ResumesController extends AppController
     {
         if (!$this->RequestHandler->isAjax()) {
             $this->set('title_for_layout', "我的简历");
-	        $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
-	        $this->_getResumeBase($conditions);
-	        $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
-	        $this->Resumes->fulltimeList($conditions);
+            $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
+            $this->_getResumeBase($conditions);
+            $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
+            $this->Resumes->fulltimeList($conditions);
         } else {
             $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
             $this->Resumes->fulltimeList($conditions);
@@ -95,16 +95,17 @@ class ResumesController extends AppController
         );
         if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
             $conditions['members_id'] = $this->_memberInfo['Member']['id'];
-	        $resume = $this->Resume->find('first', array('conditions' => $conditions));
-	        if (!empty($resume)) {
-	            $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
-	            $this->_getResumeBase($conditions);
-	            $conditions = array(
-	                'resumes_id' => $this->request->query['id']
-	            );
-	            $this->_getEducationInfo($conditions);
-	            $this->_getWorkInfo($conditions);
-	        }
+            $resume = $this->Resume->find('first', array('conditions' => $conditions));
+            if (!empty($resume)) {
+                $conditions = array('members_id' => $this->_memberInfo['Member']['id']);
+                $this->_getResumeBase($conditions);
+                $conditions = array(
+                    'resumes_id' => $this->request->query['id']
+                );
+                $this->_getEducationInfo($conditions);
+                $this->_getWorkInfo($conditions);
+                $this->set('thumbnail', $this->_memberInfo['Attribute']['thumbnail']);
+            }
         } else {
             $resume = $this->Resume->find('first', array('conditions' => $conditions));
             if (!empty($resume)) {
@@ -115,7 +116,8 @@ class ResumesController extends AppController
                 );
                 $this->_getEducationInfo($conditions);
                 $this->_getWorkInfo($conditions);
-                
+                $author = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $resume['Resume']['members_id']), 'fields' => array('thumbnail')));
+                $this->set('thumbnail', $author['MemberAttribute']['thumbnail']);
                 //职位信息
                 $fulltimes = $this->Fulltime->find('all', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id']), 'fields' => array('id', 'post')));
                 $this->set('fulltimes', $fulltimes);
@@ -153,40 +155,40 @@ class ResumesController extends AppController
     {
         if (!$this->RequestHandler->isAjax()) {
             $this->set('title_for_layout', "简历检索");
-	        $js = array('retrieval');
-	        $this->_appendJs($js);
-	        $this->Resumes->search();
+            $js = array('retrieval');
+            $this->_appendJs($js);
+            $this->Resumes->search();
         } else {
             //检索条件
             $conditions = array();
-	        if (isset($this->request->data['citys'])) {
-	            $or = array();
-	            foreach ($this->request->data['citys'] as $city) {
-	                $or[] = array('Resume.city LIKE' => "%$city%");
-	            }
-	            $conditions['OR'] = $or;
-	        }
-	        if (isset($this->request->data['categorys'])) {
-	            $or = array();
-	           foreach ($this->request->data['categorys'] as $category) {
+            if (isset($this->request->data['citys'])) {
+                $or = array();
+                foreach ($this->request->data['citys'] as $city) {
+                    $or[] = array('Resume.city LIKE' => "%$city%");
+                }
+                $conditions['OR'] = $or;
+            }
+            if (isset($this->request->data['categorys'])) {
+                $or = array();
+               foreach ($this->request->data['categorys'] as $category) {
                     $or[] = array('Resume.category LIKE' => "%$category%");
                 }
                 $conditions['AND'] = array(array('OR' => $or));
-	        }
+            }
             if (isset($this->request->data['sex']) && $this->request->data['sex'] !== "") {
                 $conditions['Base.sex'] = $this->request->data['sex'];
             }
             if (isset($this->request->data['nature']) && !empty($this->request->data['nature'])) {
                 $conditions['Resume.nature'] = $this->request->data['nature'];
             }
-	        if (isset($this->request->data['modified'])) {
-	            $limitTime = $this->request->data['modified'];
-	            if ($limitTime === '0') {
-	                $conditions['DATE_FORMAT(Resume.modified, "%Y-%m-%d")'] = date('Y-m-d', time());
-	            } elseif ($limitTime !== "") {
-	                $conditions['DATE_FORMAT(Resume.modified, "%Y-%m-%d") > '] = date('Y-m-d', strtotime("-$limitTime day"));
-	            }
-	        }
+            if (isset($this->request->data['modified'])) {
+                $limitTime = $this->request->data['modified'];
+                if ($limitTime === '0') {
+                    $conditions['DATE_FORMAT(Resume.modified, "%Y-%m-%d")'] = date('Y-m-d', time());
+                } elseif ($limitTime !== "") {
+                    $conditions['DATE_FORMAT(Resume.modified, "%Y-%m-%d") > '] = date('Y-m-d', strtotime("-$limitTime day"));
+                }
+            }
             if (isset($this->request->data['educated'])) {
                 $conditions['Education.educated >='] = $this->request->data['educated'];
             }

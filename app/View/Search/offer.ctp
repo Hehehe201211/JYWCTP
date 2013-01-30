@@ -1,3 +1,20 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+var ulCHeight=$(".ulCompany1").height();
+	$(".switchBox").click(function(){
+		if (NaV=="msie6"||NaV=="msie7") {			
+			$(".ulCompany1").height(ulCHeight);
+			if ($(".switchBox .divTable:visible").length==0) {
+				$(".ulCompany1 li").show();				
+			} else {
+				$(".ulCompany1 li").hide();				
+			}
+		}
+	});
+});
+{/literal}
+</script>
 <div class="main">
   <div id="loginWarning">
     <div class="area">
@@ -55,13 +72,7 @@
 	      {$path = Configure::read('Data.path')|cat:$homepage.Homepage.thumbnail_job}
 	      	{if !empty($homepage.Homepage.thumbnail_job) && file_exists($path)}
 	      	<img src="{$this->webroot}img/ads/1350529873.jpg" />
-	      	{else}
-            <table width="100%" height="100%" border="0">
-  <tr>
-    <td>{$homepage.Homepage.company_name}</td>
-  </tr>
-</table>
-	      	
+	      	{else}<span class="middle"><span>{$homepage.Homepage.company_name}</span></span>	      	
 	      	{/if}
 	      </a>
       </li>

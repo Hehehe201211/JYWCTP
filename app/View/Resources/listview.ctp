@@ -8,14 +8,14 @@
         <div class="arrow"></div>
     </div>
   <div class="conResource">
-    <div class="crumbsNav"><a href="plt-zytd.html">资源天地</a>&nbsp;&gt;&nbsp;<a href="plt-zytdI-list.html">客户管理</a></div>
+    <div class="crumbsNav"><a href="plt-zytd.html">资源天地</a>&nbsp;&gt;&nbsp;（上传人的昵称）</div>
     <div id="documents">
 {$form = ['isForm' => true, 'inline' => true]}
 {$options = ['update' => '#documents', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}  
     <div class="divResource" style="float:none;width:auto;">
-      <h2>客户管理</h2>
+      <h2><div class="catalog"><a href="javascript:;">全部</a><a href="javascript:;">入门成长</a><a href="javascript:;">培训课件</a><a href="javascript:;">客户管理</a><a href="javascript:;">方案模板</a><a href="javascript:;">总结计划</a><a href="javascript:;">案例分析</a></div>（上传人的昵称）- 目录</h2>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
       	{foreach $documents as $key => $document}
 	        {if $key%2 == 0}
@@ -35,7 +35,7 @@
         {/if}
       </table>      
     </div>
-    	<div class="fanye fanyePN">
+    	<div class="fanyea">
 	    	<form id="searchOpt">
 	        {if $paginatorParams['prevPage']}
 	            <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>

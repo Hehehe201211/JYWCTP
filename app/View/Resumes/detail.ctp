@@ -1,70 +1,74 @@
 <script>
 //{literal}
 $(document).ready(function(){
-	$("body").append($("#jsxxxq"));	
-	$("body").append($("#jsxxxqE"));	
-	$("body").append($("#jsxxxqW"));	
-	$("body").append($("#jsxxxqJ"));
-	
-	datepIniChange("#birthday","birth");
-	datepIniChange("#eduBegin","EPbirth");
-	datepIniChange("#eduEnd","EPbirth");	
-	datepIniChange("#workBegin","EPbirth");
-	datepIniChange("#workEnd","EPbirth");	
-	datepIniChange("#workTime","EPbirth");
-	
-	$(".resumeEdit").click(function(){
-		bgKuang("#jsxxxq",".jsxxxqB .closeDiv");			
+    $("body").append($("#jsxxxq"));    
+    $("body").append($("#jsxxxqE"));    
+    $("body").append($("#jsxxxqW"));    
+    $("body").append($("#jsxxxqJ"));
+    
+    datepIniChange("#birthday","birth");
+    datepIniChange("#eduBegin","EPbirth");
+    datepIniChange("#eduEnd","EPbirth");    
+    datepIniChange("#workBegin","EPbirth");
+    datepIniChange("#workEnd","EPbirth");    
+    datepIniChange("#workTime","EPbirth");
+    
+    $(".resumeEdit").click(function(){
+        bgKuang("#jsxxxq",".jsxxxqB .closeDiv");            
     });
-	$(".eduEdit").click(function(){
-		bgKuang("#jsxxxqE",".jsxxxqB .closeDiv");			
+    $(".eduEdit").click(function(){
+        bgKuang("#jsxxxqE",".jsxxxqB .closeDiv");            
     });
-	$(".workEdit").click(function(){
-		bgKuang("#jsxxxqW",".jsxxxqB .closeDiv");			
+    $(".workEdit").click(function(){
+        bgKuang("#jsxxxqW",".jsxxxqB .closeDiv");            
     });
-	$(".jobEdit").click(function(){
-		bgKuang("#jsxxxqJ",".jsxxxqB .closeDiv");			
+    $(".jobEdit").click(function(){
+        bgKuang("#jsxxxqJ",".jsxxxqB .closeDiv");            
     });
-		
-	$("button.addContact").live("click",function(e){
-		e.preventDefault();
-		$(this).parent().after($(this).parent().clone());
-		$(this).parent().next().children(".inpTextBox").val("");
-	});
-	$("button.deleContact").live("click",function(e){
-		e.preventDefault();
-		if ($("button.deleContact").length>1) $(this).parent().remove(); 
-	});
-	
-	$(".divExpect .addOpts").click(function(){
-	  var selOpts=$(this).parent().parent().find(".selOpts option:selected");
-	  var seledOpts=$(this).parent().parent().find(".seledOpts");	  
-	  for (i=0;i<selOpts.length;i++) {
-		  if (seledOpts.find("option").length==0)  seledOpts.append(selOpts.eq(i).clone());
-		  else {
-			  for (j=0;j<seledOpts.find("option").length;j++) {
-				  if (selOpts.eq(i).val()==seledOpts.find("option").eq(j).val()) break;
-				  else if (j==(seledOpts.find("option").length-1)) seledOpts.append(selOpts.eq(i).clone());
-			  }
-		  }
-	  }
+        
+    $("button.addContact").live("click",function(e){
+        e.preventDefault();
+        $(this).parent().after($(this).parent().clone());
+        $(this).parent().next().children(".inpTextBox").val("");
+    });
+    $("button.deleContact").live("click",function(e){
+        e.preventDefault();
+        if ($("button.deleContact").length>1) $(this).parent().remove(); 
+    });
+    
+    $(".divExpect .addOpts").click(function(){
+      var selOpts=$(this).parent().parent().find(".selOpts option:selected");
+      var seledOpts=$(this).parent().parent().find(".seledOpts");      
+      for (i=0;i<selOpts.length;i++) {
+          if (seledOpts.find("option").length==0)  seledOpts.append(selOpts.eq(i).clone());
+          else {
+              for (j=0;j<seledOpts.find("option").length;j++) {
+                  if (selOpts.eq(i).val()==seledOpts.find("option").eq(j).val()) break;
+                  else if (j==(seledOpts.find("option").length-1)) seledOpts.append(selOpts.eq(i).clone());
+              }
+          }
+      }
   });
   
   $(".divExpect .removeOpts").click(function(){
-	  $(this).parent().parent().find(".seledOpts option:selected").remove();
+      $(this).parent().parent().find(".seledOpts option:selected").remove();
   });
 });
-//{/literal}
+{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-sddsx.html">兼职管理</a>&gt;&gt;<a href="#">我的简历</a></p>
-    </div>    
+      <p>
+          <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+          <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+          <a href="javascript:void(0)">我的简历</a>
+      </p>
+    </div>
     <div class="znx resume">
       <div class="znxContent conResume" style="border-top-width:1px;">
         <div class="znxConSys">
           <div class="biaotit">基础信息<a href="javascript:;" class="left resumeEdit">编辑</a></div>
-          <table class="preview" border="1" cellspacing="0" cellpadding="0" id="baseInfo" width="593">          
+          <table class="preview" border="1" cellspacing="0" cellpadding="0" id="baseInfo" width="593">
             <tr>
               <td width="8%" class="tlt tltL">姓名：</td>
               <td width="15%">{$resumeBase.ResumeBase.name}</td>
@@ -78,7 +82,20 @@ $(document).ready(function(){
             {else}
                 {$provincial_local} {$city_local}
             {/if}</td>
-              <td width="16%" rowspan="2"><div align="center"><img width="112" height="124" alt="portrait" src="{$this->webroot}img/tx.jpg"></div></td>
+              <td width="16%" rowspan="2">
+              <div align="center">
+              {if !empty($thumbnail)}
+                {$thumbnailP = Configure::read('Data.path')|cat:$thumbnail}
+                {if file_exists($thumbnailP)}
+                    <img width="112" height="124" src="{$this->webroot}{$thumbnail}">
+                {else}
+                    <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+                <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </div>
+              </td>
             </tr>
             <tr>
               <td class="tlt tltL">国籍：</td>

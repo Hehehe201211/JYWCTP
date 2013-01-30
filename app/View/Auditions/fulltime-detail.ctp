@@ -30,7 +30,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-zwscj.html">常规招聘</a>&gt;&gt;<a href="#">{$title_for_layout}</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+      <a href="javascript:void(0)">{$title_for_layout}</a>
+      </p>
     </div>
     {if $audition.Audition.status == Configure::read('Audition.status_accept')}
         <div class="zy_zszlB zy_zszlBT">
@@ -45,7 +49,13 @@ $(document).ready(function(){
           <tbody>
           <tr>
             <th width="25%">公司名称：</th>
-            <td width="75%"><a class="red" target="_blank" href="gsqt-index.html">{$audition.Member.company_name}</a></td>
+            <td width="75%">
+            {if !empty($domain)}
+            <a class="red" target="_blank" href="/homes/index/{$domain}">{$audition.Member.company_name}</a>
+            {else}
+            {$audition.Member.company_name}
+            {/if}
+            </td>
           </tr>
           <tr>
             <th>营业执照：</th>

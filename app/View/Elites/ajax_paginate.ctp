@@ -4,12 +4,12 @@
     {$paginatorParams = $this->Paginator->params()}
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
       <thead>
-        <tr class="con_2_tr con_2_xq_too">          
+        <tr class="con_2_tr con_2_xq_too">
           <th width="137">客源标题</th>
           <th width="138">兼职标题</th>
           <th width="87">兼职配合方式</th>
           <th width="79">合作时间</th>  
-          <th width="63">状态</th>        
+          <th width="63">状态</th>
           <th width="113">选择操作</th>
         </tr>
       </thead>

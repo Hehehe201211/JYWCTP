@@ -18,7 +18,20 @@
             {else}
                 {$provincial_local} {$city_local}
             {/if}</td>
-              <td width="16%" rowspan="3"><div align="center"><img width="112" height="124" alt="portrait" src="{$this->webroot}img/tx.jpg"></div></td>
+              <td width="16%" rowspan="3">
+              <div align="center">
+              {if !empty($memberInfo.Attribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$memberInfo.Attribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img width="112" height="124" src="{$this->webroot}{$memberInfo.Attribute.thumbnail}">
+                {else}
+                    <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+                <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </div>
+              </td>
             </tr>
             <tr>
               <td class="tlt tltL">国籍：</td>

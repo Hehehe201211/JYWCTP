@@ -1,3 +1,20 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+var zy_zBottomRcdT;
+  $(".zy_rzj_tt li a").hover(function(){
+	  $(this).parent().css("text-overflow","clip");
+	  var selector=".zy_rzj_tt li a:eq("+$(".zy_rzj_tt li a").index(this)+")";	 
+	  zy_zBottomRcdT=window.setInterval(function(){singleLineTextS(selector);},200);
+  },function(){
+	   $(this).parent().css("text-overflow","ellipsis");
+	   $(this).css("margin-left",0);
+	   window.clearInterval(zy_zBottomRcdT);	   
+  });
+});
+{/literal}
+</script>
+
 <div class="fuwu">
       <h1><a href="plt-jzxx.html"><span class="fr">更多...</span>推荐兼职</a></h1>
       <dl class="imgParttime">

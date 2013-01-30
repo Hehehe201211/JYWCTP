@@ -21,7 +21,7 @@ textarea{letter-spacing:1px;}
 .errorMsg{font-weight:normal !important;margin:0 8px !important;position:absolute !important;z-index:1;color:#F00 !important;}
 .fl{FLOAT:left !important;}
 .fr{FLOAT:right !important;}
-#goToTop{position:absolute;right:3px;width:45px;height:45px;background:url(../img/arrowGreyT.gif) 0 0 no-repeat;cursor:pointer;}
+#gototop{position:fixed;width:45px;height:45px;background:url(../img/arrowGreyT.png) 0 0 no-repeat;cursor:pointer;bottom:45px;_position:absolute;_right:3px;_background-image:url(../img/arrowGreyT.gif);}
 .inpFile{height:auto !important;}
 .inpTextBox,textarea,select{border:1px #AAA solid;padding:1px 0;}
 .inpTextBox:hover,textarea:hover,select:hover{border-color:#555;}

@@ -37,7 +37,7 @@ function searchRe(event){
     <a href="/resources/upload" class="fileUpload" target="_blank">上传文档</a>
     {/if}
     <div class="userInfo">
-      <h3>{$memberInfo.Member.nickname}</h3>
+      <h3><a href="#">{$memberInfo.Member.nickname}</a></h3>
       <div class="userData">下载文档：
 	      <a href="javascript:void(0)" target="_blank">{if isset($download_cnt)}{$download_cnt}{else}0{/if}</a>次&nbsp;&nbsp;上传文档：
 	      <a href="javascript:void(0)" target="_blank">{if isset($upload_cnt)}{$upload_cnt}{else}0{/if}</a>篇

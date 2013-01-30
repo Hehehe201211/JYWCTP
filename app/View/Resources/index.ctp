@@ -13,7 +13,7 @@
       {if count($ru_men) == 6}
       <a class="fr" href="/resources/search?type=1" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">入门成长</a>
+      入门成长
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
       {foreach $ru_men as $item}
@@ -34,7 +34,7 @@
       {if count($pei_xun) == 6}
       <a class="fr" href="/resources/search?type=2" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">培训课件</a>
+      培训课件
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
         {foreach $pei_xun as $item}
@@ -56,7 +56,7 @@
       {if count($ke_hu) == 6}
       <a class="fr" href="/resources/search?type=3" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">客户管理</a>
+      客户管理
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
         {foreach $ke_hu as $item}
@@ -77,7 +77,7 @@
       {if count($fang_an) == 6}
       <a class="fr" href="/resources/search?type=4" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">方案模板</a>
+      方案模板
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
         {foreach $fang_an as $item}
@@ -99,7 +99,7 @@
       {if count($zong_jie) == 6}
       <a class="fr" href="/resources/search?type=5" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">总结计划</a>
+      总结计划
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
         {foreach $zong_jie as $item}
@@ -120,7 +120,7 @@
       {if count($an_li) == 6}
       <a class="fr" href="/resources/search?type=6" target="_blank">更多...</a>
       {/if}
-      <a href="javascript:void(0)" target="_blank">案例分析</a>
+      案例分析
       </h2>
       <table width="360" border="0" cellspacing="0" cellpadding="0">
         {foreach $an_li as $item}

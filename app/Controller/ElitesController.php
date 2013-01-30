@@ -137,6 +137,9 @@ class ElitesController extends AppController
             $categorys = explode(',', $this->request->query["amp;categorys"]);
             $conditions['MemberAttribute.category_id'] = $categorys;
         }
+        if (isset($this->request->data['sex'])) {
+            $conditions['MemberAttribute.sex'] = $this->request->data['sex'];
+        }
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $this->_search($conditions, $pageSize, 0);
         $this->set('pageSize', $pageSize);
@@ -158,7 +161,8 @@ class ElitesController extends AppController
         $fields = array(
             'Member.id',
             'Member.nickname',
-            'MemberAttribute.category_id'
+            'MemberAttribute.category_id',
+            'MemberAttribute.thumbnail'
         );
         $this->paginate = array(
             'Member' => array('limit' => $limit,

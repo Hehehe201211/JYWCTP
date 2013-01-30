@@ -34,7 +34,16 @@ $(document).ready(function(){
           <th width="20%">真实姓名：</th>
           <td width="50%">{$member.MemberAttribute.name}</td>
           <td width="30%" rowspan="7" class="top">
-            <img class="portrait" src="{$this->webroot}img/tx.jpg" />
+            {if !empty($member.MemberAttribute.thumbnail)}
+                {$thumbnail = Configure::read('Data.path')|cat:$member.MemberAttribute.thumbnail}
+                {if file_exists($thumbnail)}
+                    <img src="{$this->webroot}{$member.MemberAttribute.thumbnail}" alt="{$member.MemberAttribute.name}">
+                {else}
+                    <img src="{$this->webroot}img/tx.jpg" alt="{$member.MemberAttribute.name}"/>
+                {/if}
+            {else}
+                <img src="{$this->webroot}img/tx.jpg" alt="{$member.MemberAttribute.name}"/>
+            {/if}
             <div class="clear">&nbsp;</div>
             {if $showInviteBtn}
             <input class="invite" type="button" value="邀请兼职" />

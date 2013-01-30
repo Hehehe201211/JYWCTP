@@ -1,4 +1,13 @@
-﻿$(document).ready(function(){
+﻿var NaV=browserNaV();
+$(document).ready(function(){
+	$(window).resize(function(){
+		gototopL();
+	});
+	$(window).scroll(function(){
+		if($(document).scrollTop() < 100) $("#gototop").fadeOut("fast"); 
+		else  $("#gototop").fadeIn("fast");
+		if(NaV=="msie6") ie6GTT();
+	});
 	$("input:button,input:submit,input:reset").addClass("inpButton");
 	$("input:checkbox").addClass("inpCheckbox");
 	$("input:radio").addClass("inpRadio");
@@ -94,26 +103,23 @@ function hideWarning(){$("#loginWarning").fadeOut("slow");}
 function closeWindow() {
    var browserName=navigator.appName; if (browserName=="Netscape") { window.open('','_parent',''); window.close(); } else if (browserName=="Microsoft Internet Explorer") { window.opener = "whocares"; window.close(); }}
 //gotuTop	
-$(function(){
-	var topDistance = 180;
-	var showDistance = 100;
-	if ($(window).width()>1000) var gtbRight=parseInt(($(window).width()-1000)/2-60)+"px";
-	if ($(window).height()>200) topDistance=$(window).height()-80;
-	var goToTopButton = "<div id='goToTop'></div>";
-	$("body").append(goToTopButton);
-	$("#goToTop").hide();
-	$(window).scroll(function(){
-		var thisTop = $(this).scrollTop() + topDistance;
-		$("#goToTop").css({"top":thisTop,"right":gtbRight});
-		if($(this).scrollTop() < showDistance) $("#goToTop").fadeOut("fast"); 
-		else  $("#goToTop").fadeIn("fast");
-	});       
-	$("#goToTop").click(function(){
+$(function(){	
+	$("<div id='gototop'></div>").appendTo("body").hide();
+    gototopL();	
+	$("#gototop").click(function(){
 		$("html,body").animate({scrollTop:0},"normal");
 		return false;
-	});
+	});	
 });
-	
+function gototopL(){
+	if ($(window).width()<1060) var gototopL=$(window).width()-45;
+	else var gototopL=($(document).width()-1000)/2+1030;
+	$("#gototop").css("left",gototopL);
+}
+function ie6GTT(){	
+	var top=$(window).scrollTop()+$(window).height()-90;
+	$("#gototop").css("top",top);
+}	
 //搜索下拉框
 function searchName(seaKind,seaChild,seaParent,seaOption,seaText){
 	$(seaKind).bind("click",function(e){

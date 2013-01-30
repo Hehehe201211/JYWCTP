@@ -196,14 +196,14 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 
 .sider .h1Zy_rzj_tt{border-bottom:1px #07a solid;margin:0 12px;}
 .sider .zy_rzj_tt li{margin:6px 6px 6px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sider .zy_rzj_tt li a{padding-left:10px;background:url("../img/frmIcon.gif") no-repeat 0 -308px;}
+.sider .zy_rzj_tt li a{padding-left:10px;background:url("../img/frmIcon.gif") no-repeat 0 -308px;*display:block;*background-position:0 -305px;}
 
 .conResource{float:left;width:750px;padding-left:8px;}
 .conResource a:hover{text-decoration:underline;}
 .conResource .crumbsNav{padding-right:8px;text-align:right;} 
 .conResource .crumbsNav a{color:#666;}
 .conResource .crumbsNav a:hover{color:#F60;text-decoration:none;}
-.conResource .fanyePN{padding-right:8px;}
+.conResource .fanyea{margin-right:12px;}
 .conResource h1{font:bold 20px/28px "微软雅黑";}
 .conResource h1 .spanFileFormat{margin:6px 4px 4px 0;}
 .conResource .filedescribe{line-height:2em;text-indent: 2em;}
@@ -239,6 +239,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResource .fileUpload a.fr:hover{text-decoration:none;background-color:#e9f7f1;}
 .conResource .fileUpload a.btnCommit{background-color:#397;color:#FFF;}
 .conResource .fileUpload a.btnCommit:hover{background-color:#386;text-decoration:none;}
+.conResource .fileUpload .inpFile{padding:4px 0 2px\9;width:300px;}
 .conResource .fileUpload .inpTextBox{width:500px;padding:4px 3px;}
 .conResource .fileUpload .inpTextBoxNum{width:32px;margin-right:8px;padding:2px;}
 .conResource .fileUpload .titleFU{border:1px solid #d8e8e1;border-bottom:0 none;height:48px;background:#e9f7f1;margin-top:4px;padding:0 20px;}
@@ -284,7 +285,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResourceC .corLTReply td .totalDele label{margin-right:8px;}
 .conResourceC .corLTReply tr:hover{background-color:#FFF;}
 .conResourceC .corLTReply td a:hover{text-decoration:underline;}
-.conResourceC .corLTReply .ulTilCate{height:31px;border-bottom:1px #999 solid;}
+.conResourceC .corLTReply .ulTilCate{height:31px;border-bottom:1px #999 solid;padding-left:12px;}
 .conResourceC .corLTReply .ulTilCate li{height:30px;width:120px;float:left;border:1px #999 solid;margin-right:12px;font:bold 14px/30px "宋体";text-align:center;background:#eee;cursor:pointer;color:#666;}
 .conResourceC .corLTReply .ulTilCate li:hover{background:#F5F5F5;color:#333;}
 .conResourceC .corLTReply .ulTilCate li.active{background:#fff;border-bottom-color:#fff;cursor:default;color:#333;}
@@ -298,10 +299,10 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResourceC .corLTReply .corProblemDiv .btns a{color:#036;}
 
 .divResource{float:left;width:360px;margin:0 12px 0 0;}
-.divResource h2{border-bottom:1px #187EE3 solid;height:28px;line-height:28px;padding:0 6px;font-size:14px;font-weight:bold;color:#333;}
-.divResource h2 a{font-size:14px;font-weight:bold;color:#F60;}
-.divResource h2 a:hover{text-decoration:none;font-weight:normal;}
-.divResource h2 a.fr{color:#333;font-size:12px;}
+.divResource h2{border-bottom:1px #187EE3 solid;height:28px;line-height:28px;padding:3px 6px 0;font-size:14px;font-weight:bold;color:#333;}
+.divResource h2 a{color:#F60;}
+.divResource h2 .catalog{float:right;}
+.divResource h2 .catalog a{margin-left:12px;}
 .divResource .title{display:block;padding:3px 0;width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .divResource .title a{font-size:14px;color:#0455A1;background:url(../img/frmIcon.gif) 0 -307px no-repeat;padding-left:12px;}
 .divResource .pages{text-align:right;width:60px;}
@@ -310,7 +311,8 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 
 .sbResource{float:right;width:216px;border:1px #DDD solid;padding:8px 12px;background:#FFF;}
 .sbResource h3{font-size:14px;font-weight:bold;margin:8px 0;width:180px;}
-.sbResource h3 a{font-size:14px;font-weight:bold;}
+.sbResource h3 a{font-size:14px;font-weight:bold;color:#0455A1;}
+.sbResource h3 a:hover{text-decoration:underline;}
 .sbResource h3 a.fr{font-weight:normal;color:#F30;}
 .sbResource h3 a.fr:hover{color:#F60;}
 .sbResource h3 .btnPage a{background:url(../img/sprites_jianli.gif)  -3px -202px no-repeat;padding:0 7px;border:1px #999 solid;margin-left:4px;}
@@ -386,10 +388,12 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .sjle ul .keyuan li label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:206px;margin-top:-3px;text-align:left;}
 .sjle ul .keyuan li label .inpCheckbox{margin-right:6px;vertical-align:text-bottom;}
 .getCheckNum{color:#187EE3;font-weight:normal;}
-.getCheckNum img{height:24px;margin:0 8px;vertical-align:text-bottom;}
+.getCheckNum img{height:23px;margin:0 8px;vertical-align:text-bottom;}
 
-.inviteJobL{width:751px;border:1px #999 solid;background:#FFF;padding-bottom:7px;}
+.inviteJobL{width:751px;border:1px #999 solid;background:#FFF;padding:12px 0;}
+.inviteJobL .lists{margin-bottom:9px !important;}
 .inviteJobR{padding:9px 0 0;border:1px #999 solid;background:#FFF;width:233px;height:163px;}
+.inviteJobR .login li{margin-left:8px;}
 .inviteJobR .login .zinp{padding-left:10px;}
 .inviteJobR .login .avatar{padding-left:12px;width:100px;}
 .inviteJobR .login .avatar img{width:100px;height:110px;}
@@ -399,15 +403,16 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 
 .inviteJobB{width:1000px;margin:8px auto 20px;overflow:hidden;}
 .inviteJobB .ulCompany1{width:1005px;margin-bottom:8px;overflow:hidden;}
-.inviteJobB .ulCompany1 li{float:left;width:335px;height:68px;position:relative;}
+.inviteJobB .ulCompany1 li{float:left;width:335px;height:68px;}
 .inviteJobB .ulCompany1 li:hover{*z-index:99;}
-.inviteJobB .ulCompany1 li a{display:block;width:326px;border:1px #333 solid;height:60px;margin:3px 5px 3px 0;background:url(../img/tel_06.gif) 0 -186px repeat-x;text-align:center;font:bold 16px "微软雅黑";overflow:hidden;color:#333; }
+.inviteJobB .ulCompany1 li a{display:table;width:326px;border:1px #333 solid;height:60px;margin:3px 5px 3px 0;background:url(../img/tel_06.gif) 0 -186px repeat-x;text-align:center;overflow:hidden;*display:block;*position:relative;}
 .inviteJobB .ulCompany1 li a:hover{margin:2px 3px 2px 0;border:2px #06E solid;}
+.inviteJobB .ulCompany1 li a .middle{display:table-cell;vertical-align:middle;*display:block;*position:absolute;*top:50%;*left:0;}
+.inviteJobB .ulCompany1 li a .middle span{font:bold 14px "微软雅黑";text-align:center;*display:block;*position:relative;*top:-50%;*left:0;*width:326px;}
 .inviteJobB .ulCompany1 li img{height:60px;width:326px;}
-.inviteJobB .ulCompany1 li tr{background:none;}
-.inviteJobB .ulCompany1 li td{font:bold 14px/20px "微软雅黑";}
 .inviteJobB .ulCompany2 li{width:167.5px;}
-.inviteJobB .ulCompany2 li a{width:159px;font-size:14px;}
+.inviteJobB .ulCompany2 li a{width:159px;font-size:14px;color:#333}
+.inviteJobB .ulCompany2 li a .middle span{*width:159px;}
 .inviteJobB .ulCompany2 li img{width:159px;}
 .inviteJobB .tilInviteJobB{padding:3px 8px 0 22px;border-bottom:2px #C33 solid;margin-bottom:8px;background:url(../img/frmIcon.gif) 6px -659px no-repeat;height:22px;}
 .inviteJobB .tableJobInfo tr .textEllipsis{width:323px;padding:2px 3px 2px 7px;}

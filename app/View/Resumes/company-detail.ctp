@@ -82,7 +82,11 @@ $(document).ready(function(){
 
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-sddjl.html">常规招聘</a>&gt;&gt;<a href="#">简历检索信息详情</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+      <a href="javascript:void(0)">简历检索信息详情</a>
+      </p>
     </div>   
     <div class="resume">
       <h3>{$resumeBase.ResumeBase.name}的简历</h3>
@@ -103,7 +107,20 @@ $(document).ready(function(){
             {else}
                 {$provincial_local} {$city_local}
             {/if}</td>
-              <td width="16%" rowspan="2"><div align="center"><img width="112" height="124" alt="portrait" src="{$this->webroot}img/tx.jpg"></div></td>
+              <td width="16%" rowspan="2">
+              <div align="center">
+              {if !empty($thumbnail)}
+                {$thumbnailP = Configure::read('Data.path')|cat:$thumbnail}
+                {if file_exists($thumbnailP)}
+                    <img width="112" height="124" src="{$this->webroot}{$thumbnail}">
+                {else}
+                    <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+                {/if}
+              {else}
+                <img width="112" height="124" src="{$this->webroot}img/tx.jpg">
+              {/if}
+              </div>
+              </td>
             </tr>
             <tr>
               <td class="tlt tltL">国籍：</td>

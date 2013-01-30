@@ -174,7 +174,7 @@ $(document).ready(function(){
         var src = '/members/image/' + Math.random();
         $('#code').attr('src', src);
     });
-	$("#yanzhengma").keypress(function(e){
+	$("#yanzhengma").keydown(function(e){
 		  if ($(this).val()!=""&&e.keyCode==13) $("#btnLogin").click();
 	  });
     //login

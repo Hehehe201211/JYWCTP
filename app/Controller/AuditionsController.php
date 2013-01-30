@@ -10,7 +10,7 @@ class AuditionsController extends AppController
     var $layout = 'members';
     var $components = array('RequestHandler', 'Unit', 'Recommend');
     var $helpers = array('Js', 'City', 'Category');
-    var $uses = array('Audition', 'Fulltime');
+    var $uses = array('Audition', 'Fulltime', 'MemberAttribute', 'Homepage');
     public function listView()
     {
         if ($this->request->query['type'] == "send") {
@@ -188,6 +188,9 @@ class AuditionsController extends AppController
             if (!empty($audition)) {
                 $this->set('audition', $audition);
                 $this->set('title_for_layout', '面试邀请详情');
+                //home pages
+                $homepage = $this->Homepage->find('first', array('conditions' => array('members_id' => $audition['Fulltime']['members_id']), 'fields' => array('domain')));
+                $this->set('domain', $homepage['Homepage']['domain']);
             } else {
                 $this->set('title_for_layout', '简历投递详情');
                 $error = true;
@@ -256,6 +259,11 @@ class AuditionsController extends AppController
 	        if (!empty($audition)) {
 	           $this->set('audition', $audition);
 	           $this->set('title_for_layout', '面试邀请详情');
+	           
+	           //头像
+	           $author = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $audition['Resume']['members_id']), 'fields' => array('thumbnail')));
+               $this->set('thumbnail', $author['MemberAttribute']['thumbnail']);
+	           
 	        } else {
 	            $this->set('title_for_layout', '收到的简历详情');
 	            $error = true;

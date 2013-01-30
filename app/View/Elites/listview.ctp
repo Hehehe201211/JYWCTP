@@ -11,7 +11,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">信息概览</a></p>
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0">信息概览</a>
+      </p>
     </div>
     <div class="xxjs partTime" style="overflow-y:visible;min-height:460px;">
       <div class="biaotit">业务精英检索</div>
@@ -105,16 +109,27 @@ $(document).ready(function(){
         <a class="zclan zclan4" href="javascript:void(0)" id="searchBtn">查询</a>
     </div>
     <div id="result">
-    {assign var=options value=['update' => '#result', 'evalScripts' => true]}
+    {$form = ['isForm' => true, 'inline' => true]}
+    {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
     {$this->Paginator->options($options)}
     {$paginatorParams = $this->Paginator->params()}
         <div class="biaotit">检索结果</div>
          <ul class="eliteR">
+         {$dataPath = Configure::read('Data.path')}
          {foreach $elites as $elite}
             <li>
                 <a href="/elites/detail?id={$elite.Member.id}" target="_blank">
                     <div class="avatar">
-                    <img src="{$this->webroot}img/tx.jpg" alt="xxx5202012"/>
+                    {if !empty($elite.MemberAttribute.thumbnail)}
+                        {$thumbnail = $dataPath|cat:$elite.MemberAttribute.thumbnail}
+                        {if file_exists($thumbnail)}
+                            <img src="{$this->webroot}{$elite.MemberAttribute.thumbnail}" alt="{$elite.Member.nickname}">
+                        {else}
+                            <img src="{$this->webroot}img/tx.jpg" alt="{$elite.Member.nickname}"/>
+                        {/if}
+                    {else}
+                        <img src="{$this->webroot}img/tx.jpg" alt="{$elite.Member.nickname}"/>
+                    {/if}
                     </div>
                     <div class="name">{$elite.Member.nickname}</div>
                     <div>{$this->Category->getCategoryName($elite.MemberAttribute.category_id)}</div>
@@ -129,7 +144,7 @@ $(document).ready(function(){
                 <div class="dd_ym">
                   <label>每页显示：</label>
                   <select name="pageSize" id="pageSize">
-                    <option value="2" {if $pageSize == "10"} selected {/if}>10</option>
+                    <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                     <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                     <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                     <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
@@ -145,9 +160,8 @@ $(document).ready(function(){
                         <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
                   {/if}
               </div>
-        {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+        {$pageSizeRequestUrl = ['action' => $this->request->params['action']]}
         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
-        {$form = ['isForm' => true, 'inline' => true]}
         {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}

@@ -6,8 +6,8 @@
                 <p class="jinggao">发布时间：{$parttime.PartTime.created|date_format:"%Y-%m-%d"} 信息编号：{$parttime.PartTime.id} 该信息被浏览 {$parttime.PartTime.clicked + $clicked} 次 </p>
                 <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        <th width="148" scope="row">公司名称：</th>
-                        <td width="593"><a href="gsqt-index.html" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
+                        <th width="25%" scope="row">公司名称：</th>
+                        <td width="75%"><a href="gsqt-index.html" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
                     </tr>
                     <tr>
                         <th width="148" scope="row">营业执照：</th>

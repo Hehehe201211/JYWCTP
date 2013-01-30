@@ -1,6 +1,9 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+$("#checkNum").keydown(function(e){
+		  if ($(this).val()!=""&&e.keyCode==13) $("#btnLogin").click();
+	  });
 	//登陆验证码
 	$('#getCheckNum').prepend('<img id="code" src="/members/image">');
     $('#getCheckNum').click(function(){
@@ -46,8 +49,7 @@ $(document).ready(function(){
                 success : function(data) {
                     if (data == '') {
                         window.location.href = location.href;
-                    }
-                    
+                    }                    
                     if (data != '') {
                         msg = '<li>' + data + '</li>';
                         $('#loginWarning ul').html(msg);
@@ -101,7 +103,7 @@ function searchRe(event){
             <li>
               <label>类型：</label>              
               <label class="fl" ><input type="radio" name="type" value="0" checked="checked"/>个人</label>              
-              <label class="fl" ><input type="radio" name="type" value="1"/>企业</label>
+              <!--<label class="fl" ><input type="radio" name="type" value="1"/>企业</label>-->
             </li>
             <li class="zinp">
 	            <a id="btnLogin" class="inp" href="javascript:void(0)">登录</a>
