@@ -69,7 +69,7 @@
             <dd>业务币：
                 <a href="/coins/balance">余额</a>
                 <a href="/coins/charge">充值</a>
-                <a href="txsq.html" target="_blank">提现</a>
+                <a href="/coins/expend">提现</a>
                 <a href="/coins/income">明细</a>
             </dd>
           </dl>

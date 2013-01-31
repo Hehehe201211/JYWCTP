@@ -51,8 +51,18 @@ $(document).ready(function(){
             <div class="tableDetail">
             <div class="biaotit">{$information.Information.title}</div>
       <table width="100%">
+       <tr>
+          <th>采购产品：</th>
+          <td class="red">{$this->Category->getCategoryName({$information.Information.category})}
+                                    {$this->Category->getCategoryName({$information.Information.sub_category})}
+</td>
+        </tr>
         <tr>
-          <th width="25%">所在区域：</th>
+          <th>采购单位：</th>
+          <td class="red">{$information.Information.company}</td>
+        </tr>          
+        <tr>
+          <th width="25%">单位所在区域：</th>
           <td width="75%">
           {$provincial = $this->City->cityName({$information.Information.provincial})}
           {$city = $this->City->cityName({$information.Information.city})}
@@ -68,17 +78,7 @@ $(document).ready(function(){
           <th>行业：</th>
           <td>{$this->Category->getCategoryName({$information.Information.industries_id})}</td>
         </tr>
-        {/if}
-        <tr>
-          <th>采购产品：</th>
-          <td class="red">{$this->Category->getCategoryName({$information.Information.category})}
-                                    {$this->Category->getCategoryName({$information.Information.sub_category})}
-</td>
-        </tr>
-        <tr>
-          <th>采购单位：</th>
-          <td class="red">{$information.Information.company}</td>
-        </tr>               
+        {/if}            
         <tr>
           <th>信息交易价格：</th>
           <td>{if $information.Information.payment_type != 2}业务币：{$information.Information.price}元{/if}

@@ -56,13 +56,19 @@ class ParttimesController extends AppController
         $error = false;
         $duplicate = false;
         $parttime = $this->PartTime->find('first', array('conditions' => $conditions));
-        if (!empty($parttime)) {
+        if (!empty($parttime) && !isset($data['id'])) {
             $msg = "不能重复发布相同兼职内容！";
             $error = true;
             $duplicate = true;
             $this->set('id', $parttime['PartTime']['id']);
         } else {
             if ($this->PartTime->save($data)) {
+                if (isset($data['id'])) {
+                    $this->set('id', $data['id']);
+                } else {
+                    $this->set('id', $this->PartTime->getLastInsertId());
+                }
+                
                 $msg = "兼职发布成功！";
             } else {
                 $msg = "兼职发布失败，请稍后重试！";
@@ -74,6 +80,30 @@ class ParttimesController extends AppController
         $this->set('duplicate', $duplicate);
     }
     
+    public function edit()
+    {
+        $js = array(
+            'jquery-ui',
+            'retrieval'
+        );
+        $css = array('ui/jquery-ui');
+        $this->_appendCss($css);
+        $this->_appendJs($js);
+        if (!empty($this->request->query['id'])) {
+            $conditions = array(
+	            'id' => $this->request->query['id'], 
+	            'members_id' => $this->_memberInfo['Member']['id']
+            );
+            $parttime = $this->PartTime->find('first', array('conditions' => $conditions));
+            if (!empty($parttime)) {
+                $this->set('parttime', $parttime);
+            } else {
+                $this->_sysDisplayErrorMsg("没有你可以编辑的信息！");
+            }
+        } else {
+            $this->_sysDisplayErrorMsg("没有你可以编辑的信息！");
+        }
+    }
     
     public function listview()
     {

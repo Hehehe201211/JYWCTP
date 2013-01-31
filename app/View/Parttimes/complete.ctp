@@ -11,8 +11,8 @@
       <div class="success">
         <p class="gongxi">{$msg}</p>
         <p class="gongxiLink">
-            <a href="qy-jzfbmxxq.html">查看该信息&gt;&gt;</a>
-            <a href="qy-fbjz.html">完善该信息&gt;&gt;</a>
+            <a href="/parttimes/detail/?id={$id}">查看该信息&gt;&gt;</a>
+            <a href="/parttimes/edit/?id={$id}">完善该信息&gt;&gt;</a>
             <a href="/parttimes/create">再发布一条&gt;&gt;</a>
         </p>
       </div>

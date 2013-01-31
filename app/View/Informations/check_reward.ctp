@@ -5,8 +5,7 @@ $(document).ready(function(){
 			$('#form').submit();
 		} else {
 			$('.protocol').append('<span style="color:red">请接受协议内容</span>')
-		}
-		
+		}		
 	});
 	$('#back').click(function(){
 		var type = $('#type').val();
@@ -34,8 +33,19 @@ $(document).ready(function(){
             <input type="hidden" name="type" value="{$this->data['type']}">
             <div class="biaotit">{$this->data['title']}<input type="hidden" value="{$this->data['title']}" name="title" /></div>
       <table width="100%">
+	  <tr>
+          <th>产品名称：</th>
+          <td>{$category}
+                    <input type="hidden" value="{$this->data['category']}" name="category" />
+                    <input type="hidden" value="{$this->data['sub_category']}" name="sub_category" />
+                    <input type="hidden" value="{if isset($this->data['other_category'])}{$this->data['other_category']}{/if}" name="other_category" /></td>
+        </tr>         
+      <tr>
+          <th>产品提供单位：</th>
+          <td>{$this->data['company']}<input type="hidden" value="{$this->data['company']}" name="company" /></td>
+        </tr>
         <tr>       
-          <th width="25%">所在区域：</th>
+          <th width="25%">单位所在区域：</th>
           <td width="75%">
               {if $provincial != $city}
               {$provincial}&nbsp;{$city}
@@ -45,18 +55,7 @@ $(document).ready(function(){
               <input type="hidden" value="{$this->data['provincial']}" name="provincial" />
               <input type="hidden" value="{$this->data['city']}" name="city" />
           </td>
-        </tr>
-        <tr>
-          <th>产品名称：</th>
-          <td>{$category}
-                    <input type="hidden" value="{$this->data['category']}" name="category" />
-                    <input type="hidden" value="{$this->data['sub_category']}" name="sub_category" />
-                    <input type="hidden" value="{if isset($this->data['other_category'])}{$this->data['other_category']}{/if}" name="other_category" /></td>
-        </tr>
-         <tr>
-          <th>产品提供单位：</th>
-          <td>{$this->data['company']}<input type="hidden" value="{$this->data['company']}" name="company" /></td>
-        </tr>
+        </tr>        
         <tr>
           <th>信息悬赏价格：</th>
           <td>{if isset($this->data['pay_coin']) && $this->data['pay_coin'] == 1} 

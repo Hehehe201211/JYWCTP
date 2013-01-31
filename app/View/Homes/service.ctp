@@ -87,7 +87,7 @@ $(document).ready(function(){
           <img  style="margin:0px auto;display:block;" src="{$this->webroot}img/noimage.gif" alt="not image" />
           {/if}
           </div>
-          <h3>{$product.Product.name}</h3>          
+          <h3>{$product.Product.name}</h3>
           <table width="100%" class="hyxzyemian22" >
                <thead>
                 <tr>
@@ -98,7 +98,7 @@ $(document).ready(function(){
                 </tr>
                 </thead>
               <tr>
-                <td><a href="gsqt-zlxz.html" target="_blank">{$product.Product.document_name}</a></td>
+                <td><a href="gsqt-zlxz.html" target="_blank">{$product.Product.title}</a></td>
                 <td><a href="gsqt-zlxz.html" target="_blank">{$product.Product.created|date_format:"%Y-%m-%d"}</a></td>
                 <td class="content"><a href="gsqt-zlxz.html" target="_blank">{$product.Product.additional}</a></td>
                 <td class="btnInfoDl" title="下载文档"><a href="files/file.doc">我要下载</a></td>

@@ -195,7 +195,7 @@ $(document).ready(function(){
             </div>  
         {else}
           <div class="divBtnContainer" style="width:200px">
-            <a class="zclan zclan7" href="qy-fbjz.html">编辑</a>
+            <a class="zclan zclan7" href="/parttimes/edit/?id={$this->request->query['id']}">编辑</a>
             <a class="zclan zclan7" href="javascript:if(confirm('确定删除此兼职？')) window.open('qy-jzfblb.html','_self');">删除</a>
           </div>
         {/if}

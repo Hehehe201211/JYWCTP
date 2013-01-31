@@ -42,4 +42,21 @@ class CityHelper extends AppHelper
 		$city = $this->City->find('all', $cityParam);
 		return $city;
     }
+    
+    public function getParentByChilds($child_ids)
+    {
+        $cityParam = array(
+          'fields' => array('parent'),
+          'conditions' => array('id' => $child_ids, 'display' => 1),
+          'order' => array('priority')
+        );
+        $citys = $this->City->find('all', $cityParam);
+        $parent_ids = array();
+        foreach ($citys as $city) {
+            if (!in_array($city, $parent_ids)) {
+                $parent_ids[] = $city['City']['parent'];
+            }
+        }
+        return $parent_ids;
+    }
 }

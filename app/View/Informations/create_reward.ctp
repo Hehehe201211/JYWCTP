@@ -51,131 +51,60 @@ $(document).ready(function(){
                         'industries_id', 'company', 'category', 
                         'sub_category',
                         'payment_type', 'introduction'
-                        ];
-                        
-    var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>';
+                        ];                        
+    var errorMsg = '<span class="errorMsg">请输入此项目</span>';
     var re = /^[0-9]*$/;
-	var intEMsg = '<span style="color:red" class="errorMsg">请输入数字</span>';
-	var dateEMsg = '<span style="color:red" class="errorMsg">请正确输入时间</span>';
-    function checkData() 
-    {
+	var intEMsg = '<span class="errorMsg">请输入数字</span>';
+	var dateEMsg = '<span class="errorMsg">请正确输入时间</span>';
+    function checkData() {
         var error=0;
+		$(".sjle").find(".errorMsg").remove();
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
-                if($('#' + this).parent('dt').find('.errorMsg').length == 0) {
-                    $('#' + this).parent('dt').append(errorMsg);
-                }
+                $('#' + this).parent('dt').append(errorMsg);
                 error=1;
-            } else {
-                $('#' + this).parent('dt').find('.errorMsg').remove();
-            }
-        });
-        $('#open,#close').parent().parent().find('.errorMsg').remove();
+            } 
+        });      
         if($('#open').val() == "" || $('#close').val() == "") {
             $('#open,#close').parent().parent().append(errorMsg);
             error=1;
-        } else if($('#open').val() != "" && $('#close').val() != "") {
-            var open_str = $('#open').val().replace('\/', '-');
-            var close_str = $('#close').val().replace('\/', '-');
-            var open = new Date(open_str.split('-')[0], (parseInt(open_str.split('-')[1]) - 1), open_str.split('-')[2]);
-            var result1 = open.getFullYear() + '-';
-            var result2;
-            if (open.getMonth() + 1 < 10) {
-                 result1 += "0" + (open.getMonth() + 1) + '-'
-            } else {
-                 result1 += (open.getMonth() + 1) + '-'
-            }
-            if (open.getDate() < 10) {
-                 result1 += "0" + open.getDate();
-            } else {
-                 result1 += open.getDate();
-            }
-            if (result1 != open_str) {
-                 $('#open,#close').parent().parent().append(dateEMsg);
-                 error=1;
-            } else {
-                 var close = new Date(close_str.split('-')[0], (parseInt(close_str.split('-')[1]) - 1), close_str.split('-')[2]);
-                 result2 = close.getFullYear() + '-';
-                 if (close.getMonth() + 1 < 10) {
-                    result2 += "0" + (close.getMonth() + 1) + '-'
-                } else {
-                     result2 += (close.getMonth() + 1) + '-'
-                }
-                if (close.getDate() < 10) {
-                     result2 += "0" + close.getDate();
-                } else {
-                     result2 += close.getDate();
-                }
-                 if (result2 != close_str) {
-                     $('#open,#close').parent().parent().append(dateEMsg);
-                     error=1;
-                 }
-            }
-            if (result2 < result1) {
+        } else if($('#open').val() != "" && $('#close').val() != "") {            
+            if ($('#close').val() < $('#open').val() ) {
                  $('#open,#close').parent().parent().append(dateEMsg);
                  error=1;
             }
         }
         $('.contact, .post, .address, .contact_method').each(function(){
             if ($(this).val() == "") {
-                if($(this).parent().find('.errorMsg').length == 0) {
-                    $(this).parent().append(errorMsg);
-                }
+                $(this).parent().append(errorMsg);
                 error=1;
-            } else {
-                $(this).parent().find('.errorMsg').remove();
-            }
+            } 
         });
         var priceErr = false;
 		if($('#pay_coin').attr('checked') == "checked") {
 			if ($('#price').val() == "") {
-				if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-					$('#price').parent().parent().append(errorMsg);
-				} else {
-					$('#price').parent().parent().find('.errorMsg').html("请输入此项目")
-				}
+				$('#price').parent().parent().append(errorMsg);
 				error = 1;
 				priceErr = true;
 			} else if (!re.test($('#price').val())){
-				if ($('#price').parent().parent().find('.errorMsg').length == 0) {
-					$('#price').parent().parent().append(intEMsg);
-				} else {
-					$('#price').parent().parent().find('.errorMsg').html("请输入数字")
-				}
+				$('#price').parent().parent().append(intEMsg);
 				error = 1;
 				priceErr = true;
-			} else {
-				$('#price').parent().parent().find('.errorMsg').remove();
-			}
+			} 
 		}
 		if(!priceErr && $('#pay_point').attr('checked') == "checked") {
 			if ($('#point').val() == "") {
-				if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-					$('#point').parent().parent().append(errorMsg);
-				} else {
-					$('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-				}
+				$('#point').parent().parent().append(errorMsg);
 				error = 1;
 			} else if (!re.test($('#point').val())){
-				if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-					$('#point').parent().parent().append(intEMsg);
-				} else {
-					$('#point').parent().parent().find('.errorMsg').html("请输入数字")
-				}
+				$('#point').parent().parent().append(intEMsg);
 				error = 1;
-			} else {
-				$('#point').parent().parent().find('.errorMsg').remove();
-			}
+			} 
 		}
 		if ($('#pay_coin').attr('checked') != "checked" && $('#pay_point').attr('checked') != "checked") {
-			if ($('#point').parent().parent().find('.errorMsg').length == 0) {
-				$('#point').parent().parent().append(errorMsg);
-			} else {
-				$('#point').parent().parent().find('.errorMsg').html("请输入此项目")
-			}
+			$('#point').parent().parent().append(errorMsg);
 			error = 1;
-		}
-        
+		}        
         return error;
     }
     
@@ -194,7 +123,6 @@ $(document).ready(function(){
 {/literal}
 </script>
 
-
 <div class="zy_z">
 	  <ul class="ulFormStep">
       <li>1.填写发布信息</li>
@@ -207,47 +135,11 @@ $(document).ready(function(){
             <input type="hidden" name="type" value="{$type}">
             <input type="hidden" name="target" value="{if !empty($target)}{$target}{elseif isset($this->data['target'])}{$this->data['target']}{/if}">
           <dl>
-            <dt>
+          <dt>
               <label><font class="facexh">*</font>信息标题：</label>
               <input type="text" name="title" id="title" value="{if isset($this->data['title'])}{$this->data['title']}{else}{/if}">
             </dt>
-            <dt class="area">
-              <label style="width:125px;"><font class="facexh">*</font>省份：</label>
-              <select name="provincial" id="provincial">
-                  <option value="">请选择</option>
-                  
-                  {if !empty($target) && isset($targetInfo)}
-	                  {foreach $this->City->parentCityList() as $city}
-	                  	<option value="{$city.City.id}" {if $targetInfo.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
-	                  {/foreach}
-                  {else}
-	                  {foreach $this->City->parentCityList() as $city}
-						<option value="{$city.City.id}" {if isset($this->data['provincial']) && $this->data['provincial'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
-					  {/foreach}
-				  {/if}
-                </select>
-            </dt>
-            <dt class="area">
-              <label><font class="facexh">*</font>城市：</label>
-              {if isset($this->data['provincial'])}
-                	<select name="city" id="city">
-	                  <option value="">请选择</option>
-	                  {foreach $this->City->childrenCityList($this->data['provincial']) as $child}
-						<option value="{$child.City.id}" {if isset($this->data['city']) && {$child.City.id} == $this->data['city']}selected="selected"{/if}>{$child.City.name}</option>
-	                  {/foreach}
-	                </select>
-                {else}
-	                <select name="city" id="city">
-	                  <option value="">请选择</option>
-	                </select>
-                {/if}
-            </dt>
-            
-            <dt>
-              <label><font class="facexh">*</font>产品提供单位：</label>
-              <input type="text" name="company" id="company" value="{if isset($this->data['company'])}{$this->data['company']}{/if}">
-            </dt>
-            <dt class="productKinds">
+          <dt class="productKinds">
               <label><font class="facexh">*</font>产品名称：</label>
               <select name="category" id="category">
                   <option value="">请选择</option>
@@ -274,7 +166,38 @@ $(document).ready(function(){
 	                </select>
                 {/if}
               <input type="text" name="other_category" value="请输入产品名称" id="acpro_inp3">
+            </dt>            
+            <dt>
+              <label><font class="facexh">*</font>产品提供单位：</label>
+              <input type="text" name="company" id="company" value="{if isset($this->data['company'])}{$this->data['company']}{/if}">
             </dt>
+            <dt>
+              <label><font class="facexh">*</font>单位所在区域：</label>
+              <select name="provincial" id="provincial">
+                  <option value="">请选择省份</option>                  
+                  {if !empty($target) && isset($targetInfo)}
+	                  {foreach $this->City->parentCityList() as $city}
+	                  	<option value="{$city.City.id}" {if $targetInfo.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
+	                  {/foreach}
+                  {else}
+	                  {foreach $this->City->parentCityList() as $city}
+						<option value="{$city.City.id}" {if isset($this->data['provincial']) && $this->data['provincial'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
+					  {/foreach}
+				  {/if}
+                </select>
+                {if isset($this->data['provincial'])}
+                	<select name="city" id="city">
+	                  <option value="">请选择城市</option>
+	                  {foreach $this->City->childrenCityList($this->data['provincial']) as $child}
+						<option value="{$child.City.id}" {if isset($this->data['city']) && {$child.City.id} == $this->data['city']}selected="selected"{/if}>{$child.City.name}</option>
+	                  {/foreach}
+	                </select>
+                {else}
+	                <select name="city" id="city">
+	                  <option value="">请选择城市</option>
+	                </select>
+                {/if}
+            </dt>            
             <dt>
               <label><font class="facexh">*</font>悬赏有效期：</label>
               <ul class="validity">
@@ -290,14 +213,12 @@ $(document).ready(function(){
             <dt>
                 <label><font class="facexh">*</font>客源悬赏价格：</label>
                 <ul class="payType">
-                  <li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />
-                    <label for="xianjinzhifu">现金支付：</label>
+                  <li>                    
+                    <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{if isset($this->data['price'])}{$this->data['price']}{/if}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)"/>
                     <span>元</span></li>
-                  <li>
-                    <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" {if isset($this->data['pay_point'])}checked="checked"{/if} />
-                    <label for="jifenzhifu">积分支付：</label>
+                  <li>                    
+                    <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" {if isset($this->data['pay_point'])}checked="checked"{/if} />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="{if isset($this->data['point'])}{$this->data['point']}{/if}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)"/>
                     <span>分</span></li>
                 </ul>

@@ -42,8 +42,7 @@ $(document).ready(function(){
                 }
             });
         }
-    });    
-    
+    });        
     $('#check').click(function(){
         if (!checkData()) {
             $("#information").submit();
@@ -58,24 +57,19 @@ $(document).ready(function(){
     var re = /^[0-9]*$/;
     var intEMsg = '<span class="errorMsg">请输入数字</span>';
     var dateEMsg = '<span class="errorMsg">请正确输入时间</span>';
-    function checkData() 
-    {
+    function checkData() {
         var error=0;
+		$(".sjle").find(".errorMsg").remove();
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
                $('#' + this).parent().append(errorMsg);
                 error=1;
-            } else {
-                $('#' + this).parent().find('.errorMsg').remove();
-            }
+            } 
         });
         if ($('#city').val() == "") {
             $('#city').parent('dt').append(errorMsg);
             error=1;
-        } else if($('#provincial').val() != ""){
-            $('#city').parent().find('.errorMsg').remove();
-        }
-        $('#open').parent().parent().find('.errorMsg').remove();
+        } 
         if($('#open').val() == "" || $('#close').val() == "") {
             $('#open').parent().parent().append(errorMsg);
             error=1;
@@ -92,9 +86,7 @@ $(document).ready(function(){
             if ($(this).val() == "") {
                 $(this).parent().append(errorMsg);
                 error=1;
-            } else {
-                $(this).parent().find('.errorMsg').remove();
-            }
+            } 
         });
         var priceErr = false;
         if ($('#parttime').val() == "")
@@ -108,9 +100,7 @@ $(document).ready(function(){
                    $('#price').parent().parent().append(intEMsg);
                     error = 1;
                     priceErr = true;
-                } else {
-                    $('#price').parent().parent().find('.errorMsg').remove();
-                }
+                } 
             }
             if(!priceErr && $('#pay_point').attr('checked') == "checked") {
                 if ($('#point').val() == "") {
@@ -119,9 +109,7 @@ $(document).ready(function(){
                 } else if (!re.test($('#point').val())){
                    $('#point').parent().parent().append(intEMsg);
                     error = 1;
-                } else {
-                    $('#point').parent().parent().find('.errorMsg').remove();
-                }
+                } 
             }
             if ($('#pay_coin').attr('checked') != "checked" && $('#pay_point').attr('checked') != "checked") {
                $('#point').parent().parent().append(errorMsg);
@@ -131,9 +119,7 @@ $(document).ready(function(){
         if (!re.test($('#profit').val())) {
             $('#profit').parent().append(intEMsg);
             error = 1;
-        } else {
-            $('#profit').parent().find('.errorMsg').remove();
-        }        
+        }     
         return error;
     }
     
@@ -167,7 +153,6 @@ $(document).ready(function(){
 {/literal}
 </script>
 
-
 <div class="zy_z">
 <ul class="ulFormStep">
       <li>1.填写发布信息</li>
@@ -178,42 +163,11 @@ $(document).ready(function(){
       <form id="information" method="post" action="/informations/check{if !empty($target)}?target={$target}{/if}">
             <input type="hidden" id="parttime" name="parttime" value="">
             <input type="hidden" name="target" value="">
-            <input type="hidden" name="target_member" value="">
-            
+            <input type="hidden" name="target_member" value="">            
             <dl>
               <dt>
                 <label><font class="facexh">*</font>信息标题：</label>
                 <input type="text" name="title" id="title" value="{$info.Information.title}">
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>省份：</label>
-                <select name="provincial" id="provincial">
-                  <option value="">请选择</option>
-                      {foreach $this->City->parentCityList() as $city}
-                        <option value="{$city.City.id}" {if $info.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
-                      {/foreach}
-                </select>
-
-                <label><font class="facexh">*</font>城市：</label>
-                    <select name="city" id="city">
-                      <option value="">请选择</option>
-                      {foreach $this->City->childrenCityList($info.Information.provincial) as $child}
-                        <option value="{$child.City.id}" {if {$child.City.id} == $info.Information.city}selected="selected"{/if}>{$child.City.name}</option>
-                      {/foreach}
-                    </select>
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>行业：</label>
-                <select name="industries_id" id="industries_id">
-                    <option value="">请选择</option>
-                        {foreach $this->Category->parentCategoryList() as $value}
-                            <option value="{$value.Category.id}" {if $info.Information.industries_id == $value.Category.id}selected="selected"{/if}>{$value.Category.name}</option>
-                        {/foreach}
-                </select>
-              </dt>
-              <dt>
-                <label><font class="facexh">*</font>采购单位：</label>
-                <input type="text" name="company" id="company" value="{$info.Information.company}">
               </dt>
               <dt class="productKinds">
                 <label><font class="facexh">*</font>产品名称：</label>
@@ -234,6 +188,34 @@ $(document).ready(function(){
                 -->
               </dt>
               <dt>
+                <label><font class="facexh">*</font>采购单位：</label>
+                <input type="text" name="company" id="company" value="{$info.Information.company}">
+              </dt>
+              <dt>
+                <label><font class="facexh">*</font>单位所在区域：</label>
+                <select name="provincial" id="provincial">
+                  <option value="">请选择省份</option>
+                      {foreach $this->City->parentCityList() as $city}
+                        <option value="{$city.City.id}" {if $info.Information.provincial == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
+                      {/foreach}
+                </select>
+                <select name="city" id="city">
+                  <option value="">请选择城市</option>
+                  {foreach $this->City->childrenCityList($info.Information.provincial) as $child}
+                    <option value="{$child.City.id}" {if {$child.City.id} == $info.Information.city}selected="selected"{/if}>{$child.City.name}</option>
+                  {/foreach}
+                </select>
+              </dt>
+              <dt>
+                <label><font class="facexh">*</font>行业：</label>
+                <select name="industries_id" id="industries_id">
+                    <option value="">请选择</option>
+                        {foreach $this->Category->parentCategoryList() as $value}
+                            <option value="{$value.Category.id}" {if $info.Information.industries_id == $value.Category.id}selected="selected"{/if}>{$value.Category.name}</option>
+                        {/foreach}
+                </select>
+              </dt>                            
+              <dt>
               <label><font class="facexh">*</font>有效期：</label>
               <ul class="validity">
                   <li>
@@ -250,15 +232,13 @@ $(document).ready(function(){
                 <label><font class="facexh">*</font>买家付款方式：</label>
                 <ul class="payType">
                 {if $info.Information.type != 1}
-                    <li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" {if $info.Information.payment_type != 2} checked="checked"{/if} />
-                    <label for="xianjinzhifu">现金支付：</label>
+                    <li>                    
+                    <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" {if $info.Information.payment_type != 2} checked="checked"{/if} />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{$info.Information.price}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>
                     </li>
-                    <li>
-                    <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" {if $info.Information.payment_type != 1} checked="checked"{/if} />
-                    <label for="jifenzhifu">积分支付：</label>
+                    <li>                    
+                    <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" {if $info.Information.payment_type != 1} checked="checked"{/if} />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="{$info.Information.point}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>分</span>
                     </li>

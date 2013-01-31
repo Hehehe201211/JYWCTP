@@ -326,8 +326,7 @@ $("body").append($(".divDjbuz"));
   <p class="biaot_wz">信息标题<strong>：{$information.Information.title}</strong></p>
   <p class="biaot_wz error" style="text-indent:20px;text-align:left;display:none" >请输入回复内容</p>
   <p style="width:430px;padding-top:8px;" class="biaot_wz">
-  <input name="information_complaints_id" type="hidden" id="complaints_id" value="{$complaint.InformationComplaint.id}" />
-  <textarea class="txtJytsly" name="answer" id="answer"></textarea>
+  <input name="information_complaints_id" type="hidden" id="complaints_id" value="{$complaint.InformationComplaint.id}" /><textarea class="txtJytsly" name="answer" id="answer"></textarea>
   </p>
   <div style="padding-left:80px;" class="biaot_an">
 	  <span><a href="javascript:void(0)" id="answerBtn">确定</a></span>

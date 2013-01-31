@@ -19,8 +19,12 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;<a href="qy-jzfbmx.html">兼职管理</a>&gt;&gt;<a href="#">发布兼职</a></p>      
-    </div>    
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">发布兼职</a>
+      </p>
+    </div>
 <ul class="ulFormStep ulFormStep2">
       <li>1.填写兼职信息</li>
       <li>2.确认兼职信息</li>
@@ -175,6 +179,9 @@ $(document).ready(function(){
               我接受 <a href="#">《聚业务兼职政策（试行）》</a> </label>
           </div>
           <div class="divBtnContainer" style="width:200px;">
+          {if isset($this->data['id'])}
+          <input type="hidden" name="id" value="{$this->data['id']}" />
+          {/if}
           <a href="javascript:void(0)" class="zclan zclan7" id="complete">提交</a>
           <a href="javascript:void(0)" class="zclan zclan7" id="back">修改</a>
           </div>

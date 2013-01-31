@@ -277,45 +277,39 @@ $(document).ready(function(){
                 <label><font class="facexh">*</font>买家付款方式：</label>
                 <ul class="payType">
                 {if !empty($target) && isset($targetInfo) && ($targetInfo.Information.payment_type == 1 || $targetInfo.Information.payment_type == 3)}
-                	<li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />
-                    <label for="xianjinzhifu">现金支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{$targetInfo.Information.price}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>
                     </li>
                 {elseif isset($this->data['pay_coin']) && $this->data['pay_coin'] == 1}
-                	<li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />
-                    <label for="xianjinzhifu">现金支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{$this->data['price']}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)"/>
                     <span>元</span>
                     </li>
                 {else}
-                	<li>
-                    <input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />
-                    <label for="xianjinzhifu">现金支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" checked="checked" />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>
                     </li>
                 {/if}                
                 {if !empty($target) && isset($targetInfo) && ($targetInfo.Information.payment_type == 2 || $targetInfo.Information.payment_type == 3)}
-                	<li>
-                    <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" checked="checked" />
-                    <label for="jifenzhifu">积分支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" checked="checked" />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="{$targetInfo.Information.point}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>分</span>
                  	</li>
                 {elseif isset($this->data['pay_point']) && $this->data['pay_point'] == 1}
-                	<li>
-                    <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" checked="checked" />
-                    <label for="jifenzhifu">积分支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" checked="checked" />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="{if isset($this->data['point'])}{$this->data['point']}{/if}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>分</span>
                  	</li>
                 {else}
-                	<li>
-                    <input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" />
-                    <label for="jifenzhifu">积分支付：</label>
+                	<li>                    
+                    <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>分</span>
                  	</li>
