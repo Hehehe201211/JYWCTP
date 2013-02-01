@@ -1,10 +1,20 @@
 $(document).ready(function(){	
-     $(".switchBox .divTable input:checkbox").attr("checked",false);
+    var NaV=browserNaV();
+    $(".switchBox .divTable input:checkbox").attr("checked",false);
+	$(".switchBox .selected input:checkbox").attr("checked","checked");
 	$(".switchBox .inpButton").click(function(){
 		$(this).parent().next().toggle();
-		if ($(".switchBox .divTable:visible").length==0) $(".inviteJobB .ulCompany1 li").css("z-index",0);
-		else $(".inviteJobB .ulCompany1 li").css("z-index",-1);
+		if (NaV=="msie6"||NaV=="msie7") {
+			if ($(".switchBox .divTable:visible").length==0) $(".inviteJobB .ulCompany1 li").css("z-index",0);
+			else $(".inviteJobB .ulCompany1 li").css("z-index",-1);
+		}
 	});
+	$(".dtSwitchBox .city").click(function(){
+		if (NaV=="msie6"||NaV=="msie7") {
+			if ($(".city .divTable:visible").length==0) $(".dtSwitchBox .trade").show();
+			else $(".dtSwitchBox .trade").hide();
+		}
+	});	
 	$(".goback a").click(function(e){
 		e.preventDefault();
 		$(this).parent().next().find(".options").show();

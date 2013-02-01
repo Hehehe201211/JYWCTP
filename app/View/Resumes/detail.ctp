@@ -1,11 +1,7 @@
 <script>
 //{literal}
 $(document).ready(function(){
-    $("body").append($("#jsxxxq"));    
-    $("body").append($("#jsxxxqE"));    
-    $("body").append($("#jsxxxqW"));    
-    $("body").append($("#jsxxxqJ"));
-    
+    $("body").append($(".jsxxxqB"));    
     datepIniChange("#birthday","birth");
     datepIniChange("#eduBegin","EPbirth");
     datepIniChange("#eduEnd","EPbirth");    
@@ -13,9 +9,9 @@ $(document).ready(function(){
     datepIniChange("#workEnd","EPbirth");    
     datepIniChange("#workTime","EPbirth");
     
-    $(".resumeEdit").click(function(){
+    /*$(".resumeEdit").click(function(){
         bgKuang("#jsxxxq",".jsxxxqB .closeDiv");            
-    });
+    });*/
     $(".eduEdit").click(function(){
         bgKuang("#jsxxxqE",".jsxxxqB .closeDiv");            
     });
@@ -24,9 +20,8 @@ $(document).ready(function(){
     });
     $(".jobEdit").click(function(){
         bgKuang("#jsxxxqJ",".jsxxxqB .closeDiv");            
-    });
-        
-    $("button.addContact").live("click",function(e){
+    });        
+    /*$("button.addContact").live("click",function(e){
         e.preventDefault();
         $(this).parent().after($(this).parent().clone());
         $(this).parent().next().children(".inpTextBox").val("");
@@ -35,7 +30,7 @@ $(document).ready(function(){
         e.preventDefault();
         if ($("button.deleContact").length>1) $(this).parent().remove(); 
     });
-    
+*/    
     $(".divExpect .addOpts").click(function(){
       var selOpts=$(this).parent().parent().find(".selOpts option:selected");
       var seledOpts=$(this).parent().parent().find(".seledOpts");      
@@ -65,9 +60,10 @@ $(document).ready(function(){
       </p>
     </div>
     <div class="znx resume">
-      <div class="znxContent conResume" style="border-top-width:1px;">
+      <div class="znxContent conResume" style="border-top:1px solid #ccc;">
         <div class="znxConSys">
-          <div class="biaotit">基础信息<a href="javascript:;" class="left resumeEdit">编辑</a></div>
+          <h2><a target="_blank" href="/resumes/preview?id={$resume.Resume.id}" title="预览">{$resume.Resume.title}</a></h2>
+          <div class="biaotit">基础信息<!--<a href="javascript:;" class="left resumeEdit">编辑</a>--></div>
           <table class="preview" border="1" cellspacing="0" cellpadding="0" id="baseInfo" width="593">
             <tr>
               <td width="8%" class="tlt tltL">姓名：</td>
@@ -116,7 +112,7 @@ $(document).ready(function(){
 地址：</td>
               <td colspan="2" >{$resumeBase.ResumeBase.address}</td>
             </tr>            
-          </table>    
+          </table>
           <div class="biaotit">教育经历<a href="javascript:;" class="eduEdit">编辑</a></div>
           <table class="con_2_table preview" border="1" cellspacing="0" cellpadding="0" width="593">
             <thead>
@@ -210,7 +206,7 @@ $(document).ready(function(){
         </div>
       </div>
     </div>
-    <div class="jsxxxq jsxxxqB" id="jsxxxq"> <a class="closeDiv" href="#">&nbsp;</a>
+    <!--<div class="jsxxxq jsxxxqB" id="jsxxxq"> <a class="closeDiv" href="#">&nbsp;</a>
     <div class="biaotit">基础信息（<font class="facexh">*</font>表示必填项）</div>
       <div class="sjle">
         <form id="information" method="post" action="">          
@@ -246,34 +242,31 @@ $(document).ready(function(){
                 </li>
               </ul>
             </dt>
+            <dt><label>国籍：</label><input type="text" class="inpTextBox" />              
+            </dt>
             <dt>
-              <label>国籍：</label>
-              <select name="">
-                <option value="">请选择</option>
-                <option value="1">中国</option>
-                <option value="2">美国</option>
-              </select>
-              <label>民族：</label>
+            <label>民族：</label>
               <select name="">
                 <option value="1">汉族</option>
                 <option value="2">苗族</option>
                 <option value="3">高山族</option>
-              </select>
+              </select>              
             </dt>
-            <dt class="select100">
-              <label>户口所在地：</label>
+            <dt>
+              <label>户籍：</label>
               <select name="">
-                <option value="">请选择</option>
+                <option value="">请选择省份</option>
                 <option value="1">福建省</option>
                 <option value="2">广东省</option>
               </select>
               <select name="">
+                <option value="">请选择城市</option>
                 <option value="1">厦门市</option>
                 <option value="2">福州市</option>
                 <option value="3">泉州市</option>
               </select>
-            </dt>
-            <dt class="select100">
+            </dt>                                                
+            <dt>
               <label><font class="facexh">*</font>现居住地：</label>
               <select name="">
                 <option value="">请选择</option>
@@ -287,21 +280,13 @@ $(document).ready(function(){
               </select>
             </dt>
             <dt>
-              <label>联系方式：</label>
-              <div class="area1">
-                <select>
-                  <option>座机</option>
-                  <option selected="selected">手机</option>
-                  <option>QQ</option>
-                  <option>MSN</option>
-                  <option>E-mail</option>
-                  <option>其他</option>
-                </select>
-              </div>
-              <input type="text" style="width:155px;">
-              <button class="addContact">添加</button>
-              <button class="deleContact">删除</button>
+              <label><font class="facexh">*</font>联系电话：</label>
+              <input type="text" name="telephone" id="telephone" value="" onkeyup="phoneNum(this)" onpaste="phoneNum(this)"/>
             </dt>
+            <dt>
+              <label><font class="facexh">*</font>电子邮箱：</label>
+              <input type="text" name="email" id="email" value="" onkeyup="Emailstr(this)" onpaste="Emailstr(this)"/>
+            </dt>            
             <dt>
               <label><font class="facexh">*</font>联系地址：</label>
               <input type="text"/>
@@ -310,7 +295,7 @@ $(document).ready(function(){
           <a class="zclan zclan4" href="javascript:var a=$('.jsxxxqB .closeDiv').click();" >修改</a>
         </form>
       </div>
-    </div>
+    </div>-->
     <div class="jsxxxq jsxxxqB" id="jsxxxqE"> <a class="closeDiv" href="#">&nbsp;</a>
       <div class="biaotit">教育经历（<font class="facexh">*</font>表示必填项）</div>
       <div class="sjle">

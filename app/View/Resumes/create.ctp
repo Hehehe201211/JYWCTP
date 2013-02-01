@@ -57,21 +57,18 @@ $(document).ready(function(){
 		else $(this).parent().next().slideUp();
 	});
     
-	var checkTarget = ['title', 'school','discipline','school_type','educated','evaluation','intention','salary','workTime'];
+	var checkTarget = ['title', 'school','discipline','educated','evaluation','intention','salary','workTime'];
 	var errorMsg = '<span class="errorMsg">请输入此项目</span>';
 	var dateEMsg = '<span class="errorMsg">请正确输入时间</span>';
 	var optEMsg = '<span class="errorMsg">请选择期望选项</span>';
     $('#check').click(function(){
-        var error=0;
+		$(".sjle").find(".errorMsg").remove();
+        var error=0;		
 		$.each(checkTarget, function(target){
 			if($('#' + this).val() == "") {
-				if($('#' + this).parent().find('.errorMsg').length == 0) {
-					$('#' + this).parent().append(errorMsg);
-				}
+				$('#' + this).parent().append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parent().find('.errorMsg').remove();
-			}
+			} 
 		});
 		if($('#eduBegin').val() == "" || $('#eduEnd').val() == "") {
 			$('#eduBegin').parent().parent().append(dateEMsg);
@@ -81,43 +78,29 @@ $(document).ready(function(){
 			     $('#eduBegin').parent().parent().append(dateEMsg);
                  error=1;
 			}
-		} else {
-			$('#eduBegin').parent().parent().find('.errorMsg').remove();
-		}
-		
+		} 		
 		if($('#workBegin').val() != "" || $('#workEnd').val() != "") {			
 			if (($('#workBegin').val() == "" && $('#workEnd').val() !="") || ($('#workBegin').val() > $('#workEnd').val())) {
 			     $('#workBegin').parent().parent().append(dateEMsg);
                  error=1;
-			} else {
-			    $('#workBegin').parent().parent().find('.errorMsg').remove();
-		    }
+			} 
 		} 
 			
 		if($("#category_contain option").length==0) {
 			$('#category_contain').prev().append(optEMsg);
 			error=1;
-		} else {
-			$('#category_contain').prev().find('.errorMsg').remove();
-		}		
+		} 	
 		if($("#city_contain option").length==0) {
 			$('#city_contain').prev().append(optEMsg);
 			error=1;
-		} else {
-			$('#city_contain').prev().find('.errorMsg').remove();
-		}	
-		
+		} 		
 		if ($(".ckbWork").attr("checked")=="checked") {
 			var checkTargetW = ['company','work_category','post','service','department','responsiblly','wrok_salary','reason'];
 			$.each(checkTargetW, function(target){
 				if($('#' + this).val() == "") {
-					if($('#' + this).parent().find('.errorMsg').length == 0) {
-						$('#' + this).parent().append(errorMsg);
-					}
+					$('#' + this).parent().append(errorMsg);
 					error=1;
-				} else {
-					$('#' + this).parent().find('.errorMsg').remove();
-				}
+				} 
 		    });
 			if($('#workBegin').val() == "" || $('#workEnd').val() == "") {
 			$('#workBegin').parent().parent().append(dateEMsg);
@@ -127,9 +110,7 @@ $(document).ready(function(){
 					 $('#workBegin').parent().parent().append(dateEMsg);
 					 error=1;
 				}
-			} else {
-				$('#workBegin').parent().parent().find('.errorMsg').remove();
-			}
+			} 
 		}
 		
 		if (!error) {
@@ -224,7 +205,7 @@ $(document).ready(function(){
                 {/if}
             </dt>
             <dt class="productKinds">
-                <label><font class="facexh">*</font>就学形式：</label>
+                <label>就学形式：</label>
                 {if isset($this->data['school_type'])}
                 <select name="school_type" id="school_type">
                     <option value="">请选择就学形式</option>

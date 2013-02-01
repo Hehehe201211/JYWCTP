@@ -53,7 +53,27 @@ $(document).ready(function(){
                     }
                 });
             }
-        }        
+        }
+    });
+    $("#delete").click(function(){
+        if(confirm('确定删除此职位信息？')){
+                var fulltime_id = $('#fulltime_id').val();
+                $.ajax({
+                    url : '/fulltimes/delete',
+                    type : 'post',
+                    data : 'id=' + fulltime_id,
+                    success : function(data)
+                    {
+                        var result = eval("("+data+")");
+                        if (result.result == 'OK') {
+                            alert(result.msg);
+                            location.href = '/fulltimes/listview';
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
     });
 });
 {/literal}
@@ -86,13 +106,29 @@ $(document).ready(function(){
             <td class="red">已验证</td>
           </tr>
           {/if}
+           <tr>
+            <th width="25%">招聘职位：</th>
+            <td width="75%">{$fulltime.Fulltime.post}</td>
+          </tr>
+          <tr>
+            <th>招聘单位：</th>
+            <td>{$fulltime.Fulltime.company}</td>
+          </tr>
+          <tr>
+            <th>招聘有效期：</th>
+            <td>{$fulltime.Fulltime.begin|date_format:"%Y-%m-%d"}&nbsp;至&nbsp;{$fulltime.Fulltime.end|date_format:"%Y-%m-%d"}</td>
+          </tr>
           <tr>
             <th>工作性质：</th>
             <td>{$fulltime.Fulltime.type}</td>
           </tr>
           <tr>
-            <th>薪资待遇：</th>
+            <th>底薪：</th>
             <td>{$fulltime.Fulltime.salary}元</td>
+          </tr>
+          <tr>
+            <th>待遇：</th>
+            <td>{$fulltime.Fulltime.treatment}</td>
           </tr>
           <tr>
             <th>学历要求：</th>
@@ -156,19 +192,20 @@ $(document).ready(function(){
             <td><p>{$fulltime.Fulltime.additional}</p></td>
           </tr>
           {/foreach}
-        </table>      
-        {if !$isAuthor}
-			   <div style="width:200px;" class="divBtnContainer">
-                <a class="zclan zclan7 btnDeliverR" href="javascript:void(0)" id="candidate">投递简历</a>
+        </table>    
+        <div style="width:200px;" class="divBtnContainer">  
+        {if !$isAuthor}			   
+                <a class="zclan zclan7" href="javascript:void(0)" id="candidate">投递简历</a>
                 {if $showFavourite == 'add'}
                     <a class="zclan zclan7 add" href="javascript:void(0)" id="favorite">收藏</a>
                 {elseif $showFavourite == 'delete'}
                     <a class="zclan zclan7 del" href="javascript:void(0)" id="favorite">删除收藏</a>
-                {/if}
-			  </div>
+                {/if}			  
             {else}
-                <a class="zclan zclan4 btnDeliverR" href="javascript:void(0)" id="delete">删除职位</a>
+                <a class="zclan zclan7" href="/fulltimes/edit/?id={$this->request->query['id']}" id="">修改</a>
+                <a class="zclan zclan7" href="javascript:void(0)" id="delete">删除职位</a>
             {/if}
+            </div>
     </div>
 </div>
 <input type="hidden" name="fulltime_id" id="fulltime_id" value="{$fulltime.Fulltime.id}" />

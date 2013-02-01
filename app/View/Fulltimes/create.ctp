@@ -1,6 +1,8 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+    datepIniChange("#open","indate");
+    datepIniChange("#close","indate");
     //check number
     $('#checkNum').after('<img id="code" src="/members/image">');
     $('#captcha').click(function(){
@@ -26,23 +28,19 @@ $(document).ready(function(){
         }
     });
     
-    
-    datepIniChange("#open","indate");
-	datepIniChange("#close","indate");
-	
-	$("button.addContact").live("click",function(e){
-		e.preventDefault();
-		$(this).parent().after($(this).parent().clone());
-		$(this).parent().next().children(".inpTextBox").val("");
-	});
-	$("button.deleContact").live("click",function(e){
-		e.preventDefault();
-		if ($("button.deleContact").length>1) $(this).parent().remove(); 
-	});
+    $("button.addContact").live("click",function(e){
+        e.preventDefault();
+        $(this).parent().after($(this).parent().clone());
+        $(this).parent().next().children(".inpTextBox").val("");
+    });
+    $("button.deleContact").live("click",function(e){
+        e.preventDefault();
+        if ($("button.deleContact").length>1) $(this).parent().remove(); 
+    });
   
     $('#check').click(function(){
-		if (!checkData()) {
-		  $.ajax({
+        if (!checkData()) {
+          $.ajax({
               url : '/members/getImageNumber',
               type : 'post',
               success : function(data)
@@ -50,52 +48,51 @@ $(document).ready(function(){
                   if (data == $("#checkNum").val().toUpperCase()) {
                       $("#fulltime").submit();
                   } else {
-                      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
-                          $("#checkNum").parent().append('<span class="errorMsg">验证码不一致</span>');
-                      } else {
-                          $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
-                      }
+                      $("#checkNum").parent().append('<span class="errorMsg">验证码不一致</span>');
                   }
               }
           });
-		}
-	});
-	var checkTarget = ['title','post','company','number','contact','salary','require','checkNum', 'provincial', 'city', 'category', 'educated', 'continued'];
-	var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>';	
-	var dateEMsg = '<span style="color:red" class="errorMsg">请正确输入时间</span>';
-	function checkData() 	{
-		var error=0;
-		$(".sjle").find(".errorMsg").remove();
-		$.each(checkTarget, function(target){
-			if($('#' + this).val() == "") {
-				$('#' + this).parent('dt').append(errorMsg);
-				error=1;
-			} 
-		});		
-		if($('#open').val() == "" || $('#close').val() == "") {
-			$('#open').parent().parent().append(errorMsg);
-			error=1;
-		} else if($('#open').val() != "" && $('#close').val() != "") {			
-			if ($('#close').val() < $('#open').val()) {
-			     $('#open').parent().parent().append(dateEMsg);
+        }
+    });
+    var checkTarget = ['title','post','company','number','contact','salary','require','checkNum', 'provincial', 'city', 'category', 'educated', 'continued'];
+    var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>';    
+    var dateEMsg = '<span style="color:red" class="errorMsg">请正确输入时间</span>';
+    function checkData()     {
+        var error=0;
+        $(".sjle").find(".errorMsg").remove();
+        $.each(checkTarget, function(target){
+            if($('#' + this).val() == "") {
+                $('#' + this).parent('dt').append(errorMsg);
+                error=1;
+            } 
+        });    
+        $(".method_number").each(function(index) {
+            if ($(this).val()=="") $(this).parent().append(errorMsg);
+        });
+        if($('#open').val() == "" || $('#close').val() == "") {
+            $('#open').parent().parent().append(errorMsg);
+            error=1;
+        } else if($('#open').val() != "" && $('#close').val() != "") {            
+            if ($('#close').val() < $('#open').val()) {
+                 $('#open').parent().parent().append(dateEMsg);
                  error=1;
-			} 
-		}		
-		if($('#vehicle:checked').length == 0) {
-			$('#vehicle').parent().append("<span class='errorMsg'>请接受协议</span>");
-			error=1;
-		} 
-		return error;
-	}
+            } 
+        }        
+        if($('#vehicle:checked').length == 0) {
+            $('#vehicle').parent().append("<span class='errorMsg'>请接受协议</span>");
+            error=1;
+        } 
+        return error;
+    }
 });
-//{/literal}
+{/literal}
 </script>
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="qy-jzfbmx.html">常规招聘</a>&gt;&gt;
-            <a href="#">发布招聘需求</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">常规招聘</a>&gt;&gt;
+            <a href="javascript:void(0)">发布招聘需求</a>
         </p>
     </div>
     <div class="biaotit">发布招聘需求</div>
@@ -131,10 +128,11 @@ $(document).ready(function(){
             <dt>
                 <label><font class="facexh">*</font>性别要求：</label>
                 <div class="divSex jobNature">
-                {if isset($this->data['sex'])}                   
-                    <label> <input type="radio" name="sex" id="jobSexM" class="inpRadio" {if $this->data['type'] == "1"} checked="checked" {/if} value="1"/>男</label>                    
-                    <label><input type="radio" name="sex" id="jobSexF" class="inpRadio" {if $this->data['type'] == "2"} checked="checked" {/if} value="2"/>女</label>                    
-                    <label><input type="radio" name="sex" id="jobSexN" class="inpRadio" {if $this->data['type'] == "0"} checked="checked" {/if} value="0"/>不限</label>
+                
+                {if isset($this->data['sex'])}
+                    <label> <input type="radio" name="sex" id="jobSexM" class="inpRadio" {if $this->data['sex'] == 1} checked="checked" {/if} value="1"/>男</label>                    
+                    <label><input type="radio" name="sex" id="jobSexF" class="inpRadio" {if $this->data['sex'] == 2} checked="checked" {/if} value="2"/>女</label>                    
+                    <label><input type="radio" name="sex" id="jobSexN" class="inpRadio" {if $this->data['sex'] == 0} checked="checked" {/if} value="0"/>不限</label>
                 {else}                    
                     <label><input type="radio" name="sex" id="jobSexM" class="inpRadio" value="1"/>男</label>                    
                     <label><input type="radio" name="sex" id="jobSexF" class="inpRadio" value="2"/>女</label>                    
@@ -144,7 +142,6 @@ $(document).ready(function(){
             </dt>
             <dt>
                 <label><font class="facexh">*</font>学历要求：</label>
-                <div class="area1">
                 {if isset($this->data['educated'])}
                 <select id="educated" name="educated">
                     <option {if $this->data['educated'] == "0"}selected="selected"{/if} value="0">不限</option>
@@ -170,11 +167,9 @@ $(document).ready(function(){
                     <option value="8">博士研究生以上</option>
                 </select>
                 {/if}
-                </div>
             </dt>
             <dt>
                 <label><font class="facexh">*</font>工作经验：</label>
-                <div class="area1">
                 {if isset($this->data['continued'])}
                     <select name="continued" id="continued">
                         <option value="0" {if $this->data['continued'] == "0"}selected="selected"{/if}>不限</option>
@@ -192,7 +187,6 @@ $(document).ready(function(){
                         <option value="4">3年以上</option>
                     </select>
                 {/if}
-                </div>
             </dt>
             <dt>
                 <label><font class="facexh">*</font>招聘有效期：</label>
@@ -229,27 +223,27 @@ $(document).ready(function(){
             <dt>
                 <label><font class="facexh">*</font>工作城市：</label>
                 {if isset($this->data['provincial'])}
-                    <select id="provincial" name="provincial" class="sel2211">
-                        <option value="">请选择</option>
+                    <select id="provincial" name="provincial">
+                        <option value="">请选择省份</option>
                         {foreach $this->City->parentCityList() as $city}
                             <option value="{$city.City.id}" {if $this->data['provincial'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
                         {/foreach}
-                    </select>&nbsp;
-                    <select id="city" name="city" class="sel2211" style="float:none">
-                        <option value="">请选择</option>
+                    </select>
+                    <select id="city" name="city">
+                        <option value="">请选择城市</option>
                         {foreach $this->City->childrenCityList($this->data['provincial']) as $city}
                             <option value="{$city.City.id}" {if $this->data['city'] == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
                         {/foreach}
                     </select>
                 {else}
-                    <select id="provincial" name="provincial" class="sel2211">
-                        <option selected="selected" value="">请选择</option>
+                    <select id="provincial" name="provincial">
+                        <option selected="selected" value="">请选择省份</option>
                         {foreach $this->City->parentCityList() as $city}
                             <option value="{$city.City.id}">{$city.City.name}</option>
                         {/foreach}
-                    </select>&nbsp;
-                    <select id="city" name="city" class="sel2211" style="float:none">
-                        <option selected="selected" value="">请选择</option>
+                    </select>
+                    <select id="city" name="city">
+                        <option selected="selected" value="">请选择城市</option>
                     </select>
                 {/if}
             </dt>
@@ -260,33 +254,37 @@ $(document).ready(function(){
             {if isset($this->data['method'])}
             {foreach $this->data['method'] as $key => $method}
             <dt>
-                <label>联系方式：</label>
+                <label><font class="facexh">*</font>联系方式：</label>
                 <div class="area1">
                     <select name="method[]">
                         <option value="座机" {if $method == "座机"}selected="selected"{/if}>座机</option>
                         <option value="手机" {if $method == "手机"}selected="selected"{/if}>手机</option>
-                        <option value="QQ" {if $method == "QQ"}selected="selected"{/if}>QQ</option>
-                        <option value="MSN" {if $method == "MSN"}selected="selected"{/if}>MSN</option>
                         <option value="E-mail" {if $method == "E-mail"}selected="selected"{/if}>E-mail</option>
+                        <option value="QQ" {if $method == "QQ"}selected="selected"{/if}>QQ</option>
+                        <option value="MSN" {if $method == "MSN"}selected="selected"{/if}>MSN</option>                       
+                        <option value="Skype" {if $method == "Skype"}selected="selected"{/if}>Skype</option>
+                        <option value="其他" {if $method == "其他"}selected="selected"{/if}>其他</option>
                     </select>
                 </div>
-                <input type="text" name="method_number[]" value="{$this->data['method_number'][$key]}" style="width:108px;" onpaste="Emailstr(this)" onkeyup="Emailstr(this)" />
+                <input type="text" name="method_number[]" value="{$this->data['method_number'][$key]}" style="width:108px;" onpaste="Emailstr(this)" onkeyup="Emailstr(this)" class="method_number"/>
                 <button class="addContact" type="button">添加</button><button class="deleContact" type="button">删除</button>
             </dt>
             {/foreach}
             {else}
             <dt>
-                <label>联系方式：</label>
+                <label><font class="facexh">*</font>联系方式：</label>
                 <div class="area1">
                     <select name="method[]">
                         <option value="座机">座机</option>
-                        <option value="手机">手机</option>
-                        <option value="QQ">QQ</option>
-                        <option value="MSN">MSN</option>
-                        <option value="E-mail">E-mail</option>
+                <option value="手机">手机</option>
+        <option value="E-mail">E-mail</option>
+                <option value="QQ">Q Q</option>                
+                <option value="MSN">MSN</option>
+        <option value="Skype">Skype</option>
+        <option value="其他">其他</option>
                     </select>
                 </div>
-                <input type="text" name="method_number[]" style="width:108px;" onpaste="Emailstr(this)" onkeyup="Emailstr(this)" />
+                <input type="text" name="method_number[]" style="width:108px;" onpaste="Emailstr(this)" onkeyup="Emailstr(this)" class="method_number"/>
                 <button class="addContact">添加</button><button class="deleContact">删除</button>
             </dt>
             {/if}                      
@@ -294,7 +292,7 @@ $(document).ready(function(){
                 <label>联系邮箱：</label>
                 <input type="text" name="email" class="post" value="{if isset($this->data['email'])}{$this->data['email']}{/if}" />（如果有多个邮箱，请以","隔开）
             </dt>-->
-			<dt>
+            <dt>
                 <label><font class="facexh">*</font>底薪：</label>
                 <input type="text" id="salary" name="salary" value="{if isset($this->data['salary'])}{$this->data['salary']}{/if}">
             </dt>
@@ -304,7 +302,7 @@ $(document).ready(function(){
             </dt>
             <dt>
                 <label><font class="facexh">*</font>职位要求：</label>
-                <textarea cols="45" rows="5" name="require">{if isset($this->data['require'])}{$this->data['require']}{/if}</textarea>
+                <textarea cols="45" rows="5" name="require" id="require">{if isset($this->data['require'])}{$this->data['require']}{/if}</textarea>
             </dt>
             <dt>
                 <label>补充说明：</label>
@@ -322,7 +320,10 @@ $(document).ready(function(){
                 <input type="checkbox" id="vehicle" name="vehicle" class="inpCheckbox"/>我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务服务协议（试行）》</a>
             </label>
         </div>
-		<div class="clearfix"></div>
+        <div class="clearfix"></div>
+        {if isset($this->data['id'])}
+        <input type="hidden" value="{$this->data['id']}" name="id" />
+        {/if}
         <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
     </form>
     </div>

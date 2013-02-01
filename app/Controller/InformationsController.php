@@ -93,7 +93,7 @@ class InformationsController extends AppController
     public function complete()
     {
         $this->set('title_for_layout', "信息发布完成");
-        if ($this->request->data['type'] == 0) {
+        if ($this->request->data['type'] != 1) {
             $data = array(
                 'members_id'        => $this->_memberInfo['Member']['id'],
                 'type'              => $this->request->data['type'],
@@ -158,7 +158,7 @@ class InformationsController extends AppController
             $data['id'] = $this->request->data['id'];
         }
         $success = false;
-        if ($this->request->data['type'] == 0) {
+        if ($this->request->data['type'] != 1) {
             $target_members_id = isset($this->request->data['target_member']) ? $this->request->data['target_member'] : null;
             $target_information_id = null;
             $type = 'demand';
@@ -1029,7 +1029,7 @@ class InformationsController extends AppController
         if (isset($this->request->query['type'])) {
             $type = $this->request->query['type'];
             if ($type == 'has'){
-               $conditions['type'] = 0;
+               $conditions['type'] = array(0, 2);
                $this->set('title_for_layout', "客源列表");
                $this->set('naviText', "客源列表");
             } else {

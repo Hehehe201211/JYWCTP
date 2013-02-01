@@ -232,8 +232,8 @@ $(document).ready(function(){
     });
     $(".titleZC").click(function(){
 		$(this).parent().find(".errorMsg").remove();
-        $(".titleZC:eq(0)").next().slideToggle("normal");
-        $(".titleZC:eq(1)").next().slideToggle("normal");
+        $(".titleZC:eq(0)").toggleClass("titleZCc").next().slideToggle("normal");
+        $(".titleZC:eq(1)").toggleClass("titleZCc").next().slideToggle("normal");
       });
     // email format check
     function checkEmailFormat(email)
@@ -250,7 +250,7 @@ function hideWarning(){
 
 <div id="zccon">
   <div class="le">
-    <h1 class="titleZC">个人用户注册</h1>
+    <h1 class="titleZC" title="点击切换用户注册类型">个人用户注册</h1>
     <div style="height:260px;">
       <form id="member_register" action="/members/check" method="post">
         <dl>
@@ -283,7 +283,7 @@ function hideWarning(){
         <a class="zclan" href="javascript:void(0)" id="register">注册</a>
       </form>
     </div>
-    <h1 class="titleZC titleZCH">企业用户注册</h1>
+    <h1 class="titleZC titleZCc" title="点击切换用户注册类型">企业用户注册</h1>
     <div style="display:none;">
       <form id="company_register" action="/members/check" method="post">
         <dl>

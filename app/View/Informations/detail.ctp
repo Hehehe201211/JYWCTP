@@ -73,18 +73,20 @@ $(document).ready(function(){
           {/if}
           </td>
         </tr>
-        {if $information.Information.type == 0}
+        {if $information.Information.type != 1}
          <tr>
           <th>行业：</th>
           <td>{$this->Category->getCategoryName({$information.Information.industries_id})}</td>
         </tr>
-        {/if}            
+        {/if}
+        {if $information.Information.type != 2}
         <tr>
           <th>信息交易价格：</th>
           <td>{if $information.Information.payment_type != 2}业务币：{$information.Information.price}元{/if}
                   {if $information.Information.payment_type != 1}积分：{$information.Information.point}分{/if}</td>
-        </tr> 
-        {if $information.Information.type == 0}        
+        </tr>
+        {/if}
+        {if $information.Information.type != 1}
         <tr>
           <th>联系人：</th>
           <td class="red">{$information.Information.contact}</td>
@@ -108,7 +110,7 @@ $(document).ready(function(){
           <th>有效期：</th>
           <td>{$information.Information.open|date_format:"%Y-%m-%d"} - {$information.Information.close|date_format:"%Y-%m-%d"}</td>
         </tr>
-        {if $information.Information.type == 0}
+        {if $information.Information.type != 1}
         <tr>
           <th>预计合作金额：</th>
           <td>{if empty($information.Information.profit)}0{else}{$information.Information.profit}{/if}元人民币</td>

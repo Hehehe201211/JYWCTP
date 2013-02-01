@@ -133,7 +133,7 @@ $(document).ready(function(){
       <li>2.确认兼职信息</li>
       <li>3.兼职发布成功</li>
     </ul>
-      <div class="sjle" style="min-height:850px;">
+      <div class="sjle" style="min-height:896px;">
         <form method="post" action="/parttimes/check" id="parttimeForm">
           <dl>
             <dt>
@@ -300,7 +300,7 @@ $(document).ready(function(){
             <dd>
               <dl class="selected" style="display: block;">
                 {foreach $industries as $industry}
-                <dd><label><input type="checkbox" class="inpCheckbox" value="{$industry}" checked="checked"></label>{$this->Category->getCategoryName($industry)}</dd>
+                <dd><label><input type="checkbox" class="inpCheckbox" value="{$industry}" checked="checked">{$this->Category->getCategoryName($industry)}</label></dd>
                 {/foreach}
               </dl>
             </dd>
@@ -362,7 +362,7 @@ $(document).ready(function(){
           <div class="clearfix"></div>
           <div class="divProtocol">
             <label for="vehicle" class="protocol">
-                <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehicle">我接受 <a target="_blank" href="#">《聚业务服务协议（试行）》</a>
+                <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehicle">我接受 <a target="_blank" href="/static?tpl=mianze">《聚业务服务协议（试行）》</a>
             </label>
         </div>
         <div class="clearfix"></div>

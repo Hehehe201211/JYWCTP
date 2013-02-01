@@ -44,7 +44,7 @@ textarea{letter-spacing:1px;}
 .switch_box table tr{background:none;}
 .textEllipsis{display:block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .width1000{width:1000px;margin:0 auto;}
-.xian1{height:1px;margin:0 0 8px 0;width:auto;clear:both;border-bottom:1px solid #FFF;border-top: 1px solid #DDD;}
+.xian1{height:1px;margin:0 0 8px 0;width:auto;clear:both;border-bottom:1px solid #FFF;border-top: 1px solid #DDD;_line-height:1px;}
 .xian2{height:1px;margin-bottom:35px;width:100%;border-bottom:1px solid #FFF;border-top:1px solid #DDD;}
 .xian3{height:1px;border-bottom:1px #666 dotted;margin:20px;clear:both;}
 .zclan{text-align:center;width:88px;height:30px;background:url(../img/btnbgs.gif) -87px 0 no-repeat;display:block;font:bold 14px/30px "";color:#EEE;margin:0 0 0 200px;text-shadow:0 0 12px #F00;border-width:0;}

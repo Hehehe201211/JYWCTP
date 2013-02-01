@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$('#back').click(function(){
 		var type = $('#type').val();
 		var action;
-		if (type == 0) {
+		if (type != 1) {
 			action = '/informations/create/has';
 		} else {
 			action = '/informations/create/need';
@@ -68,7 +68,7 @@ $(document).ready(function(){
           <td>{$industry}
 			<input type="hidden" value="{$this->data['industries_id']}" name="industries_id" /></td>
         </tr>         
-        {if empty($this->data['parttime'])}
+        {if empty($this->data['parttime']) && $this->data['type'] == 0}
 	<tr>
 		<th>信息交易价格：</th>
 		<td>

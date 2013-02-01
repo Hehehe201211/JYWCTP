@@ -2,7 +2,7 @@
 {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-<table width="593" cellspacing="0" cellpadding="0" border="0" class="con_2_table" style="margin:0 5px 6px;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table" style="margin:0 5px 6px;">
   <thead>
     <tr class="con_2_tr con_2_xq_too">
       <th style="width:75px;" class="tr_td8">简历标题</th>

@@ -45,12 +45,6 @@ $(document).ready(function(){
 	});
 	
 	//是否看过
-	$(".con_2_tr td").each(function() {
-       $(this).eq(0).find("a").css("font-weight","bold"); 
-    });
-	$(".con_2_xq_tofu a").each(function() {
-       $(this).css("font-weight","normal"); 
-    });
 	$(".con_2_tr th a,.con_2_tr td a").live("click",function(){
 		$(this).parent().parent().find("a").css("font-weight","normal");
 	});

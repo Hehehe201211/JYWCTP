@@ -36,14 +36,7 @@ $(document).ready(function(){
 	                date.getHours() + ":" + 
 	                date.getMinutes() + ":" 
 	                date.getSeconds();
-                var str = '<div class="xq_huif_tet">' + 
-		              '<p class="xq_huif_tet11">' +
-		                  '<strong>我</strong>' +
-		                  '<span>的评价：' + levelstr + '</span>' +
-		                  comment + 
-		              '</p>'+
-		              '<p class="xq_huif_riq">' + time + '</p>' +
-		            '</div>';
+                var str = '<div class="name">我</div><div class="time">' +time +'</div><div class="content"><span class="appraise">评价'+ levelstr + '</span>'+ comment + '</div>';
                     $('.appraisal_area').html(str);
                 }
             }
@@ -200,34 +193,33 @@ $(document).ready(function(){
     {if $showAppraisal}
       <div class="appraisal_radio">
         <span>对本次交易的评价：</span>
-        <input type="hidden" checked="input" id="information_id" name="information_id" value="{$information.Information.id}">
-        <input type="radio" checked="checked" id="rdoEstimate1" name="rdoEstimate" class="inpRadio" value="2">
-        <label for="rdoEstimate1">好（2分）</label>
-        <input type="radio" id="rdoEstimate2" name="rdoEstimate" class="inpRadio" value="1">
-        <label for="rdoEstimate2">一般（1分）</label>
-        <input type="radio" id="rdoEstimate3" name="rdoEstimate" class="inpRadio" value="0">
-        <label for="rdoEstimate3">差（-1分）</label>        
+        <input type="hidden" checked="input" id="information_id" name="information_id" value="{$information.Information.id}">        
+        <label><input type="radio" checked="checked" id="rdoEstimate1" name="rdoEstimate" class="inpRadio" value="2">好（2分）</label>        
+        <label><input type="radio" id="rdoEstimate2" name="rdoEstimate" class="inpRadio" value="1">一般（1分）</label>        
+        <label><input type="radio" id="rdoEstimate3" name="rdoEstimate" class="inpRadio" value="0">差（-1分）</label>        
       </div>
-    {/if}
-      <div class="appraisal_area">      
+    {/if}      
+    </div>    
         {if $showAppraisal}
+        <div class="txtEstimate">      
             <span>评论：</span><textarea class="textaEstimate" name="appraisal_comment" id="appraisal_comment"></textarea>
             <input type="button" id="appraisal" value="确定" name="btnEstimate" class="btn inpButton">
             <div style="margin-bottom:8px;">（请及时评价，从交易日起，10个工作日后系统将自动评价。）</div>
-        {else if isset($appraisal) && !empty($appraisal)}
-            <div class="xq_huif_tet">
-              <p class="xq_huif_tet11">                  
-                  <span><strong>{if $type == "need"}我{else}{$author.Member.nickname}{/if}</strong>{if $type == "need"}的评价{else}对你的评价{/if}：{if $appraisal.Appraisal.level == 2}好{else if $appraisal.Appraisal.level == 1}一般{else}差{/if}</span>
-                  {$appraisal.Appraisal.comment}
-              </p>
-              <p class="xq_huif_riq">{$appraisal.Appraisal.created}</p>
-            </div>
+        </div>
+        {else if isset($appraisal) && !empty($appraisal)}        
+        <div class="infoComments">
+          <div class="comment appraisal_area" style="border:0 none;">
+            <div class="name">{if $type == "need"}我{else}{$author.Member.nickname}{/if}</div>
+            <div class="time">{$appraisal.Appraisal.created}</div>
+            <div class="content"><span class="appraise">{if $type == "need"}评价{else}对你的评价{/if}：{if $appraisal.Appraisal.level == 2}好{else if $appraisal.Appraisal.level == 1}一般{else}差{/if}</span> {$appraisal.Appraisal.comment}</div>
+          </div>
+        </div>           
         {else}
+        <div class="infoComments">
         买家没有对你进行评价
-        {/if}        
-      </div>
-    </div>
-    <div id="xq_huif">
+        </div>
+        {/if}              
+    <div class="infoComments">
     <form id="commentList">
     {$this->element('comments_paginator')}
     </form>

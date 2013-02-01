@@ -8,11 +8,31 @@ class FulltimesController extends AppController
     var $helpers = array('Js', 'City', 'Category');
     public function create()
     {
-        
+        $this->set('title_for_layout', "发布招聘");
+    }
+    
+    public function edit()
+    {
+        $this->set('title_for_layout', "招聘信息修改");
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            $conditions = array(
+                'id'            => $this->request->query['id'],
+                'members_id'    => $this->_memberInfo['Member']['id']
+            );
+            $fulltime = $this->Fulltime->find('first', array('conditions' => $conditions));
+            if (!empty($fulltime)) {
+                $this->set('fulltime', $fulltime);
+            } else {
+                $this->_sysDisplayErrorMsg('没有你可以编辑的对象');
+            }
+        } else {
+            $this->_sysDisplayErrorMsg('没有你可以编辑的对象');
+        }
     }
     
     public function check()
     {
+        $this->set('title_for_layout', "发布招聘确认");
         switch ($this->request->data['continued']) {
             case 1:
                 $continued = '1年以内';
@@ -65,6 +85,9 @@ class FulltimesController extends AppController
         }
         $data['contact_method'] = json_encode($method);
         try {
+            if (isset($this->request->data['id'])) {
+                $data['id'] = $this->request->data['id'];
+            }
             $this->Fulltime->save($data);
             $this->redirect('/fulltimes/listview');
         } catch (Exception $e) {
@@ -245,6 +268,29 @@ class FulltimesController extends AppController
         $this->_sendJson($result);
     }
     
+    public function delete()
+    {
+        $conditions = array(
+            'id'    => $this->request->data['id'],
+            'members_id' => $this->_memberInfo['Member']['id']
+        );
+        $data = array('delete_flg' => 1);
+        try {
+            $this->Fulltime->updateAll($data, $conditions);
+            $result = array(
+                'result' => 'OK',
+                'msg'    => '成功删除！'
+            );
+        } catch (Exception $e) {
+            $this->log($e->getMessage());
+            $result = array(
+                'result'    => 'NG',
+                'msg'       => '系统发生错误，请稍后重试！'
+            );
+        }
+        $this->_sendJson($result);
+    }
+    
     public function favouriteList()
     {
         $joinFulltime = array(
@@ -290,7 +336,7 @@ class FulltimesController extends AppController
     
     public function listview()
     {
-        $conditions = array('Fulltime.members_id' => $this->_memberInfo['Member']['id']);
+        $conditions = array('Fulltime.members_id' => $this->_memberInfo['Member']['id'], 'Fulltime.delete_flg' => 0);
         $this->Ft->fulltimeList($conditions);
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
         if ($this->RequestHandler->isAjax()) {

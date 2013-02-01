@@ -1,3 +1,29 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+    $(".delete").live('click', function(){
+        if(confirm('确定删除此职位信息？')){
+                var fulltime_id = $(this).next('.fulltime_id').val();
+                $.ajax({
+                    url : '/fulltimes/delete',
+                    type : 'post',
+                    data : 'id=' + fulltime_id,
+                    success : function(data)
+                    {
+                        var result = eval("("+data+")");
+                        if (result.result == 'OK') {
+                            alert(result.msg);
+                            location.href = location.href;
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+    });
+});
+{/literal}
+</script>
 <div class="zy_z">
     <div class="zy_zs">
       <p>
@@ -50,7 +76,8 @@
         </td>
         <td class="con_2_xq_tofu xiushan_anniu">
         <a target="_blank" href="/fulltimes/detail?id={$fulltime.Fulltime.id}">详情</a>
-        <a href="javascript:void(0)">删除</a>
+        <a href="javascript:void(0)" class="delete">删除</a>
+        <input type="hidden" class="fulltime_id" value="{$fulltime.Fulltime.id}">
         </td>
       </tr>
       {/foreach}        

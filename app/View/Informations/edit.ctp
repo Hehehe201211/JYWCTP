@@ -89,7 +89,7 @@ $(document).ready(function(){
             } 
         });
         var priceErr = false;
-        if ($('#parttime').val() == "")
+        if ($('#type').val() == 0)
         {
             if($('#pay_coin').attr('checked') == "checked") {
                 if ($('#price').val() == "") {
@@ -163,7 +163,7 @@ $(document).ready(function(){
       <form id="information" method="post" action="/informations/check{if !empty($target)}?target={$target}{/if}">
             <input type="hidden" id="parttime" name="parttime" value="">
             <input type="hidden" name="target" value="">
-            <input type="hidden" name="target_member" value="">            
+            <input type="hidden" name="target_member" value="">
             <dl>
               <dt>
                 <label><font class="facexh">*</font>信息标题：</label>
@@ -227,22 +227,21 @@ $(document).ready(function(){
                   </li>
                 </ul>
               </dt>
-              {if !isset($parttime) && !isset($this->data['parttime'])}
+              {*if !isset($parttime) && !isset($this->data['parttime'])*}
+              {if $info.Information.type == 0}
               <dt>
                 <label><font class="facexh">*</font>买家付款方式：</label>
                 <ul class="payType">
-                {if $info.Information.type != 1}
-                    <li>                    
+                    <li>
                     <label><input type="checkbox" name="pay_coin" value="1" class="chkWidth15" id="pay_coin" {if $info.Information.payment_type != 2} checked="checked"{/if} />现金支付：</label>
                     <input type="text" name="price" id="price" class="text" value="{$info.Information.price}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>元</span>
                     </li>
-                    <li>                    
+                    <li>
                     <label><input type="checkbox" name="pay_point" value="1" class="chkWidth15" id="pay_point" {if $info.Information.payment_type != 1} checked="checked"{/if} />积分支付：</label>
                     <input type="text" name="point" id="point" class="text" value="{$info.Information.point}" onpaste="onlyNum(this)" onkeyup="onlyNum(this)">
                     <span>分</span>
                     </li>
-                {/if}
                 </ul>
               </dt>
               {/if}
@@ -297,7 +296,7 @@ $(document).ready(function(){
                 <textarea name="additional" id="caigouyunayin" cols="45" rows="5">{$info.Information.additional}</textarea>
               </dt>
             </dl>
-            <input type="hidden" name="type" value="{$info.Information.type}">
+            <input type="hidden" id="type" name="type" value="{$info.Information.type}">
             <input type="hidden" name="id" value="{$this->request->query.id}">
             <a class="zclan zclan4" href="javascript:void(0)" id="check">预览</a>
           </form>

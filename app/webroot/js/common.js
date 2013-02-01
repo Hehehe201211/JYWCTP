@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	$(window).resize(function(){
 		gototopL();
+		$("body").css("min-height",$(window).height()+1);
 	});
 	$(window).scroll(function(){
 		if($(document).scrollTop() < 100) $("#gototop").fadeOut("fast"); 
@@ -14,10 +15,7 @@ $(document).ready(function(){
 	$("input:text,input:password").addClass("inpTextBox");
 	$("input:file").addClass("inpFile");
 	
-	$("body").css("min-height",$(window).height()+1);
-	$(window).resize(function(){
-		$("body").css("min-height",$(window).height()+1);
-	});
+	$("body").css("min-height",$(window).height()+1);	
 	
 	var tableTrH=".posInfo tbody tr:odd,.tableJobInfo tbody tr:odd";
 	$(tableTrH).addClass("even");

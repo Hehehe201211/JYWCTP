@@ -69,24 +69,17 @@ $(document).ready(function(){
        var checkTarget = ['name','provincial_now','city_now','address', 'telephone', 'email', 'nationality', 'ethnic'];
        var errorMsg = '<span class="errorMsg">请输入此项目</span>';    
        var error=0;
+	   $(".sjle").find(".errorMsg").remove();
         $.each(checkTarget, function(target){
             if($('#' + this).val() == "") {
-                if($('#' + this).parent().find('.errorMsg').length == 0) {
-                    $('#' + this).parent().append(errorMsg);
-                }
+                $('#' + this).parent().append(errorMsg);
                 error=1;
-            } else {
-                $('#' + this).parent('dt').find('.errorMsg').remove();
-            }
+            } 
         });
         if($('#birthday').val()=="") {
-            if($('#birthday').parent().parent().find('.errorMsg').length == 0) {
-                $('#birthday').parent().parent().append(errorMsg);
-            }
+            $('#birthday').parent().parent().append(errorMsg);
             error=1;
-        } else {
-            $('#birthday').parent().parent().find('.errorMsg').remove();
-        }
+        } 
        if(!error) {
             var information = $("#information").serializeArray();
             $.ajax({
@@ -108,6 +101,7 @@ $(document).ready(function(){
             });
        }
     });
+
 });
 {/literal}
 </script>
@@ -262,7 +256,6 @@ $(document).ready(function(){
             {$pageSizeRequestUrl = ['action' => $this->request->params['action']]}
             {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
             {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
-
             {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
             {$this->Js->writeBuffer()}
         </div>
@@ -286,6 +279,7 @@ $(document).ready(function(){
             <dt>
               <label>个人头像：</label>
               <input type="file" style="height:auto;height:22px\9;" />
+			  <p class="advise" style="margin-left:130px;">1寸照片（2.5x3.5cm）</p>
             </dt>
             <dt>
               <label><font class="facexh">*</font>性别：</label>
@@ -308,35 +302,36 @@ $(document).ready(function(){
             </dt>
             <dt>
               <label><font class="facexh">*</font>国籍：</label>
-              <input type="text" name="nationality" value="{$resumeBase.ResumeBase.nationality}" id="nationality" style="width:100px;" />
+              <input type="text" name="nationality" value="{$resumeBase.ResumeBase.nationality}" id="nationality" /></dt>
+              <dt>
               <label><font class="facexh">*</font>民族：</label>
-              <input type="text" name="ethnic" value="{$resumeBase.ResumeBase.ethnic}" id="ethnic" style="width:100px;" />
+              <input type="text" name="ethnic" value="{$resumeBase.ResumeBase.ethnic}" id="ethnic" />
             </dt>
-            <dt class="select100">
-              <label>户口所在地：</label>
+            <dt>
+              <label>户籍：</label>
               <select name="provincial_local" id="provincial_local">
-                <option value="">请选择</option>
+                <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}
                     <option value="{$city.City.id}" {if $resumeBase.ResumeBase.provincial_local == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
                 {/foreach}
               </select>
               <select name="city_local" id="city_local">
-              <option value="">请选择</option>
+              <option value="">请选择城市</option>
               {foreach $this->City->childrenCityList($resumeBase.ResumeBase.provincial_local) as $city}
               <option value="{$city.City.id}" {if $resumeBase.ResumeBase.city_local == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
               {/foreach}
               </select>
             </dt>
-            <dt class="select100">
+            <dt>
               <label><font class="facexh">*</font>现居住地：</label>
               <select name="provincial_now" id="provincial_now">
-                <option value="">请选择</option>
+                <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}
                     <option value="{$city.City.id}" {if $resumeBase.ResumeBase.provincial_now == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
                 {/foreach}
               </select>
               <select name="city_now" id="city_now">
-                <option value="">请选择</option>
+                <option value="">请选择城市</option>
                 {foreach $this->City->childrenCityList($resumeBase.ResumeBase.provincial_now) as $city}
                 <option value="{$city.City.id}" {if $resumeBase.ResumeBase.city_now == $city.City.id}selected="selected"{/if}>{$city.City.name}</option>
                 {/foreach}
@@ -347,7 +342,7 @@ $(document).ready(function(){
               <input type="text" name="telephone" id="telephone" value="{$resumeBase.ResumeBase.telephone}" onkeyup="phoneNum(this)" onpaste="phoneNum(this)"/>
             </dt>
             <dt>
-              <label><font class="facexh">*</font>E-mail：</label>
+              <label><font class="facexh">*</font>电子邮箱：</label>
               <input type="text" name="email" id="email" value="{$resumeBase.ResumeBase.email}" onkeyup="Emailstr(this)" onpaste="Emailstr(this)"/>
             </dt>
             <dt>
@@ -366,6 +361,7 @@ $(document).ready(function(){
             <dt>
               <label>个人头像：</label>
               <input type="file" style="height:auto;height:22px\9;" />
+			  <p class="advise" style="margin-left:130px;">1寸照片（2.5x3.5cm）</p>
             </dt>
             <dt>
               <label><font class="facexh">*</font>性别：</label>
@@ -388,33 +384,33 @@ $(document).ready(function(){
             </dt>
             <dt>
               <label><font class="facexh">*</font>国籍：</label>
-              <input type="text" name="nationality" id="nationality" style="width:100px;" />
+              <input type="text" name="nationality" id="nationality"/></dt>
+              <dt>
               <label><font class="facexh">*</font>民族：</label>
-              <input type="text" name="ethnic" id="ethnic" style="width:100px;" />
-
+              <input type="text" name="ethnic" id="ethnic"/>
             </dt>
-            <dt class="select100">
-              <label>户口所在地：</label>
+            <dt>
+              <label>户籍：</label>
               <select name="provincial_local" id="provincial_local">
-                <option value="">请选择</option>
+                <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}
                     <option value="{$city.City.id}">{$city.City.name}</option>
                 {/foreach}
               </select>
               <select name="city_local" id="city_local">
-              <option value="">请选择</option>
+              <option value="">请选择城市</option>
               </select>
             </dt>
-            <dt class="select100">
+            <dt>
               <label><font class="facexh">*</font>现居住地：</label>
               <select name="provincial_now" id="provincial_now">
-                <option value="">请选择</option>
+                <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}
                     <option value="{$city.City.id}">{$city.City.name}</option>
                 {/foreach}
               </select>
               <select name="city_now" id="city_now">
-                <option value="">请选择</option>
+                <option value="">请选择城市</option>
               </select>
             </dt>            
             <dt>
@@ -422,7 +418,7 @@ $(document).ready(function(){
               <input type="text" name="telephone" id="telephone"/>
             </dt>
             <dt>
-              <label><font class="facexh">*</font>E-mail：</label>
+              <label><font class="facexh">*</font>电子邮箱：</label>
               <input type="text" name="email" id="email"/>
             </dt>
             <dt>

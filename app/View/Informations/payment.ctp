@@ -256,7 +256,7 @@ $(document).ready(function(){
   <tr>
     <td height="27" class="payTableTil">买家留言：</td>
     <td colspan="2">
-        <textarea name="content" cols="40"> </textarea>
+        <textarea name="content" cols="40"></textarea>
     </td>
   </tr>  
 </table>

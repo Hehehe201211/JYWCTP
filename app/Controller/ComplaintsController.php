@@ -17,7 +17,8 @@ class ComplaintsController extends AppController
         'PaymentHistory',
         'ComplaintAnswer',
         'Appeal',
-        'PaymentTransaction'
+        'PaymentTransaction',
+        'Friendship'
     );
     var $helpers = array('Js', 'City', 'Category');
 	var $components = array('RequestHandler', 'Unit');
@@ -149,12 +150,20 @@ class ComplaintsController extends AppController
             $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['target_members_id'];
             $seller_type = "被投诉者";
             $this->set('type', "need");
+            $friendCond = array(
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'friend_members_id' => $complaint['InformationComplaint']['target_members_id']
+            );
         } else {
             $mCondition = array('id' => $complaint['InformationComplaint']['members_id']);
             $appealCon['members_id'] = $complaint['InformationComplaint']['target_members_id'];
             $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['members_id'];
             $seller_type = "投诉者";
             $this->set('type', "has");
+            $friendCond = array(
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'friend_members_id' => $complaint['InformationComplaint']['members_id']
+            );
         }
         $author = $this->Member->find('first',array('conditions' => $mCondition));
         $conditions = array(
@@ -213,7 +222,10 @@ class ComplaintsController extends AppController
             'order' => array('InformationComment.created DESC')
         );
         $comments = $this->InformationComment->find('all', $commentParams);
-        
+        //是否朋友关系
+        $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
+        $isFriend = $isFriend > 0 ? true : false;
+        $this->set('isFriend', $isFriend);
         $appeal = $this->Appeal->find('first', array('conditions' => $appealCon));
         $this->set('complaint', $complaint);
         $this->set('information', $information);

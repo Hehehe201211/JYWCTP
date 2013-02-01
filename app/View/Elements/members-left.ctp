@@ -1,7 +1,7 @@
 <div class="zy_l">
     <div class="zy_lq">
         <div class="zy_lt">
-            <span>信息管理</span>
+            <span>客源管理</span>
             <img src="{$this->webroot}img/{if $currentMenu == Configure::read('Menu.informationManager')}jian.png{else}jia.png{/if}"  alt=""/>
         </div>
         <div class="zy_xxl" {if $currentMenu != Configure::read('Menu.informationManager')}style="display: none;"{else}{/if}>

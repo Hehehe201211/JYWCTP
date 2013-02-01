@@ -42,7 +42,7 @@ $(document).ready(function(){
       <p class="reason">{$appeal.Appeal.content}</p>
       </div>
       <div class="divLeft divRight">
-        <div class="biaotit"><strong class="red">投诉方</strong></div>
+        <div class="biaotit"><strong>投诉方</strong></div>
         <dl class="memInfo">
           <dt><img src="/admin/img/tx.jpg" /></dt>
           <dd>会员昵称：<strong>{$buyer.Member.nickname}({$buyer.MemberAttribute.name})</strong></dd>
@@ -232,12 +232,10 @@ $(document).ready(function(){
     <tr>
     {$label = explode(';', {$template.AppealAnswerTemplate.label})}
         <td width="32%">{$key + 1}、{$template.AppealAnswerTemplate.title}</td>
-        <td class="tableR" width="15%">
-            <input name="template_answer{$template.AppealAnswerTemplate.id}" type="radio" class="inpRadio" {if empty($answers)} {else if $answers[$key]['AppealAnswer']['answer'] == 1}{/if}  value="1" />
-                <label for="inpRadio11">{$label[0]}</label>
-            <div class="clearfix1"></div>
-            <input type="radio" name="template_answer{$template.AppealAnswerTemplate.id}" {if !empty($answers) && $answers[$key]['AppealAnswer']['answer'] == 0}{/if} class="inpRadio" value="0"/>
-                <label for="inpRadio12">{$label[1]}</label>
+        <td class="tableR" width="15%">            
+                <label><input name="template_answer{$template.AppealAnswerTemplate.id}" type="radio" class="inpRadio" {if empty($answers)} {else if $answers[$key]['AppealAnswer']['answer'] == 1}{/if}  value="1" />{$label[0]}</label>
+            <div class="clearfix1"></div>            
+                <label><input type="radio" name="template_answer{$template.AppealAnswerTemplate.id}" {if !empty($answers) && $answers[$key]['AppealAnswer']['answer'] == 0}{/if} class="inpRadio" value="0"/>{$label[1]}</label>
         </td>
         <td width="53%">
             <textarea class="textarea" name="content{$template.AppealAnswerTemplate.id}">{if !empty($answers)}{$answers[$key]['AppealAnswer']['content']}{/if}</textarea>
@@ -266,7 +264,6 @@ $(document).ready(function(){
     <div class="clearfix1"></div>
   </div>
 </div>
-
 <input type="hidden" name="information_id" id="information_id" value="{$information.Information.id}" />
 <input type="hidden" name="from_members_id" id="from_members_id" value="{$author.Member.id}" />
 <input type="hidden" name="to_members_id" id="to_members_id" value="{$buyer.Member.id}" />
