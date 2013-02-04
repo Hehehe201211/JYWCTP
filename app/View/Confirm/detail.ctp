@@ -1,14 +1,13 @@
 <script type="text/javascript">
 {literal}
-$(document).ready(function(){
+$(document).ready(function(){    
 	$("body").append($(".divDjbuz"));
 	$(".btnTousu").click(function(){
 		bgKuang("#divDjbuz1",".divDjbuz .closeKuang");
 	});
 	$(".payShortage").click(function(){
 		$(".divDjbuz .closeKuang").click();
-	});
-	
+	});	
 	//投诉
 	$('#complaintsBtn').click(function(){
 		if ($('#complaints_content').val() == "") {
@@ -33,6 +32,9 @@ $(document).ready(function(){
 		}
 	});
 	//站内信
+	$("#comment_content").keydown(function(e){
+	  if (e.keyCode==13) $(".btnReply").click();
+	});
 	$('.btnReply').click(function(){
 		if($('#comment_content').val() != "") {
 			var data = $('#comment').serialize();
@@ -43,15 +45,7 @@ $(document).ready(function(){
 				success : function(data) {
 					var result = eval("("+data+")");
 					if (result.result == 'OK') {
-						var str = "";
-						
-						str += '<div class="xq_huif_tet">'+
-								'<p class="xq_huif_tet11">';
-						str += '<strong class="sender">' + result.name + '</strong>';
-						str += $('#comment_content').val()+
-								'</p>'+
-								'<p class="xq_huif_riq">' + result.time + '</p>'+
-							'</div>';
+					     var str = '<div class="comment"><div class="name sender">'+result.name+'</div><div class="time">' +result.time +'</div><div class="content">'+ $('#comment_content').val() + '</div></div>';
 						if ($('#commentList h3').length == 0) {
 							str = '<h3>&nbsp; </h3>' + str;
 							$('#commentList').append(str);
@@ -197,21 +191,20 @@ $(document).ready(function(){
         {/if}
         </div>
 </div>
-    <div id="xq_huif">
+    <div class="infoComments">
     <form id="commentList">
     {$this->element('comments_paginator')}
     </form>
       <form method="post" id="comment">
-      <p class="xq_huif_centr_toprr">
-        <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
+      <div class="reply">
+        <input type="text" class="inpTextBox" id="comment_content" name="content" />
         <input type="hidden" name="information_id" value="{$information.Information.id}" />
         <input type="hidden" name="target_members_id" value="{$author.Member.id}" />
-        <input type="button" class="btnReply" value="回复">
-      </p>
+        <input type="button" class="btnReply inpButton" value="回复">
+      </div>
       </form>
     </div>	
-    </div>
-    
+    </div>    
 <div style="width:430px;" id="divDjbuz1" class="divDjbuz">
 <form id="complaints">
   <div class="djbuzTit"><span class="biaot" style="width:397px;">投诉此信息</span><a href="#" title="关闭" class="closeKuang"></a></div>

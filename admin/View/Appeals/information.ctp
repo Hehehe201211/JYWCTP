@@ -233,7 +233,7 @@ $(document).ready(function(){
     {$label = explode(';', {$template.AppealAnswerTemplate.label})}
         <td width="32%">{$key + 1}、{$template.AppealAnswerTemplate.title}</td>
         <td class="tableR" width="15%">            
-                <label><input name="template_answer{$template.AppealAnswerTemplate.id}" type="radio" class="inpRadio" {if empty($answers)} {else if $answers[$key]['AppealAnswer']['answer'] == 1}{/if}  value="1" />{$label[0]}</label>
+                <label><input name="template_answer{$template.AppealAnswerTemplate.id}" type="radio" class="inpRadio" {if empty($answers)} {else if $answers[$key]['AppealAnswer']['answer'] == 1}{/if}  value="1" checked/>{$label[0]}</label>
             <div class="clearfix1"></div>            
                 <label><input type="radio" name="template_answer{$template.AppealAnswerTemplate.id}" {if !empty($answers) && $answers[$key]['AppealAnswer']['answer'] == 0}{/if} class="inpRadio" value="0"/>{$label[1]}</label>
         </td>

@@ -38,9 +38,9 @@ $(document).ready(function(){
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="qy-jzfbmx.html">企业服务</a>&gt;&gt;
-            <a href="#">产品图片上传</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">企业服务</a>&gt;&gt;
+            <a href="javascript:void(0)">产品图片上传</a>
         </p>
     </div>    
     <div class="biaotit">新增产品</div>
@@ -87,6 +87,7 @@ $(document).ready(function(){
             <dt>
                 <label>相关文档上传：</label>
                 <input type="file" name="document" /><p class="imgfilesize">（文档文件大小不超过2M）</p>
+                <input type="hidden" name="old_document_path" value="{$product.Product.document_path}"/>
             </dt>  
             <dt>
                 <label><font class="facexh">*</font>内容提要：</label>

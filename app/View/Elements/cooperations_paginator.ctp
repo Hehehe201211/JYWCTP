@@ -1,15 +1,13 @@
-{assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
     <div class="tableSort">        
-        <label><input type="radio" checked="checked" value="time" name="zjSort" class="inpRadio">时间</label>        
-        <label><input type="radio" value="company" name="zjSort" class="inpRadio">单位名称</label>        
-        <label><input type="radio" value="position" name="zjSort" class="inpRadio">状态</label>
-        <select>
-            <option>降序</option>
-            <option>升序</option>
+        <label>时间</label>
+        <select class="sort" name="sort">
+            <option value="DESC" {if $sort == "DESC"}selected="selected"{/if}>降序</option>
+            <option value="ASC" {if $sort == "ASC"}selected="selected"{/if}>升序</option>
         </select>
-        <input type="button" value="排序" class="inpButton">
     </div>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
         <thead>
@@ -90,7 +88,7 @@
                         <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:"/?type="|cat:$this->request->query['type']]}
 {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
 {$form = ['isForm' => true, 'inline' => true]}
 {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#informationList', 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}

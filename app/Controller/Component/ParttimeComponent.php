@@ -9,7 +9,7 @@ class ParttimeComponent extends Component
      * Enter description here ...
      * @param unknown_type $members_id
      */
-    public function partimeList($members_id)
+    public function partimeList($members_id, $sort="DESC")
     {
         $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;
@@ -28,7 +28,7 @@ class ParttimeComponent extends Component
         $this->controller->paginate = array(
             'PartTime' => array('limit' => $pageSize,
                 'page'  => $page,
-                'order' => array('PartTime.created' => 'DESC'),
+                'order' => array('PartTime.created' => $sort),
                 'conditions' => $conditions,
                 'fields'    => $fields,
             )
@@ -223,7 +223,7 @@ class ParttimeComponent extends Component
      * @param array $conditions
      * @param string $type
      */
-    public function cooperationList($conditions, $type = 'send', $complaint = false)
+    public function cooperationList($conditions, $type = 'send', $complaint = false, $sort = 'DESC')
     {
         $joinPartime = array(
             'table' => 'part_times',
@@ -295,7 +295,7 @@ class ParttimeComponent extends Component
         $this->controller->paginate = array(
             'Cooperation' => array('limit' => $pageSize,
                 'page'  => $page,
-                'order' => array('Cooperation.created' => 'DESC'),
+                'order' => array('Cooperation.created' => $sort),
                 'conditions' => $conditions,
                 'fields'    => $fields,
                 'joins'     => $joins

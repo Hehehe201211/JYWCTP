@@ -14,19 +14,14 @@
         tabSwitching(tabIndex,".corAppeal .ulAppeal li",".corAppeal .conAppeal","active");
       });
       $(".tablePTSSXQ .inpRadio:eq(0)").live('click', function(){
-        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea,.tablePTSSXQ .inpButton").attr("disabled",false);
+       $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea,.tablePTSSXQ .inpButton").attr("disabled",false);
       });
       $(".tablePTSSXQ .inpRadio:eq(1)").live('click', function(){
-        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea,.tablePTSSXQ .inpButton").attr("disabled",true);
+        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea:not(:first),.tablePTSSXQ .inpButton").attr("disabled",true);
         $(".tablePTSSXQ .inpButton:eq(1)").attr("disabled",false);
       });
     $('#active').live('click', function(){
-	    var i=0;
-		$("#answer .tablePTSSXQ input:radio").each(function(){
-		   if ($(this).attr("checked") ==true || $(this).attr("checked") =="checked") i+=1; 
-		});
-		if(i!=5) {alert("请完成所有选项。");return;}
-	   
+		if($("#answer input:radio:checked").length!=5) {alert("请完成所有选项。");return;}	
         if (confirm('确定该信息有效，同意申述方的申请？')) {
             //alert('评价成功，该信息有效。');
             $('#result').val(1);
@@ -60,11 +55,8 @@
         }
     });
     $('#unactive').live('click', function(){
-	    var i=0;
-		$("#answer .tablePTSSXQ input:radio").each(function(){
-		   if ($(this).attr("checked") ==true || $(this).attr("checked") =="checked") i+=1; 
-		});
-		if(i!=5) {alert("请完成所有选项。");return;}
+	alert(("#answer input:radio:checked").length);
+	    if(($("#answer input:radio:eq(0)").attr("cheked")=="checked")&&$("#answer input:radio:checked").length!=5) {alert("请完成所有选项。");return;}	   
         if (confirm('确定该信息无效，同意投诉方的申请？')) {
             //alert('评价成功，该信息无效。');
             $('#result').val(0);

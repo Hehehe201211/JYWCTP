@@ -37,9 +37,9 @@ $(document).ready(function(){
 <div class="zy_z">
     <div class="zy_zs">
         <p>
-            <a href="qy-hyzy.html">我的聚业务</a>&gt;&gt;
-            <a href="qy-jzfbmx.html">企业服务</a>&gt;&gt;
-            <a href="#">文档资料上传</a>
+            <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+            <a href="javascript:void(0)">企业服务</a>&gt;&gt;
+            <a href="javascript:void(0)">文档资料上传</a>
         </p>
     </div>
     <div class="biaotit">文档资料上传</div>
@@ -55,6 +55,7 @@ $(document).ready(function(){
         <dt>
         <label><font class="facexh">*</font>上传文档：</label>
         <input type="file" name="document" id="document"/> <p class="imgfilesize">（文档文件大小不超过2M）</p>       
+        <input type="hidden" name="old_document_path" value="{$document.Service.document_path}" />
         </dt>
         <dt>
             <label><font class="facexh">*</font>资料说明：</label>

@@ -28,7 +28,8 @@ class MembersController extends AppController
             if ($this->_memberInfo['Member']['grade'] == 0) {//初级
                $this->render('elementary_index');
             } else {
-                $conditions = array('members_id' => $this->_memberInfo['Member']['id'], 'type' => Configure::read('Information.type.has'));
+//                $conditions = array('members_id' => $this->_memberInfo['Member']['id'], 'type' => Configure::read('Information.type.has'));
+                $conditions = array('members_id' => $this->_memberInfo['Member']['id'], 'type' => array(Configure::read('Information.type.has'), Configure::read('Information.type.parttime')));
                 $newInformation = $this->Information->getInformationBaseBy($conditions, array('created'), 5);
                 $newReceivedInformation = $this->MemberReceived->getReceiveInformationBase($conditions, array('MemberReceived.created'), 5);
                 $conditions['type'] = Configure::read('Information.type.need');
@@ -372,8 +373,8 @@ class MembersController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "face_thumbnail",
-                    'outx'      => 112,
-                    'outy'      => 124
+                    'outx'      => Configure::read('Thumbnail.face.width'),
+                    'outy'      => Configure::read('Thumbnail.face.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $facethumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
@@ -405,8 +406,8 @@ class MembersController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "logo_thumbnail",
-                    'outx'      => 112,
-                    'outy'      => 124
+                    'outx'      => Configure::read('Thumbnail.logo.width'),
+                    'outy'      => Configure::read('Thumbnail.logo.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $logo = $path . "/logo_thumbnail." .  $this->Upload->getExt($_FILES['logo']);

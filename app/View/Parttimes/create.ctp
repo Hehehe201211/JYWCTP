@@ -133,7 +133,7 @@ $(document).ready(function(){
       <li>2.确认兼职信息</li>
       <li>3.兼职发布成功</li>
     </ul>
-      <div class="sjle" style="min-height:850px;">
+      <div class="sjle" style="min-height:900px;">
         <form method="post" action="/parttimes/check" id="parttimeForm">
           <dl>
             <dt>
@@ -173,7 +173,7 @@ $(document).ready(function(){
             </dt>
             <dt>
               <label><font class="facexh">*</font>兼职时间：</label>
-              <ul class="validity" style="width:230px;">
+              <ul class="validity" style="width:236px;">
                 <li>
                   <input type="text" name="open" id="open"  readonly="readonly" value="{if isset($this->data['open'])}{$this->data['open']}{/if}"/>
                 </li>

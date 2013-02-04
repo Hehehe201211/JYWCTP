@@ -182,9 +182,9 @@ $(document).ready(function(){
     </table>
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverR">查看详情</a>  
     </div>
-    <div class="clear">&nbsp;</div> 
+    <div class="clearfix"></div> 
      <a href="javascript:void(0)" id="delete" class="zclan zclan3">删除</a>
-     <div id="xq_huif">
+     <div class="infoComments">
         <form id="commentList">
         {$this->element('cooperation_comments_paginator')}
         </form>

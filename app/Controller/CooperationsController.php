@@ -20,6 +20,11 @@ class CooperationsController extends AppController
     public function listview()
     {
         $query = $this->request->query;
+        if (isset($this->request->data['sort'])) {
+            $sort = $this->request->data['sort'];
+        } else {
+            $sort = 'DESC';
+        }
         if ($query['type'] == 'send') {
             $conditions = array(
                 'Cooperation.sender' => $this->_memberInfo['Member']['id'],
@@ -31,8 +36,12 @@ class CooperationsController extends AppController
                 'Cooperation.status' => array(1)
             );
         }
-        $this->Parttime->cooperationList($conditions, $query['type']);
+        $this->Parttime->cooperationList($conditions, $query['type'], false, $sort);
+        $this->set('sort', $sort);
         $this->set('type', $query['type']);
+        if ($this->RequestHandler->isAjax()) {
+            $this->render('/Elements/cooperations_paginator');
+        }
     }
     /**
      * 
@@ -82,20 +91,33 @@ class CooperationsController extends AppController
      */
     public function waitlist()
     {
+        $this->set('title_for_layout', "待确认合作");
         $query = $this->request->query;
+        if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            $status = $this->request->data['status'];
+        } else {
+            $status = array(2, 5, 6, 8);
+        }
+        if (isset($this->request->data['sort']) && !empty($this->request->data['sort'])) {
+            $sort = $this->request->data['sort'];
+        } else {
+            $sort = 'DESC';
+        }
         if ($query['type'] == 'send') {
             $conditions = array(
                 'Cooperation.sender' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status' => array(2, 5, 6, 8)
+                'Cooperation.status' => $status
             );
         } else {
             $conditions = array(
                 'Cooperation.receiver' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status'  => array(2, 5, 6, 8)
+                'Cooperation.status'  => $status
             );
         }
-        $this->Parttime->cooperationList($conditions, $query['type']);
+        $this->Parttime->cooperationList($conditions, $query['type'], false, $sort);
         $this->set('type', $query['type']);
+        $this->set('status', $status);
+        $this->set('sort', $sort);
         if ($this->RequestHandler->isAjax()) {
             $this->render('/Elements/wait_cooperations_paginator');
         }
@@ -110,6 +132,7 @@ class CooperationsController extends AppController
      */
     public function waitdetail()
     {
+        $this->set('title_for_layout', "待确认合作详情");
         $query = $this->request->query;
         if (isset($query['send'])) {
             $type = "send";
@@ -166,19 +189,31 @@ class CooperationsController extends AppController
     public function completelist()
     {
         $query = $this->request->query;
+        if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            $status = $this->request->data['status'];
+        } else {
+            $status = array(4, 9, 10, 11);
+        }
+        if (isset($this->request->data['sort']) && !empty($this->request->data['sort'])) {
+            $sort = $this->request->data['sort'];
+        } else {
+            $sort = 'DESC';
+        }
         if ($query['type'] == 'send') {
             $conditions = array(
                 'Cooperation.sender' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status' => array(4, 9, 10, 11)
+                'Cooperation.status' => $status
             );
         } else {
             $conditions = array(
                 'Cooperation.receiver' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status'  => array(4, 9, 10, 11)
+                'Cooperation.status'  => $status
             );
         }
         $this->Parttime->cooperationList($conditions, $query['type']);
         $this->set('type', $query['type']);
+        $this->set('status', $status);
+        $this->set('sort', $sort);
     if ($this->RequestHandler->isAjax()) {
             $this->render('/Elements/complete_cooperations_paginator');
         }
@@ -277,19 +312,27 @@ class CooperationsController extends AppController
     public function complaintlist()
     {
         $query = $this->request->query;
+        if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+            $status = $this->request->data['status'];
+        } else {
+            $status = array(1, 2, 3);
+        }
         if ($query['type'] == 'send') {
             $conditions = array(
                 'Cooperation.sender' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status' => array(7)
+                'Cooperation.status' => 7,
+                'Complaint.type' => $status
             );
         } else {
             $conditions = array(
                 'Cooperation.receiver' => $this->_memberInfo['Member']['id'],
-                'Cooperation.status'  => array(7)
+                'Cooperation.status'  => 7,
+                'Complaint.type' => $status
             );
         }
         $this->Parttime->cooperationList($conditions, $query['type'], true);
         $this->set('type', $query['type']);
+        $this->set('status', $status);
         if ($this->RequestHandler->isAjax()) {
             $this->render('/Elements/complaint_cooperations_paginator');
         }
@@ -305,6 +348,7 @@ class CooperationsController extends AppController
 	            'id' => $id,
 	            'sender'          => $this->_memberInfo['Member']['id'],
 	        );
+	        $this->set('title_for_layout', "投诉详情");
         } elseif (isset($query['receiver'])) {
             $type = "receiver";
             $id = $query['receiver'];
@@ -312,6 +356,7 @@ class CooperationsController extends AppController
 	            'id' => $id,
 	            'receiver'        => $this->_memberInfo['Member']['id']
 	        );
+	        $this->set('title_for_layout', "被投诉详情");
         } else {
             $this->_sysDisplayErrorMsg("error");
         }

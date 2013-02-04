@@ -30,8 +30,10 @@ class ThumbnailComponent extends Component
      *  'endx'      => 200, 不是必须
      *  'endy'      => 200 不是必须
      *  )
+     *  @param $force_fix
+     *  是否强制输出所设置的大小
      */
-    public function resize($srcFileParams = array(), $imageParams = array())
+    public function resize($srcFileParams = array(), $imageParams = array(), $force_fix = false)
     {
         if (empty($srcFileParams) || empty($imageParams)) {
             throw new Exception('srcFileParams or imageParams is empty');
@@ -101,10 +103,17 @@ class ThumbnailComponent extends Component
             $dst_y = 0;
         }
         
-        $desc_image = imagecreatetruecolor($imageParams['outx'], $imageParams['outy']);
-        $white = imagecolorallocate($desc_image, 255, 255, 255);
-        imagefilledrectangle($desc_image, 0, 0, $imageParams['outx'], $imageParams['outy'], $white);
-        $createimage = imagecopyresampled($desc_image, $src_image, $dst_x, $dst_y, 0, 0, $dst_w, $dst_h, $imageParams['endx'], $imageParams['endy']);
+        if ($force_fix) {
+            $desc_image = imagecreatetruecolor($imageParams['outx'], $imageParams['outy']);
+            $white = imagecolorallocate($desc_image, 255, 255, 255);
+            imagefilledrectangle($desc_image, 0, 0, $imageParams['outx'], $imageParams['outy'], $white);
+            $createimage = imagecopyresampled($desc_image, $src_image, $dst_x, $dst_y, 0, 0, $dst_w, $dst_h, $imageParams['endx'], $imageParams['endy']);
+        } else {
+            $desc_image = imagecreatetruecolor($dst_w, $dst_h);
+            $white = imagecolorallocate($desc_image, 255, 255, 255);
+            imagefilledrectangle($desc_image, 0, 0, $dst_w, $dst_h, $white);
+            $createimage = imagecopyresampled($desc_image, $src_image, 0, 0, 0, 0, $dst_w, $dst_h, $imageParams['endx'], $imageParams['endy']);
+        }
         if (!$createimage) {
             imagedestroy($desc_image);
             imagedestroy($src_image);

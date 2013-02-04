@@ -1,16 +1,16 @@
-{assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
-{$paginatorParams = $this->Paginator->params()}    
-<div class="tableSort">      
-      <label><input type="checkbox" id="" value="position" class="inpCheckbox">合作中</label>      
-      <label><input type="checkbox" id="" value="position" class="inpCheckbox">失败待个人确认</label>      
-      <label><input type="checkbox" id="" value="time" checked="checked" class="inpCheckbox">成功待付款</label>      
-      <label><input type="checkbox" id="" value="company" class="inpCheckbox">已付款待确认</label>
-      <select>
-        <option>时间降序</option>
-        <option>时间升序</option>
+{$paginatorParams = $this->Paginator->params()}
+<div class="tableSort">
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.cooperating')}" {if in_array(Configure::read('Cooperation.status.cooperating'), $status)}checked="checked"{/if} class="inpCheckbox">合作中</label>
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.failure')}" {if in_array(Configure::read('Cooperation.status.failure'), $status)}checked="checked"{/if} class="inpCheckbox">失败待个人确认</label>
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.waitpay')}" {if in_array(Configure::read('Cooperation.status.waitpay'), $status)}checked="checked"{/if} class="inpCheckbox">成功待付款</label>
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.paid')}" {if in_array(Configure::read('Cooperation.status.paid'), $status)}checked="checked"{/if} class="inpCheckbox">已付款待确认</label>
+      <select class="sort" name="sort">
+        <option value="DESC" {if $sort == "DESC"}selected="selected"{/if}>时间降序</option>
+        <option value="ASC" {if $sort == "ASC"}selected="selected"{/if}>时间升序</option>
       </select>
-      <input type="button" value="查看" class="inpButton">
     </div>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
         <thead>
@@ -73,7 +73,7 @@
                     <div class="dd_ym">
                         <label>每页显示：</label>
                         <select name="pageSize" id="pageSize">
-                            <option value="2" {if $pageSize == "10"} selected {/if}>10</option>
+                            <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                             <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                             <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                             <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
@@ -89,8 +89,8 @@
                         <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
-{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'/?type='|cat:$this->request->query['type']]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'/?type='|cat:$this->request->query['type']]}
 {$form = ['isForm' => true, 'inline' => true]}
 {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#informationList', 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}

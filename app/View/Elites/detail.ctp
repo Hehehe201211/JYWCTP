@@ -11,9 +11,9 @@ $(document).ready(function(){
                     var result = eval("("+data+")");
                     if (result.result == 'OK') {
                         $('.invite').hide();
-                        alter('邀请成功，请关注对方的回复！');
+                        alert('邀请成功，请关注对方的回复！');
                     } else {
-                        alter(result.msg);
+                        alert(result.msg);
                     }
                 }
             });
@@ -158,7 +158,7 @@ $(document).ready(function(){
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
       </div>
-    <div class="clear">&nbsp;</div>
+    <div class="clearfix"></div>
     {if $showInviteBtn}
      <a class="zclan zclan4 invite" href="javascript:void(0)">邀请参与</a>
     {/if}   

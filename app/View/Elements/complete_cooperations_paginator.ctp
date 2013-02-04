@@ -1,16 +1,16 @@
-{assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#informationList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
 <div class="tableSort">      
-      <label><input type="checkbox" id="" value="position" class="inpCheckbox">合作成功</label>      
-      <label><input type="checkbox" id="" value="position" class="inpCheckbox">合作取消</label>      
-      <label><input type="checkbox" checked="checked" id="" value="time" class="inpCheckbox">企业违规</label>      
-      <label><input type="checkbox" value="company" id="" class="inpCheckbox">个人违规</label>
-      <select>
-        <option>时间降序</option>
-        <option>时间升序</option>
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.cancel')}" {if in_array(Configure::read('Cooperation.status.cancel'), $status)}checked="checked"{/if} class="inpCheckbox">合作成功</label>      
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.complete')}" {if in_array(Configure::read('Cooperation.status.complete'), $status)}checked="checked"{/if} class="inpCheckbox">合作取消</label>      
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.platform_company')}" {if in_array(Configure::read('Cooperation.status.platform_company'), $status)}checked="checked"{/if} class="inpCheckbox">企业违规</label>      
+      <label><input type="checkbox" name="status[]" value="{Configure::read('Cooperation.status.platform_personal')}" {if in_array(Configure::read('Cooperation.status.platform_personal'), $status)}checked="checked"{/if} class="inpCheckbox">个人违规</label>
+      <select class="sort" name="sort">
+        <option value="DESC" {if $sort == "DESC"}selected="selected"{/if}>时间降序</option>
+        <option value="ASC" {if $sort == "ASC"}selected="selected"{/if}>时间升序</option>
       </select>
-      <input type="button" value="查看" class="inpButton">
 </div>
 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
         <thead>

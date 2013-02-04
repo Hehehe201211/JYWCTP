@@ -100,7 +100,7 @@ $(document).ready(function(){
           <dd>联系邮箱：{$receiver.Member.email}</dd>
         </dl>
         <div class="biaotit">确认合作时间</div>
-      <p class="reason">[{date('Y-m-d', strtotime($cooperation.Cooperation.allow_dt))}]</p>
+      <p class="reason">[{date('Y-m-d', strtotime($cooperation.Cooperation.modified))}]</p>
       </div>
     </div>
    

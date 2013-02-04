@@ -7,24 +7,7 @@ $(document).ready(function(){
         if($(this).children("a").length!=0) $(this).css("border-color","#F50");
     },function(){
         $(this).css("border-color","#ccc");
-    });
-    
-    //地图检索
-    var strPosition;
-    $(".toggleMap").toggle(function(){
-        $(".divMapCon").show("fast",function(){
-           strPosition=new googlemapjsv3({lat:"",lng:"",strCompany:"",pChange:false});
-        });
-        $(this).text("隐藏地图检索");
-    },function(){
-        $(".divMapCon").hide("fast");
-        $(this).text("打开地图检索");
-        strPosition=null;
-    });
-    $("#codeAddress").click(function(){
-        var a=document.getElementById("geostrPosition").value;
-        strPosition.codeAddress(a);
-    });
+    });    
 });
 {/literal}
 </script>
@@ -314,7 +297,7 @@ $(document).ready(function(){
             </li>
           </ul>
         </div>
-        <div class="divMap">
+        <!--<div class="divMap">
           <div class="divMapCon">
             <div class="divInput">
               <input type="text" id="geostrPosition" value="输入地址查询"/>
@@ -323,9 +306,9 @@ $(document).ready(function(){
             </div>
             <div id="mapLayout"></div>
           </div>
-        </div>
-        <div class="toggleMap">打开地图检索</div>
-        <a class="zclan zclan4" href="#">查询</a> </div>
+        </div>-->
+        <!--<div class="toggleMap">打开地图检索</div>-->
+        <a class="zclan zclan4" href="javascript:;">查询</a> </div>
     <div class="biaotit">检索结果</div>
      <ul class="eliteR">
         <li><a href="qy-ywjyjsxq1.html" target="_blank"><div class="avatar"><img src="images/tx.jpg" alt="xxx5202012"/></div><div class="name">xxx5202012</div><div>教育培训</div></a></li>

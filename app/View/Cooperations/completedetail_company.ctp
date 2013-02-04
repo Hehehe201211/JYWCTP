@@ -1,6 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+	 $("body").append($('.jsxxxqB'));
     $(".btnDeliverL").click(function(e){
         e.preventDefault();
         bgKuang("#jsxxxq1","#jsxxxq1 .closeDiv");
@@ -168,7 +169,7 @@ $(document).ready(function(){
     </div>
     <div class="clear">&nbsp;</div> 
      <a href="javascript:void(0)" id="delete" class="zclan zclan3">删除</a>
-    <div id="xq_huif">
+    <div class="infoComments">
         <form id="commentList">
         {$this->element('cooperation_comments_paginator')}
         </form>

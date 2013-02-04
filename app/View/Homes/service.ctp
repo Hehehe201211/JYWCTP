@@ -19,7 +19,11 @@ $(document).ready(function(){
             $(".main1 .middle .pcontent:eq("+m+")").slideDown(600); 
             $(".main1 .middle .pcontent:eq("+m+") ul").css("width",$(".main1 .middle .pcontent:eq("+m+") ul li").width()*$(".main1 .middle .pcontent:eq("+m+") ul li").length);
         }
-    });         
+    });
+    $('.download').live('click', function(){
+        var src = '/homes/download_product?id=' + $(this).next('.id').val();
+        $('#downloadIframe').attr('src', src);
+    })
 });
 {/literal}
 </script>
@@ -88,6 +92,9 @@ $(document).ready(function(){
           {/if}
           </div>
           <h3>{$product.Product.name}</h3>
+          {if !empty($product.Product.document_path)}
+          {$thumbnail = Configure::read('Data.path')|cat:$product.Product.document_path}
+          {if file_exists($thumbnail)}
           <table width="100%" class="hyxzyemian22" >
                <thead>
                 <tr>
@@ -98,18 +105,30 @@ $(document).ready(function(){
                 </tr>
                 </thead>
               <tr>
-                <td><a href="gsqt-zlxz.html" target="_blank">{$product.Product.title}</a></td>
-                <td><a href="gsqt-zlxz.html" target="_blank">{$product.Product.created|date_format:"%Y-%m-%d"}</a></td>
-                <td class="content"><a href="gsqt-zlxz.html" target="_blank">{$product.Product.additional}</a></td>
-                <td class="btnInfoDl" title="下载文档"><a href="files/file.doc">我要下载</a></td>
+                <td>
+                    <a href="javascript:void(0)" target="_blank">{$product.Product.title}</a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" target="_blank">{$product.Product.created|date_format:"%Y-%m-%d"}</a>
+                </td>
+                <td class="content">
+                    <a href="javascript:void(0)" target="_blank">{$product.Product.additional}</a>
+                </td>
+                <td class="btnInfoDl" title="下载文档">
+                    <a href="javascript:void(0)" class="download">我要下载</a>
+                    <input type="hidden" class="id" value="{$product.Product.id}" />
+                </td>
               </tr>
-            </table>  
+            </table>
+            {/if}
+            {/if}
 			<div class="biaotit">产品描述</div>    
           <div class="proInfo">{$product.Product.introduction}</div>
         </div>
     {/foreach}
     </div>
 </div>
-
+<iframe style="display:none" id="downloadIframe">
+</iframe>
 
 

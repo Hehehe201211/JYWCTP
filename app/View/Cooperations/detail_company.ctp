@@ -1,6 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+$("body").append($(".jsxxxqB"));
     $('#agree').click(function(){
         var data = 'id=' + $('#cooperations_id').val() + '&status=2&type=receiver';
         var action = '/cooperations/waitlist/?type=receiver'
@@ -158,7 +159,7 @@ $(document).ready(function(){
     </table>
     <a class="btnMoreInfo btnDeliverR" href="javascript:void(0)" target="_blank">查看详情</a>  
   </div>
-  <div class="clear">&nbsp;</div>
+  <div class="clearfix"></div>
   <div class="xq_zl">
   <input type="hidden" id="cooperations_id" value="{$this->request->query['receiver']}">
   <div class="divBtnContainer" style="width:200px;">

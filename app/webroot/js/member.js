@@ -1,13 +1,17 @@
 // JavaScript Document
 $(document).ready(function(){
+	if ($(".sysDisplayErrorMsg").length!=0) {
+	   alert("没有此详细信息！点击确定后将关闭页面。");
+	   closeWindow();
+	}
 	$(".con_2_table tbody tr:odd,.conTable3 tbody tr:odd").addClass("even");
 	var tClass=window.setInterval(function(){if (!$(".con_2_table tbody tr:odd:eq(0)").hasClass("even")) {
 			$("input:text").addClass("inpTextBox");
 			$(".con_2_table tbody tr:odd,.conTable3 tbody tr:odd").addClass("even");
 	}},1000);	
 	
-	$("#jump,#comment_content").live("keydown",function(e){
-		return e.keyCode==13 ? false : true;
+	$("input:text").live("keydown",function(e){
+		e.keyCode==13 ? e.preventDefault() : true;
 	});
 	
 	$("#myTab2 li").mouseenter(function(){
@@ -92,4 +96,8 @@ $(document).ready(function(){
 	   $(this).css("margin-left",0);
 	   window.clearInterval(zy_zBottomRcdT);
   });
+  
+  $("#comment_content").keydown(function(e){
+	  if (e.keyCode==13) $(".infoComments .btnReply").click();
+	});
 });

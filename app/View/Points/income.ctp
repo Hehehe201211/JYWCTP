@@ -3,31 +3,14 @@
 $(document).ready(function(){
 	datepIniChange("#date_begin","coins");
 	datepIniChange("#date_end","coins");
-	$("body").append($("#bgKuang"));	
-	$("body").append($("#goumaikuang"));	
+	$("body").append($(".divDjbuz"));
 	$(".detail").live("click",function(e){
 		var information_id = $(this).parent().find('.information_id').val();
 		var members_id = $(this).parent().find('.members_id').val();
-		$('#goumaikuang').load('/points/detail #djbuz', {'information_id' : information_id, 'type' : 'income', 'members_id' : members_id}, function(){
-			e.preventDefault();	
-			var bgW=$(document).width();
-			if ($(document).width()<screen.availWidth) bgW=screen.availWidth; 
-			$("#goumaikuang").show();			
-			$("#bgKuang").css({width:bgW,height:($(document).height()+$("#djbuz").height())});
-			$("#goumaikuang").css({"width":$("#djbuz").width(),"height":$("#djbuz").height()});	
-		    $("#goumaikuang").css({"top":$(window).scrollTop()+100+"px","left":($(document).width()-$("#goumaikuang").width())/2+"px"});
-			$("#bgKuang").fadeTo("fast",0.5);
-			var clicked = $('#goumaikuang').find('#clicked').val();
-			if (clicked == 1) {
-				num.find('a').text(parseInt(num.find('a').text())+1);
-			}
+		$('#divDjbuz1').load('/points/detail #djbuz', {'information_id' : information_id, 'type' : 'income', 'members_id' : members_id}, function(){
+			bgKuang("#divDjbuz1",".divDjbuz .closeKuang");
 		});
-	});
-	$(".close").live("click",function(e){				
-		$("#bgKuang").fadeOut("fast");
-		$("#goumaikuang").hide();
-		if ($(this).attr("href")=="#"||$(this).attr("href")=="") e.preventDefault();
-	});
+	});	
 });
 {/literal}
 </script>
@@ -65,6 +48,5 @@ $(document).ready(function(){
       </div>
       </div>
 </div>
-<div id="bgKuang"></div>
-<div style="display:none;" id="goumaikuang">
+<div style="width:550px;" id="divDjbuz1" class="divDjbuz">
 </div>

@@ -9,7 +9,7 @@ class ServicesController extends AppController
 {
     var $layout = 'members';
     public $uses = array('Homepage', 'Product', 'Service');
-    var $components = array('Upload', 'Thumbnail', 'Unit');
+    var $components = array('Upload', 'Thumbnail', 'Unit', 'File');
     /**
      * 
      * 公司主页
@@ -48,8 +48,8 @@ class ServicesController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "company_profile",
-                    'outx'      => 300,
-                    'outy'      => 200
+                    'outx'      => Configure::read('Thumbnail.homepage.width'),
+                    'outy'      => Configure::read('Thumbnail.homepage.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $data['thumbnail'] = $path . "/company_profile." .  $this->Upload->getExt($_FILES['thumbnail']);
@@ -80,8 +80,8 @@ class ServicesController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "company_job",
-                    'outx'      => 300,
-                    'outy'      => 200
+                    'outx'      => Configure::read('Thumbnail.job.width'),
+                    'outy'      => Configure::read('Thumbnail.job.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $data['thumbnail_job'] = $path . "/company_job." .  $this->Upload->getExt($_FILES['thumbnail_job']);
@@ -129,6 +129,12 @@ class ServicesController extends AppController
      */
     public function editProduct()
     {
+        $conditions = array(
+            'members_id' => $this->_memberInfo['Member']['id']
+        );
+        if ($this->product->find('count', array('conditions' => $conditions)) >= 5) {
+            $this->redirect('material');
+        }
         if (isset($this->request->query['id'])) {
             $conditions = array(
                 'id' => $this->request->query['id'],
@@ -143,10 +149,18 @@ class ServicesController extends AppController
     
     public function saveProduct()
     {
+        $conditions = array(
+            'members_id' => $this->_memberInfo['Member']['id']
+        );
+        if ($this->product->find('count', array('conditions' => $conditions)) >= 5) {
+            $this->redirect('material');
+        }
         $data = $this->request->data;
         //TODO 上传照片处理
         $small_thumbnail = "";
         $big_thumbnail = "";
+        $document_name = "";
+        $document_path = "";
         $path = "thumbnail/" . 
                 substr(md5(($this->_memberInfo['Member']['id'] / 30000 + 1)), 0, 10) . "/" . 
                 substr(md5($this->_memberInfo['Member']['id']), 0, 10);
@@ -171,8 +185,8 @@ class ServicesController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => $time . "_small",
-                    'outx'      => 150,
-                    'outy'      => 150
+                    'outx'      => Configure::read('Thumbnail.product_small.width'),
+                    'outy'      => Configure::read('Thumbnail.product_small.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $small_thumbnail = $path . "/" . $time . "_small." .  $this->Upload->getExt($_FILES['small_thumbnail']);
@@ -201,8 +215,8 @@ class ServicesController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => $time . "_big",
-                    'outx'      => 300,
-                    'outy'      => 300
+                    'outx'      => Configure::read('Thumbnail.product_big.width'),
+                    'outy'      => Configure::read('Thumbnail.product_bit.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $big_thumbnail = $path . "/" . $time . "_big." .  $this->Upload->getExt($_FILES['big_thumbnail']);
@@ -210,6 +224,25 @@ class ServicesController extends AppController
                 }
             }
         }
+        
+        if (isset($_FILES['document'])) {
+            $path = "document/" . 
+                substr(md5(($this->_memberInfo['Member']['id'] / 30000 + 1)), 0, 10) . "/" . 
+                substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+            if (!file_exists($path)) {
+                $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                try {
+                    exec($command);
+                } catch (Exception $e) {
+                   $this->log($e->getMessage());
+                }
+            }
+            $newFilename = time() . '_' . $_FILES["document"]['name'];
+            $document_name = $_FILES["document"]['name'];
+            $document_path = $path . "/" . $newFilename;
+            $this->File->upload('document', Configure::read('Data.path') . $path, 2048, $newFilename);
+        }
+        
         try {
             if (isset($data['id'])) {
                 $conditions = array(
@@ -230,9 +263,24 @@ class ServicesController extends AppController
                     $up['small_thumbnail'] = "'" .$small_thumbnail . "'";
                     @unlink(Configure::read('Data.path') . $data['old_small_thumbnail']);
                 }
+                if (!empty($document_name)) {
+                    $up['document_name'] = "'" .$document_name . "'";
+                    $up['document_path'] = "'" .$document_path . "'";
+                    @unlink(Configure::read('Data.path') . $data['old_document_path']);
+                }
                 $this->Product->updateAll($up, $conditions);
             } else {
                 $data['members_id'] = $this->_memberInfo['Member']['id'];
+                if (!empty($big_thumbnail)) {
+                    $data['big_thumbnail'] = $big_thumbnail;
+                }
+                if (!empty($small_thumbnail)) {
+                    $data['small_thumbnail'] = $small_thumbnail;
+                }
+                if (!empty($document_name)) {
+                    $data['document_name'] = $document_name;
+                    $data['document_path'] = $document_path;
+                }
                 $this->Product->save($data);
             }
         } catch (Exception $e) {
@@ -252,6 +300,12 @@ class ServicesController extends AppController
      */
     public function editDocument()
     {
+        $conditions = array(
+            'members_id' => $this->_memberInfo['Member']['id']
+        );
+        if ($this->Service->find('count', array('conditions' => $conditions)) >= 5) {
+            $this->redirect('material');
+        }
         if (isset($this->request->query['id'])) {
             $conditions = array(
                 'id' => $this->request->query['id'],
@@ -266,8 +320,37 @@ class ServicesController extends AppController
     
     public function saveDocument()
     {
+        $conditions = array(
+            'members_id' => $this->_memberInfo['Member']['id']
+        );
+        if ($this->Service->find('count', array('conditions' => $conditions)) >= 5) {
+            $this->redirect('material');
+        }
+        $document_name = '';
+        $document_path = '';
         $data = $this->request->data;
         //TODO 上传照片处理
+        if (isset($_FILES['document'])) {
+            $path = "document/" . 
+                substr(md5(($this->_memberInfo['Member']['id'] / 30000 + 1)), 0, 10) . "/" . 
+                substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+            if (!file_exists($path)) {
+                $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                try {
+                    exec($command);
+                } catch (Exception $e) {
+                   $this->log($e->getMessage());
+                }
+            }
+            $newFilename = time() . '_' . $_FILES["document"]['name'];
+            $document_name = $_FILES["document"]['name'];
+            $document_path = $path . "/" . $newFilename;
+            $result = $this->File->upload('document', Configure::read('Data.path') . $path, 2048, $newFilename);
+            $size = $_FILES['document']['size'] / 1000;
+            if (empty($result)) {
+                @unlink(Configure::read('Data.path') . $data['old_document_path']);
+            }
+        }
         try {
             if (isset($data['id'])) {
                 $conditions = array(
@@ -278,9 +361,19 @@ class ServicesController extends AppController
                     'title' => "'" . $data['title'] . "'",
                     'introduction' => "'" . $data['introduction'] . "'"
                 );
+                if (!empty($document_name)) {
+                    $up['document_name'] = "'" .$document_name . "'";
+                    $up['document_path'] = "'" .$document_path . "'";
+                    $up['size'] = $size;
+                }
                 $this->Service->updateAll($up, $conditions);
             } else {
                 $data['members_id'] = $this->_memberInfo['Member']['id'];
+                if (!empty($document_name)) {
+                    $data['document_name'] = $document_name;
+                    $data['document_path'] = $document_path;
+                    $data['size'] = $size;
+                }
                 $this->Service->save($data);
             }
         } catch (Exception $e) {
@@ -288,6 +381,69 @@ class ServicesController extends AppController
             $this->log(__CLASS__ . "::". __FUNCTION__ . "() " . $e->getMessage());
         }
         $this->redirect('/services/material');
+    }
+    
+    public function delete()
+    {
+        $data = $this->request->data;
+        if (isset($data['id']) && !empty($data['id']) && isset($data['type']) && !empty($data['type'])) {
+            if ($data['type'] == 'product') {
+                $conditions = array('id' => $data['id'], 'members_id' => $this->_memberInfo['Member']['id']);
+                $product = $this->Product->find('first', array('conditions' => $conditions));
+                if (!empty($product)) {
+                    if ($this->Product->delete($data['id'])) {
+                        @unlink(Configure::read('Data.path') . $product['Product']['document_path']);
+                        @unlink(Configure::read('Data.path') . $product['Product']['small_thumbnail']);
+                        @unlink(Configure::read('Data.path') . $product['Product']['big_thumbnail']);
+                        $result = array(
+                            'result' => 'OK',
+                        );
+                    } else {
+                        $result = array(
+                            'result' => 'NG',
+                            'msg'    => '服务器发送错误，请稍后重试！'
+                        );
+                    }
+                } else {
+                    $result = array(
+                        'result' => 'NG',
+                        'msg'    => '没有可以删除的对象！'
+                    );
+                }
+            } elseif ($data['type'] == 'service') {
+                $conditions = array('id' => $data['id'], 'members_id' => $this->_memberInfo['Member']['id']);
+                $service = $this->Service->find('first', array('conditions' => $conditions));
+                if (!empty($service)) {
+                    if ($this->Service->delete($data['id'])) {
+                        @unlink(Configure::read('Data.path') . $service['Service']['document_path']);
+                        $result = array(
+                            'result' => 'OK',
+                        );
+                    } else {
+                        $result = array(
+                            'result' => 'NG',
+                            'msg'    => '服务器发送错误，请稍后重试！'
+                        );
+                    }
+                } else {
+                    $result = array(
+                        'result' => 'NG',
+                        'msg'    => '没有可以删除的对象！'
+                    );
+                }
+            } else {
+                $result = array(
+                    'result' => 'NG',
+                    'msg'    => '参数错误'
+                );
+            }
+        } else {
+            $result = array(
+                'result' => 'NG',
+                'msg'    => '参数错误'
+            );
+        }
+        $this->_sendJson($result);
     }
     
     /**

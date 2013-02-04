@@ -4,22 +4,19 @@
 {if $paginatorParams['count'] > 0}
 	<h3>&nbsp; </h3>
 	{foreach $comments as $comment}
-		<div class="xq_huif_tet">
-	        <p class="xq_huif_tet11">
-	        	{if $type == "send" && $comment.CooperationComment.type == 0}
-	        		<strong class="sender">我</strong>
-        		{elseif $type == "receiver" && $comment.CooperationComment.type == 1}
-                 <strong class="sender">我</strong>   
-	        	{else}
-	        		<strong>{$comment.Member.nickname}</strong>
-	        	{/if}
-		        {$comment.CooperationComment.content}
-	        </p>
-	        <p class="xq_huif_riq">{$comment.CooperationComment.created}</p>
-        </div>
+    <div class="comment">
+        {if $type == "send" && $comment.CooperationComment.type == 0}
+        <div class="name sender">我</div>
+        {elseif $type == "receiver" && $comment.CooperationComment.type == 1}
+         <div class="name sender">我</div>   
+        {else}
+        <div class="name">{$comment.Member.nickname}</div>
+        {/if}
+        <div class="time">{$comment.CooperationComment.created}</div>
+        <div class="content">{$comment.CooperationComment.content}</div>
+      </div>		
 	{/foreach}
-  <div class="pagesMag">
-    <div class="fanyea">
+  <div class="fanyea">
 		{if $paginatorParams['prevPage']}
 			<div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
 		{/if}
@@ -44,7 +41,6 @@
             <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
       {/if}
     </div>
-  </div>
 {/if}
 {if $this->request->params['controller'] == "appeals"}
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}

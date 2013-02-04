@@ -1,11 +1,10 @@
 {assign var=options value=['update' => '#informationList', 'evalScripts' => true]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
-<div class="tableSort">      
-      <label><input type="checkbox" id="" name="type" value="1" class="inpCheckbox">企业合作成功未反馈</label>      
-      <label><input type="checkbox" id="" name="type" value="2" class="inpCheckbox">合作成功未及时付款</label>      
-      <label><input type="checkbox" checked="checked" name="type" id="" value="3" class="inpCheckbox">合作成功未足额付款</label>
-      <input type="button" value="查看" class="inpButton">
+<div class="tableSort">
+      <label><input type="checkbox" name="status[]" value="1" {if in_array(1, $status)}checked="checked"{/if} class="inpCheckbox">企业合作成功未反馈</label>      
+      <label><input type="checkbox" name="status[]" value="2" {if in_array(2, $status)}checked="checked"{/if} class="inpCheckbox">合作成功未及时付款</label>      
+      <label><input type="checkbox" name="status[]" value="3" {if in_array(3, $status)}checked="checked"{/if} class="inpCheckbox">合作成功未足额付款</label>
 </div>
 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
         <thead>
@@ -86,8 +85,8 @@
                         <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
-{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'/?type='|cat:$this->request->query['type']]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'/?type='|cat:$this->request->query['type']]}
 {$form = ['isForm' => true, 'inline' => true]}
 {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#informationList', 'method' => 'post', 'data' => $this->Js->get('#informationList')->serializeForm($form)]}
 {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}

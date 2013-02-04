@@ -3,6 +3,9 @@
 $(document).ready(function(){
 $("body").append($(".divDjbuz"));
 	//站内信
+	$("#comment_content").keydown(function(e){
+	  if (e.keyCode==13) $(".reply .inpButton").click();
+	});
 	$('.inpButton').click(function(){
 		if($('#comment_content').val() != "") {
 			var data = $('#comment').serialize();
@@ -14,21 +17,17 @@ $("body").append($(".divDjbuz"));
 					var result = eval("("+data+")");
 					if (result.result == 'OK') {
 						var str = "";
-						if ($('#xq_huif h3').length == 0) {
+						if ($('#commentList h3').length == 0) {
 							str = '<h3>&nbsp; </h3>';
 						}
-						str += '<div class="xq_huif_tet">'+
-								'<p class="xq_huif_tet11">';
+						str += '<div class="comment">';
 						if (result.author) {
-							str += '<strong class="sender">' + result.name + '</strong>';
+							str += '<div class="name sender">' + result.name + '</div>';
 						} else {
-							str += '<strong>' + result.name + '</strong>';
+							str += '<div class="name">' + result.name + '</div>';
 						}
-						str += $('#comment_content').val()+
-								'</p>'+
-								'<p class="xq_huif_riq">' + result.time + '</p>'+
-							'</div>';
-						$('#xq_huif h3').after(str);
+						str +='<div class="time">' + result.time + '</div><div class="content">'+ $('#comment_content').val()+'</div></div>';
+						$('#commentList h3').after(str);
 						$('#comment_content').val('');
 					}
 				}
@@ -149,8 +148,8 @@ $("body").append($(".divDjbuz"));
       <input type="hidden" id="info_type" value="need" />
       {/if}
       </p>
-    </div>   
-    {$this->element('base_seller_info')}    
+    </div>
+    {$this->element('base_seller_info')}
     <div class="biaotit">投诉原因</div>
     <div class="zy_zszlB">
       <div class="txtTousu">{$complaint.InformationComplaint.reason}<span style="margin-left:8px;" class="time">{$complaint.InformationComplaint.created}</span></div>
@@ -271,55 +270,21 @@ $("body").append($(".divDjbuz"));
     	  {/if}
       {/if}
       <div class="clear"></div>
-    </div>
-    <div>
-      <div id="xq_huif">
-        <h3>双方交流</h3>
-        {foreach $comments as $comment}
-        	<div class="xq_huif_tet">
-	          <p class="xq_huif_tet11">
-	          {if $comment.InformationComment.members_id == $memberInfo.Member.id}
-	          	<strong class="sender">我</strong>
-	          {else}
-	          <strong>{$comment.Member.nickname}</strong>
-	          {/if}
-	          	{$comment.InformationComment.content}
-	          </p>
-	          <p class="xq_huif_riq">
-	          	{$comment.InformationComment.created}
-	          </p>
-	        </div>
-        {/foreach}
-		<div class="pagesMag">
-            <div class="fanyea">
-              <div class="dd_span"><a href="#">上一页</a></div>
-              <div class="dd_ym">
-                <label>每页显示：</label>
-                <select>
-                  <option>100</option>
-                  <option>50</option>
-                  <option>20</option>
-                  <option>10</option>
-                </select>
-              </div>
-              <div class="dd_ym11"> <font>共64388条</font> <font>第1/644页</font>
-                <input class="inpTextBox">
-                <div class="dd_span1"><a href="#">跳转</a></div>
-              </div>
-              <div class="dd_span"><a href="#">下一页</a></div>
-            </div>
-          </div>
+    </div>    
+    <div class="infoComments">
+        <form id="commentList">
+        {$this->element('comments_paginator')}
+        </form>
     <form method="post" id="comment">
-        <p class="xq_huif_centr_toprr">
+        <div class="reply">
           	<input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
 	        <input type="hidden" id="information_id" name="information_id" value="{$information.Information.id}" />
 	        <input type="hidden" id="members_id" name="members_id" value="{$memberInfo.Member.id}" />
 	        <input type="hidden" id="target_members_id" name="target_members_id" value="{$author.Member.id}" />			
           	<input type="button" value="回复" class="inpButton">
-        </p>
+        </div>
     </form>
       </div>
-    </div>
 </div>
 <div id="djbuz" class="divDjbuz" style="width:430px;height:200px;">
   <div class="djbuzTit"><span style="width:397px;" class="biaot">回复买家</span><a id="closeKuang" title="关闭" href="javascript:void(0)"></a></div>

@@ -22,6 +22,7 @@ textarea{letter-spacing:1px;}
 .fl{FLOAT:left !important;}
 .fr{FLOAT:right !important;}
 #gototop{position:fixed;width:45px;height:45px;background:url(../img/arrowGreyT.png) 0 0 no-repeat;cursor:pointer;bottom:45px;_position:absolute;_right:3px;_background-image:url(../img/arrowGreyT.gif);}
+.inpButton{padding-left:4px;padding-right:4px;padding-top:3px\9;}
 .inpFile{height:auto !important;}
 .inpTextBox,textarea,select{border:1px #AAA solid;padding:1px 0;}
 .inpTextBox:hover,textarea:hover,select:hover{border-color:#555;}

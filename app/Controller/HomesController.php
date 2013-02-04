@@ -8,7 +8,7 @@ class HomesController extends AppController
 {
     var $layout = 'homes';
     var $uses = array('Homepage', 'CompanyAttribute', 'Service', 'Product', 'Fulltime', 'PartTime');
-    var $components = array('Ft', 'Parttime', 'RequestHandler', 'Unit');
+    var $components = array('Ft', 'Parttime', 'RequestHandler', 'Unit', 'File');
     var $helpers = array('Js', 'City', 'Category');
     
     /**
@@ -51,6 +51,43 @@ class HomesController extends AppController
         $documents = $this->Service->find('all', array('conditions' => array('members_id' => $homepage['Homepage']['members_id'])));
         $this->set('documents', $documents);
     }
+    /**
+     * 
+     * 产品或服务资料下载
+     */
+    public function download_product()
+    {
+        $this->autoRender = FALSE;
+        $this->log('test');
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            $id = $this->request->query['id'];
+            $product = $this->Product->find('first', array('conditions' => array('id' => $id)));
+            if (!empty($product)) {
+                $filePath = Configure::read('Data.path') . $product['Product']['document_path'];
+                $this->File->download($filePath, $product['Product']['document_name']);
+            }
+        }
+    }
+    /**
+     * 
+     * 资料下载
+     */
+    public function download_service()
+    {
+        $this->autoRender = FALSE;
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            $id = $this->request->query['id'];
+            $service = $this->Service->find('first', array('conditions' => array('id' => $id)));
+            if (!empty($service)) {
+                $download_cnt = $service['Service']['download_cnt'] + 1;
+                $up = array('download_cnt' => $download_cnt);
+                $this->Service->updateAll($up, array('id' => $id));
+                $filePath = Configure::read('Data.path') . $service['Service']['document_path'];
+                $this->File->download($filePath, $service['Service']['document_name']);
+            }
+        }
+    }
+    
     /**
      * 
      * 招聘岗位

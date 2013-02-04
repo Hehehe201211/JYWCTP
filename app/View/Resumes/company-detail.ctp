@@ -14,24 +14,16 @@ $(document).ready(function(){
     });
     $('#invite').click(function(){
         var error = false;
-        var errorMsg = '<span style="color:red" class="errorMsg">请输入此项目</span>';
+        var errorMsg = '<span class="errorMsg">请输入此项目</span>';
+		$(".jsxxxqB .sjle").find(".errorMsg").remove();
         if($('#message').val().trim() == "") {
             error = true;
-            if($('#message').parent().find('.errorMsg').length == 0) {
-                $('#message').after(errorMsg);
-            }
-        } else {
-            $('#message').parent().find('.errorMsg').remove();
-        }
-        
+            $('#message').after(errorMsg);
+        }         
         if($('#checkNum').val().trim() == "") {
             error = true;
-            if($('#checkNum').parent().find('.errorMsg').length == 0) {
-                $('#getCheckNum').after(errorMsg);
-            }
-        } else {
-            $('#checkNum').parent().find('.errorMsg').remove();
-        }
+            $('#getCheckNum').after(errorMsg);
+        } 
         if (!error) {
             $.ajax({
               url : '/members/getImageNumber',
@@ -39,17 +31,10 @@ $(document).ready(function(){
               async  : false,
               success : function(data)
               {
-                  if (data == $("#checkNum").val().toUpperCase()) {
-                      $("#checkNum").parent().find('.errorMsg').remove();
-                      
-                  } else {
-                    error = true;
-                      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
-                          $("#getCheckNum").after('<span class="errorMsg">验证码不一致</span>');
-                      } else {
-                          $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
-                      }
-                  }
+                  if (data != $("#checkNum").val().toUpperCase()) {
+                      error = true;
+                      $("#getCheckNum").after('<span class="errorMsg">验证码不一致</span>');
+                  } 
               }
           });
         }
@@ -79,7 +64,6 @@ $(document).ready(function(){
 });
 {/literal}
 </script>
-
 <div class="zy_z">
     <div class="zy_zs">
       <p>
@@ -228,7 +212,6 @@ $(document).ready(function(){
     <div>&nbsp;</div>    
 	<div class="divBtnContainer" style="width:200px;"><a class="zclan zclan7 btnDemand" href="javascript:void(0)">我需要他</a><a target="_blank" href="/resumes/preview?id={$resume.Resume.id}" class="zclan zclan7">打印</a></div>
 </div>
-
 <div class="jsxxxq jsxxxqB">
 <a class="closeDiv" href="#">&nbsp;</a>
   <div class="sjle">
@@ -242,8 +225,7 @@ $(document).ready(function(){
         <form id="inviteForm">
         <input type="hidden" name="sender" value="{$resumeBase.ResumeBase.members_id}" />
         <input type="hidden" name="resumes_id" value="{$this->request->query['id']}" />
-        <ul class="products">
-            {if !empty($fulltimes)}
+        {if !empty($fulltimes)}
             <select id="fulltimes_id" name="fulltimes_id">
             <option value="">请选择职位</option>
             {foreach $fulltimes as $fulltime}
@@ -253,7 +235,6 @@ $(document).ready(function(){
             {else}
             <span style="color:red">没有职位信息</span>
             {/if}
-        </ul>
       </li>
       <li>
         <label><font class="facexh">*</font>留言：</label>
@@ -269,5 +250,3 @@ $(document).ready(function(){
     <a class="zclan zclan4" id="invite" href="javascript:void(0)">面试邀请</a> 
   </div>
 </div>
-
-

@@ -53,7 +53,7 @@ $(document).ready(function(){
     var checkTarget = ['title', 'provincial', 
                         'industries_id', 'company', 'category', 
                         'sub_category',
-                        'payment_type', 'introduction'
+                        'payment_type', 'introduction','profit','finished'
                         ];
     var errorMsg = '<span class="errorMsg">请输入此项目</span>'
     var re = /^[0-9]*$/;
@@ -267,7 +267,7 @@ $(document).ready(function(){
                     <input type="text" name="open" id="open" value="{if !empty($target) && isset($targetInfo)}{$targetInfo.Information.open|date_format:"%Y-%m-%d"}{elseif isset($this->data['open'])}{$this->data['open']}{/if}" readonly="readonly"/>
                   </li>
                   <li style="width:36px;text-align:center;">至</li>
-                  <li>
+                  <li style="margin-right:8px;">
                     <input type="text" name="close" id="close" value="{if !empty($target) && isset($targetInfo)}{$targetInfo.Information.close|date_format:"%Y-%m-%d"}{elseif isset($this->data['close'])}{$this->data['close']}{/if}" readonly="readonly"/>
                   </li>
                 </ul>
@@ -371,11 +371,11 @@ $(document).ready(function(){
                 <textarea name="introduction" id="introduction" cols="45" rows="5">{if isset($this->data['introduction'])}{$this->data['introduction']}{/if}</textarea>
               </dt>
               <dt>
-                <label>预计合作金额：</label>
+                <label><font class="facexh">*</font>预计合作金额：</label>
                 <input type="text" name="profit" id="profit" value="{if isset($this->data['profit'])}{$this->data['profit']}{/if}" onpaste="coinNum(this)" onkeyup="coinNum(this)">
               </dt>
               <dt>
-                <label>预计合作时间：</label>
+                <label><font class="facexh">*</font>预计合作时间：</label>
                 <input type="text" name="finished" id="finished" value="{if isset($this->data['finished'])}{$this->data['finished']}{/if}" readonly="readonly">
               </dt>
               <dt>

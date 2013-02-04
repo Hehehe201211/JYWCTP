@@ -14,7 +14,8 @@ class CompleteController extends AppController
         'InformationAttribute', 
         'Member',
         'InformationComment',
-        'InformationComplaint'
+        'InformationComplaint',
+        'Friendship'
     );
     var $helpers = array('Js', 'City', 'Category');
     var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
@@ -148,7 +149,14 @@ class CompleteController extends AppController
                 );
                 $this->Info->appeal($conditions);
             }
-            
+            //是否朋友关系
+            $friendCond = array(
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'friend_members_id' => $query['mid']
+            );
+            $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
+            $isFriend = $isFriend > 0 ? true : false;
+            $this->set('isFriend', $isFriend);
             
         } else {
             if ($this->RequestHandler->isAjax()) {

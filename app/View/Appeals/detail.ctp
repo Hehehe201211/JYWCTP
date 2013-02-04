@@ -203,18 +203,18 @@ $(document).ready(function(){
       <a href="javascript:void(0)" class="zclan zclan4 btnTYTS">同意投诉</a>
       {/if}
  </div>
-    <div id="xq_huif">
+    <div class="infoComments">
     <form id="commentList">
     	{$this->element('comments_paginator')}
     </form>
     <form method="post" id="comment">
-        <p class="xq_huif_centr_toprr">
+       <div class="reply">
             <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
             <input type="hidden" name="information_id" value="{$information.Information.id}" />
             <input type="hidden" name="members_id" value="{$memberInfo.Member.id}" />
             <input type="hidden" name="target_members_id" value="{$author.Member.id}" />            
             <input type="button" value="回复" class="inpButton">
-        </p>
+       </div>
     </form>
     </div>
 </div>

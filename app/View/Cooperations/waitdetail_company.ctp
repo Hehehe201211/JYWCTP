@@ -1,9 +1,11 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+	$("body").append($(".jsxxxqB,.divDjbuz"));
     $('#complete').click(function(){
         var data = 'id=' + $('#cooperations_id').val() + '&status=5&type=receiver';
-        var action = '/cooperations/waitlist/?type=receiver'
+        //var action = '/cooperations/waitlist/?type=receiver'
+        var action = location.href;
         sendAjax(data, action);
     });
     
@@ -83,15 +85,7 @@ $(document).ready(function(){
                 success : function(data) {
                     var result = eval("("+data+")");
                     if (result.result == 'OK') {
-                        var str = "";
-                        
-                        str += '<div class="xq_huif_tet">'+
-                                '<p class="xq_huif_tet11">';
-                        str += '<strong class="sender">我</strong>';
-                        str += $('#comment_content').val()+
-                                '</p>'+
-                                '<p class="xq_huif_riq">' + result.time + '</p>'+
-                            '</div>';
+						var str = '<div class="comment"><div class="name sender">我</div><div class="time">' +result.time +'</div><div class="content">'+ $('#comment_content').val() + '</div></div>';           
                         if ($('#commentList h3').length == 0) {
                             str = '<h3>&nbsp; </h3>' + str;
                             $('#commentList').append(str);
@@ -245,34 +239,35 @@ $(document).ready(function(){
       <tr>
     </table>
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverR">查看详情</a>  
-    </div>
-    <div class="clear">&nbsp;</div>
+    </div> 
      <input type="hidden" id="cooperations_id" value="{$this->request->query['receiver']}">
+	 <div class="clearfix"></div>
+     <div class="divBtnContainer" style="width:200px;">
      {if $cooperation.Cooperation.status == Configure::read('Cooperation.status.cooperating')}
-         <a href="javascript:void(0)" id="complete" class="zclan zclan2">合作完成</a>
-         <a href="javascript:void(0)" class="zclan zclan2 btnKYWX">合作失败</a>
-     {elseif $cooperation.Cooperation.status == Configure::read('Cooperation.status.failure')}
-        <a href="javascript:void(0)" class="zclan zclan3">合作完成</a>
+         <a href="javascript:void(0)" id="complete" class="zclan zclan7">合作完成</a>
+         <a href="javascript:void(0)" class="zclan zclan7 btnKYWX">合作失败</a>
+     {*elseif $cooperation.Cooperation.status == Configure::read('Cooperation.status.failure')*}
+        <!--<a href="javascript:void(0)" class="zclan zclan3">合作完成</a>-->
     {elseif $cooperation.Cooperation.status == Configure::read('Cooperation.status.waitpay')}
-        <a href="javascript:void(0)" id="paid" class="zclan zclan3">已付款</a>
+        <a href="javascript:void(0)" id="paid" class="zclan zclan4">已付款</a>
      {/if}
-     <div id="xq_huif">
+     </div>
+     <div class="infoComments">
         <form id="commentList">
         {$this->element('cooperation_comments_paginator')}
         </form>
         <form method="post" id="comment">
-            <p class="xq_huif_centr_toprr">
+            <div class="reply">
                 <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
                 <input type="hidden" name="cooperations_id" value="{$cooperation.Cooperation.id}" />
                 <input type="hidden" name="sender" value="{$cooperation.Cooperation.sender}" />
                 <input type="hidden" name="receiver" value="{$cooperation.Cooperation.receiver}" />
                 <input type="hidden" name="type" value="1" />
-                <input type="button" class="btnReply" value="回复">
-            </p>
+                <input type="button" class="btnReply inpButton" value="回复">
+            </div>
         </form>
     </div>    
 </div>
-
 <div id="djbuz" class="divDjbuz" style="width:430px;">
   <div class="djbuzTit">
       <span style="width:397px;" class="biaot">取消合作</span>

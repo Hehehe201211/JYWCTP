@@ -1,3 +1,15 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+    $('.sort').live('change', function(){
+        $('#pageSize').get(0).selectedIndex = 0;
+        $('#jump').val('');
+        $('#informationList').load(location.href, $('#informationList').serializeArray(), function(){});
+    });
+    
+});
+{/literal}
+</script>
 <div class="zy_z">
     <div class="zy_zs">
       <p>

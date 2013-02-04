@@ -102,6 +102,8 @@ $(document).ready(function(){
        }
     });
 
+
+
 });
 {/literal}
 </script>
@@ -419,7 +421,7 @@ $(document).ready(function(){
             </dt>
             <dt>
               <label><font class="facexh">*</font>电子邮箱：</label>
-              <input type="text" name="email" id="email"/>
+              <input type="text" name="email" id="email" onkeyup="Emailstr(this)" onpaste="Emailstr(this)"/>
             </dt>
             <dt>
               <label><font class="facexh">*</font>联系地址：</label>

@@ -21,8 +21,8 @@ class ComplaintsController extends AppController
         'Friendship'
     );
     var $helpers = array('Js', 'City', 'Category');
-	var $components = array('RequestHandler', 'Unit');
-	var $paginate;
+    var $components = array('RequestHandler', 'Unit', 'Info', 'Recommend');
+    var $paginate;
     public function index($type)
     {
         if (!isset($type) || ($type != Configure::read('Complaint.ActiveText') && $type != Configure::read('Complaint.BeenText'))) {
@@ -35,10 +35,10 @@ class ComplaintsController extends AppController
             'InformationComplaint.status' => array(Configure::read('Complaint.status_code.discuss'), Configure::read('Complaint.status_code.platform'))
             );
             $joinMember = array(
-	            'table' => 'members',
-	            'alias' => 'Member',
-	            'type'  => 'inner',
-	            'conditions' => 'Member.id = InformationComplaint.target_members_id'
+                'table' => 'members',
+                'alias' => 'Member',
+                'type'  => 'inner',
+                'conditions' => 'Member.id = InformationComplaint.target_members_id'
             );
             $this->set("msg", "没有投诉信息");
             
@@ -48,12 +48,12 @@ class ComplaintsController extends AppController
             'InformationComplaint.status' => Configure::read('Complaint.status_code.discuss')
             );
             $joinMember = array(
-	            'table' => 'members',
-	            'alias' => 'Member',
-	            'type'  => 'inner',
-	            'conditions' => 'Member.id = InformationComplaint.members_id'
-	        );
-	        $this->set("msg", "没有被投诉信息");
+                'table' => 'members',
+                'alias' => 'Member',
+                'type'  => 'inner',
+                'conditions' => 'Member.id = InformationComplaint.members_id'
+            );
+            $this->set("msg", "没有被投诉信息");
         }
         $this->set('complaint_type', $type);
         $joinInformation = array(
@@ -97,147 +97,124 @@ class ComplaintsController extends AppController
     public function detail()
     {
         $this->set('title_for_layout', "投诉详细");
-        $query = $this->request->query;
-        
-        if ((!isset($query['active']) && !isset($query['been'])) || (isset($query['active']) && isset($query['been']))){
-            //TODO error 
-            $this->_sysDisplayErrorMsg("没有你要确认的信息！");
-            return 0;
-        }
-        $id = '';
-        if (isset($query['active']) && !empty($query['active'])) {
-            $id = $query['active'];
-            $type = "active";
-            $conditions = array(
-                'information_id' => $id, 
-                'members_id' => $this->_memberInfo['Member']['id'], 
-                'target_members_id' => $query['mid'],  
-                'status' => array(Configure::read('Complaint.status_code.discuss'), Configure::read('Complaint.status_code.platform'))
+        if (!$this->RequestHandler->isAjax()) {
+            $query = $this->request->query;
+            if ((!isset($query['active']) && !isset($query['been'])) || (isset($query['active']) && isset($query['been']))){
+                //TODO error 
+                $this->_sysDisplayErrorMsg("没有你要确认的信息！");
+                return 0;
+            }
+            $id = '';
+            if (isset($query['active']) && !empty($query['active'])) {
+                $id = $query['active'];
+                $type = "active";
+                $conditions = array(
+                    'information_id' => $id, 
+                    'members_id' => $this->_memberInfo['Member']['id'], 
+                    'target_members_id' => $query['mid'],  
+                    'status' => array(Configure::read('Complaint.status_code.discuss'), Configure::read('Complaint.status_code.platform'))
+                );
+            }
+            if (isset($query['been']) && !empty($query['been'])) {
+                $id = $query['been'];
+                $type = "been";
+                $conditions = array(
+                    'information_id' => $id, 
+                    'members_id' => $query['mid'], 
+                    'target_members_id' => $this->_memberInfo['Member']['id'],
+                    'status' => Configure::read('Complaint.status_code.discuss')
+                );
+            }
+            if (empty($id)) {
+                //TODO
+                $this->_sysDisplayErrorMsg("没有你要确认的信息！");
+                return 0;
+            }
+            $joinAnswer = array(
+                'table' => 'complaint_answers',
+                'alias' => 'Answer',
+                'type'  => 'left',
+                'conditions' => 'InformationComplaint.id = Answer.information_complaints_id'
             );
-        }
-        if (isset($query['been']) && !empty($query['been'])) {
-            $id = $query['been'];
-            $type = "been";
-            $conditions = array(
-                'information_id' => $id, 
-                'members_id' => $query['mid'], 
-                'target_members_id' => $this->_memberInfo['Member']['id'],
-                'status' => Configure::read('Complaint.status_code.discuss')
+            $fields = array('InformationComplaint.*', 'Answer.answer');
+            $complaint = $this->InformationComplaint->find('first', array('conditions' => $conditions, 'fields' => $fields, 'joins' => array($joinAnswer)));
+            if (empty($complaint)) {
+                //TODO
+                $this->_sysDisplayErrorMsg("没有你要确认的信息！1");
+                return 0;
+            }
+            $this->Info->comments($complaint['InformationComplaint']['information_id'], $this->_memberInfo['Member']['id'], $query['mid']);
+            $appealCon = array('information_id' => $complaint['InformationComplaint']['information_id']);
+            if ($type == "active") {
+                $appealCon['members_id'] = $complaint['InformationComplaint']['members_id'];
+                $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['target_members_id'];
+                $seller_type = "被投诉者";
+                $this->set('type', "need");
+                $friendCond = array(
+                    'members_id' => $this->_memberInfo['Member']['id'], 
+                    'friend_members_id' => $complaint['InformationComplaint']['target_members_id']
+                );
+            } else {
+                $appealCon['members_id'] = $complaint['InformationComplaint']['target_members_id'];
+                $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['members_id'];
+                $seller_type = "投诉者";
+                $this->set('type', "has");
+                $friendCond = array(
+                    'members_id' => $this->_memberInfo['Member']['id'], 
+                    'friend_members_id' => $complaint['InformationComplaint']['members_id']
+                );
+            }
+            $information = $this->Information->find('first', array('conditions' => array('id' => $complaint['InformationComplaint']['information_id'])));
+            $informationAttributes = $this->InformationAttribute->find('all', array('conditions' => array('information_id' => $complaint['InformationComplaint']['information_id'])));
+            
+            $transaction_conditions = array(
+                'information_id'    => $complaint['InformationComplaint']['information_id'],
+                'members_id'        => $complaint['InformationComplaint']['members_id'],
+                'author_members_id' => $complaint['InformationComplaint']['target_members_id']
             );
-        }
-        if (empty($id)) {
-            //TODO
-            $this->_sysDisplayErrorMsg("没有你要确认的信息！");
-            return 0;
-        }
-        $joinAnswer = array(
-            'table' => 'complaint_answers',
-            'alias' => 'Answer',
-            'type'  => 'left',
-            'conditions' => 'InformationComplaint.id = Answer.information_complaints_id'
-        );
-        $fields = array('InformationComplaint.*', 'Answer.answer');
-        $complaint = $this->InformationComplaint->find('first', array('conditions' => $conditions, 'fields' => $fields, 'joins' => array($joinAnswer)));
-        if (empty($complaint)) {
-            //TODO
-            $this->_sysDisplayErrorMsg("没有你要确认的信息！1");
-            return 0;
-        }
-        $appealCon = array('information_id' => $complaint['InformationComplaint']['information_id']);
-        if ($type == "active") {
-            $mCondition = array('id' => $complaint['InformationComplaint']['target_members_id']);
-            $appealCon['members_id'] = $complaint['InformationComplaint']['members_id'];
-            $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['target_members_id'];
-            $seller_type = "被投诉者";
-            $this->set('type', "need");
-            $friendCond = array(
-                'members_id' => $this->_memberInfo['Member']['id'], 
-                'friend_members_id' => $complaint['InformationComplaint']['target_members_id']
+            $transaction = $this->PaymentTransaction->find('first', array('conditions' => $transaction_conditions));
+            
+            $joinMember = array(
+                'table' => 'members',
+                'alias' => 'Member',
+                'type'  => 'inner',
+                'conditions' => 'InformationComment.members_id = Member.id'
             );
+            $fields = array(
+                'InformationComment.members_id',
+                'InformationComment.content',
+                'InformationComment.created',
+                'Member.id',
+                'Member.nickname'
+            );
+            
+            //会员信息
+            $this->Info->baseMemberInfo($query['mid']);
+            
+            //是否朋友关系
+            $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
+            $isFriend = $isFriend > 0 ? true : false;
+            $this->set('isFriend', $isFriend);
+            $appeal = $this->Appeal->find('first', array('conditions' => $appealCon));
+            $this->set('complaint', $complaint);
+            $this->set('information', $information);
+            $this->set('attributes', $informationAttributes);
+            $this->set('seller_type', $seller_type);
+            $this->set('information_id', $complaint['InformationComplaint']['information_id']);
+            $this->set('mid', $query['mid']);
+            $this->set('complaints_type', $type);
+            $this->set('appeal', $appeal);
+            $this->set('transaction', $transaction);
         } else {
-            $mCondition = array('id' => $complaint['InformationComplaint']['members_id']);
-            $appealCon['members_id'] = $complaint['InformationComplaint']['target_members_id'];
-            $appealCon['buyer_members_id'] = $complaint['InformationComplaint']['members_id'];
-            $seller_type = "投诉者";
-            $this->set('type', "has");
-            $friendCond = array(
-                'members_id' => $this->_memberInfo['Member']['id'], 
-                'friend_members_id' => $complaint['InformationComplaint']['members_id']
-            );
+            $this->Info->comments($this->request->data['information_id'], $this->_memberInfo['Member']['id'], $this->request->data['mid']);
+            if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
+                $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
+                $this->set('jump', $page);
+            }
+            $this->set('information_id', $this->request->data['information_id']);
+            $this->set('mid', $this->request->data['mid']);
+            $this->render('/Elements/comments_paginator');
         }
-        $author = $this->Member->find('first',array('conditions' => $mCondition));
-        $conditions = array(
-            'members_id' => $author['Member']['id'],
-            'io'		 => Configure::read('Payment.io.in'),
-            'OR' => array(
-                'payment_type' => Configure::read('Payment.type_normal_coin'),
-                'payment_type' => Configure::read('Payment.type_normal_point'),
-            )
-        );
-        $transaction_has_num = $this->PaymentHistory->find('count', array('conditions' => $conditions));
-        $conditions['io'] = Configure::read('Payment.io.out');
-        $transaction_need_num = $this->PaymentHistory->find('count', array('conditions' => $conditions));
-        
-        
-        $information = $this->Information->find('first', array('conditions' => array('id' => $complaint['InformationComplaint']['information_id'])));
-        $informationAttributes = $this->InformationAttribute->find('all', array('conditions' => array('information_id' => $complaint['InformationComplaint']['information_id'])));
-        
-        $transaction_conditions = array(
-            'information_id'    => $complaint['InformationComplaint']['information_id'],
-            'members_id'        => $complaint['InformationComplaint']['members_id'],
-            'author_members_id' => $complaint['InformationComplaint']['target_members_id']
-        );
-        $transaction = $this->PaymentTransaction->find('first', array('conditions' => $transaction_conditions));
-        
-        $joinMember = array(
-            'table' => 'members',
-            'alias' => 'Member',
-            'type'  => 'inner',
-            'conditions' => 'InformationComment.members_id = Member.id'
-        );
-        $fields = array(
-            'InformationComment.members_id',
-            'InformationComment.content',
-            'InformationComment.created',
-            'Member.id',
-            'Member.nickname'
-        );
-        $commentParams = array(
-            'fields' => $fields,
-            'conditions' => array(
-                'information_id' => $complaint['InformationComplaint']['information_id'],
-                'show' => 1,
-                'OR' => array(
-                    array(
-                        'members_id' => $complaint['InformationComplaint']['members_id'],
-                        'target_members_id' => $complaint['InformationComplaint']['target_members_id']
-                    ),
-                    array(
-                        'members_id' => $complaint['InformationComplaint']['target_members_id'],
-                        'target_members_id' => $complaint['InformationComplaint']['members_id']
-                    ),
-                )
-            ),
-            'joins' => array($joinMember),
-            'order' => array('InformationComment.created DESC')
-        );
-        $comments = $this->InformationComment->find('all', $commentParams);
-        //是否朋友关系
-        $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
-        $isFriend = $isFriend > 0 ? true : false;
-        $this->set('isFriend', $isFriend);
-        $appeal = $this->Appeal->find('first', array('conditions' => $appealCon));
-        $this->set('complaint', $complaint);
-        $this->set('information', $information);
-        $this->set('attributes', $informationAttributes);
-        $this->set('author', $author);
-        $this->set('seller_type', $seller_type);
-        $this->set('transaction_has_num', $transaction_has_num);
-        $this->set('transaction_need_num', $transaction_need_num);
-        $this->set('comments', $comments);
-        $this->set('complaints_type', $type);
-        $this->set('appeal', $appeal);
-        $this->set('transaction', $transaction);
     }
     
     public function answer()
@@ -246,13 +223,13 @@ class ComplaintsController extends AppController
         if ($this->ComplaintAnswer->find('count', array('conditions' => array('information_complaints_id' => $this->request->data['information_complaints_id']))) > 0) {
             $result = array('result' => 'EXIST');
         } else {
-	        try {
-	            $this->ComplaintAnswer->save($this->request->data);
-	            $result = array('result' => 'OK', 'text' => $this->request->data['answer']);
-	        } catch (Exception $e) {
-	            $result = array('result' => 'NG');
-	            $this->log(__CLASS__ . "->" . __FUNCTION__ . "()" . "msg:" . $e->getMessage());
-	        }
+            try {
+                $this->ComplaintAnswer->save($this->request->data);
+                $result = array('result' => 'OK', 'text' => $this->request->data['answer']);
+            } catch (Exception $e) {
+                $result = array('result' => 'NG');
+                $this->log(__CLASS__ . "->" . __FUNCTION__ . "()" . "msg:" . $e->getMessage());
+            }
         }
         $this->_sendJson($result);
     }
@@ -312,7 +289,7 @@ class ComplaintsController extends AppController
     public function add()
     {
        $this->autoRender = false;
-	   if (!$this->RequestHandler->isAjax()) {
+       if (!$this->RequestHandler->isAjax()) {
            return 0;
        }
         $conditions = array(
@@ -341,16 +318,24 @@ class ComplaintsController extends AppController
     }
     
     public function beforeRender()
-	{
-		$css = array(
-    	'member'
-    	);
-    	$js = array('member');
+    {
+        $css = array(
+        'member'
+        );
+        $js = array('member');
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
-	}
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+            } else {
+                ;
+            }
+        }
+    }
 }

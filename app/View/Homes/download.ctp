@@ -1,7 +1,11 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    $(".navMiddle li a:eq(2)").addClass("active");       
+    $(".navMiddle li a:eq(2)").addClass("active");
+    $('.download').live('click', function(){
+        var src = '/homes/download_service?id=' + $(this).next('.id').val();
+        $('#downloadIframe').attr('src', src);
+    });
 });
 {/literal}
 </script>
@@ -30,17 +34,20 @@ $(document).ready(function(){
           <th width="178">文档名称</th>
           <th width="344">内容概要</th>
           <th width="120">上传时间</th>
-          <th width="65">下载次数</th>          
+          <th width="65">下载次数</th>
           <th width="65">下载文档</th>
         </tr>
       </thead>
       {foreach $documents as $document}
       <tr>
         <td>{$document.Service.title}</td>
-        <td class="content">{$document.Service.introduction}</td>        
-        <td>{$document.Service.created|date_format:"%Y-%m-%d"}</td>        
+        <td class="content">{$document.Service.introduction}</td>
+        <td>{$document.Service.created|date_format:"%Y-%m-%d"}</td>
         <td>{$document.Service.download_cnt}次</td>
-        <td class="btnInfoDl"><a href="files/file.doc">下载</a></td>
+        <td class="btnInfoDl">
+        <a href="javascript:void(0)" class="download">下载</a>
+        <input type="hidden" class="id" value="{$document.Service.id}" />
+        </td>
       </tr>
       {/foreach}
     </table>   
@@ -54,3 +61,5 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+<iframe style="display:none" id="downloadIframe">
+</iframe>

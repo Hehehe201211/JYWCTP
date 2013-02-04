@@ -87,8 +87,8 @@ class AccountsController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "face_thumbnail",
-                    'outx'      => 112,
-                    'outy'      => 124
+                    'outx'      => Configure::read('Thumbnail.face.width'),
+                    'outy'      => Configure::read('Thumbnail.face.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $thumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
@@ -119,8 +119,8 @@ class AccountsController extends AppController
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
                     'imagename'      => "logo_thumbnail",
-                    'outx'      => 112,
-                    'outy'      => 124
+                    'outx'      => Configure::read('Thumbnail.logo.width'),
+                    'outy'      => Configure::read('Thumbnail.logo.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $thumbnail = $path . "/logo_thumbnail." .  $this->Upload->getExt($_FILES['logo']);

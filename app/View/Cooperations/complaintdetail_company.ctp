@@ -1,6 +1,7 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
+	$("body").append($('.jsxxxqB'));
     $(".btnDeliverL").click(function(e){
         e.preventDefault();
         bgKuang("#jsxxxq1","#jsxxxq1 .closeDiv");
@@ -24,29 +25,36 @@ $(document).ready(function(){
                 success : function(data) {
                     var result = eval("("+data+")");
                     if (result.result == 'OK') {
-                        var str = "";
-                        
-                        str += '<div class="xq_huif_tet">'+
-                                '<p class="xq_huif_tet11">';
-                        str += '<strong class="sender">我</strong>';
-                        str += $('#comment_content').val()+
-                                '</p>'+
-                                '<p class="xq_huif_riq">' + result.time + '</p>'+
-                            '</div>';
+					var str = '<div class="comment"><div class="name sender">我</div><div class="time">' +result.time +'</div><div class="content">'+ $('#comment_content').val() + '</div></div>';
                         if ($('#commentList h3').length == 0) {
                             str = '<h3>&nbsp; </h3>' + str;
                             $('#commentList').append(str);
                         } else {
                             $('#commentList h3').after(str);
-                        }
-                        
+                        }                        
                         $('#comment_content').val('');
                     }
                 }
             })
         }
     });
-    
+    $('#complete').click(function(){
+        var data = 'id=' + $('#cooperations_id').val() + '&status=8&type=receiver';
+        var action = '/cooperations/waitlist/?type=receiver'
+        $.ajax({
+            url : '/cooperations/setStatus',
+            type : 'post',
+            data : data,
+            success : function(data) {
+                var result = eval("("+data+")");
+                if (result.result == 'OK') {
+                    location.href = action;
+                } else {
+                    alter(result.msg);
+                }
+            }
+        });
+    });
 });
 {/literal}
 </script>
@@ -71,14 +79,17 @@ $(document).ready(function(){
       {/if}
       </strong>
       {$complaint.CooperationComplaint.reason} [{$complaint.CooperationComplaint.created|date_format:"%Y-%m-%d"}]
-      确认合作时间[{$cooperation.Cooperation.allow_dt|date_format:"%Y-%m-%d"}]
+      确认合作时间[{$cooperation.Cooperation.modified|date_format:"%Y-%m-%d"}]
       </div>
     </div>
+    {if !empty($cooperation.Cooperation.allow_dt)}
     <div class="zy_zszlB zy_zszlBF">
-    <div class="txtTousu">请在<strong>
-    {date("Y-m-d", strtotime("+{$parttime.PartTime.pay_time} day", strtotime($cooperation.Cooperation.allow_dt)))}
-    </strong>之前完成报酬支付。</div>
+        <div class="txtTousu">请在<strong>
+        {date("Y-m-d", strtotime("+{$parttime.PartTime.pay_time} day", strtotime($cooperation.Cooperation.allow_dt)))}
+        </strong>之前完成报酬支付。
+        </div>
     </div>
+    {/if}
     <div class="mebleft">
       <div class="biaotit"><strong>{$sender.MemberAttribute.name}的会员信息 </strong></div>
       <table width="100%">
@@ -170,21 +181,23 @@ $(document).ready(function(){
         <tr>
       </tr></tbody></table>
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverR">查看详情</a> </div>
-    <div class="clear">&nbsp;</div>
-    <a href="javascript:void(0)" class="zclan zclan2">支付完成</a>
-     <div id="xq_huif">
+    <div class="clearfix"></div>
+    <div class="divBtnContainer" style="width:100px;">
+    <a href="javascript:void(0)" class="zclan zclan4" id="complete">支付完成</a>
+    </div>
+     <div class="infoComments">
       <form id="commentList">
         {$this->element('cooperation_comments_paginator')}
         </form>
       <form method="post" id="comment">
-      <p class="xq_huif_centr_toprr">
+      <div class="reply">
         <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
-        <input type="hidden" name="cooperations_id" value="{$cooperation.Cooperation.id}" />
+        <input type="hidden" name="cooperations_id" id="cooperations_id" value="{$cooperation.Cooperation.id}" />
         <input type="hidden" name="sender" value="{$cooperation.Cooperation.sender}" />
         <input type="hidden" name="receiver" value="{$cooperation.Cooperation.receiver}" />
         <input type="hidden" name="type" value="0" />
         <input type="button" class="btnReply" value="回复">
-      </p>
+      </div>
       </form>
     </div>
 </div>

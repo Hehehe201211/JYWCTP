@@ -51,7 +51,7 @@ $(document).ready(function(){
     var checkTarget = ['title', 'provincial', 
                         'industries_id', 'company', 'category', 
                         'sub_category',
-                        'payment_type', 'introduction'
+                        'payment_type', 'introduction','profit','finished'
                         ];
     var errorMsg = '<span class="errorMsg">请输入此项目</span>'
     var re = /^[0-9]*$/;
@@ -280,11 +280,11 @@ $(document).ready(function(){
                 <textarea name="introduction" id="introduction" cols="45" rows="5">{$info.Information.introduction}</textarea>
               </dt>
               <dt>
-                <label>预计合作金额:</label>
+                <label><font class="facexh">*</font>预计合作金额：</label>
                 <input type="text" name="profit" id="profit" value="{$info.Information.profit}" onpaste="coinNum(this)" onkeyup="coinNum(this)">
               </dt>
               <dt>
-                <label>预计合作时间：</label>
+                <label><font class="facexh">*</font>预计合作时间：</label>
                 <input type="text" name="finished" id="finished" value="{$info.Information.finished}" readonly="readonly">
               </dt>
               <dt>

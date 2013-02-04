@@ -4,27 +4,27 @@
     <div class="gongsichakan_jobs jsxxxq">
       <div class="gongsichakan_post">
         <p class="jinggao">发布时间： 信息编号： 该信息被浏览 7 次 </p>
-        <table class="posInfo" width="492" border="0" cellspacing="0" cellpadding="0">
+        <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <th width="119" scope="row">公司名称：</th>
-            <td width="373">
+            <th scope="row">公司名称：</th>
+            <td width="75%">
             <a href="gsqt-index.html" target="_blank" class="red">{$parttime.Member.company_name}</a>
             </td>
           </tr>
           <tr>
-            <th width="119" scope="row">营业执照：</th>
-            <td width="373"><font color="#FF0000">已验证</font></td>
+            <th scope="row">营业执照：</th>
+            <td><font color="#FF0000">已验证</font></td>
           </tr>
           <tr>
-            <th width="25%" scope="row">产品所属分类：</th>
-            <td width="68%">
+            <th scope="row">产品所属分类：</th>
+            <td>
             {$this->Category->getCategoryName($parttime.PartTime.category)} 
             {$this->Category->getCategoryName($parttime.PartTime.sub_category)}
             </td>
           </tr>
           <tr>
-            <th width="25%" scope="row">产品具体名称：</th>
-            <td width="68%">{$parttime.PartTime.sub_title}</td>
+            <th scope="row">产品具体名称：</th>
+            <td>{$parttime.PartTime.sub_title}</td>
           </tr>
           <tr>
             <th scope="row">兼职时间：</th>

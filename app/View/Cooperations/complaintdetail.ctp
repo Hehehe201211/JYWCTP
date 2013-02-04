@@ -46,29 +46,19 @@ $(document).ready(function(){
                 success : function(data) {
                     var result = eval("("+data+")");
                     if (result.result == 'OK') {
-                        var str = "";
-                        
-                        str += '<div class="xq_huif_tet">'+
-                                '<p class="xq_huif_tet11">';
-                        str += '<strong class="sender">我</strong>';
-                        str += $('#comment_content').val()+
-                                '</p>'+
-                                '<p class="xq_huif_riq">' + result.time + '</p>'+
-                            '</div>';
+						var str = '<div class="comment"><div class="name sender">我</div><div class="time">' +result.time +'</div><div class="content">'+ $('#comment_content').val() + '</div></div>';						
                         if ($('#commentList h3').length == 0) {
                             str = '<h3>&nbsp; </h3>' + str;
                             $('#commentList').append(str);
                         } else {
                             $('#commentList h3').after(str);
-                        }
-                        
+                        }                        
                         $('#comment_content').val('');
                     }
                 }
             })
         }
-    });
-    
+    });    
 });
 {/literal}
 </script>
@@ -216,24 +206,25 @@ $(document).ready(function(){
     </table>
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverR">查看详情</a>  
     </div>
-    <div class="clear">&nbsp;</div> 
+    <div class="clearfix"></div> 
+    <div class="divBtnContainer" style="width:100px;">
     <a href="javascript:void(0)" class="zclan zclan4 btnPwTrade" id="delete">取消投诉</a>
-     <div id="xq_huif">
+    </div>
+     <div class="infoComments">
       <form id="commentList">
         {$this->element('cooperation_comments_paginator')}
         </form>
       <form method="post" id="comment">
-      <p class="xq_huif_centr_toprr">
+      <div class="reply">
         <input type="text" class="txtReply inpTextBox" id="comment_content" name="content" />
         <input type="hidden" name="cooperations_id" value="{$cooperation.Cooperation.id}" />
         <input type="hidden" name="sender" value="{$cooperation.Cooperation.sender}" />
         <input type="hidden" name="receiver" value="{$cooperation.Cooperation.receiver}" />
         <input type="hidden" name="type" value="0" />
-        <input type="button" class="btnReply" value="回复">
-      </p>
+        <input type="button" class="btnReply inpButton" value="回复">
+      </div>
       </form>
-    </div>    
+    </div>
   </div>
-
 {$this->element('parttime_detail')}
 {$this->element('information_detail')}

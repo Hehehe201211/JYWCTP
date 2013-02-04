@@ -71,17 +71,15 @@ $(document).ready(function(){
         <li>
             <label><font class="facexh">*</font>选择简历：</label>
             <form id="audition" >
-            <ul class="products">
-                {if !empty($resumes)}
-                <select id="resumes_id" name="resumes_id">
-                {foreach $resumes as $resume}
-                <option value="{$resume.Resume.id}">{$resume.Resume.title}</option>
-                {/foreach}
-                </select>
-                {else}
-                <span style="color:red">没有相匹配行业的简历，请你点击【发布新简历】</span>
-                {/if}
-            </ul>
+            {if !empty($resumes)}
+            <select id="resumes_id" name="resumes_id">
+            {foreach $resumes as $resume}
+            <option value="{$resume.Resume.id}">{$resume.Resume.title}</option>
+            {/foreach}
+            </select>
+            {else}
+            <span style="color:red">没有相匹配行业的简历，请你点击【发布新简历】</span>
+            {/if}
             <input type="hidden" name="fulltimes_id" value="{$this->data['fulltime_id']}" />
             <input type="hidden" name="receiver" value="{$this->data['receiver']}" />
             </form>
@@ -99,6 +97,5 @@ $(document).ready(function(){
 	{else}
 	<a href="/resumes/create?fid={$this->data['fulltime_id']}&cid={$this->data['category']}" class="zclan zclan4">发布新简历</a> 
     {/if}
-	</div>
-    
+	</div>    
 </div>

@@ -125,7 +125,13 @@ class ParttimesController extends AppController
             }
         } else{
             $this->set('title_for_layout', "兼职发布列表");
-            $this->Parttime->partimeList($this->_memberInfo['Member']['id']);
+	        if (isset($this->request->data['sort'])) {
+	            $sort = $this->request->data['sort'];
+	        } else {
+	            $sort = "DESC";
+	        }
+	        $this->set('sort', $sort);
+            $this->Parttime->partimeList($this->_memberInfo['Member']['id'], $sort);
             if ($this->RequestHandler->isAjax()){
                 $this->render('search-send');
             }

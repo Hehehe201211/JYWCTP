@@ -1,4 +1,5 @@
-﻿{assign var=options value=['update' => '#commentList', 'evalScripts' => true]}
+{$form = ['isForm' => true, 'inline' => true]}
+{$options = ['update' => '#commentList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#commentList')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
 {if $paginatorParams['count'] > 0}
@@ -8,7 +9,7 @@
         {if $comment.InformationComment.members_id == $memberInfo.Member.id}
         <div class="name sender">我</div>
         {else}
-        <div class="name">{$comment.Member.nickname}</div>	        		
+        <div class="name">{$comment.Member.nickname}</div>
         {/if}
         <div class="time">{$comment.InformationComment.created}</div>
         <div class="content">{$comment.InformationComment.content}</div>
@@ -41,6 +42,11 @@
     </div>
 {/if}
 {if $this->request->params['controller'] == "appeals"}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{elseif $this->request->params['controller'] == "complaints"}
+<input name="information_id" type="hidden" value="{$information_id}" />
+<input name="mid" type="hidden" value="{$mid}" />
 {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
 {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
 {else}

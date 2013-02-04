@@ -160,7 +160,7 @@ $(document).ready(function(){
     </table>
     <a class="btnMoreInfo btnDeliverR" href="javascript:void(0)" target="_blank">查看详情</a>  
   </div>
-  <div class="clear">&nbsp;</div>
+  <div class="clearfix"></div>
   <div class="xq_zl">
   <div class="divBtnContainer" style="width:200px;">
   <a class="zclan zclan7" href="/informations/edit/?id={$cooperation.Cooperation.information_id}">修改</a>

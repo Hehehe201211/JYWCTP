@@ -102,7 +102,7 @@ class ConfirmController extends AppController
         }
         $transaction = $this->Info->transactionDetail($transactionP);
         if (empty($transaction)) {
-            $this->_sysDisplayErrorMsg("没有此待确认详细信息！");
+            $this->_sysDisplayErrorMsg("<div class='sysDisplayErrorMsg'></div>");
             return 0;
         }
         
