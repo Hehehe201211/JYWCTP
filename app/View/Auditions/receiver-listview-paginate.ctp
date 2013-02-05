@@ -40,9 +40,9 @@
                 </a>
                 </td>        
                 <td><a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">{$audition.Audition.created|date_format:"%Y-%m-%d"}</a></td>
-                <td class="con_2_xq_tofu xiushan_anniu">
+                <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
                 <a target="_blank" href="/auditions/detail?type=receive&id={$audition.Audition.id}">详情</a>
-                <a href="javascript:var a=confirm('删除此信息对方不会收到提示，是否删除？')">删除</a>
+                <!--<a href="javascript:;">删除</a>-->
                 </td>
             </tr>
         {/foreach}

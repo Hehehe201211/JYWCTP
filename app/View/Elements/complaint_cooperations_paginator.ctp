@@ -56,8 +56,8 @@
                 </a>
                 </td>
                 <td class="tr_td5"><a target="_blank" href="/cooperations/complaintdetail/?{$type}={$coop.Complaint.id}">{$coop.Complaint.created|date_format:"%Y-%m-%d"}</a></td>
-                <td class="con_2_xq_tofu xiushan_anniu">
-                    <a href="/cooperations/complaintdetail/?{$type}={$coop.Complaint.id}" target="_blank" style="font-weight: normal;">详情</a>
+                <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
+                    <a href="/cooperations/complaintdetail/?{$type}={$coop.Complaint.id}" target="_blank">详情</a>
                 </td>
             </tr>
         {/foreach}

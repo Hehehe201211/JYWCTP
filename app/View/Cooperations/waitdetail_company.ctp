@@ -135,7 +135,7 @@ $(document).ready(function(){
     {/if}
     <div class="mebleft">
         <div class="biaotit">{$sender.MemberAttribute.name}的会员信息</strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
         <tbody><tr>
           <th width="114" class="tdRight">真实姓名：</th>
           <td width="221">{$sender.MemberAttribute.name}</td>
@@ -183,7 +183,7 @@ $(document).ready(function(){
     </div>
     <div class="mebleft mebright">
       <div class="biaotit"><strong class="red">{$information.Information.title}(客源)</strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
       <tr>
         <th>采购单位：</th>
         <td>{if $cooperation.Cooperation.status == 1}******{else}{$information.Information.company}{/if}</td>

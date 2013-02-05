@@ -30,7 +30,7 @@
         </a>
         </td>
         <td class="tr_td5"><a href="/fulltimes/detail?id={$favo.Fulltime.id}" target="_blank">{$favo.FulltimeFavourite.created|date_format:"%Y-%m-%d"}</a></td>
-        <td class="con_2_xq_tofu xiushan_anniu">
+        <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
         <a target="_blank" href="/fulltimes/detail?id={$favo.Fulltime.id}">详情</a>
         </td>
     </tr>

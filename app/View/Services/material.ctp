@@ -2,13 +2,13 @@
 {literal}
 $(document).ready(function(){
     $('.deleteProduct').click(function(){
-        if (confirm('确定要删除此信息？')) {
+        if (confirm('确定要删除此产品？')) {
             var id = $(this).next('.id').val();
             deleteItem('product', id);
         }
     });
     $('.deleteService').click(function(){
-        if (confirm('确定要删除此信息？')) {
+        if (confirm('确定要删除此文档？')) {
             var id = $(this).next('.id').val();
             deleteItem('service', id);
         }
@@ -74,7 +74,7 @@ $(document).ready(function(){
     </table>
     <div class="biaotit">
     {if count($services) < 5}
-    <a href="/services/editDocument" class="mebgszyT">新增资料</a>文档资料（文档数量不超过5个）
+    <a href="/services/editDocument" class="mebgszyT">新增文档</a>文档资料（文档数量不超过5个）
     {/if}
     </div>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">

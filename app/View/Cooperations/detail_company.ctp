@@ -8,6 +8,7 @@ $("body").append($(".jsxxxqB"));
         sendAjax(data, action);
     });
     $('#refuse').click(function(){
+	    if (!confirm("确定放弃此客源？")) return;
         var data = 'id=' + $('#cooperations_id').val() + '&status=3&type=receiver';
         var action = '/cooperations/completelist/?type=receiver'
         sendAjax(data, action);
@@ -52,7 +53,7 @@ $("body").append($(".jsxxxqB"));
   </div>
   <div class="mebleft">
     <div class="biaotit"><strong>{$sender.MemberAttribute.name}的会员信息</strong></div>
-    <table width="100%">
+    <table width="100%" class="posInfo">
         <tbody><tr>
           <th width="114" class="tdRight">真实姓名：</th>
           <td width="221">{$sender.MemberAttribute.name}</td>
@@ -101,7 +102,7 @@ $("body").append($(".jsxxxqB"));
   </div>
   <div class="mebleft mebright">
     <div class="biaotit"><strong class="red">{$information.Information.title}(客源)</strong></div>
-    <table width="100%">
+    <table width="100%" class="posInfo">
       <tr>
         <th>采购单位：</th>
         <td>******</td>

@@ -89,7 +89,7 @@ $(document).ready(function(){
     </div>
     <div class="mebleft">
       <div class="biaotit"><strong>{$parttime.PartTime.title}</strong></div>
-      <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <table width="100%" class="posInfo">
         <tr>
           <th width="96" scope="row">公司名称：</th>
           <td width="207">
@@ -152,7 +152,7 @@ $(document).ready(function(){
     </div>
     <div class="mebleft mebright">
       <div class="biaotit"><strong class="red">{$information.Information.title}</strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
       <tr>
         <th>采购单位：</th>
         <td>{$information.Information.company}</td>

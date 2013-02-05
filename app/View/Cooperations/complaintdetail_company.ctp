@@ -92,7 +92,7 @@ $(document).ready(function(){
     {/if}
     <div class="mebleft">
       <div class="biaotit"><strong>{$sender.MemberAttribute.name}的会员信息 </strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
         <tbody><tr>
           <th width="114" class="tdRight">真实姓名：</th>
           <td width="221">{$sender.MemberAttribute.name}</td>
@@ -134,7 +134,7 @@ $(document).ready(function(){
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverL">查看详情</a> </div>
     <div class="mebleft mebright">
       <div class="biaotit"><strong class="red">{$information.Information.title}(客源) </strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
         <tbody><tr>
           <th>采购单位：</th>
           <td>{$information.Information.company}</td>

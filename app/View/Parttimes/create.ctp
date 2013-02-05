@@ -32,11 +32,7 @@ $(document).ready(function(){
                   if (data == $("#checkNum").val().toUpperCase()) {
                       $("#parttimeForm").submit();
                   } else {
-                      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
-                          $("#checkNum").parent().append('<span class="errorMsg">验证码不一致</span>');
-                      } else {
-                          $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
-                      }
+                       $("#checkNum").parent().append('<span class="errorMsg">验证码不一致</span>');
                   }
               }
           });            
@@ -88,11 +84,7 @@ $(document).ready(function(){
                 $(this).parent().append(errorMsg);
                 error=1;
             } 
-        });
-         if ($("#vehicle").attr("checked")!="checked") {
-              error = 1;
-              $("#vehicle").parent().append('<span class="errorMsg">请接受协议</span>');
-          }        
+        });         
          if ($("#checkNum").val().trim() == "") {
               error = 1;
               $("#checkNum").parent().append(errorMsg);
@@ -414,13 +406,7 @@ $(document).ready(function(){
               <input type="text" name="verificationCode" id="checkNum" style="width:60px;" class="inpTextBox">
               <a href="javascript:void(0)" id="getCheckNum" class="getCheckNum" >看不清？</a>
           </dt>
-          </dl>
-          <div class="clearfix"></div>
-          <div class="divProtocol">
-            <label for="vehicle" class="protocol">
-                <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehicle">我接受 <a target="_blank" href="#">《聚业务服务协议（试行）》</a>
-            </label>
-        </div>
+          </dl>         
         <div class="clearfix"></div>
           <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
         </form>

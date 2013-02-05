@@ -65,7 +65,7 @@ $(document).ready(function(){
     {/if}
     <div class="mebleft">
         <div class="biaotit"><strong>{$parttime.PartTime.title}(兼职)</strong></div>
-      <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <table width="100%" class="posInfo">
         <tr>
           <th width="96" scope="row">公司名称：</th>
           <td width="207">
@@ -128,7 +128,7 @@ $(document).ready(function(){
     </div>
     <div class="mebleft mebright">
       <div class="biaotit"><strong class="red">{$information.Information.title}(客源)</strong></div>
-      <table width="100%">
+      <table width="100%" class="posInfo">
       <tr>
         <th>采购单位：</th>
         <td>{$information.Information.company}</td>
@@ -183,7 +183,9 @@ $(document).ready(function(){
       <a target="_blank" href="javascript:void(0)" class="btnMoreInfo btnDeliverR">查看详情</a>  
     </div>
     <div class="clearfix"></div> 
-     <a href="javascript:void(0)" id="delete" class="zclan zclan3">删除</a>
+    <div class="divBtnContainer" style="width:100px;">
+     <a href="javascript:void(0)" id="delete" class="zclan zclan4">删除</a>
+     </div>
      <div class="infoComments">
         <form id="commentList">
         {$this->element('cooperation_comments_paginator')}

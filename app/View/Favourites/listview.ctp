@@ -46,9 +46,9 @@
             </a>
             </td>
             <td class="tr_td4"><a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}">{$favourite.PartTime.created|date_format:"%Y-%m-%d"}</a></td>
-            <td class="con_2_xq_tofu xiushan_anniu">
-            <a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}" style="font-weight: normal;">详情</a>
-            <a href="javascript:void(0)" style="font-weight: normal;">删除</a>
+            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
+            <a target="_blank" href="/favourites/detail?id={$favourite.PartTimeFavourite.id}">详情</a>
+            <!--<a href="javascript:void(0)">删除</a>-->
             </td>
           </tr>
       {/foreach}       
@@ -65,7 +65,7 @@
               </select>
             </div>
             <div class="dd_ym11"> <font>共64388条</font> <font>第1/644页</font>
-              <input style="" class="inpTextBox" id="acpro_inp5">
+              <input class="inpTextBox" id="acpro_inp5">
               <div class="dd_span1"><a href="#">跳转</a></div>
             </div>
             <div class="dd_span"><a href="#">下一页</a></div>

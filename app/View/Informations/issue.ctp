@@ -100,9 +100,9 @@ $(document).ready(function(){
                                 {$status[{$info.Information.status} - 1]}
                             </td>
                             <td class="tr_td5">{$info.Information.clicked}</td>
-                            <td class="con_2_xq_tofu xiushan_anniu">
+                            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
                                 <a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a>
-                                <a class="delete" href="javascript:void(0)">删除</a>
+                                <!--<a class="delete" href="javascript:void(0)">删除</a>-->
                                 <input type="hidden" class="information_id" name="information_id" value="{$info.Information.id}" />
                             </td>
                         </tr>

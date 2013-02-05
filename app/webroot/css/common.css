@@ -188,19 +188,6 @@ tbody .btnSingle a:hover{background-position:-50px -102px;}
 .dd_ym11 input{width:22px;padding:3px 0;text-align:center;*vertical-align:middle;*padding:2px 0;}
 .dd_span1{background:#FFF;border:1px solid #d4d4d4;display:inline;padding:4px 4px 3px;}
 
-.fanyeaFr{text-align:right;margin-top:8px;*line-height:28px;_height:28px}
-.fanyeaFr a{background:#FFF;border:1px #CCC solid;padding:4px 5px 3px;}
-.fanyeaFr a:hover{border-color:#F50;}
-.fanyeaFr select{margin-left:3px;*vertical-align:middle;}
-.fanyeaFr span a{margin-left:5px;}
-.fanyeaFr .inpTextBox{width:22px;text-align:center;padding:2px 0;*vertical-align:middle;}
-
-.fanyePN{float:right;margin-top:8px;}
-.fanyePN .dd_span{width:auto;padding:0 6px;margin:6px 1px 0;}
-.fanyePN .dd_span:hover{border-color:#F50;}
-.fanyePN .dd_ym,.fanyePN .dd_ym11{margin:7px 3px 0;width:auto;}
-.fanyePN .dd_ym11 span{width:auto;}
-
 .tofu_anniu{width:107px;}
 .tofu_anniu a{background:url(../img/btnbgs.gif) 0 -60px no-repeat;color: #3C3C3C;width:103px;margin:0 auto;height:21px;}
 .tofu_anniu a:hover{color: #FF6600;background-position:0 -81px;}

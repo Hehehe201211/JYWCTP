@@ -74,9 +74,9 @@ $(document).ready(function(){
         {$fulltime.Fulltime.modified|date_format:"%Y-%m-%d"}
         </a>
         </td>
-        <td class="con_2_xq_tofu xiushan_anniu">
+        <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
         <a target="_blank" href="/fulltimes/detail?id={$fulltime.Fulltime.id}">详情</a>
-        <a href="javascript:void(0)" class="delete">删除</a>
+        <!--<a href="javascript:void(0)" class="delete">删除</a>-->
         <input type="hidden" class="fulltime_id" value="{$fulltime.Fulltime.id}">
         </td>
       </tr>

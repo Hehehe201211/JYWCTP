@@ -3,6 +3,7 @@
 $(document).ready(function(){
     $("body").append($('.jsxxxqB'));
     $('#delete').click(function(){
+	    if (!confirm("确定删除此客源？")) return;
         var data = 'id=' + $('#cooperations_id').val() + '&status=12&type=receiver';
         var action = '/cooperations/waitlist/?type=receiver'
         sendAjax(data, action);
@@ -106,7 +107,7 @@ $(document).ready(function(){
   </div>
   <div class="mebleft mebright">
     <div class="biaotit"><strong class="red">{$information.Information.title}(客源)</strong></div>
-    <table width="100%">
+    <table width="100%" class="posInfo" >
       <tr>
         <th>采购单位：</th>
         <td>{$information.Information.company}</td>

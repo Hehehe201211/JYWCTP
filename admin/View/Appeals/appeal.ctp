@@ -5,9 +5,9 @@
 <script type="text/javascript" language="javascript">
 {literal}
   $(document).ready(function(){
-      //wrapH();
 	  $("#appeal tr").live("click",function(){
-	     $("#wrap").height(1500);
+	     $("#wrap").css("min-height",1200);
+		 $(window).animate({scrolltop:$("#info").offset().top},200);
 	  });
       $(".corAppeal .ulAppeal li").live('mouseenter', function(){
         var tabIndex=$(".corAppeal .ulAppeal li").index(this);
@@ -17,8 +17,7 @@
        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea,.tablePTSSXQ .inpButton").attr("disabled",false);
       });
       $(".tablePTSSXQ .inpRadio:eq(1)").live('click', function(){
-        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea:not(:first),.tablePTSSXQ .inpButton").attr("disabled",true);
-        $(".tablePTSSXQ .inpButton:eq(1)").attr("disabled",false);
+        $(".tablePTSSXQ .inpRadio:gt(1),.tablePTSSXQ textarea:not(:first),.tablePTSSXQ .inpButton:not(:last)").attr("disabled",true); 		
       });
     $('#active').live('click', function(){
 		if($("#answer input:radio:checked").length!=5) {alert("请完成所有选项。");return;}	
@@ -55,8 +54,7 @@
         }
     });
     $('#unactive').live('click', function(){
-	alert(("#answer input:radio:checked").length);
-	    if(($("#answer input:radio:eq(0)").attr("cheked")=="checked")&&$("#answer input:radio:checked").length!=5) {alert("请完成所有选项。");return;}	   
+	    if (($("#answer input:radio:eq(0)").attr("checked")=="checked")&&$("#answer input:radio:checked").length!=5) {alert("请完成所有选项。");return;}	   
         if (confirm('确定该信息无效，同意投诉方的申请？')) {
             //alert('评价成功，该信息无效。');
             $('#result').val(0);

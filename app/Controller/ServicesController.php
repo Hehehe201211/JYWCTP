@@ -132,7 +132,7 @@ class ServicesController extends AppController
         $conditions = array(
             'members_id' => $this->_memberInfo['Member']['id']
         );
-        if ($this->product->find('count', array('conditions' => $conditions)) >= 5) {
+        if ($this->Product->find('count', array('conditions' => $conditions)) >= 5) {
             $this->redirect('material');
         }
         if (isset($this->request->query['id'])) {

@@ -40,7 +40,7 @@
             {$invite.MemberAttribute.company_type}
             </a>
         </td>
-        <td class="con_2_xq_tofu xiushan_anniu">
+        <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">详情</a>
         </td>
       </tr>

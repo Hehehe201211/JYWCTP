@@ -2,7 +2,7 @@
 {literal}
 $(document).ready(function(){
     $('#category_id').change(function(){
-        $('ul.products').html('');
+        $('ul.products').html('').parent().find(".errorMsg").remove();
         if ($(this).val() != "") {
             $.ajax({
                 'type'  : 'Get',
@@ -42,7 +42,7 @@ $(document).ready(function(){
     $("button.addContact").live("click",function(e){
         e.preventDefault();
         $(this).parent().after($(this).parent().clone());
-        $(this).parent().next().children(".inpTextBox").val("");
+        $(this).parent().next().find(".inpTextBox").val("");
     });
     $("button.deleContact").live("click",function(e){
         e.preventDefault();
@@ -53,15 +53,58 @@ $(document).ready(function(){
         var src = '/members/image/' + Math.random();
         $('#code').attr('src', src);
     });
+    
     $('#check').click(function(){
         if (!checkData()) {
             $("#editForm").submit();
         }
-    });
-    
-    function checkData()
-    {
-        return false;
+    });    
+    function checkData() {
+        var checkTarget = ['full_name','contact','fax','address','category_id','company_type','business_scope','checkNum'];
+        var errorMsg = '<span class="errorMsg">请输入此项目</span>'
+       $(".sjle").find(".errorMsg").remove();
+        var error=0;
+        $.each(checkTarget, function(target){
+            if($('#' + this).val() == "") {
+                $('#' + this).parent().append(errorMsg);
+                error=1;
+            } 
+        });
+        if ($('#provincial_id').val() == ""||$('#city_id').val() == "") {
+            $('#city_id').parent().append(errorMsg);
+            error=1;
+        } 
+        $('.contact_method').each(function(){
+            if ($(this).val() == "") {
+                $(this).parent().append(errorMsg);
+                error=1;
+            } 
+        });    
+        if ($(".products input:checked:checked").length==0) {
+            $('ul.products').parent().append('<span class="errorMsg" style="left:516px;">请输入此项目</span>');
+            error=1;
+        }
+        if (!error) {
+            $.ajax({
+              url : '/members/getImageNumber',
+              type : 'post',
+              async  : false,
+              success : function(data)
+              {
+                if (data == $("#checkNum").val().toUpperCase()) {
+                    $("#checkNum").parent().find('.errorMsg').remove();
+                } else {
+                    error = true;
+                    if ($("#checkNum").parent().find('.errorMsg').length == 0) {
+                        $("#getCheckNum").after('<span class="errorMsg">验证码不一致</span>');
+                    } else {
+                        $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
+                    }
+                  }
+              }
+          });
+        }
+        return error;
     }
 });
 {/literal}
@@ -74,7 +117,7 @@ $(document).ready(function(){
             <a href="javascript:void(0)">完善资料</a>
         </p>
     </div> 
-	<div class="mebBaseinfo epmebBaseinfo">
+    <div class="mebBaseinfo epmebBaseinfo">
         <div class="mebBaseinfoL">
           <table width="100%" height="100%" border="0">
           {if $memberInfo.Member.grade == 2}
@@ -199,7 +242,7 @@ $(document).ready(function(){
           </li>
           <li>
             <label>公司LOGO：</label>
-            <input type="file" style="height:auto;height:22px;" size="20" id="logo" name="logo" class="inpFile">
+            <input type="file" size="20" id="logo" name="logo" class="inpFile">
           </li>
           <li class="avatar">
             <label>&nbsp;</label>
@@ -228,11 +271,14 @@ $(document).ready(function(){
                       <select name="contact_method[]">
                         <option value="座机" {if $method == "座机"}selected="selected"{/if}>座机</option>
                         <option value="手机" {if $method == "手机"}selected="selected"{/if}>手机</option>
+                        <option value="E-mail" {if $method == "E-mail"}selected="selected"{/if}>E-mail</option>
                         <option value="QQ" {if $method == "QQ"}selected="selected"{/if}>QQ</option>
                         <option value="MSN" {if $method == "MSN"}selected="selected"{/if}>MSN</option>
+                        <option value="Skype" {if $method == "Skype"}selected="selected"{/if}>Skype</option>
+                        <option value="其他" {if $method == "其他"}selected="selected"{/if}>其他</option>
                       </select>
                     </div>
-                    <input type="text" style="width:128px;" value="{$this->data['contact_content'][$key]}" name="contact_content[]">
+                    <input type="text" style="width:128px;" value="{$this->data['contact_content'][$key]}" name="contact_content[]" onkeyup="Emailstr(this)" onpaste="Emailstr(this)">
                     <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
                   </li>
               {/foreach}
@@ -245,24 +291,26 @@ $(document).ready(function(){
                       <select name="contact_method[]">
                         <option value="座机" {if $contact.method == "座机"}selected="selected"{/if}>座机</option>
                         <option value="手机" {if $contact.method == "手机"}selected="selected"{/if}>手机</option>
+                        <option value="E-mail" {if $contact.method == "E-mail"}selected="selected"{/if}>E-mail</option>
                         <option value="QQ" {if $contact.method == "QQ"}selected="selected"{/if}>QQ</option>
                         <option value="MSN" {if $contact.method == "MSN"}selected="selected"{/if}>MSN</option>
+                        <option value="Skype" {if $contact.method == "Skype"}selected="selected"{/if}>Skype</option>
+                        <option value="其他" {if $contact.method == "其他"}selected="selected"{/if}>其他</option>
                       </select>
                     </div>
-                    <input type="text" style="width:128px;" value="{$contact.content}" name="contact_content[]">
+                    <input type="text" style="width:128px;" value="{$contact.content}" name="contact_content[]" onkeyup="Emailstr(this)" onpaste="Emailstr(this)" class="contact_method">
                     <button class="addContact fl">添加</button><button class="deleContact fl">删除</button>
                   </li>
               {/foreach}
           {/if}
           <li>
             <label><font class="facexh">*</font>传真：</label>
-            <input type="text" name="fax" class="inpTextBox" id="fax" value="{if isset($this->data['fax'])}{$this->data['fax']}{else}{$memberAttribute.CompanyAttribute.fax}{/if}">
+            <input type="text" name="fax" class="inpTextBox" id="fax" value="{if isset($this->data['fax'])}{$this->data['fax']}{else}{$memberAttribute.CompanyAttribute.fax}{/if}" onkeyup="phoneNum(this)" onpaste="phoneNum(this)">
           </li>        
           <li>
             <label><font class="facexh">*</font>所在城市：</label>
-            <div class="area1">
-              <select name="provincial_id" id="provincial_id">
-                <option value="">请选择</option>
+            <select name="provincial_id" id="provincial_id">
+                <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}
                 <option value="{$city.City.id}" 
                 {if isset($this->data['provincial_id']) && $this->data['provincial_id'] == $city.City.id}
@@ -273,10 +321,8 @@ $(document).ready(function(){
                 </option>
                 {/foreach}
               </select>
-            </div>
-            <div class="area1">
-              <select name="city_id" id="city_id">
-                <option value="">请选择</option>
+            <select name="city_id" id="city_id">
+                <option value="">请选择城市</option>
                 {if isset($this->data['provincial_id'])}
                     {$parent_id = $this->data['provincial_id']}
                 {else}
@@ -292,7 +338,6 @@ $(document).ready(function(){
                     </option>
                 {/foreach}
               </select>
-            </div>
           </li>
           <li>
             <label><font class="facexh">*</font>公司详细地址：</label>
@@ -300,8 +345,8 @@ $(document).ready(function(){
           </li>
           <li>
             <label><font class="facexh">*</font>公司性质：</label>
-            <div class="select150">
-              <select id="company_type" name="company_type">
+<select id="company_type" name="company_type">
+<option value="">请选择</option>
                 {if isset($this->data['company_type'])}
                     <option value="民营/私营公司" {if $this->data['company_type'] == "民营/私营公司"}selected="selected"{/if}>民营/私营公司</option>
                     <option value="外企代表处" {if $this->data['company_type'] == "外企代表处"}selected="selected"{/if}>外企代表处</option>
@@ -329,12 +374,9 @@ $(document).ready(function(){
                     <option value="私营股份制" {if $memberAttribute.CompanyAttribute.company_type == "私营股份制"}selected="selected"{/if}>私营股份制</option>
                     <option value="其他" {if $memberAttribute.CompanyAttribute.company_type == "其他"}selected="selected"{/if}>其他</option>
                 {/if}
-              </select>
-            </div>
-          </li>
+              </select>          </li>
           <li>
             <label><font class="facexh">*</font>从事行业：</label>
-            <div class="area1">
             <select name="category_id" id="category_id">
             <option value="">请选择</option>
                 {foreach $this->Category->parentCategoryList() as $value}
@@ -348,7 +390,6 @@ $(document).ready(function(){
                     </option>
                 {/foreach}
             </select>
-            </div>
           </li>
           <li>
             <label>其他行业：</label>
@@ -380,9 +421,9 @@ $(document).ready(function(){
             <label><font class="facexh">*</font>业务范围：</label>
             <textarea name="business_scope" id="business_scope" cols="45" rows="5">{if isset($this->data['business_scope'])}{$this->data['business_scope']}{else}{$memberAttribute.CompanyAttribute.business_scope}{/if}</textarea>
           </li>          
-          <li style="text-align: left;">
+          <li>
             <label><font class="facexh">*</font>验证码：</label>
-            <input type="text" name="" style="width:60px;" class="inpTextBox" id="checkNum" />
+            <input type="text" name="" style="width:40px;" class="inpTextBox" id="checkNum" />
             <a class="getCheckNum" id="getCheckNum" href="javascript:void(0)">看不清楚？</a>
           </li> 
           <li><a href="javascript:void(0)" class="zclan zclan4" id="check">确定</a></li>

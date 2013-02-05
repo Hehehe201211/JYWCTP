@@ -39,9 +39,9 @@
         <td class="tr_td2">
             <a target="_blank" href="/parttimes/detail?id={$parttime.PartTime.id}">{$parttime.PartTime.number}次</a>
         </td>
-        <td class="con_2_xq_tofu xiushan_anniu">
-            <a target="_blank" href="/parttimes/detail?id={$parttime.PartTime.id}" style="font-weight: normal;">详情</a>
-            <a href="javascript:void(0)" style="font-weight: normal;">删除</a>
+        <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
+            <a target="_blank" href="/parttimes/detail?id={$parttime.PartTime.id}">详情</a>
+            <!--<a href="javascript:void(0)">删除</a>-->
         </td>
       </tr>
       {/foreach}       

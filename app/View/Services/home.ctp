@@ -4,7 +4,7 @@ $(document).ready(function(){
     $("button.addContact").live("click",function(e){
         e.preventDefault();
         $(this).parents(".sjle dl dt").after($(this).parents(".sjle dl dt").clone());
-        $(this).parents(".sjle dl dt").next().children(".inpTextBox").val("");
+        $(this).parents(".sjle dl dt").next().find(".inpTextBox").val("");
     });
     $("button.deleContact").live("click",function(e){
         e.preventDefault();
@@ -43,18 +43,29 @@ $(document).ready(function(){
                 error=1;
             } 
         });
-            
+        if (!error) {
+            $.ajax({
+              url : '/members/getImageNumber',
+              type : 'post',
+              async  : false,
+              success : function(data)
+              {
+                  if (data == $("#checkNum").val().toUpperCase()) {
+                      $("#checkNum").parent().find('.errorMsg').remove();
+                      
+                  } else {
+                    error = true;
+                      if ($("#checkNum").parent().find('.errorMsg').length == 0) {
+                          $("#getCheckNum").after('<span class="errorMsg">验证码不一致</span>');
+                      } else {
+                          $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
+                      }
+                  }
+              }
+          });
+        }
         if (!error) {
             $('#servicesForm').submit();
-        /*
-            alert("资料修改成功。");
-            $(this).text("修改");
-            span.show();
-            inp.hide();
-            $("#dtCheckNum").hide();
-            $("html,body").animate({scrollTop:0},"normal");
-            var error=0;
-            */            
           }
         }
     });
@@ -251,7 +262,7 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label>传真：</label>
-            <input type="text" name="fax" />
+            <input type="text" name="fax" onkeyup="phoneNum(this)" onpaste="phoneNum(this)"/>
             <span class="spanValue">无</span>
           </dt>
           <dt>
@@ -307,14 +318,14 @@ $(document).ready(function(){
           <dt>
             <label>公司简介图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail"><p class="advise">（图片文件大小不超过300K。）</p>
+            <input type="file" name="thumbnail"><p class="advise">（图片文件大小不超过300K）</p>
             </div>
             <span class="spanValue spanValueI">无</span>
           </dt>		 
 		  <dt>
             <label>企业招聘图片：</label>
             <div style="float:left;">
-            <input type="file" name="thumbnail_job"><p class="advise">（图片分辨率为159x60px，大小不超过300K。）</p>
+            <input type="file" name="thumbnail_job"><p class="advise">（图片分辨率为159x60px，大小不超过300K）</p>
             </div>
             <span class="spanValue spanValueI">{if !empty($homepage.Homepage.thumbnail_job)}<img src="{$this->webroot}{$homepage.Homepage.thumbnail_job}" />{/if}</span>
           </dt>

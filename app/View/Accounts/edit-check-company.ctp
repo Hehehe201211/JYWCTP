@@ -2,6 +2,10 @@
 {literal}
 $(document).ready(function(){
     $('#complete').click(function(){
+		if($("#vehiclePT").attr("checked")!="checked") {
+			$(".divProtocol .protocol").append('<span class="errorMsg">请接受协议</span>');
+			return;
+		}
         $('#edit').attr('action', '/accounts/editComplete');
         $('#edit').submit();
     });
@@ -27,34 +31,34 @@ $(document).ready(function(){
       <li>3.修改成功</li>
     </ul> 
         <div class="sjle">
-        <div class="xq_zl_xbxq">
+        <div class="tableDetail">
             <form id="edit" action="" method="post" >
       <input type="hidden" name="type" value="1">
-        <table width="570">
-        <tbody><tr>
-            <td width="176" class="tdRight connection">公司全名：</td>
-            <td width="382" colspan="3" class="tdLeft">
+        <table width="100%">
+        <tr>
+            <th widtn="25%">公司全名：</th>
+            <td class="red" width="75%">
             {$this->data['full_name']}
             <input type="hidden" name="full_name" id="full_name" value="{$this->data['full_name']}"/>
             </td>
           </tr>
           <tr>
-            <td class="tdRight">成立时间：</td>
-            <td colspan="3" class="tdLeft">
+            <th>成立时间：</th>
+            <td>
             {$this->data['established']}
             <input type="hidden" name="established" id="established" value="{$this->data['established']}"/>
             </td>
           </tr>
           <tr>
-            <td class="tdRight">联系人：</td>
-            <td colspan="3" class="tdLeft">
+            <th>联系人：</th>
+            <td>
             {$this->data['contact']}
             <input type="hidden" name="contact" id="contact" value="{$this->data['contact']}"/>
             </td>
           </tr>
           <tr>
-            <td class="tdRight">营业执照：</td>
-            <td class="tdLeft" colspan="3">
+            <th>营业执照：</th>
+            <td>
                 {if !empty($this->data['license'])}
                 <img src="{$this->webroot}{$this->data['license']}">
                 {else}
@@ -64,8 +68,8 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <td class="tdRight">公司LOGO：</td>
-            <td class="tdLeft" colspan="3">
+            <th>公司LOGO：</th>
+            <td>
                 {if !empty($thumbnail) && file_exists($thumbnail)}
                     <img src="{$this->webroot}{$thumbnail}">
                     <input type="hidden" id="thumbnail" name="thumbnail" value="{$thumbnail}">
@@ -86,9 +90,8 @@ $(document).ready(function(){
           </tr>
           {foreach $this->data['contact_method'] as $key => $value}
           <tr>
-            <td width="176" class="tdRight">联系方式：</td>
-            <td colspan="3" class="tdLeft">
-            
+            <th>联系方式：</th>
+            <td>            
             {$value} {$this->data['contact_content'][$key]}
             <input type="hidden" name="contact_method[]" id="contact_method" value="{$value}"/>
             <input type="hidden" name="contact_content[]" id="contact_content" value="{$this->data['contact_content'][$key]}"/>
@@ -96,15 +99,15 @@ $(document).ready(function(){
           </tr>
           {/foreach}
           <tr>
-            <td width="176" class="tdRight">传真：</td>
-            <td colspan="3" class="tdLeft">
+            <th>传真：</th>
+            <td>
             {$this->data['fax']}
             <input type="hidden" name="fax" id="fax" value="{$this->data['fax']}"/>
             </td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">所在城市：</td>
-            <td colspan="3" class="tdLeft">
+            <th>所在城市：</th>
+            <td>
             {$provincial = $this->City->cityName($this->data['provincial_id'])}
             {$city = $this->City->cityName($this->data['city_id'])}
             {if $provincial == $city}
@@ -117,29 +120,29 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">公司详细地址：</td>
-            <td colspan="3" class="tdLeft">
+            <th>公司详细地址：</th>
+            <td>
             {$this->data['address']}
             <input type="hidden" name="address" id="address" value="{$this->data['address']}">
             </td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">公司性质：</td>
-            <td colspan="3" class="tdLeft">
+            <th>公司性质：</th>
+            <td>
             {$this->data['company_type']}
             <input type="hidden" name="company_type" id="company_type" value="{$this->data['company_type']}">
             </td>
           </tr>
           <tr>
-            <td class="tdRight">从事行业：</td>
-            <td colspan="3" class="tdLeft">
+            <th>从事行业：</th>
+            <td>
             {$this->Category->getCategoryName($this->data['category_id'])}
             <input type="hidden" name="category_id" id="category" value="{$this->data['category_id']}">
             </td>
           </tr>
           <tr>
-            <td class="tdRight">提供产品或服务：</td>
-            <td colspan="3" class="tdLeft">
+            <th>提供产品或服务：</th>
+            <td>
             {foreach $this->data['service'] as $value}
             {$this->Category->getCategoryName($value)}&nbsp;
             <input type="hidden" name="service[]" id="service" value="{$value}">
@@ -147,17 +150,23 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <td class="tdRight">业务范围：</td>
-            <td colspan="3" class="tdLeft">
+            <th>业务范围：</th>
+            <td>
             {$this->data['business_scope']}
             <input type="hidden" name="business_scope" id="business_scope" value="{$this->data['business_scope']}">
             </td>
           </tr>
-        </tbody>
         </table>
         </form>
+        <div class="divProtocol">            
+              <label class="protocol" for="vehiclePT">
+              <input type="checkbox" id="vehiclePT" name="vehicle" class="inpCheckbox">
+              我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务兼职政策（试行）》</a> </label>
+          </div>
         </div>
-        <a href="javascript:void(0)" id="complete" class="zclan zclan2">提交</a>
-        <a href="javascript:void(0)" id="backBtn" class="zclan zclan2">上一步</a>
+        <div class="divBtnContainer" style="width:200px;">
+        <a href="javascript:void(0)" id="complete" class="zclan zclan7">提交</a>
+        <a href="javascript:void(0)" id="backBtn" class="zclan zclan7">上一步</a>
+        </div>
         </div>
 </div>

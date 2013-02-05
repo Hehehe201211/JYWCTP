@@ -23,8 +23,7 @@
 		</li>
 	{/foreach}
   </ul>
-  <div class="pagesMag">
-    <div class="fanye">
+  <div class="fanyea">
 		{if $paginatorParams['prevPage']}
 			<div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
 		{/if}
@@ -49,7 +48,6 @@
             <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
       {/if}
     </div>
-  </div>
 </div>
 {else}
 	<div>&nbsp;{$msg}</div>

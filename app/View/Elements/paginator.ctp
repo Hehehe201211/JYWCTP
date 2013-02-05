@@ -52,9 +52,9 @@
                 </td>
                 <td class="tr_td5">{$info.Information.clicked}</td>
                 {if $infoType == "myself"}
-                    <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a></td>
+                    <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1"><a href="/informations/detail/{$info.Information.id}" target="_blank">查看</a><!--<a onclick="confirm('确定删除这条信息吗？')" href="#">删除</a>--></td>
                 {else if $infoType == "received"}
-                    <td class="con_2_xq_tofu xiushan_anniu"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要</a><a  href="javascript:void(0)">忽略</a></td>
+                    <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要</a><!--<a  href="javascript:void(0)">忽略</a>--></td>
                 {else if $type == "need"}
                     <td class="con_2_xq_tofu tofu_anniu"><a href="/informations/payment/{$info.Information.id}" target="_blank">我需要类似服务</a></td>
                 {else}

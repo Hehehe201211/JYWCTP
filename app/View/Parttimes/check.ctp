@@ -3,7 +3,7 @@
 $(document).ready(function(){
     $('#complete').click(function(){
 		if($("#vehiclePT").attr("checked")!="checked") {
-			$(".divProtocol .protocol").append('<font color="#FF0000">请接受协议</font>');
+			$(".divProtocol .protocol").append('<span class="errorMsg">请接受协议</span>');
 		} else {
 			$('#completeForm').attr('action', '/parttimes/complete');
 			$('#completeForm').submit();
@@ -176,7 +176,7 @@ $(document).ready(function(){
           <div class="divProtocol">            
               <label for="vehiclePT" class="protocol">
               <input type="checkbox" class="inpCheckbox" name="vehicle" id="vehiclePT">
-              我接受 <a href="#">《聚业务兼职政策（试行）》</a> </label>
+              我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务兼职政策（试行）》</a> </label>
           </div>
           <div class="divBtnContainer" style="width:200px;">
           {if isset($this->data['id'])}

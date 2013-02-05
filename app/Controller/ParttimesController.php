@@ -225,7 +225,6 @@ class ParttimesController extends AppController
         );
         $parttimes = $this->PartTime->find('first', $params);
         $area = explode(',', $parttimes['PartTime']['area']);
-        
         $conditionsSubQuery = array(
             'sender'    => $sender,
             'receiver'  => $reciever,

@@ -31,7 +31,7 @@
             </td>
             <td><a target="_blank" href="/cooperations/detail">{$cooperation.Cooperation.created}</a></td>
             <td><a target="_blank" href="/cooperations/detail">{$status[$cooperation.Cooperation.status]}</a></td>
-            <td class="con_2_xq_tofu xiushan_anniu">
+            <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
             <a href="/cooperations/detail" target="_blank">详情</a>
             </td>
           </tr>

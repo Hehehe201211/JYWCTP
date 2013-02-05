@@ -1,5 +1,6 @@
 @charset "utf-8";
 body{background:url(../img/index_bj.jpg) top repeat-x #f5f5f5;}
+.artFangye{float:right;border-top:0 none;}
 /*Nesting Comment Style*/
 .articleCommentN h3{border-bottom:1px dashed #CCC;color:#369;font-weight:bold;padding:12px 0 0 12px;font-size:14px;}
 .articleCommentN .nolog{background-color:#FFD;border:1px solid #000;height:40px;line-height:40px;margin:10px 10px 0;text-align:center;}
@@ -28,12 +29,6 @@ body{background:url(../img/index_bj.jpg) top repeat-x #f5f5f5;}
 .articleCommentN .row .inpTextBox{padding:3px 0;width:40px;margin-right:8px;text-align:center;vertical-align:text-bottom;}
 .articleCommentN .row a img{vertical-align:text-bottom;height:22px;margin-right:6px;}
 .articleCommentN .row .btnCommit{display:block;background:url(../img/gradient.gif) 0 -327px repeat-x;border:1px solid #000;color:#FFF;font-weight:bold;height:20px;margin-left:170px;padding:2px 5px;text-align:center;width:40px;}
-
-.artFangye{float:right;}
-.artFangye .dd_span{width:auto;padding:0 6px;margin:6px 1px 0;}
-.artFangye .dd_span:hover{border-color:#F50;text-decoration:none;}
-.artFangye .dd_ym,.artFangye .dd_ym11{margin:7px 3px 0;width:auto;}
-.errorMsg{font-weight:normal;font-size:12px !important;margin:0 12px;position:absolute;z-index:1;color:#F00;}
 
 .divMap{border:1px #999 solid;}
 .divMapCon{margin:3px;padding:6px 3px;background:#FFF;color:#000;text-align:left;font-weight:normal;display:none;}

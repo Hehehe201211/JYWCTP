@@ -59,9 +59,9 @@
                 </td>
                 <td class="tr_td5"><a target="_blank" href="/cooperations/waitdetail/?{$type}={$coop.Cooperation.id}">{$status[$coop.Cooperation.status - 1]}</a></td>
                 <td class="tr_td5"><a target="_blank" href="/cooperations/waitdetail/?{$type}={$coop.Cooperation.id}">{$coop.Cooperation.created|date_format:"%Y-%m-%d"}</a></td>
-                <td class="con_2_xq_tofu xiushan_anniu">
-                    <a href="/cooperations/waitdetail/?{$type}={$coop.Cooperation.id}" target="_blank" style="font-weight: normal;">详情</a>
-                    <a href="javascript:void(0)" style="font-weight: normal;">完成</a>
+                <td class="con_2_xq_tofu xiushan_anniu xiushan_anniu1">
+                    <a href="/cooperations/waitdetail/?{$type}={$coop.Cooperation.id}" target="_blank">详情</a>
+                    <!--<a href="javascript:void(0)">完成</a>-->
                 </td>
             </tr>
         {/foreach}

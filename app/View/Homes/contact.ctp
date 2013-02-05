@@ -2,6 +2,8 @@
 {literal}
 $(document).ready(function(){
     $(".navMiddle li a:eq(5)").addClass("active");	
+	var urlc=$("#urlCompany").attr("href").toUpperCase();	;
+	if (urlc.indexOf("HTTP://"))  $("#urlCompany").attr("href","http://"+urlc)
 });
 {/literal}
 </script>
@@ -62,7 +64,7 @@ $(document).ready(function(){
         {if !empty($homepage.Homepage.url)}
         <tr>
           <th scope="row">公司网站：</th>
-          <td><a href="{$homepage.Homepage.url}" target="_blank">{$homepage.Homepage.url}</a></td>
+          <td><a href="{$homepage.Homepage.url}" target="_blank" id="urlCompany">{$homepage.Homepage.url}</a></td>
         </tr>
         {/if}
       </table>
