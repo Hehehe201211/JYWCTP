@@ -16,7 +16,7 @@ class InformationsController extends AppController
         'Payment',
         'Appraisal',
         'PartTime',
-        'Friendship'
+        'Friendship',
     );
     var $helpers = array('Js', 'City', 'Category');
     var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
@@ -342,6 +342,19 @@ class InformationsController extends AppController
             'conditions' => array('id' => $id)
         );
         $information = $this->Information->find('first', $params);
+        
+        //是否是收到的信息，如果是则设置阅读标志位
+        $conditions = array(
+            'members_id'        => $this->_memberInfo['Member']['id'], 
+            'information_id'    => $id,
+            'status'            => 1
+        );
+        $receive = $this->MemberReceived->find('first', array('conditions' => $conditions));
+        if (!empty($receive)) {
+            $up = array('status' => 2);
+            $this->MemberReceived->updateAll($up, $conditions);
+        }
+        
         //是否朋友关系
         $isFriend = $this->Friendship->find('count', array('conditions' => array('members_id' => $this->_memberInfo['Member']['id'], 'friend_members_id' => $information['Information']['members_id'])));
         $isFriend = $isFriend > 0 ? true : false;
@@ -721,6 +734,7 @@ class InformationsController extends AppController
     public function received()
     {
        $type = isset($this->request->query['type']) ? $this->request->query['type'] : "has";
+       $type = isset($this->request->date['type']) ? $this->request->date['type'] : "has";
        $fields = array(
             'Information.id',
             'Information.title',
@@ -742,14 +756,12 @@ class InformationsController extends AppController
             'conditions' => 'Information.id = MemberReceived.information_id'
         );
         $members_id = $this->_memberInfo['Member']['id'];
-        $conditions = array('MemberReceived.members_id' => $members_id);
-        $conditions = array('MemberReceived.status' => 0);
+        $conditions = array('MemberReceived.members_id' => $members_id, 'MemberReceived.status' => array(1, 2));
         if ($type == 'has'){
            $conditions['MemberReceived.type'] = 0;
         } else {
            $conditions['MemberReceived.type'] = 1;
         }
-        
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : 2;
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
         $this->paginate = array(
@@ -770,6 +782,8 @@ class InformationsController extends AppController
                 $this->set('jump', $page);
             }
             $this->render('/Elements/paginator');
+        } else {
+            $this->set('title_for_layout', "收到的客源");
         }
 
     }
@@ -1377,15 +1391,18 @@ class InformationsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+	        $notices = $this->Unit->notice();
+	        $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }

@@ -99,21 +99,8 @@
         <a style="margin-top:12px;" href="/informations/payment/{$this->request->query['id']}" class="zclan zclan4 linkLogin">{if $information.Information.type == Configure::read('Information.type.has')}我需要{else}我有客源{/if}</a>
    </div>
   <div class="sider">
-    <div class="fuwu">         
-      <h1 class="h1Zy_rzj_tt"><a href="plf-wyky2.html"><span class="fr">更多...</span>最新需求发布</a></h1>   
-      <ul class="zy_rzj_tt">
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-          <li><a title="2012-11-16 09:28" target="_blank" href="jzxxxq2.html">厦门/电视广告/提供信息/10%厦门/电视广告/提供信息/10%</a></li>
-        </ul>
+    <div class="fuwu">
+        {$this->element('common/parttime-right')}
     </div>
   </div>
   <div class="clear">&nbsp;</div>

@@ -18,28 +18,35 @@ body{background:#50574f;}
 .zhucrig a{color:#ccc;}
 .zhucrig a:hover{color:#FFF;}
 
-.header{background:url(../img/gsqtHBg.gif) 0 0 repeat-x;height:151px;overflow:hidden;}
+.header{background:url(../img/gsqtHBg.gif) 0 8px repeat-x #FFF;height:151px;overflow:hidden;}
 .header .divH{width:113px;float:left;height:151px;}
 .header .middle{width:297px;margin-top:10px;overflow:hidden;display:table;height: 121px;*position: relative;*display:block;}
 .header .middle div{display:table-cell;vertical-align:middle;*display:block;*position:absolute;*top:50%;*left:0;}
 .header .middle img{max-height:121px;max-width:297px;*display:block;*position:relative;*top:-50%;*left:0;}
 .header .right{width:560px;margin-right:30px;font:bold 30px "微软雅黑","黑体";text-shadow:3px 3px 1px #CCC;background-position:-13px -151px;text-align:right;}
 .header .right table tr:hover{background:none;}
-.header .right .webName{font-size:22px;color:#D33;letter-spacing:2px;}
-.header .right .webNameB{font-size:30px;color:#000;}
+.header .right .webName{font-size:22px;color:#555;letter-spacing:2px;}
+.header .right .webNameB{font-size:30px;color:#333;}
 
-.main{background:#f0be5d;color:#fff;overflow:hidden;}
+.main{background:#b77210;color:#fff;overflow:hidden;}
 .main a{text-decoration:underline;}
 .main .left{width:113px;float:left;height:100%;}
 .main .left .divnavLeft,.navMiddle{width:100%;height:41px;margin-bottom:12px;}
 .main .left .navLeft{background:url(../img/gsqtNavLiBg.png) -388px 0 no-repeat;float:right;width:24px;height:25px;}
 .main .right{width:115px;}
 .main .left .navRight{background-image:url(../img/gsqtNavLiBgH.png);float:left;}
-.main .middle{background:#ba791c;width:772px;float:left;padding-bottom:12px;}
+.main .middle{width:772px;float:left;padding-bottom:12px;}
 .main .middle .conLeft th{text-align:right;}
-.main .conLeft .content{padding:12px 8px;background:#8C4300;overflow:hidden;}
+.main .conLeft .content{padding:12px 8px;overflow:hidden;}
 .main .conLeft .content p{text-indent:2em;}
 .main .middle .conRImg{width:256px;border:2px #FFC solid;float:right;margin-left:8px;}
+
+.products tr:hover{background:none;}
+.products td{text-align:center;}
+.products a{text-decoration:none;display:block;margin:0 auto;width:142px;}
+.products a img{border:1px #3F381E solid;max-width:140px;max-height:130px;_width:140px;_height:130px;}
+.products a:hover img{border-color:#FF0;}
+.products .borderImg{width:142px;height:132px;display:table-cell;vertical-align:middle;display:block\9;*cursor:pointer;}
 
 .navMiddle ul li{float:left;height:34px;margin-top:7px;}
 .navMiddle li a{display:block;width:128px;height:34px;background:url(../img/gsqtNavLiBg.png) -130px 0 no-repeat;color:#444;font:bold 14px/34px "宋体";text-align:center;text-decoration:none;}
@@ -47,13 +54,6 @@ body{background:#50574f;}
 .navMiddle li a.aleft{background-position:0 0;width:130px}
 .navMiddle li a.aright{background-position:-258px 0;width:130px;}
 
-.main .divconMiddle{padding:0 12px}
-.main .middle .ulProducts{margin:0 auto;height:162px;width:748px;}
-.main .middle .ulProducts li{float:left;margin:8px 0;overflow:hidden;text-align:center;width:142px;}
-.main .middle .ulProducts li a{text-decoration:none;}
-.main .middle .ulProducts li .borderImg{border:1px #3F381E solid;height:130px;width:140px;}
-.main .middle .ulProducts li a:hover div{border-color:#FF0;}
-.main .middle .ulProducts li img{max-width:140px;max-height:130px;_width:140px;_height:130px;}
 .main .divContact{width:360px;float:left;}
 .main .divMap{float:right;width:360px;display:none;}
 #mapLayout{color:#333;width:360px;height:240px;}

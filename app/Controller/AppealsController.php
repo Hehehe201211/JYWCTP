@@ -12,10 +12,12 @@ class AppealsController extends AppController
         'InformationComment',
         'Appeal',
         'InformationComplaint',
-        'AppealAnswerTemplate'
+        'AppealAnswerTemplate',
+        'Friendship',
+        'PaymentTransaction'
     );
 	var $helpers = array('Js', 'City', 'Category');
-	var $components = array('RequestHandler', 'Info', 'Unit');
+	var $components = array('RequestHandler', 'Info', 'Unit', 'Recommend');
 	var $paginate;
 	
 	public function listview()
@@ -89,6 +91,17 @@ class AppealsController extends AppController
                 'members_id' => $this->_memberInfo['Member']['id'], 
                 'buyer_members_id' => $query['mid'], 
             );
+            $friendCond = array(
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'friend_members_id' => $query['mid']
+            );
+            $transaction_conditions = array(
+                'information_id' => $id,
+                'members_id' => $query['mid'], 
+                'author_members_id' => $this->_memberInfo['Member']['id'], 
+                'send_readed'       => 0
+            );
+            $up = array('send_readed' => 1);
         }
         if (isset($query['been']) && !empty($query['been'])) {
             $id = $query['been'];
@@ -97,14 +110,29 @@ class AppealsController extends AppController
                 'members_id' => $query['mid'], 
                 'buyer_members_id' => $this->_memberInfo['Member']['id'], 
             );
+            $friendCond = array(
+                'members_id' => $query['mid'], 
+                'friend_members_id' => $this->_memberInfo['Member']['id']
+            );
+            $up = array('receive_readed' => 1);
+            $transaction_conditions = array(
+                'information_id' => $id,
+                'members_id' => $this->_memberInfo['Member']['id'], 
+                'author_members_id' => $query['mid'], 
+                'receive_readed' => 0
+            );
         }
 	    $appeal = $this->Appeal->find('first', array('conditions' => $conditions));
 	    if (empty($appeal)) {
 	        $this->_sysDisplayErrorMsg("没有此信息的详情！");
             return 0;
 	    }
+	    
+	    //是否阅读过
+	    $this->PaymentTransaction->updateAll($up, $transaction_conditions);
+	    
 	    $this->Info->detail($appeal['Appeal']['information_id']);
-	    $this->Info->baseMemberInfo($appeal['Appeal']['buyer_members_id']);
+	    $this->Info->baseMemberInfo($query['mid']);
         //投诉
         $complaint = $this->Info->complaint($appeal['Appeal']['information_id'], $appeal['Appeal']['buyer_members_id']);
         //投诉答案
@@ -119,6 +147,11 @@ class AppealsController extends AppController
             }
             $this->render('/Elements/comments_paginator');
         }
+        
+        //是否朋友关系
+        $isFriend = $this->Friendship->find('count', array('conditions' => $friendCond));
+        $isFriend = $isFriend > 0 ? true : false;
+        $this->set('isFriend', $isFriend);
         
         //platform
         $this->Info->appealAnswer($appeal['Appeal']['id']);
@@ -181,8 +214,19 @@ class AppealsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
+	   //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            //系统信息
+            $notices = $this->Unit->notice();
+            $this->set('notices', $notices);
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
+            } else {
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
+            }
+        }
 	}
 }

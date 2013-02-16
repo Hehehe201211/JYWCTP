@@ -100,6 +100,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .wmxxjs_left .pltParttimes .toggleMap{float:right;margin:10px 40px 0 0;border-top-width:1px;border-bottom-width:0;}
 .wmxxjs_left .pltParttimes .zclan{margin-top:8px;}
 .wmxxjs_left .divMap{margin-bottom:12px;}
+.wmxxjs_left #informationList .fanyea{border-top:0 none;}
 
 .xxjs_li{padding-bottom:10px; display:block;}
 .xxjs_li ul{width:345px;margin:6px 6px 12px;overflow:hidden;padding:0px;}
@@ -195,7 +196,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 
 .conResource{float:left;width:750px;padding-left:8px;}
 .conResource a:hover{text-decoration:underline;}
-.conResource .crumbsNav{padding-right:8px;text-align:right;} 
+.conResource .crumbsNav{padding-right:8px;} 
 .conResource .crumbsNav a{color:#666;}
 .conResource .crumbsNav a:hover{color:#F60;text-decoration:none;}
 .conResource .fanyea{margin-right:12px;}

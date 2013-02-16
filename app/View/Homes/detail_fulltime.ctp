@@ -3,7 +3,7 @@
     <h2>{$fulltime.Fulltime.title}</h2>
     <div class="pleft">
       <div class="biaotit">基本信息</div>
-      <p class="jinggao">发布时间：{$fulltime.Fulltime.created|date_format:"%Y-%m-%d"} 信息编号：{$fulltime.Fulltime.id} <br />该信息被浏览 7 次 </p>
+      <p class="jinggao">发布时间：{$fulltime.Fulltime.created|date_format:"%Y-%m-%d"} 信息编号：{$fulltime.Fulltime.id} &nbsp;&nbsp;&nbsp;该信息被浏览 7 次 </p>
       <table width="492" cellspacing="0" cellpadding="0" border="0" class="posInfo">
         <tr>
           <th width="119" scope="row">公司名称：</th>
@@ -87,8 +87,8 @@
       <div class="biaotit">补充说明</div>
       <div class="xxContent">{$fulltime.Fulltime.additional}</div>
   </div>
-  <div class="divBtnContainer" style="width:200px">
-    <a class="btnDeliverR zclan zclan7" href="javascript:;">投递简历</a>
+  <div class="divBtnContainer">
+    <a class="btnDeliverR zclan zclan4" href="javascript:;">投递简历</a>
   </div> 
   <div class="clearfix"></div>
 </div>

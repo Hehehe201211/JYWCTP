@@ -73,6 +73,10 @@ class CooperationsController extends AppController
         $cooperation = $this->Parttime->cooperationDetail($conditions, $type);
         if ($type == "receiver") {
             $this->render('detail_company');
+            if ($cooperation['Cooperation']['receive_readed'] == 0) {
+                $up = array('receive_readed' => 1);
+                $this->Cooperation->updateAll($up, $conditions);
+            }
         }
         if (empty($cooperation)) {
             $this->_sysDisplayErrorMsg("empty cooperation");
@@ -154,6 +158,21 @@ class CooperationsController extends AppController
             $this->_sysDisplayErrorMsg("error");
         }
         $cooperation = $this->Parttime->cooperationDetail($conditions, $type);
+        $up = array();
+        if ($type == "send") {
+            if ($cooperation['Cooperation']['send_readed'] == 0) {
+                $up = array('send_readed' => 1);
+            }
+        } else {
+            if ($cooperation['Cooperation']['receive_readed'] == 0) {
+                $up = array('receive_readed' => 1);
+            }
+        }
+        if (!empty($up)) {
+            unset($conditions['Cooperation.status']);
+            $this->Cooperation->updateAll($up, $conditions);
+        }
+        
         if ($cooperation['Cooperation']['status'] == Configure::read('Cooperation.status.failure')) {
             $this->Parttime->getFailure($cooperation['Cooperation']['id']);
         }
@@ -420,6 +439,7 @@ class CooperationsController extends AppController
                     'id'    => $this->request->data['id'],
                     'sender'    => $this->_memberInfo['Member']['id']
                 );
+                $data['receive_readed'] = 0;
                if ($this->Parttime->setCooperationStatus($data, $conditions)) {
                    $result = array(
                         'result' => 'OK',
@@ -435,6 +455,7 @@ class CooperationsController extends AppController
                     'id'    => $this->request->data['id'],
                     'receiver'    => $this->_memberInfo['Member']['id']
                 );
+                $data['send_readed'] = 0;
                 if ($this->Parttime->setCooperationStatus($data, $conditions)) {
                    $result = array(
                         'result' => 'OK',
@@ -596,15 +617,18 @@ class CooperationsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+	        $notices = $this->Unit->notice();
+	        $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }

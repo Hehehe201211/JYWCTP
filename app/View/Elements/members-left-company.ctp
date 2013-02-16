@@ -10,9 +10,19 @@
           <li><a href="/parttimes/listview?type=send">兼职发布列表</a></li>
           <li><a href="/elites/listview">业务精英检索</a></li>
           <!--<li><a href="/invitations/listview">邀请的合作</a></li> -->
-          <li><a href="/cooperations/listview/?type=receiver">收到的合作</a></li>
+          <li>
+          <a href="/cooperations/listview/?type=receiver">收到的合作</a>
+            {if isset($receiveCooperationCount) && !empty($receiveCooperationCount)}
+                <span class="infoNum">{$receiveCooperationCount}</span>
+            {/if}
+          </li>
           <li><a href="/cooperations/waitlist/?type=receiver">待确认的合作</a></li> 
-          <li><a href="/cooperations/complaintlist/?type=receiver">被投诉的合作</a></li>
+          <li>
+          <a href="/cooperations/complaintlist/?type=receiver">被投诉的合作</a>
+            {if isset($complaintCooperationCount) && !empty($complaintCooperationCount)}
+                <span class="infoNum">{$complaintCooperationCount}</span>
+            {/if}
+          </li>
           <li><a href="/cooperations/completelist/?type=receiver">已结束的合作</a></li>
         </ul>
       </div>
@@ -27,8 +37,15 @@
           <li><a href="/resumes/search">简历检索</a></li>
           <li><a href="/fulltimes/create">发布招聘需求</a></li>
           <li><a href="/fulltimes/listview">职位管理</a></li>
-          <li><a href="/auditions/listview?type=receive">收到的简历</a></li>
-          <li><a href="/auditions/inviteList?type=receive">面试邀请</a></li>
+          <li>
+          <a href="/auditions/listview?type=receive">收到的简历</a>
+            {if isset($resumeReceive) && !empty($resumeReceive)}
+                <span class="infoNum">{$resumeReceive}</span>
+            {/if}
+          </li>
+          <li>
+          <a href="/auditions/inviteList?type=receive">面试邀请</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -58,6 +75,6 @@
         </ul>
       </div>
     </div>
-    <div class="zy_bz"><a href="#"></a></div>
-    <div class="zy_fx"><a href="#"></a></div>
+    <div class="zy_bz"><a href="/static?tpl=service" target="_blank"></a></div>
+    <div class="zy_fx"><a href="/static?tpl=faq" target="_blank"></a></div>
 </div>

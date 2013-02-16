@@ -155,7 +155,8 @@ class IndexController extends AppController
         );
         $params = array(
             'conditions' => $conditions,
-            'order'         => array('PartTime.created'),
+            'order'         => array('PartTime.created DESC'),
+            'group'         => array('PartTime.members_id'),
             'limit'         => 5,
             'fields'     => $fields,
             'joins'      => array($joinMember)

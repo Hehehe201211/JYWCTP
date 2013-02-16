@@ -1,12 +1,71 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-	$(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"});
-	$(".header_top_search .test2").keydown(function(e){
-		if ($(this).val()!=""&&e.keyCode==13) $(this).next().click();
-	});    
+    $(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"});
+    /*
+    $(".header_top_search .test2").keydown(function(e){
+        if ($(this).val()!=""&&e.keyCode==13){
+            if ($('#keyword').val() != '') {
+                postKeyword();
+            } else {
+                return false;
+            }
+        }
+    });
+    */
+    $('#keywordSearch').submit(function(){
+        var type = $('.x_selected.select').text().trim();
+        var url = '';
+        switch(type) {
+            case "客源" : 
+                url = '/search?type=has';
+                break;
+            case "悬赏" : 
+                url = '/search?type=need';
+                break;
+            case "职位" : 
+                url = '/search/offerSearch';
+                break;
+            case "兼职" : 
+                url = '/search/parttime'
+                break;
+            default : 
+                break;
+        }
+        if (url != '') {
+            $('#keywordSearch').attr('action', url);
+            return true;
+        }
+        return false;
+    });
+    
+    function postKeyword()
+    {
+        var type = $('.x_selected.select').text();
+        var url = '';
+        switch(type) {
+            case '客源' : 
+                url = '/search?type=has';
+                break;
+            case '悬赏' : 
+                url = '/search?type=need';
+                break;
+            case '职位' : 
+                url = '/search/offer';
+                break;
+            case '兼职' : 
+                url = '/search/parttime'
+                break;
+            default : 
+                break;
+        }
+        if (url != '') {
+            $('#keywordSearch').attr('action', url).submit();
+        }
+    }
+    
 });
-//{/literal}
+{/literal}
 </script>
 <div class="header">
   <div class="toplist">
@@ -17,7 +76,7 @@ $(document).ready(function(){
           <li class="line"></li>
           {if empty($memberInfo) || $memberInfo.Member.type == Configure::read('UserType.Personal')}
           <li><a href="/accounts/invite" target="_blank">好友推荐</a></li>
-		  <li class="line"></li>
+          <li class="line"></li>
           {/if}          
           <li><a href="/accounts/sms" target="_blank">站内信</a></li>
           <li class="line"></li>
@@ -25,38 +84,38 @@ $(document).ready(function(){
           <li class="cor">
           <a href="/services/home" target="_blank">企业服务</a>
              <div class="moreList" style="width:60px;">
-	             <a href="/services/home" target="_blank">企业服务</a>
-	             <a href="/fulltimes/create" target="_blank">常规招聘</a>
-	             <a href="/parttimes/create" target="_blank">平台兼职</a>
+                 <a href="/services/home" target="_blank">企业服务</a>
+                 <a href="/fulltimes/create" target="_blank">常规招聘</a>
+                 <a href="/parttimes/create" target="_blank">平台兼职</a>
              </div>
           </li>
           <li class="line"></li>
           <li class="cor">
           <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="/informations/search/need" target="_blank">我有客源</a>
-	             <a href="/informations/search/has" target="_blank">我要客源</a>
-	             <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
-	             <a href="/invitations/listview" target="_blank">平台兼职</a>
+                 <a href="/informations/search/need" target="_blank">我有客源</a>
+                 <a href="/informations/search/has" target="_blank">我要客源</a>
+                 <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
+                 <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
           </li>
           {else if $memberInfo.Member.type == Configure::read('UserType.company')}
           <li class="cor">
           <a href="/services/home" target="_blank">企业服务</a>
              <div class="moreList" style="width:60px;">
-	             <a href="/services/home" target="_blank">企业服务</a>
-	             <a href="/fulltimes/create" target="_blank">常规招聘</a>
-	             <a href="/parttimes/create" target="_blank">平台兼职</a>
+                 <a href="/services/home" target="_blank">企业服务</a>
+                 <a href="/fulltimes/create" target="_blank">常规招聘</a>
+                 <a href="/parttimes/create" target="_blank">平台兼职</a>
              </div>
           </li>
           {else}
           <li class="cor">
           <a href="/members" target="_blank">我的聚业务</a>
              <div class="moreList" style="width:72px;">
-	             <a href="/informations/search/need" target="_blank">我有客源</a>
-	             <a href="/informations/search/has" target="_blank">我要客源</a>
-	             <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
-	             <a href="/invitations/listview" target="_blank">平台兼职</a>
+                 <a href="/informations/search/need" target="_blank">我有客源</a>
+                 <a href="/informations/search/has" target="_blank">我要客源</a>
+                 <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
+                 <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
           </li>
           {/if}
@@ -73,13 +132,13 @@ $(document).ready(function(){
         {if empty($memberInfo)}
           <dt><a href="/members" target="_blank">个人会员</a></dt>
           <dd><a href="/informations/create/has" target="_blank">发布客源</a>
-	          <a href="/informations/create/need" target="_blank">发布悬赏</a>
-	          <a href="#" target="_blank">我要充值</a>
+              <a href="/informations/create/need" target="_blank">发布悬赏</a>
+              <a href="#" target="_blank">我要充值</a>
           </dd>
           <dt><a href="/members" target="_blank">企业会员</a></dt>
           <dd>
-	          <a href="/fulltimes/create" target="_blank">发布招聘</a>
-	          <a href="/parttimes/create" target="_blank">发布兼职</a>
+              <a href="/fulltimes/create" target="_blank">发布招聘</a>
+              <a href="/parttimes/create" target="_blank">发布兼职</a>
           </dd>
         {else}
             {if $memberInfo.Member.type == Configure::read('UserType.company')}
@@ -98,10 +157,10 @@ $(document).ready(function(){
         {/if}
           <dt><a href="#" target="_blank">聚业务社区</a></dt>
           <dd>
-	          <a href="#" target="_blank">博文</a>
-	          <a href="#" target="_blank">论坛</a>
-	          <a href="#" target="_blank">知道</a>
-	          <a href="#" target="_blank">新闻</a>
+              <a href="#" target="_blank">博文</a>
+              <a href="#" target="_blank">论坛</a>
+              <a href="#" target="_blank">知道</a>
+              <a href="#" target="_blank">新闻</a>
           </dd>
           <dt><a href="#" target="_blank">所有服务</a></dt>          
         </dl>
@@ -218,15 +277,21 @@ $(document).ready(function(){
     </div>
     <div class="header_top_search">
       <div class="x_search2 x_only2" >
-        <div id="top_select" class="x_slist2" > <a class="x_selected select" href="#" hidefocus="true"><span id="topSearch" class="rel">任务</span></a> </div>
-        <input id="inpSearch" class="test2" type="text" name="input"/>
-        <input class="image2" width="22" type="image" height="26" src="{$this->webroot}img/topsearch_04.gif" name="inpSearch" />
+        <div id="top_select" class="x_slist2" >
+        <a class="x_selected select" href="#" hidefocus="true">
+        <span id="topSearch" class="rel">任务</span>
+        </a>
+        </div>
+        <form id="keywordSearch" method="post">
+        <input id="inpSearch" class="test2" type="text" name="keyword"/>
+        <input class="image2" width="22" type="image" id="searchBtn" height="26" src="{$this->webroot}img/topsearch_04.gif" name="inpSearch" />
+        </form>
         <ul id="topSearchUl" class="select_list" style="display:none;">
-          <li><a href="javascript:;">客源</a></li>
-          <li><a href="javascript:;">悬赏</a></li>
-          <li><a href="javascript:;">职位</a></li>
-          <li><a href="javascript:;">兼职</a></li>
-          <li><a href="javascript:;">公司</a></li>
+          <li><a href="javascript:void(0);">客源</a></li>
+          <li><a href="javascript:void(0);">悬赏</a></li>
+          <li><a href="javascript:void(0);">职位</a></li>
+          <li><a href="javascript:void(0);">兼职</a></li>
+          <li><a href="javascript:void(0);">公司</a></li>
         </ul>
       </div>
     </div>

@@ -11,12 +11,9 @@
 <script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    $("ul.nav li a:eq(7)").addClass("current");
-    $(".index_tj").Scroll({line:1,speed:200,timer:3000,up:"index_tj_sp",down:"index_tj_sp1",selector:".index_tj"}); 
-    
+    $("ul.nav li a:eq(7)").addClass("current");    
     $(".ntcLeft .category p a").eq($(".corContent .crumbs").attr("mnum")).parent().next().show();
-	$(".ntcLeft .category p a").eq($(".corContent .crumbs").attr("mnum")).parent().prev().addClass("cActive");  
-	
+	$(".ntcLeft .category p a").eq($(".corContent .crumbs").attr("mnum")).parent().prev().addClass("cActive");  	
 	$(".searchBox .inpButton").click(function(){
 	  if (document.getElementById("keywrod").value!="") document.getElementById("staticForm").submit();
 	});

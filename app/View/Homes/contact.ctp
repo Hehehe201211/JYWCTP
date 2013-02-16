@@ -2,7 +2,7 @@
 {literal}
 $(document).ready(function(){
     $(".navMiddle li a:eq(5)").addClass("active");	
-	var urlc=$("#urlCompany").attr("href").toUpperCase();	;
+	var urlc=$("#urlCompany").attr("href").trim().toUpperCase();
 	if (urlc.indexOf("HTTP://"))  $("#urlCompany").attr("href","http://"+urlc)
 });
 {/literal}

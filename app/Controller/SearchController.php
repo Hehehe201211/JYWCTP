@@ -11,7 +11,7 @@ class SearchController extends AppController
 {
     public $uses = array('Category', 'Information', 'PartTime', 'Homepage', 'Fulltime');
     var $helpers = array('Js', 'City', 'Category');
-    var $components = array('RequestHandler', 'Info', 'Parttime', 'SiteAnalyzes');
+    var $components = array('RequestHandler', 'Info', 'Parttime', 'SiteAnalyzes', 'Recommend', 'Ft');
     var $paginate;
     /**
      * 
@@ -119,6 +119,16 @@ class SearchController extends AppController
                 $conditions['DATE_FORMAT(Information.created, "%Y-%m-%d") > '] = date('Y-m-d', strtotime("-$limitTime day"));
             }
         }
+        
+        if (isset($this->request->data['keyword'])) {
+            $conditions['AND'][] = array(
+                        'OR' => array(
+                            array('Information.introduction LIKE ' => "%{$this->request->data['keyword']}%"),
+                            array('Information.additional LIKE ' => "%{$this->request->data['keyword']}%")
+                        )
+            );
+        }
+        
         $this->set('type', $type);
         if (!$this->RequestHandler->isAjax()) {
             $menuList = $this->Category->getMenuList();
@@ -149,9 +159,13 @@ class SearchController extends AppController
             if ($info['Information']['type'] == Configure::read('Information.type.has')) {
                 $this->currentTopBar = 'has';
                 $this->set('title_for_layout', "客源详细");
+                $this->Recommend->newInformation(Configure::read('Information.type.has'));
+                $this->set('recommendType', 'has');
             } else {
                 $this->currentTopBar = 'need';
                 $this->set('title_for_layout', "悬赏详细");
+                $this->Recommend->newInformation(Configure::read('Information.type.need'));
+                $this->set('recommendType', 'need');
             }
         }
         
@@ -171,6 +185,58 @@ class SearchController extends AppController
         $this->_graphicOffer();
         $this->_linkOffer();
     }
+    
+    public function offerSearch()
+    {
+        $conditions = array();
+        if (isset($this->request->data['citys']) && !empty($this->request->data['citys'])) {
+            $conditions['OR'] = array('Fulltime.provincial' => $this->request->data['citys'], 'Fulltime.city' => $this->request->data['citys']);
+        }
+        if (isset($this->request->data['products']) && !empty($this->request->data['products'])) {
+            $conditions[] = array('Fulltime.category' => $this->request->data['products']);
+        }
+        if (isset($this->request->data['salary']) && !empty($this->request->data['salary'])) {
+            list($min, $max) = explode('-', $this->request->data['salary']);
+            if (!empty($min)) {
+                $conditions[] = array('Fulltime.salary >= ' => $min);
+            }
+            if (!empty($max)) {
+                $conditions[] = array('Fulltime.salary <= ' => $max);
+            }
+        }
+        if (isset($this->request->data['educated']) && !empty($this->request->data['educated'])) {
+            $conditions[] = array('Fulltime.educated >= ' => $this->request->data['educated']);
+        }
+        if (isset($this->request->data['continued']) && !empty($this->request->data['continued'])) {
+            $conditions[] = array('Fulltime.continued' => $this->request->data['continued']);
+        }
+        if (isset($this->request->data['type']) && !empty($this->request->data['type'])) {
+            $conditions[] = array('Fulltime.type' => $this->request->data['type']);
+        }
+        if (isset($this->request->data['limitTime'])) {
+            $limitTime = $this->request->data['limitTime'];
+            if ($limitTime === '0') {
+                $conditions['Information.created >= '] = date('Y-m-d', time());
+            } elseif ($limitTime !== "") {
+                $conditions['Information.created >= '] = date('Y-m-d', strtotime("-$limitTime day"));
+            }
+        }
+        
+        if (isset($this->request->data['keyword']) && $this->request->data['keyword'] != "请输入关键字") {
+            $conditions[] = array('Fulltime.require LIKE' => "%{$this->request->data['keyword']}%");
+        }
+        $this->Ft->fulltimeList($conditions);
+        
+        if ($this->RequestHandler->isAjax()) {
+            $this->render('/Elements/common/offer-result');
+        } else {
+            $this->set('title_for_layout', "企业招聘");
+            $this->currentTopBar = 'offer';
+            $this->Recommend->newFulltime();
+            $this->set('recommendType', 'fulltime');
+        }
+    }
+    
     /**
      * 
      * 图片区域的招聘
@@ -203,7 +269,8 @@ class SearchController extends AppController
             'Fulltime.end >='   => $now
         );
         $fields = array(
-            'DISTINCT(Member.id)',
+//            'DISTINCT(Member.id)',
+            'Member.id',
             'Fulltime.post',
             'Fulltime.company',
             'Fulltime.id'
@@ -215,19 +282,39 @@ class SearchController extends AppController
             'conditions' => 'Fulltime.members_id = Member.id'
         );
         $params = array(
-//            'conditions' => $conditions,
+            'conditions' => $conditions,
             'fields' => $fields,
             'limit' => 30,
             'order' => array('Member.modified DESC'),
+            'group' => array('Member.id'),
             'joins' => array($joinMember)
         );
         $links = $this->Fulltime->find('all', $params);
+        $this->Fulltime->printLog();
         $this->set('links', $links);
     }
     
     public function odetail()
     {
-        
+        $this->currentTopBar = 'offer';
+        $this->set('title_for_layout', "企业招聘详情");
+        if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
+            if (isset($this->_memberInfo['Member']) && !empty($this->_memberInfo) && $this->_memberInfo['Member']['grade'] == 2) {
+                $this->redirect('/fulltimes/detail?id=' . $this->request->query['id']);
+            }
+            $fulltime = $this->Fulltime->find('first', array('conditions' => array('id' => $this->request->query['id'])));
+            if (!empty($fulltime)) {
+                $conditions = array('members_id' => $fulltime['Fulltime']['members_id']);
+                $homepage = $this->Homepage->find('first',array('conditions' => $conditions, 'fields' => array('domain')));
+                $this->set('homepage', $homepage);
+                $this->set('fulltime', $fulltime);
+                $this->Recommend->newFulltime();
+                $this->set('recommendType', 'fulltime');
+            } else {
+                ;
+            }
+            
+        }
     }
     
     /**
@@ -253,6 +340,15 @@ class SearchController extends AppController
                 )
             );
         }
+        if (isset($this->request->data['keyword'])) {
+            $conditions['AND'][] = array(
+                array(
+                    'OR' => array(
+                        'PartTime.sub_title LIKE ' => "%{$this->request->data['keyword']}%"),
+                        'PartTime.additional LIKE' => "%{$this->request->data['keyword']}%"
+                    )
+                );
+        }
         if (!empty($conditions)) {
             $this->Parttime->partimeListNeed($conditions);
         } else {
@@ -264,6 +360,8 @@ class SearchController extends AppController
         } else {
             $this->set('title_for_layout', "兼职信息");
             $this->currentTopBar = 'parttime';
+            $this->Recommend->newParttime();
+            $this->set('recommendType', 'parttime');
         }
     }
     
@@ -285,7 +383,12 @@ class SearchController extends AppController
                     $this->Session->write('PartTime_' . $id, $id);
                     $clicked = 1;
                 }
+                $conditions = array('members_id' => $parttime['PartTime']['members_id']);
+                $homepage = $this->Homepage->find('first',array('conditions' => $conditions, 'fields' => array('domain')));
+                $this->set('homepage', $homepage);
                 $this->set('clicked', $clicked);
+                $this->Recommend->newParttime();
+                $this->set('recommendType', 'parttime');
             }
         } else {
             $this->set('parttime', array());

@@ -39,7 +39,13 @@
               </td>
               <td class="tr_td7">
                   <a target="_blank" href="/informations/detail/{$information.Information.id}" >
-                      {$this->City->cityName($information.Information.provincial)}<br/>{$this->City->cityName($information.Information.city)}
+                    {$provincial = $this->City->cityName($information.Information.provincial)}
+                    {$city = $this->City->cityName($information.Information.city)}
+                    {if $provincial != $city}
+                    {$provincial}<br/>{$city}
+                    {else}
+                    {$provincial}
+                    {/if}
                 </a>
               </td>
               <td class="tr_td4">
@@ -83,7 +89,13 @@
                       </td>
                       <td class="tr_td7">
                           <a target="_blank" href="/informations/payment/{$information.Information.id}" >
-                              {$this->City->cityName($information.Information.provincial)}<br/>{$this->City->cityName($information.Information.city)}
+                            {$provincial = $this->City->cityName($information.Information.provincial)}
+                            {$city = $this->City->cityName($information.Information.city)}
+                            {if $provincial != $city}
+                            {$provincial}<br/>{$city}
+                            {else}
+                            {$provincial}
+                            {/if}
                         </a>
                       </td>
                       <td class="tr_td4">
@@ -129,7 +141,13 @@
                       </td>
                       <td class="tr_td7">
                           <a target="_blank" href="/informations/detail/{$information.Information.id}" >
-                              {$this->City->cityName($information.Information.provincial)}<br/>{$this->City->cityName($information.Information.city)}
+                            {$provincial = $this->City->cityName($information.Information.provincial)}
+                            {$city = $this->City->cityName($information.Information.city)}
+                            {if $provincial != $city}
+                            {$provincial}<br/>{$city}
+                            {else}
+                            {$provincial}
+                            {/if}
                         </a>
                       </td>
                       <td class="tr_td4">
@@ -175,7 +193,13 @@
                       </td>
                       <td class="tr_td7">
                           <a target="_blank" href="/informations/create/{if $information.Information.type == 0}has{else}need{/if}/{$information.Information.id}" >
-                              {$this->City->cityName($information.Information.provincial)}<br/>{$this->City->cityName($information.Information.city)}
+                            {$provincial = $this->City->cityName($information.Information.provincial)}
+                            {$city = $this->City->cityName($information.Information.city)}
+                            {if $provincial != $city}
+                            {$provincial}<br/>{$city}
+                            {else}
+                            {$provincial}
+                            {/if}
                         </a>
                       </td>
                       <td class="tr_td4">

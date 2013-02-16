@@ -64,10 +64,20 @@ class InvitationsController extends AppController
             $id = $this->request->query['id'];
             $conditions = array(
                 'id'    => $id,
+                'receiver'  => $this->_memberInfo['Member']['id'],
                 'status' => Configure::read('Invitation.inviting')
             );
             $invitation = $this->Invitation->find('first', array('conditions' => $conditions));
+            
             if (!empty($invitation)) {
+	            if ($invitation['Invitation']['receive_readed'] == 0) {
+	                $up = array('receive_readed' => 1);
+	                $conditions = array(
+	                    'id' => $id,
+	                    'receiver' => $this->_memberInfo['Member']['id']
+	                );
+	                $this->Invitation->updateAll($up, $conditions);
+	            }
                 $conditions = array(
                     'members_id' => $invitation['Invitation']['sender']
                 );
@@ -150,14 +160,16 @@ class InvitationsController extends AppController
         $conditions = array(
             'sender'    => $this->_memberInfo['Member']['id'],
             'receiver'  => $this->request->data['receiver'],
-            'status'    => Configure::read('Invitation.inviting')
+            'status'    => Configure::read('Invitation.inviting'),
         );
-        if ($this->Invitation->find('count', $conditions) > 0) {
+        if ($this->Invitation->find('count', array('conditions' => $conditions)) > 0) {
             $result = array(
                 'result' => 'NG',
                 'msg'    => '你已邀请此会员，不能重复邀请，请查看回复！'
             );
         } else {
+            $conditions['receive_readed'] = 0;
+            $conditions['send_readed']   = 1;
             if ($this->Invitation->save($conditions)) {
                 $result = array(
                     'result' => 'OK'
@@ -182,15 +194,18 @@ class InvitationsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+	        $notices = $this->Unit->notice();
+	        $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }

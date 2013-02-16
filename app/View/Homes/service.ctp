@@ -2,23 +2,23 @@
 {literal}
 $(document).ready(function(){
     $(".navMiddle li a:eq(1)").addClass("active");    
-    var mulLR=$(".main .middle .ulProducts").width()/$(".middle .ulProducts li").length-$(".middle .ulProducts li").width();
-    var mulLR=mulLR/2;
-    $(".middle .ulProducts li").css({"margin-left":mulLR,"margin-right":mulLR});
+    if ($.browser.msie) {
+		$(".products img").each(function(index) {
+			var mTop=($(this).parent().height()-$(this).height())/2;
+			$(this).css("margin-top",mTop);
+		});
+	}
     
     //切换详情
     var n=-1;
-    $(".middle .ulProducts li a").click(function(e){
+    $(".products a").click(function(e){
         e.preventDefault();
-        var m=$(".middle .ulProducts li a").index(this);
+        var m=$(".products a").index(this);
         if (n!=m) {
-            for (i=0;i<$(".main1 .middle .pcontent").length;i++) {
-                $(".main1 .middle .pcontent:eq("+i+")").slideUp(600);           
-            }           
-            n=m;
-            $(".main1 .middle .pcontent:eq("+m+")").slideDown(600); 
-            $(".main1 .middle .pcontent:eq("+m+") ul").css("width",$(".main1 .middle .pcontent:eq("+m+") ul li").width()*$(".main1 .middle .pcontent:eq("+m+") ul li").length);
-        }
+			$(".pcontent").eq(n).slideUp(600);	
+			$(".pcontent").eq(m).slideDown(600);			
+			n=m;
+		}
     });
     $('.download').live('click', function(){
         var src = '/homes/download_product?id=' + $(this).next('.id').val();
@@ -47,28 +47,20 @@ $(document).ready(function(){
         </ul>
     </div>
     <div class="divconMiddle">
-      <div class="productslist">
-        <ul class="ulProducts">
-        {foreach $products as $product}
-            <li>
-            <a href="javascript:void(0)">
-                <div class="borderImg">
-				<table width="100%" border="0" height="100%">
-              <tr>
-                <td> {if !empty($product.Product.big_thumbnail)}
+    <table width="100%" border="0" class="products">
+        <tr>
+        {foreach $products as $product}            
+            <td><a href="javascript:;">
+            <span class="borderImg">  {if !empty($product.Product.big_thumbnail)}
                 <img src="{$this->webroot}{$product.Product.small_thumbnail}" alt="{$product.Product.name}" />
                 {else}
                 <img src="{$this->webroot}img/noimage.gif" alt="not image" />
-                {/if}</td>
-              </tr>
-            </table>               
-                </div>
-                <p>{$product.Product.name}</p>
-            </a>
-            </li>
+                {/if} </span>
+            <p>{$product.Product.name}</p>
+            </a></td>
         {/foreach}
-        </ul>
-      </div>
+        </tr>
+      </table>      
     </div>
   </div>
   <div class="left right">
@@ -130,5 +122,3 @@ $(document).ready(function(){
 </div>
 <iframe style="display:none" id="downloadIframe">
 </iframe>
-
-

@@ -14,7 +14,8 @@ $(document).ready(function(){
     });
     //检索按钮
     $('#search').click(function(){
-        $('#searchOpt').submit();
+       var searchOpt = $('#searchOpt').serializeArray();
+        $('#informationList').load('/search/offerSearch', searchOpt, function(){});
     });
 });
 {/literal}
@@ -35,12 +36,13 @@ $(document).ready(function(){
     </div>
     <div class="arrow"></div>
   </div>
+  <form id="searchOpt" action="/search/offerSearch" method="post">
   <div class="wmxxjs_left inviteJobL" style="overflow:visible;">
-    <form id="searchOpt" action="/search/offerSearch" method="post">
       {$this->element('common/parttime-search-bar')}
-    </form>
   </div>
+  <!--
   <div class="sider inviteJobR">
+  
     <div class="login">
       <form action="#" method="post" id="loginBox">
         <ul>
@@ -66,55 +68,17 @@ $(document).ready(function(){
         </ul>
       </form>
     </div>
+    
   </div>
-  <div class="clearfix"></div>  
-  <div class="inviteJobB">
-    <h2 class="tilInviteJobB">热门招聘</h2>
+  -->
     <div class="clearfix"></div>
-    <ul class="ulCompany1 ulCompany2">
-    {foreach $graphics as $homepage}
-      <li>
-          <a href="/homes/fulltime/{$homepage.Homepage.domain}" target="_blank" title="{$homepage.Homepage.company_name}">
-          {$path = Configure::read('Data.path')|cat:$homepage.Homepage.thumbnail_job}
-              {if !empty($homepage.Homepage.thumbnail_job) && file_exists($path)}
-              <img src="{$this->webroot}img/ads/1350529873.jpg" />
-              {else}<span class="middle"><span>{$homepage.Homepage.company_name}</span></span>              
-              {/if}
-          </a>
-      </li>
-      {/foreach}
-    </ul>
-    <div class="ad"><img src="{$this->webroot}img/ad_03.jpg" width="998" height="98" alt="" /></div>
-
-    <h2 class="tilInviteJobB"><a href="plt-qyfw2more.html" class="fr">更多...</a>最新招聘</h2>
-    <table class="tableJobInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
-    {foreach $links as $key => $fulltime}
-        {if $key % 3 == 0}
-        <tr>
-            <td>
-                <div class="textEllipsis">
-                    <a href="/search/odetail?id={$fulltime.Fulltime.id}" class="name" target="_blank">{$fulltime.Fulltime.company}</a>
-                    <a href="/search/odetail?id={$fulltime.Fulltime.id}" target="_blank">{$fulltime.Fulltime.post}</a>
-                </div>
-            </td>
-        
-        {else if $key % 3 == 2}
-            <td>
-                <div class="textEllipsis">
-                <a href="/search/odetail?id={$fulltime.Fulltime.id}" class="name" target="_blank">{$fulltime.Fulltime.company}</a>
-                <a href="/search/odetail?id={$fulltime.Fulltime.id}" target="_blank">{$fulltime.Fulltime.post}</a>
-                </div>
-            </td>
-          </tr>
-        {else}
-        <td>
-            <div class="textEllipsis">
-                <a href="/search/odetail?id={$fulltime.Fulltime.id}" class="name" target="_blank">{$fulltime.Fulltime.company}</a>
-                <a href="/search/odetail?id={$fulltime.Fulltime.id}" target="_blank">{$fulltime.Fulltime.post}</a>
-            </div>
-        </td>
-        {/if}
-    {/foreach}
-    </table>
+    <div style="margin-top:12px;" class="wmxxjs_left">
+        <div class="biaotit">检索结果</div>
+        {$this->element('common/offer-result')}
+    </div>
+  </form>
+  <div class="sider">
+    {$this->element('common/parttime-right')}
   </div>
+  <div class="clear">&nbsp;</div>
 </div>

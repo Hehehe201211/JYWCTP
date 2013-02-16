@@ -25,7 +25,7 @@ $(document).ready(function(){
         </div>
         <div class="divconMiddle">
             <div class="conLeft">
-                <div class="content">{if !empty($homepage.Homepage.thumbnail)}<img class="conRImg" src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}{$homepage.Homepage.introduction}</div>
+                <div class="content">{if !empty($homepage.Homepage.thumbnail)}<img class="conRImg" src="{$this->webroot}{$homepage.Homepage.thumbnail}" />{/if}<p>{$homepage.Homepage.introduction}</p></div>
             </div>            
         </div>
     </div>

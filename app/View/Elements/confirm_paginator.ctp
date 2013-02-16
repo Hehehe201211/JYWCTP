@@ -4,9 +4,9 @@
 {$paginatorParams = $this->Paginator->params()}
 {if $paginatorParams['count'] > 0 || $isAjax}
 <div class="tableSort" style="clear: both;">      
-      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.transaction'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.transaction')}" name="status[]" class="inpRadio status">待确认交易</label>      
-      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complaint'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.complaint')}" name="status[]" class="inpRadio status">被投诉客源</label>      
-      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal')}" name="status[]" class="inpRadio status">申述中</label>
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.transaction'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.transaction')}" name="status[]" class="inpRadio status">待确认交易</label>
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.complaint'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.complaint')}" name="status[]" class="inpRadio status">{if $type=="has"}被投诉客源{else}我投诉客源{/if}</label>
+      <label><input type="checkbox" {if in_array(Configure::read('Transaction.status_code.appeal'), $status)}checked="checked"{/if} value="{Configure::read('Transaction.status_code.appeal')}" name="status[]" class="inpRadio status">{if $type=="has"}我在申述中{else}对方申述中{/if}</label>
 </div>
 {/if}
 {if $paginatorParams['count'] > 0}

@@ -289,10 +289,12 @@ class ParttimesController extends AppController
                     'sender'        => $this->_memberInfo['Member']['id'],
                     'receiver'       => $this->request->data['receiver'],
                     'part_times_id' => $this->request->data['part_times_id'],
-                    'information_id'=> $id
+                    'information_id'=> $id,
+                    'receive_readed' => 0,
+                    'send_readed'    => 1
                 );
             }
-            if ($this->Cooperation->addCopperation($cooperations)) {
+            if ($this->Cooperation->addCooperation($cooperations)) {
                 $result = array(
                     'result' => 'OK'
                 );
@@ -316,16 +318,19 @@ class ParttimesController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+	        $notices = $this->Unit->notice();
+	        $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }

@@ -84,7 +84,7 @@ function searchRe(event){
 </script>
 <div class="sbResource">
     <div class="login">
-        <div class="frmTitle">会员登录</div>
+        <div class="frmTitle">个人会员登录</div>
         <form action="#" method="post" id="loginBox">
           <ul>
             <li>
@@ -100,10 +100,8 @@ function searchRe(event){
               <label>验证码：</label>
               <input type="text" name="checkNum" value="验证码" id="checkNum" class="yanzhengma" txt="验证码"/>
               <a id="getCheckNum" href="javascript:void(0)">看不清？</a></li>
-            <li>
-              <label>类型：</label>              
-              <label class="fl" ><input type="radio" name="type" value="0" checked="checked"/>个人</label>              
-              <!--<label class="fl" ><input type="radio" name="type" value="1"/>企业</label>-->
+            <li style="display:none;">              
+              <input type="radio" name="type" value="0" checked="checked"/>
             </li>
             <li class="zinp">
 	            <a id="btnLogin" class="inp" href="javascript:void(0)">登录</a>

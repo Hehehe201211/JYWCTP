@@ -106,6 +106,32 @@ class ConfirmController extends AppController
             return 0;
         }
         
+        //是否阅读过
+        $up = array();
+        if ($type == "has") {
+            if ($transaction['PaymentTransaction']['send_readed'] == 0) {
+                $conditions = array(
+	                'information_id' => $information_id,
+	                'members_id' => $query['mid'],
+	                'author_members_id' => $this->_memberInfo['Member']['id'],
+	            );
+	            $up = array('send_readed' => 1);
+            }
+        } else {
+            if ($transaction['PaymentTransaction']['receive_readed'] == 0) {
+                $conditions = array(
+	                'information_id' => $information_id,
+	                'members_id' => $this->_memberInfo['Member']['id'],
+	                'author_members_id' => $query['mid'],
+	            );
+	            $up = array('receive_readed' => 1);
+            }
+        }
+        if (!empty($up)) {
+            $this->PaymentTransaction->updateAll($up, $conditions);
+        }
+        
+        
         $this->Info->comments($information_id, $this->_memberInfo['Member']['id'], $query['mid']);
         $this->set('type', $type);
         if (!$this->RequestHandler->isAjax()){
@@ -154,15 +180,18 @@ class ConfirmController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+	        $notices = $this->Unit->notice();
+	        $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }

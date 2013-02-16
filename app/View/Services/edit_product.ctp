@@ -1,33 +1,24 @@
 ﻿<script type="text/javascript">
 {literal}
 $(document).ready(function(){
-    var checkTarget = ['title','name','introduction','additional'];
+    var checkTarget = ['title','name','introduction'];
 	var checkTargetF = ['small_thumbnail','big_thumbnail'];
     var errorMsg = '<span class="errorMsg">请完善此项目</span>';
 	$("#check").click(function(){
 		var error=false;
+		$(".sjle").find(".errorMsg").remove();
 		$.each(checkTarget, function(target){		    
 			if($('#' + this).val() == "") {
-				if($('#' + this).parents(".sjle dl dt").find('.errorMsg').length == 0) {
-					$('#' + this).parents(".sjle dl dt").append(errorMsg);
-				}
+				$('#' + this).parents(".sjle dl dt").append(errorMsg);
 				error=1;
-			} else {
-				$('#' + this).parents(".sjle dl dt").find('.errorMsg').remove();
-			}
+			} 
 		});	
-		if ($('#id').val() == "") {
-    		$.each(checkTargetF, function(target){		    
-    			if($('#' + this).val() == "") {
-    				if ($('#' + this).next().find('.errorMsg').length == 0) {
-    					$('#' + this).next().append(errorMsg);
-    				}
-    				error=1;
-    			} else {
-    				$('#' + this).next().find('.errorMsg').remove();
-    			}
-    		});	
-		}		
+		$.each(checkTargetF, function(target){		    
+			if($('#' + this).val() == "") {
+				$('#' + this).next().append(errorMsg);
+				error=1;
+			} 
+    	});	
 		if (!error) {
 			$("#productForm").submit();
 		}
@@ -121,7 +112,7 @@ $(document).ready(function(){
                 <input type="file" name="document" /><p class="imgfilesize">（文档文件大小不超过2M）</p>
             </dt>  
             <dt>
-                <label><font class="facexh">*</font>内容提要：</label>
+                <label>内容提要：</label>
                 <textarea rows="5" cols="45" name="additional" id="additional"></textarea>
             </dt> 
         </dl>

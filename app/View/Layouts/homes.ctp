@@ -10,10 +10,9 @@
 </head>
 <body>
     <div class="width1000 zhucrig">
-        <a href="zhuce.html">免费注册</a>&nbsp;|&nbsp;
-        <a href="zhuce.html">登录</a>&nbsp;|&nbsp;
-        <a href="index.html">聚客源首页</a>&nbsp;|&nbsp;
-        <a href="#">帮助</a>
+        <a href="http://dev.jukeyuan.com/members/register">免费注册</a>&nbsp;|&nbsp;
+        <a href="http://dev.jukeyuan.com/members/register">登录</a>&nbsp;|&nbsp;
+        <a href="http://dev.jukeyuan.com/">聚业务首页</a>
     </div>
     <div class="width1000 header"> 
         <div class="divH left">&nbsp;</div>

@@ -28,6 +28,7 @@ class FtComponent extends Component
             'category',
             'type',
             'number',
+            'modified'
         );
         if (!empty($joins)) {
 	        $this->controller->paginate = array(

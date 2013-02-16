@@ -105,57 +105,58 @@
         </ul>
       </li>
       <li class="lists keyword">
-        <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onFocus="this.select()"/>
+        <input type="text" name="keyword" class="inpKeyword" value="{if isset($this->data['keyword'])}{$this->data['keyword']}{else}请输入关键字{/if}" placeholder="请输入关键字" onFocus="this.select()"/>
       </li>
       </ul>
-    <div class="clearfix"></div>       
+      {if $this->request->params['action'] != 'parttime'}
+    <div class="clearfix"></div>
         <ul class="ulParttime">
             <li class="lists">经验要求：
-                <select>
-                    <option>不限</option>
-                    <option>1年以下</option>
-                    <option>1-2年</option>
-                    <option>2-3年</option>
-                    <option>3年以上</option>
+                <select name="continued">
+                    <option value="">不限</option>
+                    <option value="1">1年以下</option>
+                    <option value="2">1-2年</option>
+                    <option value="3">2-3年</option>
+                    <option value="4">3年以上</option>
                 </select>
             </li>
             <li class="lists">学历要求：
-                <select>
-                    <option>不限</option>
-                    <option>小学及以上</option>
-                    <option>高中/中专及以上</option>
-                    <option>本科/大专及以上</option>
-                    <option>研究生及以上</option>
+                <select name="educated">
+                    <option value="">不限</option>
+                    <option value="1">小学及以上</option>
+                    <option value="3">高中/中专及以上</option>
+                    <option value="5">大专/本科及以上</option>
+                    <option value="7">研究生及以上</option>
                 </select>
             </li>
             <li class="lists">薪资：
-                <select>
-                    <option>不限</option>
-                    <option>1000元/月以下</option>
-                    <option>1000-2000元/月</option>
-                    <option>2000-3000元/月</option>
-                    <option>3000-4000元/月</option>
-                    <option>4000元/月以上</option>
+                <select name="salary">
+                    <option value="">不限</option>
+                    <option value="0-1000">1000元/月以下</option>
+                    <option value="1000-2000">1000-2000元/月</option>
+                    <option value="2000-3000">2000-3000元/月</option>
+                    <option value="3000-4000">3000-4000元/月</option>
+                    <option value="4000-">4000元/月以上</option>
                 </select>
             </li>
             <li class="lists">工作性质：
-                <select>
-                    <option>不限</option>
-                    <option>全职</option>
-                    <option>兼职</option>
+                <select name="type">
+                    <option value="">不限</option>
+                    <option value="全职">全职</option>
+                    <option value="兼职">兼职</option>
                 </select>
             </li>
             <li class="lists">发布日期：
-                <select>
-                    <option>不限</option>
-                    <option>当日</option>
-                    <option>3天</option>
-                    <option>一周</option>
-                    <option>两周</option>
-                    <option>一个月及以上</option>
+                <select name="limitTime">
+                  <option value="">全部</option>
+                  <option value="0">当日</option>
+                  <option value="3">3天</option>
+                  <option value="7">一周</option>
+                  <option value="30">一个月</option>
                 </select>
             </li>
         </ul>
+        {/if}
     </div>
     <a class="zclan zclan4" href="javascript:void(0)" id="search">检索</a>
 </div>

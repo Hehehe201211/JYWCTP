@@ -9,7 +9,7 @@ class ServicesController extends AppController
 {
     var $layout = 'members';
     public $uses = array('Homepage', 'Product', 'Service');
-    var $components = array('Upload', 'Thumbnail', 'Unit', 'File');
+    var $components = array('Upload', 'Thumbnail', 'Unit', 'File', 'Recommend', 'RequestHandler');
     /**
      * 
      * 公司主页
@@ -468,5 +468,19 @@ class ServicesController extends AppController
         //系统信息
         $notices = $this->Unit->notice();
         $this->set('notices', $notices);
+        //推荐信息
+        if (!$this->RequestHandler->isAjax()){
+            //系统信息
+            $notices = $this->Unit->notice();
+            $this->set('notices', $notices);
+            if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
+            } else {
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
+            }
+        }
     }
 }

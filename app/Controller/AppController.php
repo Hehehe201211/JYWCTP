@@ -99,9 +99,9 @@ class AppController extends Controller {
     public function beforeFilter()
     {
         $except = array(
-        	'index' => array(),
-        	'members' => array('login', 'register', 'check', 'complete', 'ajaxlogin', 'image', 'existEmail', 'existMember'),
-        	'informations' => array('getCityList', 'getCategoryList'),
+            'index' => array(),
+            'members' => array('login', 'register', 'check', 'complete', 'ajaxlogin', 'image', 'existEmail', 'existMember'),
+            'informations' => array('getCityList', 'getCategoryList'),
             'static'        => array(),
             'search'        => array(),
             'accounts'      => array('eComplete'),
@@ -113,15 +113,58 @@ class AppController extends Controller {
         $checkSession = true;
         $this->_memberInfo = $this->Session->read('memberInfo');
         if (array_key_exists($this->request->params['controller'], $except)) {
-        	if (empty($except[$this->request->params['controller']]) || 
-        	in_array($this->request->params['action'], $except[$this->request->params['controller']])) {
-        		$checkSession = false;
-        	}
+            if (empty($except[$this->request->params['controller']]) || 
+            in_array($this->request->params['action'], $except[$this->request->params['controller']])) {
+                $checkSession = false;
+            }
         }
         if ($checkSession) {
-        	if (empty($this->_memberInfo)) {
-        		$this->redirect('/members/register');
-        	}
+            if (empty($this->_memberInfo)) {
+                $this->redirect('/members/register');
+            } else {
+                if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
+                    $allow = array(
+                        'informations'  => array(),
+                        'confirm'       => array(),
+                        'complete'      => array(),
+                        'coins'         => array(),
+                        'points'        => array(),
+                        'complete'      => array(),
+                        'complaints'    => array(),
+                        'appeals'       => array(),
+                        'accounts'      => array(),
+                        'members'       => array(),
+                        'resumes'       => array('create', 'check', 'complete', 'listview', 'detail', 'preview', 'editBase', 'editBase', 'candidate'),
+                        'fulltimes'     => array('search', 'detail', 'favouriteList', 'addFavourite', 'delFavourite'),
+                        'auditions'     => array('listView', 'detail', 'addAudition', 'inviteList', 'delete'),
+                        'parttimes'     => array('listview', 'search', 'detail', 'informationList', 'addCandidates'),
+                        'favourites'    => array(),
+                        'invitations'   => array(),
+                        'cooperations'  => array(),
+                        'friends'       => array()
+                    );
+                } else {
+                    $allow = array(
+                        'elites'        => array(),
+                        'fulltimes'     => array('create', 'edit', 'check', 'complete', 'listview', 'detail', 'delete'),
+                        'parttimes'     => array('create', 'edit', 'check', 'complete', 'listview', 'detail'),
+                        'cooperations'  => array(),
+                        'resumes'       => array('detail', 'search'),
+                        'auditions'     => array('listView', 'detail', 'inviteList', 'delete', 'accept', 'companySendInvite'),
+                        'services'      => array(),
+                        'accounts'      => array(),
+                        'members'       => array()
+                    );
+                }
+                if (!array_key_exists($this->request->params['controller'], $allow)) {
+                    $this->redirect('/members');
+                } elseif (
+                        !empty($allow[$this->request->params['controller']]) && 
+                        !in_array($this->request->params['action'], $allow[$this->request->params['controller']])
+                    ) {
+                    $this->redirect('/members');
+                }
+            }
         }
     }
     

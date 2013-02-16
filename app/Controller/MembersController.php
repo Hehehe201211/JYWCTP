@@ -45,6 +45,9 @@ class MembersController extends AppController
                 
                 //
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             }
         } else {//企业会员
             $this->currentMenu = Configure::read('Menu.parttimeManager');

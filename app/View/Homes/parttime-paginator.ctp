@@ -29,7 +29,7 @@
         {else}独立签单
         {/if} </td>
       <td>{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</td>
-      <td class="btnInfoDl"><a href="#" class="btnDeliverR">参与</a></td>
+      <td class="btnInfoDl"><a href="javascript:;" class="btnDeliverR">参与</a></td>
     </tr>
     {/foreach}
   </table>

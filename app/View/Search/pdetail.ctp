@@ -7,7 +7,13 @@
                 <table class="posInfo" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <th width="25%" scope="row">公司名称：</th>
-                        <td width="75%"><a href="gsqt-index.html" target="_blank" class="red">{$parttime.Member.company_name}</a></td>
+                        <td width="75%">
+                        {if !empty($homepage.Homepage.domain)}
+                        <a href="/homes/index/{$homepage.Homepage.domain}" target="_blank" class="red">{$parttime.Member.company_name}</a>
+                        {else}
+                        {$parttime.Member.company_name}
+                        {/if}
+                        </td>
                     </tr>
                     <tr>
                         <th width="148" scope="row">营业执照：</th>
@@ -101,8 +107,7 @@
                 </table>
             </div>
             <div class="divBtnContainer" style="width:200px;">
-                <a class="zclan zclan7 linkLogin" href="#">我有客源</a>
-                <a class="zclan zclan7 linkLogin" href="javascript:;">收藏</a>
+                <a class="zclan zclan7 linkLogin" href="/parttimes/detail?id={$parttime.PartTime.id}">我有客源</a>
             </div>
         </div>
     </div>

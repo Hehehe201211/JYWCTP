@@ -11,14 +11,29 @@
                 <dd><a href="/informations/received/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>收到的悬赏</a></dd>
                 <dd><a href="/informations/create/has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>发布客源</a></dd>
                 <dd><a href="/informations/issue/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的客源</a></dd>
-                <dd><a href="/confirm/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a></dd>
+                <dd>
+                    <a href="/confirm/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a>
+                    {if isset($confirmHas) && !empty($confirmHas)}
+                        <span class="infoNum">{$confirmHas}</span>
+                    {/if}
+                </dd>
                 <dd><a href="/complete/listview/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>已结束</a></dd>
                 <dt>我要客源</dt>
                 <dd><a href="/informations/search/has">所有客源</a></dd>
-                <dd><a href="/informations/received/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>收到的客源</a></dd>
+                <dd>
+                    <a href="/informations/received/?type=has" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>收到的客源</a>
+                    {if isset($receiveHas) && !empty($receiveHas)}
+                        <span class="infoNum">{$receiveHas}</span>
+                    {/if}
+                </dd>
                 <dd><a href="/informations/create/need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我要悬赏</a></dd>
                 <dd><a href="/informations/issue/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>我的悬赏</a></dd>
-                <dd><a href="/confirm/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a></dd>
+                <dd>
+                    <a href="/confirm/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}>交易中</a>
+                    {if isset($confirmNeed) && !empty($confirmNeed)}
+                        <span class="infoNum">{$confirmNeed}</span>
+                    {/if}
+                </dd>
                 <dd><a href="/complete/listview/?type=need" {if $memberInfo.Member.grade == 0}class="elementary"{/if}> 已结束</a></dd>
             </dl>
         </div>
@@ -68,7 +83,12 @@
           <li><a href="/fulltimes/search">我要工作</a></li>
           <li><a href="/fulltimes/favouriteList">职位收藏夹</a></li>
           <li><a href="/auditions/listview?type=send">简历投递记录</a></li>
-          <li><a href="/auditions/inviteList?type=send">面试邀请</a></li>
+          <li>
+            <a href="/auditions/inviteList?type=send">面试邀请</a>
+            {if isset($auditionSend) && !empty($auditionSend)}
+                <span class="infoNum">{$auditionSend}</span>
+            {/if}
+          </li>
         </ul>
       </div>
     </div>
@@ -79,14 +99,24 @@
             <ul>
                 <li><a href="/parttimes/listview?type=need">我要兼职</a></li>
                 <li><a href="/favourites/listview">我收藏的兼职</a></li>
-                <li><a href="/invitations/listview">收到的邀请</a></li>
+                <li>
+                <a href="/invitations/listview">收到的邀请</a>
+                {if isset($parttimeReceiveInvitation) && !empty($parttimeReceiveInvitation)}
+                    <span class="infoNum">{$parttimeReceiveInvitation}</span>
+                {/if}
+                </li>
                 <li><a href="/cooperations/listview/?type=send">客源提供列表</a></li>
-                <li><a href="/cooperations/waitlist/?type=send">合作中的兼职</a></li>
+                <li>
+                <a href="/cooperations/waitlist/?type=send">合作中的兼职</a>
+                {if isset($cooperationCount) && !empty($cooperationCount)}
+                    <span class="infoNum">{$cooperationCount}</span>
+                {/if}
+                </li>
                 <li><a href="/cooperations/complaintlist/?type=send">我的投诉</a></li>
                 <li><a href="/cooperations/completelist/?type=send">交易结束的兼职</a></li>
             </ul>
         </div>
     </div>
-    <div class="zy_bz"><a href="#"></a></div>
-    <div class="zy_fx"><a href="#"></a></div>
+    <div class="zy_bz"><a href="/static?tpl=service" target="_blank"></a></div>
+    <div class="zy_fx"><a href="/static?tpl=faq" target="_blank"></a></div>
 </div>

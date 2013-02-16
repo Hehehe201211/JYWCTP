@@ -11,9 +11,9 @@ $(document).ready(function(){
                     var result = eval("("+data+")");
                     if (result.result == 'OK') {
                         $('.invite').hide();
-                        alert('邀请成功，请关注对方的回复！');
+                        alter('邀请成功，请关注对方的回复！');
                     } else {
-                        alert(result.msg);
+                        alter(result.msg);
                     }
                 }
             });
@@ -69,8 +69,13 @@ $(document).ready(function(){
         <tr>
           <th>联系地址：</th>
           <td>
-          {$this->City->cityName($member.MemberAttribute.provincial_id)} 
-          {$this->City->cityName($member.MemberAttribute.city_id)}
+          {$provincial = $this->City->cityName($member.MemberAttribute.provincial_id)} 
+          {$city = $this->City->cityName($member.MemberAttribute.city_id)}
+          {if $provincial != $city}
+          {$provincial} {$city}
+          {else}
+          {$provincial}
+          {/if}
           </td>
         </tr>  
         <tr>
@@ -158,7 +163,7 @@ $(document).ready(function(){
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
       </div>
-    <div class="clearfix"></div>
+    <div class="clear">&nbsp;</div>
     {if $showInviteBtn}
      <a class="zclan zclan4 invite" href="javascript:void(0)">邀请参与</a>
     {/if}   

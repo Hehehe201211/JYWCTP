@@ -28,7 +28,7 @@ class AuditionsController extends AppController
             );
             $this->set('title', '收到的简历');
             $this->set('title_for_layout', '收到的简历');
-            $this->_listReceive(array('Audition.status' => Configure::read('Audition.status_active')));
+            $this->_listReceive($conditions);
         }
     }
     /**
@@ -123,9 +123,9 @@ class AuditionsController extends AppController
         );
         
         $conditions['Audition.receiver'] = $this->_memberInfo['Member']['id'];
+        $this->log(print_r($conditions, true));
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
-        
         $this->paginate = array(
             'Audition' => array('limit' => $pageSize,
                 'page'  => $page,
@@ -185,6 +185,14 @@ class AuditionsController extends AppController
                'joins'     => array($joinFulltime, $joinMember)
             );
             $audition = $this->Audition->find('first', $params);
+            if ($audition['Audition']['send_readed'] == 0) {
+                $conditions = array(
+                    'id'        => $this->request->query['id'],
+                    'sender'    => $this->_memberInfo['Member']['id'],
+                );
+                $up = array('send_readed' => 1);
+                $this->Audition->updateAll($up, $conditions);
+            }
             if (!empty($audition)) {
                 $this->set('audition', $audition);
                 $this->set('title_for_layout', '面试邀请详情');
@@ -208,18 +216,18 @@ class AuditionsController extends AppController
         $error = false;
         if (isset($this->request->query['id']) && !empty($this->request->query['id'])) {
             $joinResume = array(
-	            'table' => 'resumes',
-	            'alias' => 'Resume',
-	            'type'  => 'left',
-	            'conditions' => 'Resume.id = Audition.resumes_id'
-	        );
-	        $joinResumeBase = array(
-	            'table' => 'resume_bases',
-	            'alias' => 'ResumeBase',
-	            'type'  => 'left',
-	            'conditions' => 'ResumeBase.members_id = Audition.sender'
-	        );
-	        $joinResumeWork = array(
+                'table' => 'resumes',
+                'alias' => 'Resume',
+                'type'  => 'left',
+                'conditions' => 'Resume.id = Audition.resumes_id'
+            );
+            $joinResumeBase = array(
+                'table' => 'resume_bases',
+                'alias' => 'ResumeBase',
+                'type'  => 'left',
+                'conditions' => 'ResumeBase.members_id = Audition.sender'
+            );
+            $joinResumeWork = array(
                 'table' => 'resume_works',
                 'alias' => 'ResumeWork',
                 'type'  => 'left',
@@ -232,43 +240,51 @@ class AuditionsController extends AppController
                 'conditions' => 'Resume.id = ResumeEducation.resumes_id'
             );
             $joinFulltime = array(
-	            'table' => 'fulltimes',
-	            'alias' => 'Fulltime',
-	            'type'  => 'left',
-	            'conditions' => 'Fulltime.id = Audition.fulltimes_id'
-	        );
+                'table' => 'fulltimes',
+                'alias' => 'Fulltime',
+                'type'  => 'left',
+                'conditions' => 'Fulltime.id = Audition.fulltimes_id'
+            );
             $conditions = array(
-	            'Audition.receiver' => $this->_memberInfo['Member']['id'],
+                'Audition.receiver' => $this->_memberInfo['Member']['id'],
                 'Audition.id'       => $this->request->query['id'],
                 'Audition.receiver_delete' => 0
-	        );
-	        $fields = array(
-	           "Resume.*",
-	           "Audition.*",
-	           "ResumeBase.*",
-	           "ResumeWork.*",
-	           "ResumeEducation.*",
-	           "Fulltime.post"
-	        );
-	        $params = array(
-	           'conditions' => $conditions,
-	           'fields'    => $fields,
-	           'joins'     => array($joinResume, $joinResumeBase, $joinResumeEdu, $joinResumeWork, $joinFulltime)
-	        );
-	        $audition = $this->Audition->find('first', $params);
-	        if (!empty($audition)) {
-	           $this->set('audition', $audition);
-	           $this->set('title_for_layout', '面试邀请详情');
-	           
-	           //头像
-	           $author = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $audition['Resume']['members_id']), 'fields' => array('thumbnail')));
+            );
+            $fields = array(
+               "Resume.*",
+               "Audition.*",
+               "ResumeBase.*",
+               "ResumeWork.*",
+               "ResumeEducation.*",
+               "Fulltime.post"
+            );
+            $params = array(
+               'conditions' => $conditions,
+               'fields'    => $fields,
+               'joins'     => array($joinResume, $joinResumeBase, $joinResumeEdu, $joinResumeWork, $joinFulltime)
+            );
+            $audition = $this->Audition->find('first', $params);
+            if (!empty($audition)) {
+            if ($audition['Audition']['receive_readed'] == 0) {
+                $conditions = array(
+                    'id'        => $this->request->query['id'],
+                    'receiver'    => $this->_memberInfo['Member']['id'],
+                );
+                $up = array('receive_readed' => 1);
+                $this->Audition->updateAll($up, $conditions);
+            }
+               $this->set('audition', $audition);
+               $this->set('title_for_layout', '面试邀请详情');
+               
+               //头像
+               $author = $this->MemberAttribute->find('first', array('conditions' => array('members_id' => $audition['Resume']['members_id']), 'fields' => array('thumbnail')));
                $this->set('thumbnail', $author['MemberAttribute']['thumbnail']);
-	           
-	        } else {
-	            $this->set('title_for_layout', '收到的简历详情');
-	            $error = true;
-	        }
-	        
+               
+            } else {
+                $this->set('title_for_layout', '收到的简历详情');
+                $error = true;
+            }
+            
         } else {
             $error = true;
         }
@@ -296,6 +312,8 @@ class AuditionsController extends AppController
             );
         } else {
             try {
+                $data['send_readed'] = 1;
+                $data['receive_readed'] = 0;
                 $this->Audition->save($data);
                 //TODO更新招聘信息的应聘人数，有可能要把这个数据从数据表删除
 //                $fulltime =  $this->Fulltime->find('first', array('conditions' => array('id' => $this->request->data['fulltimes_id'])));
@@ -394,7 +412,8 @@ class AuditionsController extends AppController
         $updata = array(
             'status' => Configure::read('Audition.status_accept'),
             'message' => "'" . $this->request->data['message'] . "'", 
-            'modified' => "'" . date('Y-m-d H:i:s', time()) . "'"
+            'modified' => "'" . date('Y-m-d H:i:s', time()) . "'",
+            'send_readed'   => 0
         );
         $conditions = array(
             'id'    => $this->request->data['id'],
@@ -472,15 +491,18 @@ class AuditionsController extends AppController
         $this->_appendCss($css);
         $this->_appendJs($js);
         parent::beforeRender();
-        //系统信息
-        $notices = $this->Unit->notice();
-        $this->set('notices', $notices);
         //推荐信息
         if (!$this->RequestHandler->isAjax()){
+            //系统信息
+            $notices = $this->Unit->notice();
+            $this->set('notices', $notices);
             if ($this->_memberInfo['Member']['type'] == Configure::read('UserType.Personal')) {
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
+                //提示各种信息所处各种状态
+                $this->Recommend->PersonNoticeCount($this->_memberInfo['Member']['id']);
             } else {
-                ;
+                //提示各种信息所处各种状态
+                $this->Recommend->CompanyNoticeCount($this->_memberInfo['Member']['id']);
             }
         }
     }
