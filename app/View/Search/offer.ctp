@@ -16,6 +16,65 @@ $(document).ready(function(){
     $('#search').click(function(){
         $('#searchOpt').submit();
     });
+    //验证码
+    $('#getCheckNum').prepend('<img id="code" src="/members/image">');
+    $('#getCheckNum').click(function(){
+        var src = '/members/image/' + Math.random();
+        $('#code').attr('src', src);
+    });
+    //login
+    $('#btnLogin').click(function(e){
+        var msg = '';
+        var error = false;
+        var nickname = $('#loginBox input[name="nickname"]').val();
+        var password = $('#loginBox input[name="password"]').val();
+        var checkNum = $('#loginBox input[name="checkNum"]').val();
+        var type = $('#loginBox input[name="type"]:checked').val();
+        if (nickname == '' || nickname == '请输入用户名') {
+            msg = '<li>请输入用户名</li>'
+            error = true;
+        }
+        if (password == '') {
+            msg += '<li>请输入密码</li>';
+            error = true;
+        }
+        if (checkNum == '' || checkNum == '验证码') {
+            msg += '<li>请输入验证码</li>';
+            error = true;
+        }
+        if (type == null) {
+            msg += '<li>请选择类型</li>';
+            error = true;
+        }
+        if (error) {
+            e.preventDefault();
+            $('#loginWarning .question').html(msg);
+            $("#loginWarning").fadeIn("fast");
+            var t=setTimeout("hideWarning()",10000);            
+        }
+        
+        if(!error) {
+             params = "nickname=" + nickname + "&password=" + password + "&checkNum=" + checkNum + "&type=" + type;
+             $.ajax({
+                type : 'post',
+                url  : '/members/ajaxlogin',
+                data : params,
+                success : function(data) {
+                    if (data == '') {
+                        window.location.href = location.href;
+                    }                    
+                    if (data != '') {
+                        msg = '<li>' + data + '</li>';
+                        $('#loginWarning ul').html(msg);
+                        $("#loginWarning").fadeIn("fast");
+                        var t=setTimeout("hideWarning()",10000);
+                    } else {
+                        $('#loginWarning').hide();
+                    }                    
+                }
+             });
+         }
+    });    
 });
 {/literal}
 </script>
@@ -42,7 +101,8 @@ $(document).ready(function(){
   </div>
   <div class="sider inviteJobR">
     <div class="login">
-      <form action="#" method="post" id="loginBox">
+        {if empty($memberInfo)}            
+        <form action="#" method="post" id="loginBox">
         <ul>
           <li>
             <label>用户名：</label>
@@ -56,15 +116,43 @@ $(document).ready(function(){
           <li>
             <label>验证码：</label>
             <input type="text" name="yanzhengma" value="验证码" class="yanzhengma" txt="验证码"/>
-            <a id="getCheckNum" href="javascript:void(0)"><img src="{$this->webroot}img/num_03.jpg"/>看不清？</a></li>
+            <a id="getCheckNum" href="javascript:void(0)">看不清？</a></li>
           <li>
-            <label>类型：</label>            
-            <label class="fl"><input type="radio" name="type" value="person" checked="checked" id="person"/>个人</label>            
-            <label class="fl"><input type="radio" name="type" value="enterprise" id="enterprise"/>企业</label>
+            <label>类型：</label>
+            <label class="fl"><input type="radio" name="type" value="person" checked="checked"/>个人</label>
+            <label class="fl"><input type="radio" name="type" value="enterprise" />企业</label>
           </li>
           <li class="zinp"><a id="btnLogin" class="inp" href="new-hyzy.html">登录</a><a id="btnRegister" class="inp" href="zhuce.html" target="_blank">免费注册</a><a class="forget" href="wangjimima.html">忘记密码</a></li>
         </ul>
       </form>
+        {else}
+            {if $memberInfo.Member.grade != 2}
+                  <h3>{$memberInfo.Member.nickname}</h3>
+                  <dl class="mebLinks">
+                    <dt>你还不是高级会员，点击<a class="upgrade" href="/members/upgrade">立即升级</a></dt>
+                    <dd><a target="_blank" href="/informations/search/has">检索客源</a></dd>
+                    <dd><a target="_blank" href="/informations/search/need">检索悬赏</a></dd>
+                    <dd><a target="_blank" href="/fulltimes/search">检索职位</a></dd>
+                    <dd><a target="_blank" href="/parttimes/listview?type=need">检索兼职</a></dd>
+                    <dd>&nbsp;</dd>
+                    <dd><a class="logout" target="_blank" href="/members/logout">退出</a></dd>
+                  </dl>
+            {else}
+                  <!--<h3>{$memberInfo.Member.nickname}</h3>-->
+                  <dl class="mebLinks">        
+                    <dd><a href="/informations/search/has" target="_blank">检索客源</a></dd>
+                    <dd><a href="/informations/create/has" target="_blank">发布客源</a></dd>
+                    <dd><a href="/informations/search/need" target="_blank">检索悬赏</a></dd>
+                    <dd><a href="/informations/create/need" target="_blank">发布悬赏</a></dd>
+                    <dd><a href="/fulltimes/search" target="_blank">检索职位</a></dd>
+                    <dd><a href="/resumes/listview" target="_blank">简历管理</a></dd>   
+                    <dd><a href="/parttimes/listview?type=need" target="_blank">检索兼职</a></dd>     
+                    <dd><a href="/invitations/listview" target="_blank">兼职管理</a></dd> 
+                    <dd><a href="/resources/listview?mid={$memberInfo.Member.id}" target="_blank">文档管理</a></dd>       
+                    <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
+                  </dl>
+            {/if}
+        {/if}
     </div>
   </div>
   <div class="clearfix"></div>  

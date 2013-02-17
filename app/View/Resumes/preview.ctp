@@ -57,6 +57,13 @@
         <tr>
           <td colspan="5" class="tlt tltH"> 教&nbsp;育&nbsp;经&nbsp;历</td>
         </tr>
+		<tr>
+          <td class="tlt tltC">就学起讫时间</td>
+          <td class="tlt tltC">就读院校名称</td>
+          <td class="tlt tltC">专业类别</td>
+          <td class="tlt tltC">专业学历</td>
+          <td class="tlt tltC">就学形式</td>
+        </tr>
         <tr>
           <td width="19%">{$resumeEducation.ResumeEducation.begin|date_format:"%Y-%m-%d"} - {$resumeEducation.ResumeEducation.end|date_format:"%Y-%m-%d"}</td>
           <td width="23%">{$resumeEducation.ResumeEducation.school}</td>
@@ -69,6 +76,13 @@
         </tr>
         <tr>
           <td colspan="5" class="tlt tltH">工&nbsp;作&nbsp;经&nbsp;历</td>
+        </tr>
+		<tr>
+          <td class="tlt tltC">就职起讫时间</td>
+          <td class="tlt tltC">单位名称</td>
+          <td class="tlt tltC">单位行业</td>
+          <td class="tlt tltC">部门</td>
+          <td class="tlt tltC">职位</td>
         </tr>
         <tr>
           <td>{$resumeWork.ResumeWork.begin|date_format:"%Y-%m-%d"} - {$resumeWork.ResumeWork.end|date_format:"%Y-%m-%d"}</td>

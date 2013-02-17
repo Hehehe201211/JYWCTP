@@ -29,6 +29,9 @@ $(document).ready(function(){
             case "兼职" : 
                 url = '/search/parttime'
                 break;
+            case "公司" : 
+                url = '/search/company'
+                break;
             default : 
                 break;
         }

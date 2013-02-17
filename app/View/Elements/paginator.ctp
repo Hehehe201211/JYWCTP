@@ -24,7 +24,7 @@
     </thead>
         {foreach $informations as $info}
             <tr class="con_2_tr">
-                <td class="tr_td1">
+                <td class="tr_td1{if $type=="has" && $info.MemberReceived.status == 1} new{/if}">
                 {$this->Category->getCategoryName($info.Information.category)}
                 {$this->Category->getCategoryName($info.Information.sub_category)}
                 </td>

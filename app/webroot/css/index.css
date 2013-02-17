@@ -21,23 +21,15 @@
 .login li{*margin:0 0 8px;}
 .login ul li .inpTextBox{width:140px;padding-left:22px;background:url(../img/iconLogin.png) no-repeat #FFF;_background-image:url(../img/iconLogin.gif);}
 .login ul li input.password{background-position:0 -20px;color:#333;}
-#passwordL{left:43px;top:48px;}
+#passwordL{left:46px;left:45px\9;top:48px;top:45px\9;_left:25px;}
 .login ul li input.yanzhengma{background-position:0 -39px;width:37px;}
 .login ul li label{line-height:20px;} 
 .login ul li label .inpRadio{margin-right:5px;*vertical-align:middle;*margin-right:0;}
 .zinp{text-align:center;margin-left:18px;}
 .login .liForget{text-align:right;margin-top:-7px;}
 .login .liForget a:hover{text-decoration:underline;color:#333;}
-
 .login .mebLinks{padding:8px;}
-.login .mebLinks a{line-height:32px;color:#FFF;font-size:14px;}
-.login .mebLinks a.upgrade{color:#F30}
-.login .mebLinks a:hover{text-decoration:underline;}
-.login .mebLinks dt{text-align:center;font-size:14px;margin-bottom:8px;}
-.login .mebLinks dd{float:left;width:109px;text-align:center;}
-.login .mebLinks dd a{display:block;margin:0 auto 7px;width:85px;height:28px;background:url(../img/btnbgs.gif) 0 -207px no-repeat;font-weight:bold;text-shadow: 0 0 6px #F30;}
-.login .mebLinks dd a:hover{background-position:-85px -207px;text-decoration:none;}
-.login .mebLinks dd a.logout{background-position:-85px -207px;} 
+.login .mebLinks dd a{margin-bottom:7px;}
 
 .content_right .crAd{margin-bottom:12px;}
 .content_right .crAd img{width:235px;}

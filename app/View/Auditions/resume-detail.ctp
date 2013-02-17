@@ -256,7 +256,6 @@ $(document).ready(function(){
         </table> 
      {/if}
     </div>
-    <div>&nbsp;</div>        
         {if $audition.Audition.status == Configure::read('Audition.status_accept')}
 		<div style="width:200px;" class="divBtnContainer">
 		<a target="_blank" href="/resumes/preview?id={$audition.Resume.id}" class="zclan zclan7">打印</a>

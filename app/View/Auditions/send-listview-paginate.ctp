@@ -17,7 +17,7 @@
     
         {foreach $auditions as $audition}
             <tr class="con_2_tr">
-                <td class="tr_td1"><a target="_blank" href="/auditions/detail?type=send&id={$audition.Audition.id}">{$audition.Member.company_name}</a></td>
+                <td class="tr_td1{if $audition.Audition.send_readed == 0} new{/if}"><a target="_blank" href="/auditions/detail?type=send&id={$audition.Audition.id}">{$audition.Member.company_name}</a></td>
                 <td class="tr_td2"><a target="_blank" href="/auditions/detail?type=send&id={$audition.Audition.id}">{$audition.Fulltime.post}</a></td>
                 <td class="tr_td2"><a target="_blank" href="/auditions/detail?type=send&id={$audition.Audition.id}">{$audition.Fulltime.type}</a></td>
                 <td class="tr_td3"><a target="_blank" href="/auditions/detail?type=send&id={$audition.Audition.id}">{$audition.Fulltime.salary}元/月</a></td>

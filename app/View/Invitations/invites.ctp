@@ -14,7 +14,7 @@
       <tbody>
       {foreach $invites as $invite}
       <tr class="con_2_tr even">
-        <td class="tr_td2">
+        <td class="tr_td2{if $invite.Invitation.receive_readed == 0} new{/if}">
             <a target="_blank" href="/invitations/detail?id={$invite.Invitation.id}">
                 {$invite.MemberAttribute.full_name}
             </a>

@@ -25,22 +25,22 @@
         {foreach $informations as $info}
 	        <tr class="con_2_tr">
 	               {if $info.PaymentTransaction.status == Configure::read("Transaction.status_code.transaction")}
-	                  <th><a href="/confirm/detail/{$type}:{$info.PaymentTransaction.information_id}/mid:{$info.Member.id}" target="_blank">{$info.Member.nickname}</a></th> 
+	                  <td {if $type=="need" && $info.PaymentTransaction.receive_readed == 0}class="new"{elseif $type=="has" && $info.PaymentTransaction.send_readed == 0}class="new"{/if}><a href="/confirm/detail/{$type}:{$info.PaymentTransaction.information_id}/mid:{$info.Member.id}" target="_blank">{$info.Member.nickname}</a></td> 
 	                  <td><a style="font-weight: bold;" href="/confirm/detail/{$type}:{$info.PaymentTransaction.information_id}/mid:{$info.Member.id}" target="_blank">{$info.Information.title}</a></td>
                     {else if $info.PaymentTransaction.status == Configure::read("Transaction.status_code.complaint")}
                         {if $type == "need"}
-                            <th><a href="/complaints/detail?active={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.author_members_id}" target="_blank">{$info.Member.nickname}</a></th> 
+                            <td {if $info.PaymentTransaction.receive_readed == 0}class="new"{/if}><a href="/complaints/detail?active={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.author_members_id}" target="_blank">{$info.Member.nickname}</a></td> 
                             <td><a style="font-weight: bold;" href="/complaints/detail?active={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.author_members_id}" target="_blank">{$info.Information.title}</a></td>
                         {else}
-                            <th><a href="/complaints/detail?been={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.members_id}" target="_blank">{$info.Member.nickname}</a></th> 
+                            <td {if $info.PaymentTransaction.send_readed == 0}class="new"{/if}><a href="/complaints/detail?been={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.members_id}" target="_blank">{$info.Member.nickname}</a></td> 
                             <td><a style="font-weight: bold;" href="/complaints/detail?been={$info.PaymentTransaction.information_id}&mid={$info.PaymentTransaction.members_id}" target="_blank">{$info.Information.title}</a></td>
                         {/if}
                     {else}
                         {if $type == "need"}
-                            <th><a href="/appeals/detail?been={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Member.nickname}</a></th> 
+                            <td {if $info.PaymentTransaction.receive_readed == 0}class="new"{/if}><a href="/appeals/detail?been={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Member.nickname}</a></td> 
                             <td><a style="font-weight: bold;" href="/appeals/detail?been={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Information.title}</a></td>
                         {else}
-                            <th><a href="/appeals/detail?active={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Member.nickname}</a></th> 
+                            <td {if $info.PaymentTransaction.send_readed == 0}class="new"{/if}><a href="/appeals/detail?active={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Member.nickname}</a></td> 
                             <td><a style="font-weight: bold;" href="/appeals/detail?active={$info.PaymentTransaction.information_id}&mid={$info.Member.id}" target="_blank">{$info.Information.title}</a></td>
                         {/if}
                     {/if}

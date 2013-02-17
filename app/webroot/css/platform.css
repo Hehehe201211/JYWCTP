@@ -264,6 +264,15 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .conResource .uploadNotice .txtR{padding-right:10px;width:105px;text-align:right;}
 .conResource .uploadNotice .spanFileFormat{float:none;display:inline;margin-right:3px;padding:3px 7px;}
 
+.conResource .serResult li{border-bottom:1px solid #aaa;padding:8px;}
+.conResource .serResult li:hover{background-color:#FFF;}
+.conResource .serResult .title{font:bold 14px "";color:#039;}
+.conResource .serResult .title span{color:#C00;font-size:14px;}
+.conResource .serResult li div{height:22px;}
+.conResource .serResult div p{float:left;width:320px;}
+.conResource .serResult div .left{margin-right:94px;}
+.conResource .serResult span{color:#666;}
+
 .conResourceC{border:1px #CCC solid;background:#FFF;}
 .conResourceC .crumbsNav{text-align:right;padding:6px 12px 0;}
 .conResourceC .corLTReply th{vertical-align:top;width:180px;border:1px #ccc solid;border-left:0 none;padding:12px;background:#E5EDF2}
@@ -356,6 +365,16 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 #getCheckNum img{margin:0 3px;height:24px;vertical-align:text-bottom;}
 #loginWarning{top:30px;}
 
+.login .mebLinks{padding-left:12px;}
+.login .mebLinks a{line-height:32px;color:#FFF;font-size:14px;}
+.login .mebLinks a.upgrade{color:#F30}
+.login .mebLinks a:hover{text-decoration:underline;}
+.login .mebLinks dt{text-align:center;font-size:14px;margin-bottom:8px;}
+.login .mebLinks dd{float:left;width:109px;text-align:center;}
+.login .mebLinks dd a{display:block;margin:0 auto 4px;width:85px;height:28px;background:url(../img/btnbgs.gif) 0 -207px no-repeat;font-weight:bold;text-shadow: 0 0 6px #F30;}
+.login .mebLinks dd a:hover{background-position:-85px -207px;text-decoration:none;}
+.login .mebLinks dd a.logout{background-position:-85px -207px;} 
+
 .divDjbuz{position:absolute;z-index:99;display:none;background:#FFF;padding:12px;border: 1px dashed #999;}
 .divDjbuz .closeDiv{display:block;position:absolute;width:22px;height:22px;background:url(../img/xc_r.gif) -37px -6px no-repeat;top:-10px;right:-8px;}
 .divDjbuz .closeDiv:hover{background-position:-37px -38px;}
@@ -386,9 +405,10 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .getCheckNum{color:#187EE3;font-weight:normal;}
 .getCheckNum img{height:23px;margin:0 8px;vertical-align:text-bottom;}
 
-.inviteJobL{width:751px;border:1px #999 solid;background:#FFF;padding:12px 0;}
+.inviteJobL{width:751px;border:1px #999 solid;background:#FFF;padding:12px 0;*padding-top:3px;}
 .inviteJobL .lists{margin-bottom:9px !important;}
 .inviteJobR{padding:9px 0 0;border:1px #999 solid;background:#FFF;width:233px;height:163px;}
+.inviteJobR #passwordL{left:70px;}
 .inviteJobR .login li{margin-left:8px;}
 .inviteJobR .login .zinp{padding-left:10px;}
 .inviteJobR .login .avatar{padding-left:12px;width:100px;}

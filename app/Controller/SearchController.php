@@ -395,6 +395,63 @@ class SearchController extends AppController
         }
     }
     
+    public function company()
+    {
+        $conditions = array('display' => 1);
+        $joinCompanyAttribute = array(
+            'table' => 'company_attributes',
+            'alias' => 'CompanyAttribute',
+            'type'  => 'inner',
+            'conditions' => 'CompanyAttribute.members_id = Homepage.members_id'
+        );
+        if (isset($this->request->data['keyword'])) {
+            $conditions['AND'][] = array(
+                array(
+                    'OR' => array(
+                        'CompanyAttribute.full_name LIKE ' => "%{$this->request->data['keyword']}%",
+                        'CompanyAttribute.business_scope LIKE ' => "%{$this->request->data['keyword']}%",
+                        'Homepage.introduction LIKE' => "%{$this->request->data['keyword']}%"
+                        )
+                    )
+            );
+        }
+        $fields = array(
+            'Homepage.company_name',
+            'Homepage.address',
+            'Homepage.company_type',
+            'Homepage.domain',
+            'CompanyAttribute.category_id',
+            'CompanyAttribute.service',
+            'CompanyAttribute.business_scope',
+            'CompanyAttribute.provincial_id',
+            'CompanyAttribute.city_id',
+            'CompanyAttribute.full_name'
+        );
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
+        $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
+        
+        $this->paginate = array(
+            'Homepage' => array('limit' => $pageSize,
+                'page'  => $page,
+                'order' => array('Homepage.created' => 'DESC'),
+                'conditions' => $conditions,
+                'fields'    => $fields,
+                'joins'     => array($joinCompanyAttribute)
+            )
+        );
+        $this->set('pageSize', $pageSize);
+        $this->set("companies", $this->paginate('Homepage'));
+        if ($this->RequestHandler->isAjax()) {
+            $this->render('/Elements/common/company-result');
+        } else {
+            $this->set('title_for_layout', "公司检索");
+//            $this->currentTopBar = 'parttime';
+            $this->Recommend->newParttime();
+            $this->set('recommendType', 'parttime');
+        }
+    }
+    
+    
     public function beforeRender()
     {
         $css = array(

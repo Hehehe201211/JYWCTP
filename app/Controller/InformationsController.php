@@ -513,7 +513,7 @@ class InformationsController extends AppController
                 'conditions' => 'PaymentTransaction.author_members_id = Member.id'
             );
         }
-        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : 10;
+        $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
         
         $this->paginate = array(
@@ -747,7 +747,8 @@ class InformationsController extends AppController
             'Information.point',
             'Information.price',
             'Information.status',
-            'Information.clicked'
+            'Information.clicked',
+            'MemberReceived.status'
         );
         $joinInformation = array(
             'table' => 'information',

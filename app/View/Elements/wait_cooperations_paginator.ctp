@@ -31,7 +31,7 @@
         {/if}
         {foreach $cooperations as $coop}
             <tr class="con_2_tr">
-                <td class="tr_td1">
+                <td class="tr_td1{if $type == "send" && $coop.Cooperation.send_readed == 0} new{elseif $type == "receive" && $coop.Cooperation.receive_readed == 0} new{/if}">
                     <a target="_blank" href="/cooperations/waitdetail/?{$type}={$coop.Cooperation.id}">
                     {if $type == "send"}
                         {$coop.Member.company_name}

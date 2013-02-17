@@ -115,53 +115,57 @@ $(document).ready(function(){
           </table>
           <div class="biaotit">教育经历<a href="javascript:;" class="eduEdit">编辑</a></div>
           <table class="con_2_table preview" border="1" cellspacing="0" cellpadding="0" width="593">
-            <thead>
-              <tr class="con_2_tr con_2_xq_too">
-                <th width="25%"> 就学起讫时间  
-                  </th>
-                <th width="15%"> 学历      
-                  </th>
-                <th width="20%"> 专业  
-                  </th>
-                <th width="40%"> 毕业院校  
-                  </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="con_2_tr">
-                <td align="center">{$resumeEducation.ResumeEducation.begin|date_format:"%Y-%m-%d"} - {$resumeEducation.ResumeEducation.end|date_format:"%Y-%m-%d"}</td>
-                <td align="center">
-                {$educate = Configure::read('Fulltime.educated')}
-                {$educate[$resumeEducation.ResumeEducation.educated]}
-                </td>
-                <td align="center">{$resumeEducation.ResumeEducation.discipline}</td>
-                <td align="center">{$resumeEducation.ResumeEducation.school} </td>
-              </tr>
-            </tbody>
+          <tr>
+          <td class="tlt tltC">就学起讫时间</td>
+          <td class="tlt tltC">就读院校名称</td>
+          <td class="tlt tltC">专业类别</td>
+          <td class="tlt tltC">专业学历</td>
+          <td class="tlt tltC">就学形式</td>
+        </tr>
+        <tr>
+          <td width="25%">{$resumeEducation.ResumeEducation.begin|date_format:"%Y-%m-%d"} - {$resumeEducation.ResumeEducation.end|date_format:"%Y-%m-%d"}</td>
+          <td width="27%">{$resumeEducation.ResumeEducation.school}</td>
+          <td width="17%">{$resumeEducation.ResumeEducation.discipline}</td>
+          <td width="15%">
+          {$educate = Configure::read('Fulltime.educated')}
+          {$educate[$resumeEducation.ResumeEducation.educated]}
+          </td>
+          <td width="15%">{$resumeEducation.ResumeEducation.school_type}</td>
+        </tr>
           </table>
           <div class="biaotit">工作经历<a href="javascript:;" class="workEdit">编辑</a></div>
           <table class="con_2_table preview" border="1" cellspacing="0" cellpadding="0" width="593">
-            <thead>
-              <tr class="con_2_tr con_2_xq_too">
-                <th width="25%"> 就职起讫时间
-                  </th>
-                <th width="15%"> 部门
-                  </th>
-                <th width="20%"> 职位
-                  </th>
-                <th width="40%"> 就职单位
-                  </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="con_2_tr">
-                <td align="center">{$resumeWork.ResumeWork.begin|date_format:"%Y-%m-%d"} - {$resumeWork.ResumeWork.end|date_format:"%Y-%m-%d"}</td>
-                <td align="center">{$resumeWork.ResumeWork.department}</td>
-                <td align="center">{$resumeWork.ResumeWork.post} </td>
-                <td align="center">{$resumeWork.ResumeWork.company} </td>
-              </tr>
-            </tbody>
-          </table>
+<tr>
+          <td class="tlt tltC">就职起讫时间</td>
+          <td class="tlt tltC">单位名称</td>
+          <td class="tlt tltC">单位行业</td>
+          <td class="tlt tltC">部门</td>
+          <td class="tlt tltC">职位</td>
+        </tr>
+        <tr>
+          <td>{$resumeWork.ResumeWork.begin|date_format:"%Y-%m-%d"} - {$resumeWork.ResumeWork.end|date_format:"%Y-%m-%d"}</td>
+          <td>{$resumeWork.ResumeWork.company}</td>
+          <td>{$this->Category->getCategoryName($resumeWork.ResumeWork.category)}</td>
+          <td>{$resumeWork.ResumeWork.department}</td>
+          <td>{$resumeWork.ResumeWork.post}</td>
+        </tr>       
+        <tr>
+            <td class="tlt">从事产品或服务：</td>
+            <td colspan="4">{$resumeWork.ResumeWork.service}</td>
+        </tr>
+		<tr>
+            <td class="tlt">职位待遇：</td>
+            <td colspan="4">{$resumeWork.ResumeWork.salary}</td>
+        </tr>
+		<tr>
+            <td class="tlt">工作职责：</td>
+            <td colspan="4">{$resumeWork.ResumeWork.responsiblly}</td>
+        </tr>
+        <tr>
+            <td class="tlt">离职原因：</td>
+            <td colspan="4">{$resumeWork.ResumeWork.reason}</td>
+        </tr>
+        </table>
           <div class="biaotit">求职方向<a href="javascript:;" class="left jobEdit">编辑</a></div>
           <table class="preview" border="1" cellspacing="0" cellpadding="0" width="593">
             <tr>
@@ -203,6 +207,7 @@ $(document).ready(function(){
               <td>{$resume.Resume.start|date_format:"%Y-%m-%d"}</td>
             </tr>
           </table>
+          <div style="width:100px;" class="divBtnContainer"><a class="zclan zclan4" href="/resumes/preview?id={$resume.Resume.id}" target="_blank">预览</a></div>
         </div>
       </div>
     </div>
@@ -396,11 +401,11 @@ $(document).ready(function(){
             </ul>
           </dt>
           <dt>
-            <label><font class="facexh">*</font>就职单位名称：</label>
+            <label><font class="facexh">*</font>单位名称：</label>
             <input type="text" name="contact[]" class="contact" />
           </dt>
           <dt class="productKinds">
-            <label>就职单位行业：</label>
+            <label>单位行业：</label>
             <select>
               <option selected="selected" value="">请选择就职公司所属行业</option>
               <option value="1">计算机/互联网/通信/电子 </option>
@@ -472,11 +477,11 @@ $(document).ready(function(){
             </select>
           </dt>
           <dt>
-            <label><font class="facexh">*</font>就职部门名称：</label>
+            <label><font class="facexh">*</font>部门：</label>
             <input type="text" name="" class="contact" />
           </dt>
           <dt>
-            <label><font class="facexh">*</font>就职职位名称：</label>
+            <label><font class="facexh">*</font>职位：</label>
             <input type="text" name="contact[]" class="contact" />
           </dt>
           <dt>

@@ -127,8 +127,9 @@ textarea{letter-spacing:1px;}
 #loginWarning .question li p a:hover{color:#F00;text-decoration:underline;}
 #loginWarning .arrow{background:url(../img/arrowR.gif) 0 center no-repeat;position:absolute;width:18px;height:33px;top:40%;right:0;}
 
-.con_2_table a,.conTable3 a{display:block; overflow:hidden;color:#333;}
+.con_2_table a,.conTable3 a{display:block;overflow:hidden;color:#333;font-weight:bold;}
 .con_2_tr{height:37px;text-align:center;}
+.con_2_tr .new{background:url(../img/new149.gif) left 0 no-repeat;text-indent:28px;background-color:auto;}
 .con_2_xq_too{background:#FCBD60 !important;height:37px;overflow: hidden;width: 596px;}
 tbody .btnSingle{width:56px;}
 tbody .btnSingle a{display:block;width:50px;margin:0 3px;height:21px;background:url(../img/btnbgs.gif) 0 -102px;font-weight:normal !important;}
@@ -179,6 +180,7 @@ tbody .btnSingle a:hover{background-position:-50px -102px;}
 
 .fanyea{margin:0 0 8px;text-align:center;border-top:1px #999 dashed;padding-top:6px;clear:both;}
 .fanyea input, .fanyea label {float: none !important;}
+.fanyeaNob{border-top:0 none;}
 .dd_span{background:#FFF;border:1px solid #D4D4D4;text-align:center;margint:4px 0;display:inline;padding:4px 3px 3px;*margin-left:6px;}
 .dd_ym{display:inline;margin-left:4px;}
 .dd_ym labe{padding:3px;}

@@ -38,7 +38,7 @@
             </dl>
         </div>
     </div>
-    <div class="zy_lq" style="margin-top:6px;">
+    <div class="zy_lq">
       <div class="zy_lt"><span>帐号管理</span> <img src="{$this->webroot}img/{if $currentMenu == Configure::read('Menu.accountManager')}jian.png{else}jia.png{/if}" alt="" /></div>
         <div class="zy_lx" {if $currentMenu != Configure::read('Menu.accountManager')}style="display: none;"{else}{/if}>
             <ul>
@@ -52,7 +52,7 @@
             </ul>
         </div>
     </div>
-    <div class="zy_lq" style="margin-top:6px;">
+    <div class="zy_lq">
         <div class="zy_lt"><span>业务币管理</span><img src="{$this->webroot}img/{if $currentMenu == Configure::read('Menu.coinManager')}jian.png{else}jia.png{/if}"  alt=""/></div>
         <div class="zy_lx" {if $currentMenu != Configure::read('Menu.coinManager')}style="display: none;"{else}{/if}>
             <ul>

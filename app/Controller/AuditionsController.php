@@ -52,6 +52,7 @@ class AuditionsController extends AppController
         $fields = array(
             'Audition.id',
             'Audition.created',
+            'Audition.send_readed',
             'Fulltime.company',
             'Fulltime.post',
             'Fulltime.id',

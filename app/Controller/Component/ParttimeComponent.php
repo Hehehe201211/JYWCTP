@@ -269,6 +269,8 @@ class ParttimeComponent extends Component
 	            'Cooperation.id',
 	            'Cooperation.status',
 	            'Cooperation.created',
+                'Cooperation.send_readed',
+                'Cooperation.receive_readed',
                 'Complaint.id',
                 'Complaint.type',
                 'Complaint.created',
@@ -286,6 +288,8 @@ class ParttimeComponent extends Component
 	            'Cooperation.id',
 	            'Cooperation.status',
 	            'Cooperation.created',
+                'Cooperation.send_readed',
+                'Cooperation.receive_readed',
                 'Information.provincial',
                 'Information.city'
 	        );

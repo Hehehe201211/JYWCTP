@@ -28,6 +28,7 @@ class InvitationsController extends AppController
         );
         $fields = array(
             'Invitation.id',
+            'Invitation.receive_readed',
             'MemberAttribute.full_name',
             'MemberAttribute.provincial_id',
             'MemberAttribute.city_id',
