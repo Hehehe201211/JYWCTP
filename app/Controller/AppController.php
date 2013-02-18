@@ -100,7 +100,7 @@ class AppController extends Controller {
     {
         $except = array(
             'index' => array(),
-            'members' => array('login', 'register', 'check', 'complete', 'ajaxlogin', 'image', 'existEmail', 'existMember'),
+            'members' => array('login', 'register', 'check', 'complete', 'ajaxlogin', 'image', 'existEmail', 'existMember', 'logout'),
             'informations' => array('getCityList', 'getCategoryList'),
             'static'        => array(),
             'search'        => array(),
@@ -136,12 +136,15 @@ class AppController extends Controller {
                         'members'       => array(),
                         'resumes'       => array('create', 'check', 'complete', 'listview', 'detail', 'preview', 'editBase', 'editBase', 'candidate'),
                         'fulltimes'     => array('search', 'detail', 'favouriteList', 'addFavourite', 'delFavourite'),
-                        'auditions'     => array('listView', 'detail', 'addAudition', 'inviteList', 'delete'),
+                        'auditions'     => array('listview', 'detail', 'addAudition', 'inviteList', 'delete'),
                         'parttimes'     => array('listview', 'search', 'detail', 'informationList', 'addCandidates'),
                         'favourites'    => array(),
                         'invitations'   => array(),
                         'cooperations'  => array(),
-                        'friends'       => array()
+                        'friends'       => array(),
+                        'sms'           => array(),
+                        'alipays'       => array(),
+                        'payment'       => array()
                     );
                 } else {
                     $allow = array(
@@ -149,8 +152,8 @@ class AppController extends Controller {
                         'fulltimes'     => array('create', 'edit', 'check', 'complete', 'listview', 'detail', 'delete'),
                         'parttimes'     => array('create', 'edit', 'check', 'complete', 'listview', 'detail'),
                         'cooperations'  => array(),
-                        'resumes'       => array('detail', 'search'),
-                        'auditions'     => array('listView', 'detail', 'inviteList', 'delete', 'accept', 'companySendInvite'),
+                        'resumes'       => array('detail', 'search', 'preview'),
+                        'auditions'     => array('listview', 'detail', 'inviteList', 'delete', 'accept', 'companySendInvite'),
                         'services'      => array(),
                         'accounts'      => array(),
                         'members'       => array()

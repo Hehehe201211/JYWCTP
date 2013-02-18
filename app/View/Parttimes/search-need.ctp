@@ -1,5 +1,5 @@
 {$form = ['isForm' => true, 'inline' => true]}
-{$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
 {$this->Paginator->options($options)}
 {$paginatorParams = $this->Paginator->params()}
 <div id="result">
@@ -60,13 +60,12 @@
       </table>
   {/foreach}
     <div class="fanyea">
-    <form id="searchOpt">
         {if $paginatorParams['prevPage']}
             <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
         {/if}
         <div class="dd_ym">
             <label>每页显示：</label>
-            <select>
+            <select name="pageSize" id="pageSize">
                 <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                 <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                 <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
@@ -82,13 +81,12 @@
           {if $paginatorParams['nextPage']}
                 <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
           {/if}
-      </form>
     </div>
 </div>
-{$pageSizeRequestUrl = ['action' => $this->request->params['action']]}
-{$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+{$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
+{$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
 {$form = ['isForm' => true, 'inline' => true]}
-{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
+{$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
 {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
 {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
 {$this->Js->writeBuffer()}

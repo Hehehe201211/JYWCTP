@@ -39,7 +39,7 @@
     {/foreach}
 </ul>
 
-<div class="fanye fanyePN">
+<div class="fanyea fanyeaNob">
     {if $paginatorParams['prevPage']}
         <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
     {/if}

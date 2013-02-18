@@ -65,11 +65,11 @@ class AuditionsController extends AppController
         $conditions['Audition.sender'] = $this->_memberInfo['Member']['id'];
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : Configure::read('Paginate.pageSize');
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
-        
+        $sort = isset($this->request->data['sort']) ? $this->request->data['sort'] : "DESC";
         $this->paginate = array(
             'Audition' => array('limit' => $pageSize,
                 'page'  => $page,
-                'order' => array('Audition.created' => 'DESC'),
+                'order' => array('Audition.created' => $sort),
                 'conditions' => $conditions,
                 'fields'    => $fields,
                 'joins'     => array($joinFulltime, $joinMember)

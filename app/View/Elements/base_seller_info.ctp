@@ -56,10 +56,10 @@ $(document).ready(function(){
               <td>上次登陆时间：{date('d', time() - strtotime($author.Member.lastlogin))}天内</td>
             </tr>
             <tr>
-              <td>客源数量：{$transaction_has_num}次</td>
+              <td>客源数量：{$hasInformationCount}次</td>
             </tr>
             <tr>
-              <td>交易次数：{$transaction_need_num}次</td>
+              <td>交易次数：{$transaction_need_num + $transaction_has_num}次</td>
             </tr>
             <tr>
               <td>好评率：100%</td>

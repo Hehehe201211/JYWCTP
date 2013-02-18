@@ -17,8 +17,9 @@ $(document).ready(function(){
       <a href="javascript:void(0)">平台兼职</a>&gt;&gt;
       <a href="javascript:void(0)">兼职发布列表</a>
       </p>
-    </div>    
+    </div>
     <div class="biaotit">兼职发布列表</div>
+    <form id="searchOpt">
       <div class="tableSort">
           <label>发布时间</label>
           <select class="sort" name="sort">
@@ -71,7 +72,6 @@ $(document).ready(function(){
       {/foreach}
     </table>
     <div class="fanyea">
-        <form id="searchOpt">
             {if $paginatorParams['prevPage']}
                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
             {/if}
@@ -94,13 +94,13 @@ $(document).ready(function(){
                 <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
             {/if}
           </div>
-      </form>
-        {$pageSizeRequestUrl = ['action' => $this->request->params['action']]}
-        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+        {$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
+        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
         {$form = ['isForm' => true, 'inline' => true]}
         {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
     </div>
+    </form>
 </div>

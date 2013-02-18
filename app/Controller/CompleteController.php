@@ -48,8 +48,13 @@ class CompleteController extends AppController
             }
             $this->set('status', $this->request->data['status']);
         } else {
-            $status = array(Configure::read('Transaction.status_code.complete'), Configure::read('Transaction.status_code.complaint_cancel'), Configure::read('Transaction.status_code.appeal_effective'));
-            $this->set('status', array(Configure::read('Transaction.status_code.complete')));
+            $status = array(
+                Configure::read('Transaction.status_code.complete'), 
+                Configure::read('Transaction.status_code.complaint_cancel'), 
+                Configure::read('Transaction.status_code.appeal_effective'),
+                Configure::read('Transaction.status_code.appeal_invalid'),
+            );
+            $this->set('status', $status);
         }   
         $this->Info->transaction($this->_memberInfo['Member']['id'], $type, $status);
         $this->set("type", $type);

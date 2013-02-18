@@ -263,6 +263,7 @@ class InfoComponent extends Component
     {
         $mHistory = ClassRegistry::init('PaymentHistory');
         $mMember = ClassRegistry::init('Member');
+        $mInformation = ClassRegistry::init('Information');
         $joinAttribute = array(
             'table' => 'member_attributes',
             'alias' => 'MemberAttribute',
@@ -287,9 +288,17 @@ class InfoComponent extends Component
         $transaction_has_num = $mHistory->find('count', array('conditions' => $conditions));
         $conditions['io'] = Configure::read('Payment.io.out');
         $transaction_need_num = $mHistory->find('count', array('conditions' => $conditions));
+        
+        //客源数量
+        $conditions = array(
+            'members_id' => $members_id,
+            'type'       => Configure::read('Information.type.has')
+        );
+        $hasInformationCount = $mInformation->find('count', array('conditions' => $conditions));
         $this->controller->set('author', $author);
         $this->controller->set('transaction_has_num', $transaction_has_num);
         $this->controller->set('transaction_need_num', $transaction_need_num);
+        $this->controller->set('hasInformationCount', $hasInformationCount);
     }
     /**
      * 

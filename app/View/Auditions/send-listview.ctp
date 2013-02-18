@@ -1,3 +1,15 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+    $('#sort').live('change', function(){
+        $('#pageSize').get(0).selectedIndex = 0;
+        $('#jump').val('');
+        $('#result').load(location.href, $('#searchOpt').serializeArray(), function(){});
+    });
+    
+});
+{/literal}
+</script>
 <div class="zy_z">
     <div class="zy_zs">
       <p>
@@ -7,10 +19,11 @@
       </p>
     </div>  
      <div class="biaotit">{$title}</div>
+     <form id="searchOpt">
         <div class="tableSort">
-        <select>
-            <option>降序</option>
-            <option>升序</option>
+        <select name="sort" id="sort">
+            <option value="DESC">投递时间降序</option>
+            <option value="ASC">投递时间升序</option>
         </select>
         </div>
         <div id="result">
@@ -56,7 +69,6 @@
                 </tr>
             {/foreach}
     </table>
-    <form id="searchOpt">
                 <div class="fanyea">
                     {if $paginatorParams['prevPage']}
                         <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
@@ -79,8 +91,8 @@
                         <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                     {/if}
                 </div>
-                </form>
     </div>
+    </form>
 </div>
 {$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?type=send']}
 {$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?type=send']}

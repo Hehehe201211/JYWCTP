@@ -58,7 +58,11 @@ $(document).ready(function(){
 </script>
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="grxxxg.html.html">我要客源</a>&gt;&gt;<a href="#">客源检索</a></p>      
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">我要客源</a>&gt;&gt;
+      <a href="javascript:void(0)">客源检索</a>
+      </p>      
       <div class="hx"></div>
     </div>    
     {$this->element('base_seller_info')}

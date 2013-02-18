@@ -9,8 +9,8 @@
       <table width="100%" cellspacing="0" cellpadding="0" border="0" class="conTable3">
       <thead>
         <tr class="con_2_tr con_2_xq_too">
-          <th width="179" class="tr_td1">兼职标题</th>          
-          <th width="100" class="tr_td3">产品或服务</th>          
+          <th width="179" class="tr_td1">兼职标题</th>
+          <th width="100" class="tr_td3">产品或服务</th>
           <th width="92" class="tr_td5">兼职配合方式</th>
           <th width="69" class="tr_td4">发布日期</th>
           <th width="60" class="tr_td2">参与人次</th>
@@ -48,7 +48,6 @@
     </tbody>
     </table>
     <div class="fanyea">
-        <form id="searchOpt" >
             {if $paginatorParams['prevPage']}
                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
             {/if}
@@ -71,10 +70,8 @@
                 <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array(1,2))}</div>
             {/if}
           </div>
-      </form>
-        {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
-        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
-        {$form = ['isForm' => true, 'inline' => true]}
+        {$pageSizeRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
+        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']|cat:'?type='|cat:$this->request->query['type']]}
         {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}

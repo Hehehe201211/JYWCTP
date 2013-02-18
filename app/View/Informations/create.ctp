@@ -1,6 +1,10 @@
 <script>
 {literal}
 $(document).ready(function(){
+    $("body").append($(".jsxxxqB"));
+	$(".batch a").click(function(){
+		bgKuang("#jsxxxq1",".jsxxxqB .closeDiv");			
+	});	
     $('#provincial').change(function(){
         $('#city').find('option:gt(0)').remove();
         if ($(this).val() != "") {
@@ -146,6 +150,7 @@ $(document).ready(function(){
       <li>3.发布成功</li>
     </ul>
       <div class="sjle">
+	  <div class="batch"><a href="javascript:;">批量发布</a></div>
       <form id="information" method="post" action="/informations/check{if !empty($target)}?target={$target}{/if}">
               <input type="hidden" id="parttime" name="parttime" value="{if !empty($parttime)}{$this->request->query['parttime']}{elseif isset($this->data['parttime'])}{$this->data['parttime']}{/if}">
               <input type="hidden" name="target" value="{if !empty($target)}{$target}{elseif isset($this->data['target'])}{$this->data['target']}{/if}">
@@ -395,5 +400,16 @@ $(document).ready(function(){
             <input type="hidden" name="id" value="{if isset($this->data['id'])}{$this->data['id']}{/if}" />
             <a class="zclan zclan4" href="javascript:void(0)" id="check">预览</a>
           </form>
+      </div>
+    </div>
+	<div class="jsxxxq jsxxxqB" id="jsxxxq1" style="width:480px;"><a href="#" class="closeDiv">&nbsp;</a>      
+      <div class="sjle" style="overflow:hidden;">
+        <dl>
+          <dt><label><font class="facexh">*</font>客源模板文件下载：</label><a href="#" class="inp" style="margin-left:0;">点击下载</a></dt>
+          <dt><label><font class="facexh">*</font>上传客源模板文件：</label><input type="file" /></dt>
+        </dl>
+      </div>
+      <div class="divBtnContainer" style="width:200px;">
+      <a href="javascript:alert('模板文件上传成功。');var a=$('.jsxxxqB .closeDiv').click();" class="zclan zclan7">上传</a><a href="javascript:;" onclick="$('.jsxxxqB .closeDiv').click()" class="zclan zclan7">取消</a>
       </div>
     </div>

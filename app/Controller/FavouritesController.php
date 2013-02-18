@@ -37,7 +37,7 @@ class FavouritesController extends AppController
         );
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : 10;
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
-        
+        $this->set('pageSize', $pageSize);
         $this->paginate = array(
             'PartTimeFavourite' => array('limit' => $pageSize,
                 'page'  => $page,
@@ -52,7 +52,7 @@ class FavouritesController extends AppController
             if (isset($this->request->data['jump']) && !empty($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize'])) {
                 $this->set('jump', $page);
             }
-//            $this->render('/Elements/cinfirm_paginator');
+            $this->render('listview_paginator');
         }
     }
     

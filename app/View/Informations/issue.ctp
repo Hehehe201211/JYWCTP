@@ -54,10 +54,10 @@ $(document).ready(function(){
         {$this->Paginator->options($options)}
         {$paginatorParams = $this->Paginator->params()}
         {if $paginatorParams['count'] > 0}
-            <div class="tableSort" style="clear: both;">                  
-                  <label><input type="checkbox" checked="checked" value="{Configure::read('Information.status_code.active')}" name="status[]" class="status">未交易</label>                  
-                  <label><input type="checkbox" value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="status">已过期</label>                  
-                  <label><input type="checkbox" value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="status">已撤销</label>
+            <div class="tableSort" style="clear: both;">
+                  <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.active'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.active')}" name="status[]" class="status">未交易</label>
+                  <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.overtime'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.overtime')}" name="status[]" class="status">已过期</label>
+                  <label><input type="checkbox" {if in_array(Configure::read('Information.status_code.cancel'), $status)}checked="checked"{/if} value="{Configure::read('Information.status_code.cancel')}" name="status[]" class="status">已撤销</label>
             </div>
             <table width="100%" cellspacing="0" cellpadding="0" border="0"
                 class="con_2_table">

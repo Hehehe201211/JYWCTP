@@ -341,7 +341,77 @@ class RecommendComponent extends Component
 //        $cooperationCount = $this->cooperationCount($conditions);
 //        $this->controller->set('cooperationCount', $cooperationCount);
     }
+    /**
+     * 
+     * 个人会员收到的站内信条数
+     * @param int $members_id
+     */
+    public function stationMessageCount($members_id)
+    {
+        $constions = array(
+            'receiver' => $members_id,
+            'status'    => 1
+        );
+        $mStationMessage = ClassRegistry::init('StationMessage');
+        $countStationMessage = $mStationMessage->find('count', array('conditions' => $constions));
+        $this->controller->set('countStationMessage', $countStationMessage);
+    }
     
+    /**
+     * 
+     * 企业会员发布职位信息数
+     * @param int $members_id
+     */
+    public function fulltimeCount($members_id)
+    {
+        $mFulltime = ClassRegistry::init('Fulltime');
+        $conditions = array('members_id' => $members_id, 'delete_flg' => 0);
+        $fulltimeCount = $mFulltime->find('count', array('conditions' => $conditions));
+        $this->controller->set('fulltimeCount', $fulltimeCount);
+    }
+    /**
+     * 
+     * 企业会员发布兼职信息数
+     * @param int $members_id
+     */
+    public function parttimeCount($members_id)
+    {
+        $mPartTime = ClassRegistry::init('PartTime');
+        $conditions = array('members_id' => $members_id, 'status' => 1);
+        $parttimeCount = $mPartTime->find('count', array('conditions' => $conditions));
+        $this->controller->set('parttimeCount', $parttimeCount);
+    }
+    /**
+     * 
+     * 企业会员收到简历数
+     * @param int $members_id
+     */
+    public function receiveResumeCount($members_id)
+    {
+        $mAudition = ClassRegistry::init('Audition');
+        $conditions = array(
+            'receiver'  => $members_id,
+            'status' => Configure::read('Audition.status_active'),
+            'receiver_delete' => 0,
+        );
+        $receiveResumeCount = $mAudition->find('count', array('conditions' => $conditions));
+        $this->controller->set('receiveResumeCount', $receiveResumeCount);
+    }
+    /**
+     * 
+     * 企业会员收到兼职合作数
+     * @param int $members_id
+     */
+    public function receiveCooperationsCount($members_id)
+    {
+        $mCooperation = ClassRegistry::init('Cooperation');
+        $conditions = array(
+            'Cooperation.receiver' => $members_id,
+            'Cooperation.status' => array(1)
+        );
+        $receiveCooperationsCount = $mCooperation->find('count', array('conditions' => $conditions));
+        $this->controller->set('receiveCooperationsCount', $receiveCooperationsCount);
+    }
     
     function startup(Controller $controller)
     {

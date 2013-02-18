@@ -42,7 +42,7 @@ $(document).ready(function(){
     
     //agree
     $('.agree').live('click', function(e){
-        if (confirm("真的要同意添加对方为好友吗？")) {
+        if (confirm("确定同意添加对方为好友？")) {
             var id = $(this).parent().parent().find('.msg_id').val();
             $this = $(this);
             $.ajax({
@@ -113,6 +113,8 @@ $(document).ready(function(){
             }
         }
     });
+
+
     
 });
 </script>
@@ -136,10 +138,10 @@ $(document).ready(function(){
                 <ul>
                     <li>
                         <p>
+						    <a href="javascript:void(0)" title="删除" class="close">&nbsp;</a>
                             <input type="checkbox" name="" class="inpChk"/>
                             <a class="title" href="#">QQ空间6.0，照亮心灵最闪亮的星。</a>
                             <span class="time">2012-05-10 14:46:33</span>
-                            <a href="javascript:void(0)" title="删除" class="close ">&nbsp;</a>
                         </p>
                         <div class="znxMesCon">亲爱的xxx5202012：<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;恭喜您注册成功！您现在可以在聚业务网购买创意解决方案（<a target="_blank" href="#">看看出聚业务能为您做什么</a>），或者出售你的信息开始赚钱！（<a target="_blank" href="#">你的任何业务信息都可出售</a>），让你赚得轻松！
@@ -147,10 +149,7 @@ $(document).ready(function(){
                     </li>
                 </ul>
                 <div class="pagesMag">
-                    <input type="checkbox" class="inpChk" name="" id="znxConTradeAll"/>
-                    <label for="znxConTradeAll">全选</label>
-                    <input type="button" class="inpButton deleMess" name="" value="删除"/>
-                    <div class="fanyea">
+                  <div class="fanyea fanyeaFr">
                         <div class="dd_span"><a href="#">上一页</a></div>
                         <div class="dd_ym">
                             <label>每页显示：</label>
@@ -167,6 +166,9 @@ $(document).ready(function(){
                         </div>
                         <div class="dd_span"><a href="#">下一页</a></div>
                     </div>
+                    <input type="checkbox" class="inpChk" name="" id="znxConTradeAll"/>
+                    <label for="znxConTradeAll">全选</label>
+                    <input type="button" class="inpButton deleMess" name="" value="删除"/>
                 </div>
             </div>
             <div class="znxConFri" style="display:none;" id="msgList">
@@ -180,13 +182,13 @@ $(document).ready(function(){
                         {if $message.StationMessage.type == Configure::read('Sms.normal')}
                         <li>
                             <p>
+							    <a class="close delete" title="删除" href="javascript:void(0)">&nbsp;</a>
                                 <input type="checkbox" class="inpChk inpCheckbox checkboxVal" name="" value="{$message.StationMessage.id}">
                                 <a class="trader" href="/accounts/fdetail?fid={$message.Member.id}">{$message.Member.nickname}</a>
                                 <a target="_blank" href="#" class="title">发来信息。</a>
                                 <span class="time">{$message.StationMessage.title}</span>
                                 <span class="time">[{$message.StationMessage.created|date_format:"%Y-%m-%d %H:%M:%S"}]</span>
-                                <input class="msg_id" type="hidden" value="{$message.StationMessage.id}" />
-                                <a class="close delete" title="删除" href="javascript:void(0)">&nbsp;</a>
+                                <input class="msg_id" type="hidden" value="{$message.StationMessage.id}" />                                
                             </p>
                             <div class="znxMesCon">
                                 {$message.StationMessage.content}
@@ -196,14 +198,15 @@ $(document).ready(function(){
                         {elseif $message.StationMessage.type == Configure::read('Sms.friendRequest')}
                             <li>
                                 <p>
+								    <a href="javascript:void(0)" title="删除" class="close delete">&nbsp;</a>
                                     <input type="checkbox" name="" class="inpChk checkboxVal" value="{$message.StationMessage.id}"/>
                                     <a href="hyzl.html" class="trader">{$message.Member.nickname}</a>
                                     <a class="title" href="#" target="_blank">请求添加你为好友。</a>
                                     <span class="time">[{$message.StationMessage.created|date_format:"%Y-%m-%d %H:%M:%S"}]</span>
-                                    <input class="msg_id" type="hidden" value="{$message.StationMessage.id}" />
-                                    <a href="javascript:void(0)" title="删除" class="close delete">&nbsp;</a>
+                                    <input class="msg_id" type="hidden" value="{$message.StationMessage.id}" />                                    
                                 </p>
-                                <div class="znxMesCon">注册时间：[{$message.Member.created|date_format:"%Y-%m-%d %H:%M:%S"}]
+                                <div class="znxMesCon"><input class="inpButton agree" type="button" value="同意" />
+								    注册时间：[{$message.Member.created|date_format:"%Y-%m-%d %H:%M:%S"}]
                                     <br/>所在城市：
                                     {$provincial = $this->City->cityName($message.Attribute.provincial_id)}
                                     {$city = $this->City->cityName($message.Attribute.city_id)}
@@ -215,19 +218,13 @@ $(document).ready(function(){
                                     <br/>行业：
                                     {$this->Category->getCategoryName($message.Attribute.category_id)}
                                     <br/>公司名称：{$message.Attribute.company}
-                                    <input class="inpButton agree" type="button" value="同意" />
                                 </div>
                             </li>
                         {/if}
                     {/foreach}
                 </ul>
                 <div class="pagesMag">
-                    <input type="checkbox" class="inpChk" name="" id="znxConFriAll" value=""/>
-                    <label for="znxConFriAll">全选</label>
-                    <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
-                    <form id="msgOpt" >
-                        <input type="hidden" name="msg_type" value="station" />
-                        <div class="fanyea">
+                    <div class="fanyea fanyeaFr">
                             {if $paginatorParams['prevPage']}
                                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
                             {/if}
@@ -250,6 +247,11 @@ $(document).ready(function(){
                                 <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
                             {/if}
                         </div>
+                    <input type="checkbox" class="inpChk" name="" id="znxConFriAll" value=""/>
+                    <label for="znxConFriAll">全选</label>
+                    <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
+                    <form id="msgOpt" >
+                        <input type="hidden" name="msg_type" value="station" />
                         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
                         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
                         {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#msgList', 'method' => 'post', 'data' => $this->Js->get('#msgOpt')->serializeForm($form)]}

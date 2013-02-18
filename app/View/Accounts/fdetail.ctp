@@ -25,14 +25,9 @@ $(document).ready(function(){
 					var result = eval("("+data+")");
 					var date = new Date();
 					date = date.getFullYear() + '-' + date.getMonth()+1 + '-' + date.getDate();
-					if (result.result == "OK") {
-						var str = '<div class="xq_huif_tet">'+
-										'<p class="xq_huif_tet11">'+
-												'<strong class="sender">我</strong>' + $('#content').val() +
-										'</p>'+
-										'<p class="xq_huif_riq">' + date +'</p>'+
-								  '</div>';
-						$('#result').prepend(str);
+					if (result.result == "OK") {						
+						var str = '<div class="comment"><div class="name sender">我</div><div class="time">' +date +'</div><div class="content">'+ $('#content').val() + '</div></div>';
+						$('.infoComments').prepend(str);
 						$('#title').val("");
 						$('#content').val("");
 						alert(result.msg);
@@ -114,23 +109,22 @@ $(document).ready(function(){
         <a class="zclan zclan4" href="javascript:void(0);" id="sendMsg">发送</a>
         <p class="hx"></p>
         <div id="result">
+        <div class="infoComments">
         {$form = ['isForm' => true, 'inline' => true]}
         {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#searchOpt')->serializeForm($form)]}
         {$this->Paginator->options($options)}
         {$paginatorParams = $this->Paginator->params()}
-        {foreach $messages as $message}
-            <div class="xq_huif_tet">
-                <p class="xq_huif_tet11">
-                    {if $message.StationMessage.sender == $memberInfo.Member.id}
-                        <strong class="sender">我</strong>
-                    {else}
-                        <strong>{$message.Member.nickname}</strong>
-                    {/if}
-                    {$message.StationMessage.content}
-                </p>
-                <p class="xq_huif_riq">{$message.StationMessage.created|date_format:"%Y-%m-%d"}</p>
-          </div>
-        {/foreach}
+        {foreach $messages as $message}            
+              <div class="comment">
+              {if $message.StationMessage.sender == $memberInfo.Member.id}
+                    <div class="name sender">我</div>                    
+              {else}
+                    <div class="name">{$message.Member.nickname}</div>
+              {/if}        
+              <div class="time">{$message.StationMessage.created|date_format:"%Y-%m-%d"}</div>
+              <div class="content">{$message.StationMessage.content}</div>
+      </div>          
+        {/foreach}        
         <form id="searchOpt">
           <div class="fanyea">
             {if $paginatorParams['prevPage']}
@@ -162,6 +156,7 @@ $(document).ready(function(){
             {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
             {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
             {$this->Js->writeBuffer()}
+        </div>
         </div>
       </div>      
 </div>

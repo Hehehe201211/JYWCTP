@@ -332,17 +332,17 @@ function hideWarning(){
             <label>密码：</label>
             <input type="password" class="password" id="password" value="" name="password">
             <label for="password" id="passwordL" style="display: block;">请输入密码</label>
-          </li>
-          <li>
-            <label>类型：</label>
-            <label class="tL"><input type="radio" id="person" class="inpRadio" checked="checked" value="0" name="type">个人</label>
-            <label class="tL"><input type="radio" id="enterprise" class="inpRadio" value="1" name="type">企业</label>
-          </li>
+          </li>          
           <li>
             <label>验证码：</label>
             <input type="text" name="checkNum" value="验证码" class="yanzhengma" id="yanzhengma" txt="验证码" style="margin-right:6px;"/>
           </li>
-          <li style="text-align:right"><a href="javascript:void(0)" id="getCheckNum">看不清楚？换一个</a></li>          
+          <li style="text-align:right"><a href="javascript:void(0)" id="getCheckNum">看不清楚？换一个</a></li>         
+          <li>
+            <label>类型：</label>
+            <label class="tL"><input type="radio" id="person" class="inpRadio" checked="checked" value="0" name="type">个人</label>
+            <label class="tL"><input type="radio" id="enterprise" class="inpRadio" value="1" name="type">企业</label>
+          </li> 
           <li><a class="inp" id="btnLogin" href="javascript:void(0)"> 登录</a><a href="wangjimima.html" style="text-decoration:underline;">忘记密码</a></li>
         </ul>
       </form>

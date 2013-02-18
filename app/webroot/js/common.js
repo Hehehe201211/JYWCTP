@@ -1,5 +1,5 @@
 ﻿var NaV=browserNaV();
-$(document).ready(function(){
+$(document).ready(function(){	
 	$(window).resize(function(){
 		gototopL();
 		$("body").css("min-height",$(window).height()+1);
@@ -9,13 +9,23 @@ $(document).ready(function(){
 		else  $("#gototop").fadeIn("fast");
 		if(NaV=="msie6") ie6GTT();
 	});
+	$("body").css("min-height",$(window).height()+1);	
 	$("input:button,input:submit,input:reset").addClass("inpButton");
 	$("input:checkbox").addClass("inpCheckbox");
 	$("input:radio").addClass("inpRadio");
 	$("input:text,input:password").addClass("inpTextBox");
-	$("input:file").addClass("inpFile");
+	$("input:file").addClass("inpFile");	
 	
-	$("body").css("min-height",$(window).height()+1);	
+	$(".browserTip .close").live("click",function(){
+		 $(this).parents(".browserTip").remove();
+	 });
+	 var keyHP=$(".inpKeyword ").attr("placeholder");
+	$(".inpKeyword ").click(function(){
+		if ($(this).val()==keyHP) $(this).val("");
+	});
+	$(".inpKeyword ").blur(function(){
+		if ($(this).val()=="") $(this).val(keyHP);
+	});
 	
 	var tableTrH=".posInfo tbody tr:odd,.tableJobInfo tbody tr:odd";
 	$(tableTrH).addClass("even");

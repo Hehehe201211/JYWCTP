@@ -66,10 +66,27 @@ $(document).ready(function(){
             $('#keywordSearch').attr('action', url).submit();
         }
     }
-    
+    //logout
+    $('.logout').click(function(){
+        $.ajax({
+                type : 'post',
+                url  : '/members/logout',
+                success : function(data) {
+                    var result = eval("("+data+")");
+                    if (result.result == 'OK') {
+                        location.href = location.href;
+                    } else {
+                        alert('退出失败，请稍后重试！');
+                    }
+                }
+             });
+    });
 });
 {/literal}
 </script>
+<!--[if lte IE 6]>
+<div class="browserTip"><div class="browserUG"><a href="javascript:;" class="button close">关闭</a><a href="/static?tpl=browserUG" class="button">查看详情</a><div class="img"></div>您正在使用 Internet Explorer 6，可能无法正常浏览、使用本网站，强烈建议您在windows系统使用更快速！更安全！更稳定！的浏览器。<br>下载：<a href="http://windows.microsoft.com/zh-CN/internet-explorer/download-ie" target="_blank">Internet Explorer</a>，<a href="http://chrome.google.com" target="_blank">谷歌浏览器</a>，<a href="http://mozilla.org/firefox/" target="_blank">火狐浏览器</a>，<a href="http://www.opera.com/browser/" target="_blank">欧朋浏览器</a></div></div>
+<![endif]-->
 <div class="header">
   <div class="toplist">
     <ul>
@@ -99,6 +116,7 @@ $(document).ready(function(){
                  <a href="/informations/search/need" target="_blank">我有客源</a>
                  <a href="/informations/search/has" target="_blank">我要客源</a>
                  <a href="/auditions/inviteList?type=send" target="_blank">面试邀请</a>
+
                  <a href="/invitations/listview" target="_blank">平台兼职</a>
              </div>
           </li>
@@ -126,7 +144,7 @@ $(document).ready(function(){
         {if empty($memberInfo)}
         您好，游客，欢迎光临聚业务网&nbsp;<a href="/members/register" target="blank" class="toptoolUseN">注册/登录</a>
         {else}
-        您好，<font color="#FF3300">{$memberInfo.Member.nickname}</font>，欢迎光临聚业务网&nbsp;<a href="/members/logout" target="blank" class="toptoolUseN">[安全退出]</a>
+        您好，<font color="#FF3300">{$memberInfo.Member.nickname}</font>，欢迎光临聚业务网&nbsp;<a href="javascript:void(0)" class="toptoolUseN logout">[安全退出]</a>
         {/if}
       </li>
       <li class="help"><a href="#" target="_blank">帮助</a></li>
@@ -261,6 +279,7 @@ $(document).ready(function(){
                   <td width="12%">悬赏</td>
                   <td width="11%">简历</td>
                   <td width="12%">岗位</td>
+
                   <td width="11%">兼职</td>
                 </tr>
                 <tr>

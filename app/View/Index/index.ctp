@@ -79,7 +79,7 @@ $(document).ready(function(){
       $(this).parent().slideUp("fast");
   });
     
-  	//验证码
+      //验证码
     $('#yanzhengma').after('<img id="code" src="/members/image">');
     $('#getCheckNum').click(function(){
         var src = '/members/image/' + Math.random();
@@ -114,7 +114,7 @@ $(document).ready(function(){
             e.preventDefault();
             $('#loginWarning .question').html(msg);
             $("#loginWarning").fadeIn("fast");
-            var t=setTimeout("hideWarning()",10000);            
+            var t=setTimeout("hideWarning()",10000);
         }
         
         if(!error) {
@@ -134,13 +134,13 @@ $(document).ready(function(){
                         var t=setTimeout("hideWarning()",10000);
                     } else {
                         $('#loginWarning').hide();
-                    }                    
+                    }
                 }
              });
          }
-    });  
+    });
 });
-//{/literal}
+{/literal}
 </script>
 <div class="main">
     <div id="loginWarning">
@@ -153,12 +153,12 @@ $(document).ready(function(){
     </div>
     <div class="content_mid" >
         <div id="banners">
-		   <a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner5a.jpg" alt="马上注册，体验聚业务为您精心打造的服务" /></a>
+           <a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner5a.jpg" alt="马上注册，体验聚业务为您精心打造的服务" /></a>
            <a href="/static?tpl=about-us" target="_blank"><img src="{$this->webroot}img/banners/banner1a.jpg" alt="聚业务——为您提供业务生涯一站式服务" /></a>
            <a href="/static?tpl=kehufuwu" target="_blank"><img src="{$this->webroot}img/banners/banner2b.jpg" alt="聚业务——助力您的企业" /></a>
            <a href="/static?tpl=haoyou" target="_blank"><img src="{$this->webroot}img/banners/banner4a.jpg" alt="参加聚业务网站平台推广活动，轻松赚取积分" /></a>            
            <a href="/static?tpl=youhui" target="_blank"><img src="{$this->webroot}img/banners/banner6a.jpg" alt="你有一条经验，我有一条经验，我们彼此交换，每人可拥有两条经验。" /></a>
-			<a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner7a.jpg" alt="聚业务——汇聚各行各业" /></a>
+            <a href="/members/register" target="_blank"><img src="{$this->webroot}img/banners/banner7a.jpg" alt="聚业务——汇聚各行各业" /></a>
         </div>
         <div class="keyuan">
       <div class="fl"> 
@@ -167,10 +167,10 @@ $(document).ready(function(){
           <ul class="lists">
           {foreach $hasTaskList as $information}
             <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
-	          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
-	          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
-	          	{$city = $this->City->cityName({$information.Information.city})}
-	          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}</p></a></li>          	
+                  {if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
+                  {if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
+                  {$city = $this->City->cityName({$information.Information.city})}
+                  {if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}</p></a></li>              
           {/foreach}
           </ul>
         </div>
@@ -179,13 +179,13 @@ $(document).ready(function(){
       <h3><a href="/search?type=has" target="_blank" class="fr">更多..</a>最新悬赏</h3>
         <div class="ulLists">
           <ul class="lists">
-	          {foreach $needTaskList as $information}
+              {foreach $needTaskList as $information}
                 <li><a href="/search/infodetail?id={$information.Information.id}" target="_blank"><p>{$information.Information.title}</p><p>/{if $information.Information.payment_type == 1}业务币：{$information.Information.price}元{/if}
-		          	{if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
-		          	{if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
-		          	{$city = $this->City->cityName({$information.Information.city})}
-		          	{if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/</p></a></li>	          	
-	          {/foreach}
+                      {if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
+                      {if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
+                      {$city = $this->City->cityName({$information.Information.city})}
+                      {if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/</p></a></li>                  
+              {/foreach}
           </ul>
         </div>
       </div>
@@ -221,57 +221,57 @@ $(document).ready(function(){
                 </ul>
             </form>
             {else}
-	            {if $memberInfo.Member.type == Configure::read('UserType.Personal')}
-	            	{if $memberInfo.Member.grade != 2}
-				      <h3>{$memberInfo.Member.nickname}</h3>
-				      <dl class="mebLinks">
-				        <dt>你还不是高级会员，点击<a class="upgrade" href="/members/upgrade">立即升级</a></dt>
-				        <dd><a target="_blank" href="/informations/search/has">检索客源</a></dd>
-				        <dd><a target="_blank" href="/informations/search/need">检索悬赏</a></dd>
-				        <dd><a target="_blank" href="/fulltimes/search">检索职位</a></dd>
-				        <dd><a target="_blank" href="/parttimes/listview?type=need">检索兼职</a></dd>
-				        <dd>&nbsp;</dd>
-				        <dd><a class="logout" target="_blank" href="/members/logout">退出</a></dd>
-				      </dl>
-				      {else}
-					      <h3>{$memberInfo.Member.nickname}</h3>
-					      <dl class="mebLinks">        
-					        <dd><a href="/informations/search/has" target="_blank">检索客源</a></dd>
-					        <dd><a href="/informations/create/has" target="_blank">发布客源</a></dd>
-					        <dd><a href="/informations/search/need" target="_blank">检索悬赏</a></dd>
-					        <dd><a href="/informations/create/need" target="_blank">发布悬赏</a></dd>
-					        <dd><a href="/fulltimes/search" target="_blank">检索职位</a></dd>
-					        <dd><a href="/resumes/listview" target="_blank">简历管理</a></dd>   
-					        <dd><a href="/parttimes/listview?type=need" target="_blank">检索兼职</a></dd>     
-					        <dd><a href="/invitations/listview" target="_blank">兼职管理</a></dd> 
-					        <dd><a href="/resources/listview?mid={$memberInfo.Member.id}" target="_blank">文档管理</a></dd>       
-					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
-					      </dl>
-				      {/if}
-			      {else}
+                {if $memberInfo.Member.type == Configure::read('UserType.Personal')}
+                    {if $memberInfo.Member.grade != 2}
+                      <h3>{$memberInfo.Member.nickname}</h3>
+                      <dl class="mebLinks">
+                        <dt>你还不是高级会员，点击<a class="upgrade" href="/members/upgrade">立即升级</a></dt>
+                        <dd><a target="_blank" href="/informations/search/has">检索客源</a></dd>
+                        <dd><a target="_blank" href="/informations/search/need">检索悬赏</a></dd>
+                        <dd><a target="_blank" href="/fulltimes/search">检索职位</a></dd>
+                        <dd><a target="_blank" href="/parttimes/listview?type=need">检索兼职</a></dd>
+                        <dd>&nbsp;</dd>
+                        <dd><a class="logout"href="javascript:void(0)">退出</a></dd>
+                      </dl>
+                      {else}
+                          <h3>{$memberInfo.Member.nickname}</h3>
+                          <dl class="mebLinks">        
+                            <dd><a href="/informations/search/has" target="_blank">检索客源</a></dd>
+                            <dd><a href="/informations/create/has" target="_blank">发布客源</a></dd>
+                            <dd><a href="/informations/search/need" target="_blank">检索悬赏</a></dd>
+                            <dd><a href="/informations/create/need" target="_blank">发布悬赏</a></dd>
+                            <dd><a href="/fulltimes/search" target="_blank">检索职位</a></dd>
+                            <dd><a href="/resumes/listview" target="_blank">简历管理</a></dd>   
+                            <dd><a href="/parttimes/listview?type=need" target="_blank">检索兼职</a></dd>     
+                            <dd><a href="/invitations/listview" target="_blank">兼职管理</a></dd> 
+                            <dd><a href="/resources/listview?mid={$memberInfo.Member.id}" target="_blank">文档管理</a></dd>       
+                            <dd><a href="javascript:void(0)" class="logout">退出</a></dd>
+                          </dl>
+                      {/if}
+                  {else}
 
-			      		{if $memberInfo.Member.grade != 2}
-					      <h3>{$memberInfo.Member.nickname}</h3>
-					      <dl class="mebLinks">
-					        <dt>你还不是高级会员，点击<a href="/members/upgrade" class="upgrade">立即升级</a></dt>
-					        <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
-					        <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
-					        <dd>&nbsp;</dd>
-					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
-					      </dl>
-			      		{else}
-					      <h3>{$memberInfo.Member.nickname}</h3>
-					      <dl class="mebLinks">        
-					        <dd><a href="/services/material" target="_blank">产品管理</a></dd>
-					        <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
-					        <dd><a href="/auditions/listview?type=receive" target="_blank">招聘管理</a></dd>
-					        <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
-					        <dd><a href="/parttimes/listview?type=send" target="_blank">兼职管理</a></dd>   
-					        <dd>&nbsp;</dd>         
-					        <dd><a href="/members/logout" target="_blank" class="logout">退出</a></dd>
-					      </dl>
-			      		{/if}
-			      {/if}
+                          {if $memberInfo.Member.grade != 2}
+                          <h3>{$memberInfo.Member.nickname}</h3>
+                          <dl class="mebLinks">
+                            <dt>你还不是高级会员，点击<a href="/members/upgrade" class="upgrade">立即升级</a></dt>
+                            <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
+                            <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
+                            <dd>&nbsp;</dd>
+                            <dd><a href="javascript:void(0)" class="logout">退出</a></dd>
+                          </dl>
+                          {else}
+                          <h3>{$memberInfo.Member.nickname}</h3>
+                          <dl class="mebLinks">        
+                            <dd><a href="/services/material" target="_blank">产品管理</a></dd>
+                            <dd><a href="/resumes/search" target="_blank">检索简历</a></dd>
+                            <dd><a href="/auditions/listview?type=receive" target="_blank">招聘管理</a></dd>
+                            <dd><a href="/elites/listview" target="_blank">检索精英</a></dd>
+                            <dd><a href="/parttimes/listview?type=send" target="_blank">兼职管理</a></dd>   
+                            <dd>&nbsp;</dd>
+                            <dd><a href="javascript:void(0)" class="logout">退出</a></dd>
+                          </dl>
+                          {/if}
+                  {/if}
             {/if}
         </div>
         <div class="crAd"><a href="/accounts/invite"><img src="{$this->webroot}img/ads/20110615175842023378.jpg" /></a></div>
@@ -280,28 +280,28 @@ $(document).ready(function(){
                 <div class="TabTitle3">
                     <ul id="myTab2">
                     {foreach $notices as $key => $notice}
-	                    {if $key == 0}
-	                    	<li class="active3"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
-	                    {elseif $key+1 == count($notices)}
-	                    	<li style="width:71px;"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
-	                    {else}
-	                    	<li><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
-	                    {/if}
+                        {if $key == 0}
+                            <li class="active3"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
+                        {elseif $key+1 == count($notices)}
+                            <li style="width:71px;"><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
+                        {else}
+                            <li><a href="/notices/listview?pid={$notice.Notice.id}">{$notice.Notice.title}</a></li>
+                        {/if}
                     {/foreach}
                     </ul>
                 </div>
                 <div class="TabContent3">
                 {foreach $notices as $key => $notice}
-                	{if $key == 0}
-                	<div class="myTab1_Content2" style="display:block">
+                    {if $key == 0}
+                    <div class="myTab1_Content2" style="display:block">
                         <div class="con_3">
                             <ul>
-                            	{foreach $notice.subNotice as $sub}
-                            		<li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
-                            	{/foreach}
+                                {foreach $notice.subNotice as $sub}
+                                    <li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                                {/foreach}
                             </ul>
                             {if count($notice.subNotice) == 5}
-                            	<h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
+                                <h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
                             {/if}
                         </div>
                     </div>
@@ -309,12 +309,12 @@ $(document).ready(function(){
                     <div class="myTab1_Content2">
                         <div class="con_3">
                             <ul>
-                            	{foreach $notice.subNotice as $sub}
-                            		<li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
-                            	{/foreach}
+                                {foreach $notice.subNotice as $sub}
+                                    <li><a href="/notices/detail?id={$sub.Notice.id}">{$sub.Notice.title}</a><span>[{$sub.Notice.created|date_format:"%Y-%m-%d"}]</span></li>
+                                {/foreach}
                             </ul>
                             {if count($notice.subNotice) == 5}
-                            	<h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
+                                <h5><a href="/notices/listview?pid={$notice.Notice.id}">查看更多&gt;&gt;</a></h5>
                             {/if}
                         </div>
                     </div>
@@ -380,49 +380,49 @@ $(document).ready(function(){
                     </table>
                     {foreach $parttimes as $parttime}
                     <table width="100%" border="1" cellspacing="0" cellpadding="0" class="serTable">        
-                    <tbody>            	
-                    		<tr class="con_2_tr">
-	                            <td width="15%">
-	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
-	                            {$this->Category->getCategoryName($parttime.PartTime.category)} 
-            					{$this->Category->getCategoryName($parttime.PartTime.sub_category)}
-	                            </a>
-	                            </td>
-	                            <td width="27%">
-	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
-	                            {$parttime.Member.company_name}
-	                            </a>
-	                            </td>
-	                            <td width="13%">
-	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
-	                            {if $parttime.PartTime.method == 1}提供客户信息
-			                    {elseif $parttime.PartTime.method == 2} 协助跟单
-			                    {else}独立签单
-			                    {/if}
-	                            </a>
-	                            </td>
-	                            <td width="19%">
-	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
-	                            {if $parttime.PartTime.pay == 1}
-				                {$parttime.PartTime.pay_rate}%
-				                {else}协商确定
-				                {/if}
-	                            </a>
-	                            </td>
-	                            <td width="13%">
-	                            <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</a>
-	                            </td>
-	                            <td width="13%">
-	                            <a class="detail " href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">详细信息</a>
-	                            </td>
-	                        </tr>      
-	                        <tr class="con_2_tr">
-	                            <th class="right top">兼职说明：</th>
-	                            <td colspan="5" class="left">
-	                            <p class="textEllipsis">{$parttime.PartTime.additional}</p>
-	                            </td>
-	                        </tr>    
-                            </tbody>                	
+                    <tbody>                
+                            <tr class="con_2_tr">
+                                <td width="15%">
+                                <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
+                                {$this->Category->getCategoryName($parttime.PartTime.category)} 
+                                {$this->Category->getCategoryName($parttime.PartTime.sub_category)}
+                                </a>
+                                </td>
+                                <td width="27%">
+                                <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
+                                {$parttime.Member.company_name}
+                                </a>
+                                </td>
+                                <td width="13%">
+                                <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
+                                {if $parttime.PartTime.method == 1}提供客户信息
+                                {elseif $parttime.PartTime.method == 2} 协助跟单
+                                {else}独立签单
+                                {/if}
+                                </a>
+                                </td>
+                                <td width="19%">
+                                <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">
+                                {if $parttime.PartTime.pay == 1}
+                                {$parttime.PartTime.pay_rate}%
+                                {else}协商确定
+                                {/if}
+                                </a>
+                                </td>
+                                <td width="13%">
+                                <a href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">{$parttime.PartTime.created|date_format:"%Y-%m-%d"}</a>
+                                </td>
+                                <td width="13%">
+                                <a class="detail " href="/search/pdetail?id={$parttime.PartTime.id}" target="_blank">详细信息</a>
+                                </td>
+                            </tr>      
+                            <tr class="con_2_tr">
+                                <th class="right top">兼职说明：</th>
+                                <td colspan="5" class="left">
+                                <p class="textEllipsis">{$parttime.PartTime.additional}</p>
+                                </td>
+                            </tr>    
+                            </tbody>                    
                     </table>
                     {/foreach}
                 </div>
@@ -446,20 +446,20 @@ $(document).ready(function(){
                     <li class="listZYTD" style="display:block;">                    
                         <table width="100%" border="0">
                         {if !empty($documents.chengzhang)}
-                        		{foreach $documents.chengzhang as $key => $document}
-                        			<tr>
+                                {foreach $documents.chengzhang as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-  {if count($documents.chengzhang) >= 5}                       	
+  {if count($documents.chengzhang) >= 5}                           
                            <a href="/resources/search?type=1" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}
@@ -469,20 +469,20 @@ $(document).ready(function(){
                     <li class="listZYTD" >   
                         <table width="100%" border="0">
                        {if !empty($documents.peixun)}
-                        		{foreach $documents.peixun as $key => $document}
-                        			<tr>
+                                {foreach $documents.peixun as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-   {if count($documents.peixun) >= 5}                       	
+   {if count($documents.peixun) >= 5}                           
                            <a href="/resources/search?type=2" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}
@@ -491,21 +491,21 @@ $(document).ready(function(){
                     </li>
                     <li class="listZYTD" >
                         <table width="100%" border="0">
-                        	{if !empty($documents.kehu)}
-                        		{foreach $documents.kehu as $key => $document}
-                        			<tr>
+                            {if !empty($documents.kehu)}
+                                {foreach $documents.kehu as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-   {if count($documents.kehu) >= 5}                       	
+   {if count($documents.kehu) >= 5}                           
                            <a href="/resources/search?type=3" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}
@@ -514,21 +514,21 @@ $(document).ready(function(){
                     </li>
                     <li class="listZYTD" >                       
                         <table width="100%" border="0">
-                        	{if !empty($documents.fangan)}
-                        		{foreach $documents.fangan as $key => $document}
-                        			<tr>
+                            {if !empty($documents.fangan)}
+                                {foreach $documents.fangan as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-   {if count($documents.fangan) >= 5}                       	
+   {if count($documents.fangan) >= 5}                           
                            <a href="/resources/search?type=4" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}
@@ -537,21 +537,21 @@ $(document).ready(function(){
                     </li>
                     <li class="listZYTD" >
                     <table width="100%" border="0">
-                        	{if !empty($documents.zongjie)}
-                        		{foreach $documents.zongjie as $key => $document}
-                        			<tr>
+                            {if !empty($documents.zongjie)}
+                                {foreach $documents.zongjie as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-   {if count($documents.zongjie) >= 5}                       	
+   {if count($documents.zongjie) >= 5}                           
                            <a href="/resources/search?type=5" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}
@@ -560,21 +560,21 @@ $(document).ready(function(){
                     </li>
                     <li class="listZYTD" >
                         <table width="100%" border="0">
-                        	{if !empty($documents.anli)}
-                        		{foreach $documents.anli as $key => $document}
-                        			<tr>
+                            {if !empty($documents.anli)}
+                                {foreach $documents.anli as $key => $document}
+                                    <tr>
     <td width="60%"><p class="textEllipsis"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.title}</a></p></td>
     <td width="9%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{if $document.Document.point == 0}免费{else}{$document.Document.point}分{/if}</a></td>
     <td width="8%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.pages}页</a></td>
     <td width="13%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">下载：{$document.Document.download_cnt}次</a></td>
     <td width="10%"><a href="/resources/detail?id={$document.Document.id}" target="_blank">{$document.Document.created|date_format:"%Y-%m-%d"}</a></td>
   </tr>
-                        		{/foreach}
-                        	{else}
-                        	没有入门成长相关的资源。
-                        	{/if}   
+                                {/foreach}
+                            {else}
+                            没有入门成长相关的资源。
+                            {/if}   
                              <tr><td colspan="5" class="more"> 
-   {if count($documents.anli) >= 5}                       	
+   {if count($documents.anli) >= 5}
                            <a href="/resources/search?type=6" target="_blank">更多...</a>
                            {else}&nbsp;
                         {/if}

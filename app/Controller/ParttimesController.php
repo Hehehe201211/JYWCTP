@@ -149,9 +149,9 @@ class ParttimesController extends AppController
             }
             if (isset($this->request->data['citys'])) {
                 foreach ($this->request->data['citys'] as $city) {
-//                    $or['area LIKE'] = 
+                    $or[] = array('area LIKE ' => "%{$city}%");
                 }
-                $conditions['OR'] = array('c');
+                $conditions['OR'] = $or;
             }
             if (isset($this->request->data['categorys'])) {
                 $conditions['PartTime.category'] = $this->request->data['categorys'];

@@ -302,6 +302,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 .xsjgSend .hysj{background-position:5px top;}
 
 .sjle{width:100%;float:left;overflow-y:hidden;position:relative;}
+.sjle .batch{background-color:#FFF;border:1px solid #CCC;width:111px;position:absolute;right:0;top:0;}
+.sjle .batch a{display:block;margin:12px auto;text-align:center;background: url("../img/btnbgs.gif") no-repeat 0 -297px;font:bold 14px/28px "宋体";height:28px;width:87px;color:#333;}
+.sjle .batch a:hover{background-position:-87px -297px;}
 .sjle .area{width:240px;float:left;}
 .sjle .area label{width:120px;}
 .sjle .area1{float:left;width:90px;} 
@@ -407,7 +410,6 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle .mebSetup dd .inpText{width:40px;text-align:center;margin-right:6px;}
 .sjle .mebSetup dd.xiushan_anniu{text-align:center;margin:6px 0 0 204px;}
 .sjleBold ul li{font-weight:bold;}
-.xiushan_anniu{width:110px;}
 
 .zy_z .mebleft{float:left;width:298px;border-right:1px #666 dashed;padding:0 2px;overflow:hidden;}
 .zy_z .mebleft .biaotit1{font-size:14px;color:#06E;border-bottom:1px solid #999;margin-top:3px;text-indent:1.2em;}
@@ -546,6 +548,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .znxContent .znxMesCon{border:1px #999 solid;background-color:#f0f0f0;padding:6px;margin:6px 0;clear:both;display:none;}
 .znxContent .znxMesCon a{color:#F60;}
 .pagesMag{height:32px;padding-left:6px;clear:both;}
+.pagesMag .fanyeaFr{padding:0;margin-right:8px;}
 .znxContent .trader{font-size:14px;color:#f60;margin:0 12px 0 3px;font-weight:bold;}
 .znxContent .result{color:#F30;float:right;*float:left;padding-right:6px;}
 .znxConTrade .title,.znxContent .titleNo{background:none;}
@@ -619,9 +622,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 
 #zccon {background: url("../img/title_v2.jpg") no-repeat scroll 0 0 transparent;border: 1px solid #F5F5F5;margin: 12px auto 0;padding-top: 35px; width: 900px;}
 #zccon .le{width:591px; height:485px; float:left;display:block;overflow:hidden;background-color:#FFFFFF;border:1px #DDD solid;border-right:1px #FE9900 dashed;}
-.titleZC{background:url("../img/zy_ye.gif") no-repeat 550px -144px #E1E5E6;cursor:pointer;font:bold 14px/40px "";height: 40px;margin: 0 0 4px;padding-left: 20px;}
-.titleZC:hover{background-color:#EEE;}
-.titleZCc{background-position:550px -117px}
+.titleZC{background:url("../img/zy_ye.gif") no-repeat 550px -204px #E1E5E6;cursor:pointer;font:bold 14px/40px "";height: 40px;margin: 0 0 4px;padding-left: 20px;}
+.titleZC:hover{background-color:#FC6;}
+.titleZCc{background-position:550px -177px}
 .le dl {display: block;overflow: hidden;padding-left: 30px;padding-top: 19px;width: 620px;}
 .le dl dt {height:36px;overflow:hidden;padding-top:6px;width:510px;}
 .le dl dt label{float: left;line-height: 36px;overflow: hidden;padding: 0 5px;text-align: right;width: 80px;}
@@ -678,7 +681,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .porleft .forgetInp{margin-right:3px;padding:3px;width:200px;font-size:14px;letter-spacing:1px;}
 .porleft .inw2{width:80px;display: block;float: left;margin:0 6px 0 0;width: 80px;}
 .butt{background: url(../img/reg-btn.gif) no-repeat right top;display: inline-block;font-weight: 700;height: 34px;padding-right: 1px;margin-left:80px;}
-.fgbtn {background: url(../img/reg-btn.gif) no-repeat  0 0;  border: medium none;color: #FFFFFF;cursor: pointer;display: block;font-size: 14px;font-weight: bold;margin: 0;padding: 6px 20px 7px;}
+.fgbtn {background: url(../img/reg-btn.gif) no-repeat  0 0;border:0 none;color: #FFFFFF;cursor:pointer;display: block;font-size:14px;font-weight:bold;margin:0;padding: 6px 20px 7px;}
 
 .contacts-list{padding:6px 0 0;width:604px;}
 .contacts-list div{float:left;}

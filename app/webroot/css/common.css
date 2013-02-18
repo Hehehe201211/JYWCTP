@@ -66,22 +66,6 @@ textarea{letter-spacing:1px;}
 .wrapper1{height:120px; width:100%;}
 .header{margin:0 auto;height:149px;width:1000px;position:relative;}
 
-/*.daohang{float:right; background:url(../img/toplist_04.gif) 3px 0 no-repeat; width:95px;margin-right:5px;height:27px;position:absolute;top:0;right:80px;z-index:99;_right:100px;}
-#daohang{position:absolute;top:0;background:#fff;z-index:99; width:986px;padding:10px 0 0 10px;border:2px #FCBB5D solid;display:none;}
-#daohang a{ width:160px; display:block; color:#000; float:left; line-height:30px;text-decoration:none;}
-#daohang hr{display:block;margin:12px 0;clear:both;color:#F00}
-.daohangD{background-position:3px -27px;}
-.toplist{height:30px;overflow:hidden;}
-.toplist ul li{height:27px; text-align:center;}
-.toplist ul li a{color:#fff;font-size:14px;font-weight:bold;line-height:27px;}
-.toplist ul li a:hover{text-decoration:underline;}
-.toplist .loginInfo{float:left;margin:3px 0 0 20px;width:670px;}
-.toplist .loginInfo a{color:#187EE3;font-weight:normal;font-size:12px;padding:0 3px}
-.toplist .loginInfo a:hover{color:#FF6600;text-decoration:underline;}
-.toplist .loginInfo .right a{border-right:1px #FF9900 solid;padding:0 6px;}
-.back{float:left; background:url(../img/toplist_02.jpg) top no-repeat; width:102px;margin-left:13px;}
-.help{float:right; background:url(../img/toplist_06.jpg) top no-repeat; width:62px;margin-right:16px;}*/
-
 .toplist{height:30px;*z-index:999;}
 .toplist ul li{height:27px;text-align:center;background-image:url(../img/topIconblock.gif);*z-index:99;}
 .toplist ul li a{color:#fff;font:bold 14px/27px "";}
@@ -179,16 +163,18 @@ tbody .btnSingle a:hover{background-position:-50px -102px;}
 .switchBox .keyword .inpTextBox{width:197px;padding:3px;}
 
 .fanyea{margin:0 0 8px;text-align:center;border-top:1px #999 dashed;padding-top:6px;clear:both;}
+.fanyea a:hover{text-decoration:none !important;}
 .fanyea input, .fanyea label {float: none !important;}
+.fanyeaFr{float:right;border-top:0 none;}
 .fanyeaNob{border-top:0 none;}
-.dd_span{background:#FFF;border:1px solid #D4D4D4;text-align:center;margint:4px 0;display:inline;padding:4px 3px 3px;*margin-left:6px;}
+.dd_span{background:#FFF;border:1px solid #AAA;text-align:center;margint:4px 0;display:inline;padding:4px 3px 3px;*margin-left:6px;}
 .dd_ym{display:inline;margin-left:4px;}
 .dd_ym labe{padding:3px;}
 .dd_ym select{height:20px;padding:1px 0;*vertical-align:middle;}
 .dd_ym11{display:inline;}
 .dd_ym11 font,.dd_ym11 span{margin:0px 3px;}
 .dd_ym11 input{width:22px;padding:3px 0;text-align:center;*vertical-align:middle;*padding:2px 0;}
-.dd_span1{background:#FFF;border:1px solid #d4d4d4;display:inline;padding:4px 4px 3px;}
+.dd_span1{background:#FFF;border:1px solid #AAA;display:inline;padding:4px 4px 3px;}
 
 .tofu_anniu{width:107px;}
 .tofu_anniu a{background:url(../img/btnbgs.gif) 0 -60px no-repeat;color: #3C3C3C;width:103px;margin:0 auto;height:21px;}
@@ -240,6 +226,14 @@ tbody .btnSingle a:hover{background-position:-50px -102px;}
 .errorPage tr:hover{background:none;}
 .errorPage p{font-size:14px;font-weight:bold}
 .errorPage a{color:#F60;font-size:14px;font-weight:bold;margin:0 3px;}
+
+.browserTip{margin:0 auto;width:1000px;background:#ff9;position:relative;z-index:999;}
+.browserTip .browserUG{width:1000px;margin:0 auto;padding:8px 12px;background:#FD6;position:absolute;top:0;}
+.browserTip .browserUG a{color:#D00;}
+.browserTip .browserUG a:hover{text-decoration:underline;}
+.browserTip .browserUG .img{float:left;margin:3px 12px 0 0;width:38px;height:38px;background:url(../img/reg-ok.gif) 0 0 no-repeat;}
+.browserTip .browserUG .button{float:right;padding:2px 12px;color:#fff;border:1px #666 solid;background:#C96;margin:7px 8px 0;}
+.browserTip .browserUG .button:hover{text-decoration:none;background:#963;}
 
 /*google chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {

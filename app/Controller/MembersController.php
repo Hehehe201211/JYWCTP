@@ -19,7 +19,7 @@ class MembersController extends AppController
         'Audition',
     
     );
-    var $components = array('ImageCheck', 'Unit', 'Upload', 'Thumbnail', 'Recommend');
+    var $components = array('RequestHandler', 'ImageCheck', 'Unit', 'Upload', 'Thumbnail', 'Recommend');
     var $helpers = array('City', 'Category');
     public function index()
     {
@@ -42,6 +42,8 @@ class MembersController extends AppController
                 $this->set('newRewards', $newReward);
                 $this->set('newReceivedRewards', $newReceivedReward);
                 $this->set('historyInfo', $historyInfo);
+                //收到站内信留言
+                $this->Recommend->stationMessageCount($this->_memberInfo['Member']['id']);
                 
                 //
                 $this->Recommend->parttime($this->_memberInfo['Member']['id'], $this->_memberInfo['Attribute']['category_id']);
@@ -119,6 +121,10 @@ class MembersController extends AppController
                 $newReceived = $this->Cooperation->find('all', $params);
                 $this->getNewReceiveAudition();
                 
+                $this->Recommend->fulltimeCount($this->_memberInfo['Member']['id']);
+                $this->Recommend->parttimeCount($this->_memberInfo['Member']['id']);
+                $this->Recommend->receiveResumeCount($this->_memberInfo['Member']['id']);
+                $this->Recommend->receiveCooperationsCount($this->_memberInfo['Member']['id']);
                 $this->set('newParttimes', $parttimes);
                 $this->set('newFulltimes', $fulltimes);
                 $this->set('newReceived', $newReceived);
@@ -184,7 +190,11 @@ class MembersController extends AppController
     public function logout()
     {
         $this->Session->delete('memberInfo');
-        $this->redirect('/');
+        if (!$this->RequestHandler->isAjax()) {
+            $this->redirect('/');
+        } else {
+            $this->_sendJson(array('result' => 'OK'));
+        }
     }
     
     public function register()

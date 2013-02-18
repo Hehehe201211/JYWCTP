@@ -164,7 +164,7 @@ $("body").append($(".divDjbuz"));
         </ul>
       </li>
       <li class="lists keyword">
-        <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onFocus="this.select()"/>
+        <input type="text" name="inpKeyword" class="inpKeyword" value="请输入关键字" placeholder="请输入关键字" onfocus="this.select()"/>
       </li>
       </ul>
       <div class="clearfix"></div>

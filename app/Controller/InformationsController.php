@@ -733,8 +733,13 @@ class InformationsController extends AppController
      */
     public function received()
     {
-       $type = isset($this->request->query['type']) ? $this->request->query['type'] : "has";
-       $type = isset($this->request->date['type']) ? $this->request->date['type'] : "has";
+       if ($this->request->query['type']) {
+            $type = $this->request->query['type'];
+       } else if ($this->request->date['type']){
+            $type = $this->request->date['type'];
+       } else {
+            $type = "has";
+       }
        $fields = array(
             'Information.id',
             'Information.title',
@@ -1062,8 +1067,9 @@ class InformationsController extends AppController
             $conditions['OR'] = $or;
             $this->set('status', $this->request->data['status']);
         } else {
-            $conditions['status'] = Configure::read('Information.status_code.active');
-            $this->set('status', array(Configure::read('Information.status_code.active')));
+            $status = array(Configure::read('Information.status_code.active'), Configure::read('Information.status_code.cancel'), Configure::read('Information.status_code.overtime'));
+            $conditions['status'] = $status;
+            $this->set('status', $status);
         }
         $fields = array(
             'id',

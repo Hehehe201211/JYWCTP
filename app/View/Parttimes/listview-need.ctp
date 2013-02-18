@@ -6,12 +6,16 @@ $(document).ready(function(){
         $('#result').load('/parttimes/search?type=need', conditionsArray, function(){});
     });
 });
-//{/literal}
+{/literal}
 </script>
 
 <div class="zy_z">
     <div class="zy_zs">
-      <p><a href="new-hyzy.html">我的聚业务</a>&gt;&gt;<a href="new-wyjz.html">兼职管理</a>&gt;&gt;<a href="#">我要兼职</a></p>      
+      <p>
+      <a href="javascript:void(0)">我的聚业务</a>&gt;&gt;
+      <a href="javascript:void(0)">兼职管理</a>&gt;&gt;
+      <a href="javascript:void(0)">我要兼职</a>
+      </p>
     </div>    
     <div class="xxjs partTime" style="overflow-y:visible;min-height:485px;">
         <div class="biaotit">我要兼职</div>
@@ -123,9 +127,9 @@ $(document).ready(function(){
             <div class="toggleMap">打开地图检索</div>-->
             <a class="zclan zclan4" href="javascript:void(0)" id="search">查询</a>
         </div>
-        </form>
         <div id="result">
-        {assign var=options value=['update' => '#result', 'evalScripts' => true]}
+        {$form = ['isForm' => true, 'inline' => true]}
+        {$options = ['update' => '#result', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
         {$this->Paginator->options($options)}
         {$paginatorParams = $this->Paginator->params()}
           <div class="biaotit">检索结果</div>
@@ -190,8 +194,8 @@ $(document).ready(function(){
                 {/if}
                 <div class="dd_ym">
                     <label>每页显示：</label>
-                    <select>
-                        <option value="2" {if $pageSize == "10"} selected {/if}>10</option>
+                    <select name="pageSize" id="pageSize">
+                        <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                         <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                         <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                         <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
@@ -208,12 +212,12 @@ $(document).ready(function(){
                   {/if}
             </div>
         </div>
-        {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
-        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
-        {$form = ['isForm' => true, 'inline' => true]}
-        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#result')->serializeForm($form)]}
+        {$pageSizeRequestUrl = ['action' => 'search?type='|cat:$this->request->query['type']]}
+        {$jumpButtonRequestUrl = ['action' => 'search?type='|cat:$this->request->query['type']]}
+        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#result', 'method' => 'post', 'data' => $this->Js->get('#search_conditions')->serializeForm($form)]}
         {$this->Js->get('#pageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
         {$this->Js->get('#jumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
         {$this->Js->writeBuffer()}
-    </div>    
+    </div>
+    </form>
 </div>

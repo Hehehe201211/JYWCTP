@@ -82,12 +82,13 @@
         </div>
         <div class="mebBaseinfoR">
           <dl>
-            <dd>已发布岗位：<a href="/fulltimes/listview">0</a>个全职&nbsp;&nbsp;<a href="/parttimes/listview?type=send">0</a>个兼职</dd>
-            <dd>已收到简历到：<a href="/auditions/listview?type=receive">0</a>封</dd>
-            <dd>已收到合作信息：<a href="/cooperations/listview/?type=receiver">0</a>条</dd>
-            <dd>合作中的信息：<a href="/cooperations/waitlist/?type=receiver">0</a>条</dd>            
-            <dd>待付款的信息：<a href="/cooperations/waitlist/?type=receiver">0</a>条</dd>
-            <dd>留言：<a href="/accounts/sms">0</a>条</dd>
+            <dd>已发布岗位：
+            <a href="/fulltimes/listview">{$fulltimeCount}</a>个全职&nbsp;&nbsp;
+            <a href="/parttimes/listview?type=send">{$parttimeCount}</a>个兼职
+            </dd>
+            <dd>已收到简历到：<a href="/auditions/listview?type=receive">{$receiveResumeCount}</a>封</dd>
+            <dd>已收到合作信息：<a href="/cooperations/listview/?type=receiver">{$receiveCooperationsCount}</a>条</dd>
+            <!--<dd>留言：<a href="/accounts/sms">0</a>条</dd>-->
           </dl>
         </div>
       </div>
@@ -97,12 +98,12 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
         <thead>
         <tr class="con_2_tr con_2_xq_too">
-          <th width="158" class="tr_td1">兼职标题 </th>
-          <th width="109" class="tr_td2">产品所属分类 </th>
-          <th width="91" class="tr_td7">兼职配合方式  </th>
-          <th width="67" class="tr_td4">发布时间</th>
-          <th width="61" class="tr_td5">参与人次</th>
-          <th width="110" class="tr_td8">选择操作</th>
+          <th width="180" class="tr_td1">兼职标题 </th>
+          <th width="149" class="tr_td2">产品所属分类 </th>
+          <th width="88" class="tr_td7">兼职配合方式  </th>
+          <th width="79" class="tr_td4">发布时间</th>
+          <th width="57" class="tr_td5">参与人次</th>
+          <th width="64" class="tr_td8">选择操作</th>
         </tr>
         </thead>
         <tbody>
@@ -144,12 +145,12 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
         <thead>
         <tr class="con_2_tr con_2_xq_too">
-          <th width="158" class="tr_td1">会员名 </th>
-          <th width="109" class="tr_td2">产品或服务 </th>
-          <th width="91" class="tr_td7">客户区域</th>
-          <th width="67" class="tr_td4">合作状态</th>
-          <th width="61" class="tr_td5">投递时间</th>
-          <th width="110" class="tr_td8">选择操作</th>
+          <th width="120" class="tr_td1">会员名 </th>
+          <th width="166" class="tr_td2">产品或服务 </th>
+          <th width="130" class="tr_td7">客户区域</th>
+          <th width="61" class="tr_td4">合作状态</th>
+          <th width="76" class="tr_td5">投递时间</th>
+          <th width="64" class="tr_td8">选择操作</th>
         </tr>
         </thead>
         <tbody>
@@ -200,12 +201,12 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
         <thead>
         <tr class="con_2_tr con_2_xq_too">
-          <th width="158" class="tr_td1">职位 </th>
-          <th width="109" class="tr_td2">工作性质 </th>
-          <th width="91" class="tr_td7">招聘人数</th>
-          <th width="67" class="tr_td4">底薪</th>
-          <th width="61" class="tr_td5">工作区域</th>
-          <th width="110" class="tr_td8">选择操作</th>
+          <th width="180" class="tr_td1">职位 </th>
+          <th width="60" class="tr_td2">工作性质 </th>
+          <th width="60" class="tr_td7">招聘人数</th>
+          <th width="70" class="tr_td4">底薪</th>
+          <th width="183" class="tr_td5">工作区域</th>
+          <th width="64" class="tr_td8">选择操作</th>
         </tr>
         </thead>
         <tbody>
@@ -255,13 +256,13 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="con_2_table">
         <thead>
         <tr class="con_2_tr con_2_xq_too">
-          <th width="158" class="tr_td1">会员名 </th>
-          <th width="109" class="tr_td2">应聘岗位 </th>
-          <th width="91" class="tr_td7">工作经验</th>
-          <th width="74" class="tr_td4">学历</th>
-          <th width="58" class="tr_td5">现居住地</th>
-          <th width="73" class="tr_td5">接收时间</th>
-          <th width="110" class="tr_td8">选择操作</th>
+          <th width="120" class="tr_td1">会员名 </th>
+          <th width="126" class="tr_td2">应聘岗位 </th>
+          <th width="82" class="tr_td7">工作经验</th>
+          <th width="67" class="tr_td4">学历</th>
+          <th width="84" class="tr_td5">现居住地</th>
+          <th width="74" class="tr_td5">接收时间</th>
+          <th width="64" class="tr_td8">选择操作</th>
         </tr>
         </thead>
         <tbody>

@@ -29,6 +29,7 @@ class InvitationsController extends AppController
         $fields = array(
             'Invitation.id',
             'Invitation.receive_readed',
+            'Invitation.created',
             'MemberAttribute.full_name',
             'MemberAttribute.provincial_id',
             'MemberAttribute.city_id',
@@ -37,11 +38,11 @@ class InvitationsController extends AppController
         
         $pageSize = isset($this->request->data['pageSize']) ? $this->request->data['pageSize'] : 10;
         $page = isset($this->request->data['jump']) && !isset($this->request->params['named']['setPageSize']) ? $this->request->data['jump'] : 0;
-        
+        $sort = isset($this->request->data['sort']) ? $this->request->data['sort'] : "DESC";
         $this->paginate = array(
             'Invitation' => array('limit' => $pageSize,
                 'page'  => $page,
-                'order' => array('Invitation.created' => 'DESC'),
+                'order' => array('Invitation.created' => $sort),
                 'conditions' => $conditions,
                 'fields'    => $fields,
                 'joins'     => array($joinCompany)
