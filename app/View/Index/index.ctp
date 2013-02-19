@@ -217,7 +217,7 @@ $(document).ready(function(){
                         <a href="javascript:void(0)" id="btnLogin" class="inp">登录</a>
                         <a href="/members/register" class="inp">免费注册</a>
                     </li>
-                    <li class="liForget"><a href="wangjimima.html">忘记密码？</a>&nbsp;&nbsp;</li>
+                    <li class="liForget"><a href="/account/forget">忘记密码？</a>&nbsp;&nbsp;</li>
                 </ul>
             </form>
             {else}

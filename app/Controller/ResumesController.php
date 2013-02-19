@@ -271,6 +271,75 @@ class ResumesController extends AppController
         $this->set('resumes', $resumes);
     }
     
+    /**
+     * 
+     * ajax 修改教育经历
+     */
+    public function editEducation()
+    {
+        $data = array(
+            'begin'         => "'" . $this->request->data['begin'] . "'",
+            'end'           => "'" . $this->request->data['end'] . "'",
+            'educated'      => $this->request->data['educated'],
+            'discipline'    => "'" . $this->request->data['discipline'] . "'",
+            'school'        => "'" . $this->request->data['school'] . "'",
+            'school_type'   => "'" . $this->request->data['school_type'] . "'",
+            'modified'      => "'" . date('Y-m-d H:i:s', time()) . "'"
+        );
+        try {
+            $this->ResumeEducation->updateAll($data, array('resumes_id' => $this->request->data['resumes_id']));
+            $result = array('result' => 'OK');
+        } catch (Exception $e) {
+            $this->log($e->getMessage());
+            $result = array('result' => 'NG', 'msg' => '系统发生错误，请稍后重试！');
+        }
+        $this->_sendJson($result);
+    }
+    /**
+     * 
+     * ajax 修改工作经历
+     */
+    public function editWork()
+    {
+        $data = array(
+            'begin'         => "'" . $this->request->data['begin']. "'",
+            'end'           => "'" . $this->request->data['end']. "'",
+            'department'    => "'" . $this->request->data['department']. "'",
+            'category'      => "'" . $this->request->data['work_category']. "'",
+            'post'          => "'" . $this->request->data['post']. "'",
+            'company'       => "'" . $this->request->data['company']. "'",
+            'service'       => "'" . $this->request->data['service']. "'",
+            'responsiblly'  => "'" . $this->request->data['responsiblly']. "'",
+            'salary'        => "'" . $this->request->data['salary']. "'",
+            'reason'        => "'" . $this->request->data['reason']. "'",
+            'modified'      => "'" . date('Y-m-d H:i:s', time()) . "'"
+        );
+        try {
+            $this->ResumeWork->updateAll($data, array('resumes_id' => $this->request->data['resumes_id']));
+            $result = array('result' => 'OK');
+        } catch (Exception $e) {
+            $this->log($e->getMessage());
+            $result = array('result' => 'NG', 'msg' => '系统发生错误，请稍后重试！');
+        }
+        $this->_sendJson($result);
+    }
+    /**
+     * 
+     * ajax 修改求职方向
+     */
+    public function editResume()
+    {
+        $data = $this->request->data;
+        try {
+            $this->Resume->save($data);
+            $result = array('result' => 'OK');
+        } catch (Exception $e) {
+            $this->log($e->getMessage());
+            $result = array('result' => 'NG', 'msg' => '系统发生错误，请稍后重试！');
+        }
+        $this->_sendJson($result);
+    }
+    
     public function beforeRender()
     {
         $this->currentMenu = Configure::read('Menu.fulltimeManager');

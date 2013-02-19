@@ -1,7 +1,7 @@
 {$form = ['isForm' => true, 'inline' => true]}
 {$options = ['update' => '#msgList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#msgOpt')->serializeForm($form)]}
 {$this->Paginator->options($options)}
-{$paginatorParams = $this->Paginator->params()}
+{$paginatorParams = $this->Paginator->params('StationMessage')}
 {if $paginatorParams['count'] > 0}
 <ul>
     {foreach $messages as $message}

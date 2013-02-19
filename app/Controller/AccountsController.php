@@ -12,7 +12,8 @@ class AccountsController extends AppController
                     'StationMessage', 
                     'CompanyAttribute',
                     'PaymentTransaction',
-                    'Information'
+                    'Information',
+                    'SystemMessage'
     );
     var $components = array('RequestHandler', 'Friend', 'StationMsg', 'Unit', 'Upload', 'Thumbnail', 'Recommend');
     var $helpers = array('Js', 'City', 'Category');
@@ -239,17 +240,27 @@ class AccountsController extends AppController
                 'status'    => 1
             );
             $this->StationMsg->getMessageList($constions);
-        } else {
             $constions = array(
-                'receiver'  => $this->_memberInfo['Member']['id'],
+                'members_id' => $this->_memberInfo['Member']['id'],
                 'status'    => 1
             );
+            $this->StationMsg->getSystemMessage($constions);
+        } else {
             if (isset($this->request->data['msg_type']) && 
                 $this->request->data['msg_type'] == "station") {
+                $constions = array(
+	                'receiver'  => $this->_memberInfo['Member']['id'],
+	                'status'    => 1
+	            );
                 $this->StationMsg->getMessageList($constions);
                 $this->render('station_paginator');
             } else {
-                
+                $constions = array(
+	                'members_id'  => $this->_memberInfo['Member']['id'],
+	                'status'    => 1
+	            );
+                $this->StationMsg->getSystemMessage($constions);
+                $this->render('system_paginator');
             }
         }
         

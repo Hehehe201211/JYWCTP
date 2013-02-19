@@ -47,6 +47,26 @@ class StationMsgComponent extends Component
         $this->controller->set('pageSize', $pageSize);
         $this->controller->set("messages", $this->controller->paginate('StationMessage'));
     }
+    /**
+     * 
+     * 系统消息
+     * @param $conditions
+     */
+    public function getSystemMessage($conditions)
+    {
+        $pageSize = isset($this->controller->request->data['pageSize']) ? $this->controller->request->data['pageSize'] : Configure::read('Paginate.pageSize');
+        $page = isset($this->controller->request->data['jump']) && !isset($this->controller->request->params['named']['setPageSize']) ? $this->controller->request->data['jump'] : 0;
+        $this->controller->paginate = array(
+            'SystemMessage' => array('limit' => $pageSize,
+                'page'  => $page,
+                'order' => array('SystemMessage.created' => 'DESC'),
+                'conditions' => $conditions,
+            )
+        );
+        $this->controller->set('pageSize', $pageSize);
+        $this->controller->set("system_messages", $this->controller->paginate('SystemMessage'));
+    }
+    
     
     function startup(Controller $controller)
     {

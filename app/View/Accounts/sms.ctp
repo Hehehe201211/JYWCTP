@@ -134,55 +134,74 @@ $(document).ready(function(){
             <li><a href="#">好友信息</a></li>
         </ul>
         <div class="znxContent">
-            <div class="znxConSys">
+            <div class="znxConSys" id="systemList">
+            {$form = ['isForm' => true, 'inline' => true]}
+            {$options = ['update' => '#systemList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#systemOpt')->serializeForm($form)]}
+            {$this->Paginator->options($options)}
+            {$paginatorParams = $this->Paginator->params('SystemMessage')}
                 <ul>
+                {foreach $system_messages as $message}
                     <li>
                         <p>
-						    <a href="javascript:void(0)" title="删除" class="close">&nbsp;</a>
+                            <a href="javascript:void(0)" title="删除" class="close">&nbsp;</a>
                             <input type="checkbox" name="" class="inpChk"/>
-                            <a class="title" href="#">QQ空间6.0，照亮心灵最闪亮的星。</a>
-                            <span class="time">2012-05-10 14:46:33</span>
+                            <a class="title" href="javascript:void(0)">{$message.SystemMessage.title}</a>
+                            <span class="time">{$message.SystemMessage.created|date_format:"%Y-%m-%d"}</span>
                         </p>
-                        <div class="znxMesCon">亲爱的xxx5202012：<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;恭喜您注册成功！您现在可以在聚业务网购买创意解决方案（<a target="_blank" href="#">看看出聚业务能为您做什么</a>），或者出售你的信息开始赚钱！（<a target="_blank" href="#">你的任何业务信息都可出售</a>），让你赚得轻松！
-                        </div>
+                        <div class="znxMesCon">{$message.SystemMessage.content}</div>
                     </li>
+                {/foreach}
                 </ul>
                 <div class="pagesMag">
-                  <div class="fanyea fanyeaFr">
-                        <div class="dd_span"><a href="#">上一页</a></div>
-                        <div class="dd_ym">
-                            <label>每页显示：</label>
-                            <select>
-                                <option>100</option>
-                                <option>50</option>
-                                <option>20</option>
-                                <option>10</option>
-                            </select>
+                    <form id="systemOpt" >
+                    <div class="fanyea fanyeaFr">
+                            {if $paginatorParams['prevPage']}
+                                <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
+                            {/if}
+                            <div class="dd_ym">
+                                <label>每页显示：</label>
+                                <select name="pageSize" id="syspageSize">
+                                    <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
+                                    <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
+                                    <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
+                                    <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
+                                </select>
+                            </div>
+                            <div class="dd_ym11">
+                                <font>共{$paginatorParams['count']}条</font>
+                                <font>第{$paginatorParams['page']}/{$paginatorParams['pageCount']}页</font>
+                                <input type="text" id="sysjump" name="jump" value="{if isset($jump)}{$jump}{/if}">
+                                <div class="dd_span1"><a href="javascript:void(0)" id="sysjumpButton">跳转</a></div>
+                            </div>
+                            {if $paginatorParams['nextPage']}
+                                <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
+                            {/if}
                         </div>
-                        <div class="dd_ym11"> <font>共64388条</font> <font>第1/644页</font>
-                            <input>
-                            <div class="dd_span1"><a href="#">跳转</a></div>
-                        </div>
-                        <div class="dd_span"><a href="#">下一页</a></div>
-                    </div>
                     <input type="checkbox" class="inpChk" name="" id="znxConTradeAll"/>
                     <label for="znxConTradeAll">全选</label>
                     <input type="button" class="inpButton deleMess" name="" value="删除"/>
+                        <input type="hidden" name="msg_type" value="system" />
+                        {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
+                        {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
+                        {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#systemList', 'method' => 'post', 'data' => $this->Js->get('#systemOpt')->serializeForm($form)]}
+                        {$this->Js->get('#syspageSize')->event('change', $this->Js->request($pageSizeRequestUrl, $requestOpt))}
+                        {$this->Js->get('#sysjumpButton')->event('click', $this->Js->request($jumpButtonRequestUrl, $requestOpt))}
+                        {$this->Js->writeBuffer()}
+                    </form>
                 </div>
             </div>
             <div class="znxConFri" style="display:none;" id="msgList">
             {$form = ['isForm' => true, 'inline' => true]}
             {$options = ['update' => '#msgList', 'evalScripts' => true, 'dataExpression' => true, 'method' => 'post', 'data' => $this->Js->get('#msgOpt')->serializeForm($form)]}
             {$this->Paginator->options($options)}
-            {$paginatorParams = $this->Paginator->params()}
+            {$paginatorParams = $this->Paginator->params('StationMessage')}
             {if $paginatorParams['count'] > 0}
                 <ul>
                     {foreach $messages as $message}
                         {if $message.StationMessage.type == Configure::read('Sms.normal')}
                         <li>
                             <p>
-							    <a class="close delete" title="删除" href="javascript:void(0)">&nbsp;</a>
+                                <a class="close delete" title="删除" href="javascript:void(0)">&nbsp;</a>
                                 <input type="checkbox" class="inpChk inpCheckbox checkboxVal" name="" value="{$message.StationMessage.id}">
                                 <a class="trader" href="/accounts/fdetail?fid={$message.Member.id}">{$message.Member.nickname}</a>
                                 <a target="_blank" href="#" class="title">发来信息。</a>
@@ -198,7 +217,7 @@ $(document).ready(function(){
                         {elseif $message.StationMessage.type == Configure::read('Sms.friendRequest')}
                             <li>
                                 <p>
-								    <a href="javascript:void(0)" title="删除" class="close delete">&nbsp;</a>
+                                    <a href="javascript:void(0)" title="删除" class="close delete">&nbsp;</a>
                                     <input type="checkbox" name="" class="inpChk checkboxVal" value="{$message.StationMessage.id}"/>
                                     <a href="hyzl.html" class="trader">{$message.Member.nickname}</a>
                                     <a class="title" href="#" target="_blank">请求添加你为好友。</a>
@@ -206,7 +225,7 @@ $(document).ready(function(){
                                     <input class="msg_id" type="hidden" value="{$message.StationMessage.id}" />                                    
                                 </p>
                                 <div class="znxMesCon"><input class="inpButton agree" type="button" value="同意" />
-								    注册时间：[{$message.Member.created|date_format:"%Y-%m-%d %H:%M:%S"}]
+                                    注册时间：[{$message.Member.created|date_format:"%Y-%m-%d %H:%M:%S"}]
                                     <br/>所在城市：
                                     {$provincial = $this->City->cityName($message.Attribute.provincial_id)}
                                     {$city = $this->City->cityName($message.Attribute.city_id)}
@@ -224,6 +243,7 @@ $(document).ready(function(){
                     {/foreach}
                 </ul>
                 <div class="pagesMag">
+                    <form id="msgOpt" >
                     <div class="fanyea fanyeaFr">
                             {if $paginatorParams['prevPage']}
                                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
@@ -231,7 +251,7 @@ $(document).ready(function(){
                             <div class="dd_ym">
                                 <label>每页显示：</label>
                                 <select name="pageSize" id="pageSize">
-                                    <option value="2" {if $pageSize == "10"} selected {/if}>10</option>
+                                    <option value="10" {if $pageSize == "10"} selected {/if}>10</option>
                                     <option value="20" {if $pageSize == "20"} selected {/if}>20</option>
                                     <option value="50" {if $pageSize == "50"} selected {/if}>50</option>
                                     <option value="100" {if $pageSize == "100"} selected {/if}>100</option>
@@ -250,7 +270,6 @@ $(document).ready(function(){
                     <input type="checkbox" class="inpChk" name="" id="znxConFriAll" value=""/>
                     <label for="znxConFriAll">全选</label>
                     <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
-                    <form id="msgOpt" >
                         <input type="hidden" name="msg_type" value="station" />
                         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
                         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}

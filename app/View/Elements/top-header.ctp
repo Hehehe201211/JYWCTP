@@ -85,7 +85,7 @@ $(document).ready(function(){
 {/literal}
 </script>
 <!--[if lte IE 6]>
-<div class="browserTip"><div class="browserUG"><a href="javascript:;" class="button close">关闭</a><a href="/static?tpl=browserUG" class="button">查看详情</a><div class="img"></div>您正在使用 Internet Explorer 6，可能无法正常浏览、使用本网站，强烈建议您在windows系统使用更快速！更安全！更稳定！的浏览器。<br>下载：<a href="http://windows.microsoft.com/zh-CN/internet-explorer/download-ie" target="_blank">Internet Explorer</a>，<a href="http://chrome.google.com" target="_blank">谷歌浏览器</a>，<a href="http://mozilla.org/firefox/" target="_blank">火狐浏览器</a>，<a href="http://www.opera.com/browser/" target="_blank">欧朋浏览器</a></div></div>
+<div class="browserTip"><div class="browserUG"><a href="javascript:;" class="button close">关闭</a><a href="/static?tpl=browserUG" class="button">查看详情</a><div class="img"></div>您正在使用 Internet Explorer 6，可能无法正常浏览、使用本网站，强烈建议您在windows系统使用更快速！更安全！更稳定！的浏览器。<br>官方下载：<a href="http://windows.microsoft.com/zh-CN/internet-explorer/download-ie" target="_blank">Internet Explorer</a>，<a href="http://chrome.google.com" target="_blank">谷歌浏览器</a>，<a href="http://mozilla.org/firefox/" target="_blank">火狐浏览器</a>，<a href="http://www.opera.com/browser/" target="_blank">欧朋浏览器</a></div></div>
 <![endif]-->
 <div class="header">
   <div class="toplist">

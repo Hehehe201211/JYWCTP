@@ -45,14 +45,15 @@ class ServicesController extends AppController
                     'path' => $result['path'],
                     'name' => $result['name']
                 );
+                list($secend, $profix) = explode('.', microtime(true));
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
-                    'imagename'      => "company_profile",
+                    'imagename'      => "company_profile_" . $profix,
                     'outx'      => Configure::read('Thumbnail.homepage.width'),
                     'outy'      => Configure::read('Thumbnail.homepage.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
-                    $data['thumbnail'] = $path . "/company_profile." .  $this->Upload->getExt($_FILES['thumbnail']);
+                    $data['thumbnail'] = $path . "/company_profile_"  . $profix . "." .  $this->Upload->getExt($_FILES['thumbnail']);
                     @unlink($result['path'] . '/' . $result['name']);
                 }
             }
@@ -77,14 +78,15 @@ class ServicesController extends AppController
                     'path' => $result['path'],
                     'name' => $result['name']
                 );
+                list($secend, $profix) = explode('.', microtime(true));
                 $descParams = array(
                     'imagepath' => Configure::read('Data.path') . $path,
-                    'imagename'      => "company_job",
+                    'imagename'      => "company_job_" . $profix,
                     'outx'      => Configure::read('Thumbnail.job.width'),
                     'outy'      => Configure::read('Thumbnail.job.height')
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
-                    $data['thumbnail_job'] = $path . "/company_job." .  $this->Upload->getExt($_FILES['thumbnail_job']);
+                    $data['thumbnail_job'] = $path . "/company_job_" . $profix  ."." .  $this->Upload->getExt($_FILES['thumbnail_job']);
                     @unlink($result['path'] . '/' . $result['name']);
                 }
             }

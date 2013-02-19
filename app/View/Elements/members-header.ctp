@@ -1,3 +1,24 @@
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+    //logout
+    $('.logout').click(function(){
+        $.ajax({
+            type : 'post',
+            url  : '/members/logout',
+            success : function(data) {
+                var result = eval("("+data+")");
+                if (result.result == 'OK') {
+                    location.href = location.href;
+                } else {
+                    alert('退出失败，请稍后重试！');
+                }
+            }
+         });
+    });
+});
+{/literal}
+</script>
 <div class="wrapper1 wrap header">
   <div class="toplist">
     <ul>
@@ -54,7 +75,7 @@
         {if empty($memberInfo)}
         您好，游客，欢迎光临聚业务网&nbsp;<a href="/members/register" target="blank" class="toptoolUseN">注册/登录</a>
         {else}
-        您好，<font color="#FF3300">{$memberInfo.Member.nickname}</font>，欢迎光临聚业务网&nbsp;<a href="/members/logout" target="blank" class="toptoolUseN">[安全退出]</a>
+        您好，<font color="#FF3300">{$memberInfo.Member.nickname}</font>，欢迎光临聚业务网&nbsp;<a href="javascript:voio(0)" class="toptoolUseN logout">[安全退出]</a>
         {/if}
       </li>
       <li class="help"><a href="#" target="_blank">帮助</a></li>

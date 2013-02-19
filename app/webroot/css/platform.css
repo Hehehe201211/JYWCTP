@@ -448,7 +448,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .ntcLeft .suckerdiv .catContent{display:none;}
 .ntcLeft .suckerdiv li{height:22px;border:0 none;margin:2px 0 2px 30px;}
 .ntcLeft .suckerdiv li a{display:inline;background:url(../img/sprites_jianli.gif) -16px -254px no-repeat;padding:4px 0 4px 14px;font-size:12px;border:0 none;line-height:22px;}
-.ntcLeft .otherLinks{background:#EFEFEF;}
+.ntcLeft .otherLinks{background:#EFEFEF;margin-bottom:20px;}
 .ntcLeft .otherLinks li{float:left;width:108px;height:35px;}
 .ntcLeft .otherLinks li a{display:block;he8ight:33px;font:bold 14px/33px "";border:1px solid #DDD;text-align:center;}
 .ntcLeft .otherLinks li a:hover{border-color:#F50;}
@@ -482,7 +482,7 @@ ul.nav li a.current{background:url(../img/hover.png) 0 0 no-repeat;color:#fff;fo
 .ntcRight .serviceCon *{font-size:14px;}
 .ntcRight .serviceCon h1{font-size:28px;font-weight:bold;margin:0.6em 0;}
 .ntcRight .serviceCon h2{font-size:21px;font-weight:bold;margin: 0.8em 0;}
-.ntcRight .serviceCon h3{font-size:17px;font-weight:bold;margin:1em 0;}
+.ntcRight .serviceCon h3{font-size:16px;font-weight:bold;margin:1em 0;}
 .ntcRight .serviceCon h4{font-size:14px;font-weight:bold;margin:1.3em 0;}
 .ntcRight .serviceCon ol{margin-left:47px;color:#000;}
 .ntcRight .serviceCon ol,.ntcRight .serviceCon ol li{list-style:outside decimal none;}

@@ -109,7 +109,10 @@ function browserNaV() {
 function hideWarning(){$("#loginWarning").fadeOut("slow");}
 //关闭窗口
 function closeWindow() {
-   var browserName=navigator.appName; if (browserName=="Netscape") { window.open('','_parent',''); window.close(); } else if (browserName=="Microsoft Internet Explorer") { window.opener = "whocares"; window.close(); }}
+   myWindow=window.open('','_self','')
+   myWindow.close();
+   if ((!myWindow.closed)&&$.browser.mozilla) alert("自动关闭失败。如果您需要自动关闭功能，请按以下操作：\n1.在地址栏输入about:config；\n2.找到dom.allow_scripts_to_close_windows这项并改为true。");	
+}
 //gotuTop	
 $(function(){	
 	$("<div id='gototop'></div>").appendTo("body").hide();

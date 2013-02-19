@@ -134,7 +134,7 @@ class AppController extends Controller {
                         'appeals'       => array(),
                         'accounts'      => array(),
                         'members'       => array(),
-                        'resumes'       => array('create', 'check', 'complete', 'listview', 'detail', 'preview', 'editBase', 'editBase', 'candidate'),
+                        'resumes'       => array('create', 'check', 'complete', 'listview', 'detail', 'preview', 'editBase', 'editBase', 'candidate', 'editEducation', 'editWork', 'editResume'),
                         'fulltimes'     => array('search', 'detail', 'favouriteList', 'addFavourite', 'delFavourite'),
                         'auditions'     => array('listview', 'detail', 'addAudition', 'inviteList', 'delete'),
                         'parttimes'     => array('listview', 'search', 'detail', 'informationList', 'addCandidates'),
@@ -165,6 +165,7 @@ class AppController extends Controller {
                         !empty($allow[$this->request->params['controller']]) && 
                         !in_array($this->request->params['action'], $allow[$this->request->params['controller']])
                     ) {
+                        $this->log($this->request->params['action']);
                     $this->redirect('/members');
                 }
             }
