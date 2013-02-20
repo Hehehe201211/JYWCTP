@@ -112,10 +112,7 @@ $(document).ready(function(){
                 });
             }
         }
-    });
-
-
-    
+    });    
 });
 </script>
 <div class="zy_z">
@@ -280,7 +277,7 @@ $(document).ready(function(){
                     </form>
                 </div>
                 {else}
-                没有好友信息
+                &nbsp;没有好友信息
                 {/if}
             </div>
         </div>

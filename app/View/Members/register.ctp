@@ -343,7 +343,7 @@ function hideWarning(){
             <label class="tL"><input type="radio" id="person" class="inpRadio" checked="checked" value="0" name="type">个人</label>
             <label class="tL"><input type="radio" id="enterprise" class="inpRadio" value="1" name="type">企业</label>
           </li> 
-          <li><a class="inp" id="btnLogin" href="javascript:void(0)"> 登录</a><a href="wangjimima.html" style="text-decoration:underline;">忘记密码</a></li>
+          <li><a class="inp" id="btnLogin" href="javascript:void(0)"> 登录</a><a href="/forget" style="text-decoration:underline;">忘记密码</a></li>
         </ul>
       </form>
     </div>

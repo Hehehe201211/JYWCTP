@@ -50,12 +50,7 @@
     {/foreach}
 </ul>
 <div class="pagesMag">
-    <input type="checkbox" class="inpChk" name="" id="znxConFriAll"/>
-    <label for="znxConFriAll">全选</label>
-    <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
-    <form id="msgOpt" >
-        <input type="hidden" name="msg_type" value="station" />
-        <div class="fanye">
+    <div class="fanyea fanyeaFr">
             {if $paginatorParams['prevPage']}
                 <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
             {/if}
@@ -78,6 +73,11 @@
                 <div class="dd_span">{$this->Paginator->next('下一页', array(), null, array())}</div>
             {/if}
         </div>
+    <input type="checkbox" class="inpChk" name="" id="znxConFriAll"/>
+    <label for="znxConFriAll">全选</label>
+    <input type="button" class="inpButton deleMess deleteSelectSmg" name="" value="删除"/>
+    <form id="msgOpt" >
+        <input type="hidden" name="msg_type" value="station" />        
         {$pageSizeRequestUrl = ['action' => $this->request->params['action'], 'setPageSize' => 1]}
         {$jumpButtonRequestUrl = ['action' => $this->request->params['action']]}
         {$requestOpt = ['async' => true, 'dataExpression' => true, 'update' => '#msgList', 'method' => 'post', 'data' => $this->Js->get('#msgOpt')->serializeForm($form)]}

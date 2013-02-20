@@ -248,8 +248,8 @@ $(document).ready(function(){
 	<div class="jsxxxq jsxxxqB" id="jsxxxq1" style="width:480px;"><a href="#" class="closeDiv">&nbsp;</a>      
       <div class="sjle" style="overflow:hidden;">
         <dl>
-          <dt><label><font class="facexh">*</font>客源模板文件下载：</label><a href="#" class="inp" style="margin-left:0;">点击下载</a></dt>
-          <dt><label><font class="facexh">*</font>上传客源模板文件：</label><input type="file" /></dt>
+          <dt><label><font class="facexh">*</font>悬赏模板文件下载：</label><a href="#" class="inp" style="margin-left:0;">点击下载</a></dt>
+          <dt><label><font class="facexh">*</font>上传悬赏模板文件：</label><input type="file" /></dt>
         </dl>
       </div>
       <div class="divBtnContainer" style="width:200px;">

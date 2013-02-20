@@ -145,7 +145,9 @@ $(document).ready(function(){
         </table>
         </form>
         </div>
-        <a class="zclan zclan2" id="upgradeBtn" href="javascript:void(0)">升级</a>
-        <a class="zclan zclan2" id="backBtn" href="javascript:void(0)">上一步</a>
+        <div class="divBtnContainer" style="width: 200px;">
+        <a class="zclan zclan7" id="upgradeBtn" href="javascript:void(0)">升级</a>
+        <a class="zclan zclan7" id="backBtn" href="javascript:void(0)">上一步</a>
+        </div>
       </div>
 </div>

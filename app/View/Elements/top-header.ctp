@@ -328,6 +328,6 @@ $(document).ready(function(){
         <li><a {if $currentTopBar == "parttime"}class="current"{/if} href="/search/parttime">兼职信息</a></li>
         <li><a {if $currentTopBar == "resource"}class="current"{/if} href="/resources">资源天地</a></li>
         <li><a {if $currentTopBar == "community"}class="current"{/if} href="#">聚业务社区</a></li>
-        <li><a {if $currentTopBar == "static"}class="current"{/if} href="http://dev.jukeyuan.com/static?tpl=SIndex">服务中心</a></li>
+        <li><a {if $currentTopBar == "static"}class="current"{/if} href="/static?tpl=SIndex">服务中心</a></li>
     </ul>
 </div>

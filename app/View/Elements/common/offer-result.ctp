@@ -52,7 +52,7 @@
         </tbody>
     </table>
     {/foreach}
-    <div class="fanye fanyePN">
+    <div class="fanyea">
         {if $paginatorParams['prevPage']}
             <div class="dd_span">{$this->Paginator->prev('上一页', array(), null, null)}</div>
         {/if}

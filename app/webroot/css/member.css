@@ -328,7 +328,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .sjle ul li ul,.sjle dl dt ul{width:450px;float:right;}
 .sjle ul li.avatar img{max-width:350px;}
 .sjle ul .products{padding:0 5px;}
-.sjle ul .products label{text-align:left;margin:0 0 0 6px;}
+.sjle ul .products label{text-align:left;margin:0 0 0 6px;*width:107px;}
 .sjle ul .products label .inpCheckbox{margin-right:6px;float:none;vertical-align:text-bottom;}
 .sjle ul .keyuan li{width:225px;}
 .sjle ul .keyuan li label{width:206px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -541,13 +541,13 @@ a.btnSearch:hover{background-position:0 -122px;}
 .znxContent input,.znxContent label{float:left;}
 .znxContent .inpChk,.znxContent .inpChkAll{display:block;margin:3px 6px 0 0;}
 .znxContent .inpButton{margin:0 3px;}
-.znxContent .title{font-weight:bold;padding-right:20px;background:url(../img/sprites_jianli.gif) right -63px no-repeat;}
-.znxContent .titleH{background-position:right -79px;}
+.znxContent .title{font-weight:bold;padding-right:30px;background:url(../img/sprites_jianli.gif) right -64px no-repeat;}
+.znxContent .titleH{background-position:right -80px;}
 .znxContent .time{color:#666;margin:0 12px 0 0;}
 .znxContent .close{float:right;background:url(../img/binded.gif) 0 -50px no-repeat;display:block;width:15px;height:22px;}
 .znxContent .znxMesCon{border:1px #999 solid;background-color:#f0f0f0;padding:6px;margin:6px 0;clear:both;display:none;}
 .znxContent .znxMesCon a{color:#F60;}
-.pagesMag{height:32px;padding-left:6px;clear:both;}
+.pagesMag{height:28px;padding:4px 0 0 6px;clear:both;}
 .pagesMag .fanyeaFr{padding:0;margin-right:8px;}
 .znxContent .trader{font-size:14px;color:#f60;margin:0 12px 0 3px;font-weight:bold;}
 .znxContent .result{color:#F30;float:right;*float:left;padding-right:6px;}
@@ -634,7 +634,7 @@ a.btnSearch:hover{background-position:0 -122px;}
 .le ul li label {float: left;line-height: 24px;text-align: right;width: 80px;}
 .le ul li select {float: left;width: 100px;padding:1px 0;height:20px;}
 .zcl{height: 18px;line-height: 18px;padding:0 0 8px 115px;}
-.zcl .inpCheckbox{float: left;margin:2px 5px 0;*margin-top:0;}
+.zcl .inpCheckbox{float: left;margin:2px 5px 0;*margin:-2px 3px 0 0;}
 .protocol{color:#F00;}
 
 #zccon .ri{ width:305px; height:485px; float:left;border:1px #DDD solid;border-left:0px;position:relative;}
@@ -665,6 +665,8 @@ a.btnSearch:hover{background-position:0 -122px;}
 .renzheng p a{font-size:14px;color:#F30;}
 .renzheng p a:hover{color:#F00;text-decoration:underline;}
 .renzheng p strong{font-size:16px;color:#333;}
+.renzheng .pbut a{color:#FFF;}
+.renzheng .pbut a:hover{color:#FF0;text-decoration:none;}
 .RZfailure h2{color:#F30;}
 .RZfailure h2 span.reg-email-icon{background-position:0 -76px;}
 .renzheng .errorMsg{background:url(../img/binded.gif) 0 -24px no-repeat;padding:9px 0 3px 16px;color:#F00;position:static;}

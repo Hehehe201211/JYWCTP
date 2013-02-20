@@ -4,6 +4,10 @@ $(document).ready(function(){
     datepIniChange("#open","indate");
     datepIniChange("#close","indate");
     
+	$("body").append($(".jsxxxqB"));
+	$(".batch a").click(function(){
+		bgKuang("#jsxxxq1",".jsxxxqB .closeDiv");			
+	});	
     $('#category').change(function(){
         $('#sub_category').find('option:gt(0)').remove();
         if ($(this).val() != "") {
@@ -126,6 +130,7 @@ $(document).ready(function(){
       <li>3.兼职发布成功</li>
     </ul>
       <div class="sjle" style="min-height:900px;">
+	    <div class="batch"><a href="javascript:;">批量发布</a></div>
         <form method="post" action="/parttimes/check" id="parttimeForm">
           <dl>
             <dt>
@@ -410,5 +415,16 @@ $(document).ready(function(){
         <div class="clearfix"></div>
           <a class="zclan zclan4" href="javascript:void(0)" id="check">提交</a>
         </form>
+      </div>
+    </div>
+	<div class="jsxxxq jsxxxqB" id="jsxxxq1" style="width:480px;"><a href="#" class="closeDiv">&nbsp;</a>      
+      <div class="sjle" style="overflow:hidden;">
+        <dl>
+          <dt><label><font class="facexh">*</font>兼职模板文件下载：</label><a href="#" class="inp" style="margin-left:0;">点击下载</a></dt>
+          <dt><label><font class="facexh">*</font>上传兼职模板文件：</label><input type="file" /></dt>
+        </dl>
+      </div>
+      <div class="divBtnContainer" style="width:200px;">
+      <a href="javascript:alert('模板文件上传成功。');var a=$('.jsxxxqB .closeDiv').click();" class="zclan zclan7">上传</a><a href="javascript:;" onclick="$('.jsxxxqB .closeDiv').click()" class="zclan zclan7">取消</a>
       </div>
     </div>

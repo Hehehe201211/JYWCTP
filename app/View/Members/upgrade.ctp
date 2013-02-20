@@ -182,8 +182,6 @@ $(document).ready(function(){
             <label><font class="facexh">*</font>业务范围：</label>
             <input type="text" name="business_scope" id="business_scope">
           </li>          
-        </ul>  
-        <ul>        
           <li>
             <label><font class="facexh">*</font>支付宝绑定：</label>
             <input type="text" name="pay_account" id="pay_account" onpaste="Emailstr(this)" onkeyup="Emailstr(this)">
@@ -208,7 +206,7 @@ $(document).ready(function(){
           <li>
             <label class="protocol" for="vehicle">
               <input type="checkbox" id="vehicle" name="vehicle" class="inpCheckbox">
-              我接受 <a href="/static?tpl=mianze">《聚业务服务协议（试行）》</a>
+              我接受 <a href="/static?tpl=mianze" target="_blank">《聚业务服务协议（试行）》</a>
             </label>
           </li>
           <li><a href="javascript:void(0)" class="zclan zclan4">提交</a></li>

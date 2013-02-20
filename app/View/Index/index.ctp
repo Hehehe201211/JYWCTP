@@ -184,7 +184,7 @@ $(document).ready(function(){
                       {if $information.Information.payment_type == 2}积分：{$information.Information.point}分{/if}
                       {if $information.Information.payment_type == 3}业务币：{$information.Information.price}元 积分：{$information.Information.point}分{/if}</p><p>/{$information.Information.created|date_format:"%Y-%m-%d"}</p><p>/{$provincial = $this->City->cityName({$information.Information.provincial})}
                       {$city = $this->City->cityName({$information.Information.city})}
-                      {if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/</p></a></li>                  
+                      {if $provincial != $city}{$provincial} {$city}{else}{$provincial}{/if}/</p></a></li>
               {/foreach}
           </ul>
         </div>
@@ -217,7 +217,7 @@ $(document).ready(function(){
                         <a href="javascript:void(0)" id="btnLogin" class="inp">登录</a>
                         <a href="/members/register" class="inp">免费注册</a>
                     </li>
-                    <li class="liForget"><a href="/account/forget">忘记密码？</a>&nbsp;&nbsp;</li>
+                    <li class="liForget"><a href="/forget">忘记密码？</a>&nbsp;&nbsp;</li>
                 </ul>
             </form>
             {else}

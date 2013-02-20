@@ -21,19 +21,18 @@ $(document).ready(function(){
         <li>2.信息确认</li>
         <li>3.升级成功</li>
       </ul>
-      <div class="sjle">
-      <div class="xq_zl_xbxq">
+      <div class="tableDetail">
       <form id="upgrade" action="" method="post" >
-        <table width="570">
-        <tbody><tr>
-            <td width="176" class="tdRight connection">真实姓名：</td>
-            <td width="382" class="tdLeft" colspan="3">{$this->data['name']}
+        <table width="100%">
+        <tr>
+            <th width="30%">真实姓名：</th>
+            <td width="70%" class="red">{$this->data['name']}
             <input type="hidden" id="name" name="name" value="{$this->data['name']}">
             </td>
           </tr>
            <tr>
-            <td class="tdRight">我的头像：</td>
-            <td class="tdLeft" colspan="3">
+            <th>我的头像：</th>
+            <td>
                 {if !empty($thumbnail)}
                 <img src="{$this->webroot}{$thumbnail}">
                 {else}
@@ -43,8 +42,8 @@ $(document).ready(function(){
             <input type="hidden" name="thumbnail" value="{$thumbnail}" />
           </tr>
           <tr>
-            <td class="tdRight">性别：</td>
-            <td class="tdLeft" colspan="3">
+            <th>性别：</th>
+            <td>
             {if $this->data['sex'] == 1}男
             {else}女
             {/if}
@@ -53,28 +52,28 @@ $(document).ready(function(){
           </tr>
           {if isset($this->data['birthday']) && !empty($this->data['birthday'])}
           <tr>
-            <td class="tdRight">生日：</td>
-            <td class="tdLeft" colspan="3">
+            <th>生日：</th>
+            <td>
             {$this->data['birthday']}
             <input type="hidden" name="birthday" value="{$this->data['birthday']}" />
             </td>
           </tr>
           {/if}
           <tr>
-            <td width="176" class="tdRight connection">手机号码：</td>
-            <td class="tdLeft" colspan="3">{$this->data['mobile']}
+            <th>手机号码：</th>
+            <td class="red">{$this->data['mobile']}
             <input type="hidden" name="mobile" id="mobile" value="{$this->data['mobile']}" />
             </td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">联系电话：</td>
-            <td class="tdLeft" colspan="3">{$this->data['telephone']}
+            <th>联系电话：</th>
+            <td>{$this->data['telephone']}
             <input type="hidden" name="telephone" id="telephone" value="{$this->data['telephone']}" />
             </td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">所在城市：</td>
-            <td class="tdLeft" colspan="3">
+            <th>所在城市：</th>
+            <td>
             {$provincial = $this->City->cityName($this->data['provincial'])}
             {$city = $this->City->cityName($this->data['city'])}
             {if $provincial == $city}
@@ -87,20 +86,20 @@ $(document).ready(function(){
 			</td>
           </tr>
           <tr>
-            <td width="176" class="tdRight">公司名称：</td>
-            <td class="tdLeft" colspan="3">{$this->data['company']}
+            <th>公司名称：</th>
+            <td>{$this->data['company']}
             <input type="hidden" name="company" id="company" value="{$this->data['company']}" />
             </td>
           </tr>
           <tr>
-            <td class="tdRight">从事行业：</td>
-            <td class="tdLeft" colspan="3">{$this->Category->getCategoryName($this->data['category'])}
+            <th>从事行业：</th>
+            <td>{$this->Category->getCategoryName($this->data['category'])}
             <input type="hidden" name="category" id="category" value="{$this->data['category']}">
             </td>
           </tr>
           <tr>
-            <td class="tdRight">提供产品或服务：</td>
-            <td class="tdLeft" colspan="3">
+            <th>提供产品或服务：</th>
+            <td>
             {foreach $this->data['service'] as $service}
             {$this->Category->getCategoryName($service)}
             <input type="hidden" name="service[]" value="{$service}">
@@ -108,24 +107,22 @@ $(document).ready(function(){
             </td>
           </tr>
           <tr>
-            <td class="tdRight">业务范围：</td>
-            <td class="tdLeft" colspan="3">{$this->data['business_scope']}
+            <th>业务范围：</th>
+            <td>{$this->data['business_scope']}
             <input type="hidden" name="business_scope" id="business_scope" value="{$this->data['business_scope']}">
             </td>
           </tr>
           <tr>
-            <td class="tdRight connection">支付宝账号：</td>
-            <td class="tdLeft " colspan="3">{$this->data['pay_account']}
+            <th>支付宝账号：</th>
+            <td class="red">{$this->data['pay_account']}
             <input type="hidden" name="pay_account" id="pay_account" value="{$this->data['pay_account']}" />
             </td>
           </tr>
           <input type="hidden" name="pay_password" value="{$this->data['pay_password']}" />
-        </tbody>
         </table>
         </form>
         </div>
-		<div class="divBtnContainer" style="width: 200px;">
+        <div class="divBtnContainer" style="width: 200px;">
         <a href="javascript:void(0)" id="upgradeBtn" class="zclan zclan7">升级</a><a href="javascript:void(0)" id="backBtn" class="zclan zclan7">上一步</a>
 		</div>
-      </div>
     </div>

@@ -108,7 +108,8 @@ class AppController extends Controller {
             'homes'         => array(),
             'resources'     => array('index', 'detail', 'listview', 'search'),
             'notices'       => array(),
-            'alipays'       => array('notify', 'callback')
+            'alipays'       => array('notify', 'callback'),
+            'forget'        => array()
         );
         $checkSession = true;
         $this->_memberInfo = $this->Session->read('memberInfo');
