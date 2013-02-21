@@ -196,32 +196,28 @@ $(document).ready(function(){
             <table width="593" cellspacing="0" cellpadding="0" border="0" class="con_2_table" style="margin:0 5px 6px;">
               <thead>
                 <tr class="con_2_tr con_2_xq_too">
-                  <th style="width:75px;" class="tr_td8">简历标题</th>
-                  <th class="tr_td1">期望从事行业</th>
-                  <th style="width:90px;" class="tr_td2">期望工作地点 </th>
-                  <th class="tr_td1">工作性质</th>
-                  <th style="width:90px;" class="tr_td2">发布时间 </th>
-                  <th class="tr_td8">选择操作</th>
-                </tr>
+                    <th width="90">简历标题</th>
+                    <th width="131">期望从事行业</th>
+                    <th width="144">期望工作地点 </th>
+                    <th width="56">工作性质</th>
+                    <th width="62">发布时间 </th>
+                    <th width="110">选择操作</th>
+                  </tr>
               </thead>
               {foreach $resumes as $resume}
               <tr class="con_2_tr">
-                <th><a target="_blank" href="/resumes/preview?id={$resume.Resume.id}">{$resume.Resume.title}</a></th>
+                <td><a target="_blank" href="/resumes/detail?id={$resume.Resume.id}">{$resume.Resume.title}</a></td>
                 <td>
-                    <a target="_blank" href="/resumes/preview?id={$resume.Resume.id}">
                     {$categories = explode(',', $resume.Resume.category)}
                     {foreach $categories as $id}
                         {$this->Category->getCategoryName($id)}
                     {/foreach}
-                    </a>
                 </td>
                 <td>
-                <a target="_blank" href="/resumes/preview?id={$resume.Resume.id}">
-                {$cities = explode(',', $resume.Resume.city)}
+                 {$cities = explode(',', $resume.Resume.city)}
                 {foreach $cities as $id}
                     {$this->City->cityName($id)}
                 {/foreach}
-                </a>
                 </td>
                 <td>{$resume.Resume.nature}</td>
                 <td>{$resume.Resume.created|date_format:"%Y-%m-%d"}</td>
@@ -325,7 +321,7 @@ $(document).ready(function(){
               </select>
             </dt>
             <dt>
-              <label><font class="facexh">*</font>现居住地：</label>
+              <label><font class="facexh">*</font>现居住地（检索）：</label>
               <select name="provincial_now" id="provincial_now">
                 <option value="">请选择省份</option>
                 {foreach $this->City->parentCityList() as $city}

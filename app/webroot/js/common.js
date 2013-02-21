@@ -9,12 +9,32 @@ $(document).ready(function(){
 		else  $("#gototop").fadeIn("fast");
 		if(NaV=="msie6") ie6GTT();
 	});
-	$("body").css("min-height",$(window).height()+1);	
-	$("input:button,input:submit,input:reset").addClass("inpButton");
-	$("input:checkbox").addClass("inpCheckbox");
-	$("input:radio").addClass("inpRadio");
-	$("input:text,input:password").addClass("inpTextBox");
+	
+	$("input:button,input:submit,input:reset").addClass("inpButton");	
+	$("input:checkbox,input:radio").addClass("inpChkRao");
 	$("input:file").addClass("inpFile");	
+	$("input:text,input:password").addClass("inpTextbox");
+	$("input:checkbox").addClass("inpCheckbox");
+	$("input:radio").addClass("inpRadio");	
+	$("input:text,input:password").addClass("inpTextBox");
+	var tableTrH=".posInfo tbody tr:odd,.tableJobInfo tbody tr:odd";
+	$(tableTrH).addClass("even");
+	var tClass=window.setInterval(function(){
+		$(tableTrH).addClass("even");
+		$("input:button,input:submit,input:reset").addClass("inpButton");	
+		$("input:checkbox,input:radio").addClass("inpChkRao");
+		$("input:file").addClass("inpFile");	
+		$("input:text,input:password").addClass("inpTextbox");
+		$("input:checkbox").addClass("inpCheckbox");
+		$("input:radio").addClass("inpRadio");	
+		$("input:text,input:password").addClass("inpTextBox");
+	},1000);
+		
+	$(".con_2_tr a").hover(function(){
+		$(this).parent().parent().addClass("hover");
+	},function(){
+		$(this).parent().parent().removeClass("hover");
+	});	
 	
 	$(".browserTip .close").live("click",function(){
 		 $(this).parents(".browserTip").remove();
@@ -26,17 +46,7 @@ $(document).ready(function(){
 	$(".inpKeyword ").blur(function(){
 		if ($(this).val()=="") $(this).val(keyHP);
 	});
-	
-	var tableTrH=".posInfo tbody tr:odd,.tableJobInfo tbody tr:odd";
-	$(tableTrH).addClass("even");
-	var tClass=window.setInterval(function(){
-		$(tableTrH).addClass("even");
-		$("input:button,input:submit,input:reset").addClass("inpButton");
-		$("input:checkbox").addClass("inpCheckbox");
-		$("input:radio").addClass("inpRadio");
-		$("input:text,input:password").addClass("inpTextBox");			
-	},1000);
-	
+		
 	var dhHeight=$("#daohang").height()+14+"px";
 	$("#siteNavi").toggle(function(e){
 		e.preventDefault();

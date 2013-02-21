@@ -111,15 +111,19 @@ textarea{letter-spacing:1px;}
 #loginWarning .question li p a:hover{color:#F00;text-decoration:underline;}
 #loginWarning .arrow{background:url(../img/arrowR.gif) 0 center no-repeat;position:absolute;width:18px;height:33px;top:40%;right:0;}
 
-.con_2_table a,.conTable3 a{display:block;overflow:hidden;color:#333;font-weight:bold;}
+/*.con_2_table a,.conTable3 a{font-weight:bold;}*/
+.con_2_table a,.conTable3 a{color:#000;display:block}
+.con_2_table a:visited,.conTable3 a:visited{color:#006;}
+.con_2_table a:hover,.conTable3 a:hover{color:#F30;}
 .con_2_tr{height:37px;text-align:center;}
+.con_2_tr.hover a{color:#F30;}
 .con_2_tr .new{background:url(../img/new149.gif) left 0 no-repeat;text-indent:28px;background-color:auto;}
 .con_2_xq_too{background:#FCBD60 !important;height:37px;overflow: hidden;width: 596px;}
 tbody .btnSingle{width:56px;}
 tbody .btnSingle a{display:block;width:50px;margin:0 3px;height:21px;background:url(../img/btnbgs.gif) 0 -102px;font-weight:normal !important;}
 tbody .btnSingle a:hover{background-position:-50px -102px;}
-.xiushan_anniu a,.contacts-list .btn a{background:url("../img/btnbgs.gif") no-repeat 0 -102px;color:#333;float:left;height:21px;margin-left:3px;width:50px;font-weight:normal !important;}
-.xiushan_anniu a:hover,.contacts-list .btn a:hover{color: #F7951E;background-position: -50px -102px;}
+.xiushan_anniu a,.contacts-list .btn a{background:url("../img/btnbgs.gif") no-repeat 0 -102px;color:#333 !important;float:left;height:21px;margin-left:3px;width:50px;font-weight:normal !important;}
+.xiushan_anniu a:hover,.contacts-list .btn a:hover{background-position: -50px -102px;color:#F30 !important;}
 .xiushan_anniu1 a{margin:0 auto;float:none;}
 .contacts-list .btn a{margin:0 4px 0 0;text-align:center;}
 

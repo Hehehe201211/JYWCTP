@@ -568,8 +568,6 @@ a.btnSearch:hover{background-position:0 -122px;}
 .conResume div .preview{margin:0 auto 6px;background:#FFF;border-color:#333}
 .conResume div .preview .con_2_xq_too{background:#FEE !important;}
 .conResume div .xiushan_anniu a{margin:0 -3px 0 6px}
-.conResume div .con_2_tr:hover a{color:#333;}
-.conResume div .con_2_tr:hover a:hover{color:#F40;}
 .conResume h2{text-align:center;}
 .conResume h2 a{font:bold 14px/32px "";}
 
@@ -678,8 +676,9 @@ a.btnSearch:hover{background-position:0 -122px;}
 .porleft{margin:0 auto;padding:30px 10px 0 0;width:500px;overflow:hidden;}
 .porleft p {padding:0 0 12px 46px;width:686px;font-size:14px;height:32px;}
 .porleft p a{display:block;float:left;font-size: 14px;line-height:30px;margin:0 3px;}
-.porleft p img{height:24px;}
+.porleft p img{height:23px;vertical-align:text-bottom;margin-right:6px;}
 .porleft p label.zhmm{color:#666;margin-right:10px;font-size:14px;text-align:right;}
+.porleft p .inpRadio{margin-right:6px;}
 .porleft .forgetInp{margin-right:3px;padding:3px;width:200px;font-size:14px;letter-spacing:1px;}
 .porleft .inw2{width:80px;display: block;float: left;margin:0 6px 0 0;width: 80px;}
 .butt{background: url(../img/reg-btn.gif) no-repeat right top;display: inline-block;font-weight: 700;height: 34px;padding-right: 1px;margin-left:80px;}
@@ -819,7 +818,6 @@ table.previewTH td.tltH{height:22px;}
 .sjleSafety ul li .inpRadio{display:inline;width:auto;}
 .sjleSafety .corInpRadio{width:80px;padding-left:200px;line-height:18px;}
 .sjleSafety .inp{margin-left:200px}
-.con_2_table td a{font-weight:bold;}
 .con_2_xq_tofu a{font-weight:normal !important;}
 
 /*jQuery Style*/

@@ -48,11 +48,6 @@ $(document).ready(function(){
 		$(".ddAddFri").toggle("fast");
 	});
 	
-	//是否看过
-	$(".con_2_tr th a,.con_2_tr td a").live("click",function(){
-		$(this).parent().parent().find("a").css("font-weight","normal");
-	});
-	
 	//会员页面，左半部分，导航提示，如果是初级会员提示升级
 	$('a.elementary').click(function(){
 		if (confirm("您目前是初级会员，无法使用此项功能，是否免费升级为高级会员？")) {

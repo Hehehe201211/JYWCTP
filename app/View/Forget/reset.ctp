@@ -9,15 +9,19 @@ $(document).ready(function(){
     });
     
     $('.inpButton').click(function(e){
+		$("#send").find(".errorMsg").remove();
         var error = false;
         if ($('#password').val() == "") {
             error = true;
+			$('#password').after('<span class="errorMsg">请输入密码</span>');
         }
         if ($('#password').val() != $('#rep_password').val()) {
             error = true;
+			$('#rep_password').after('<span class="errorMsg">两次密码输入不一致</span>');
         }
         if ($('#checkNum').val() == "") {
             error = true;
+			$('#getCheckNum').after('<span class="errorMsg">请输入验证码</span>');
         }
         if (!error) {
             $.ajax({
@@ -26,17 +30,11 @@ $(document).ready(function(){
                   async  : false,
                   success : function(data)
                   {
-                      if (data == $("#checkNum").val().toUpperCase()) {
-                          $("#checkNum").parent().find('.errorMsg').remove();
-                          
-                      } else {
-                        error = true;
-                        if ($("#checkNum").parent().find('.errorMsg').length == 0) {
-                            $("#getCheckNum").after('<span class="errorMsg">验证码不一致</span>');
-                        } else {
-                            $("#checkNum").parent().find('.errorMsg').html('验证码不一致');
-                        }
-                    }
+					  alert("data:"+data);
+                      if (data != $("#checkNum").val().toUpperCase()) {
+						  error = true;
+                          $("#getCheckNum").after('<span class="errorMsg">验证码输入错误</span>');
+					 }
                 }
             });
         }
@@ -54,20 +52,20 @@ $(document).ready(function(){
         <p>请填写以下内容</p>
         <p>
             <label class="zhmm">新密码：</label>
-            <input type="password" name="password" id="password" class="forgetInp inpTextbox inpTextBox" value="">
+            <input type="password" name="password" id="password" class="forgetInp inpTextBox" value="">
         </p>
         <p>
             <label class="zhmm">重复新密码：</label>
-            <input type="password" name="rep_password" id="rep_password" class="forgetInp inpTextbox inpTextBox" value="">
+            <input type="password" name="rep_password" id="rep_password" class="forgetInp inpTextBox" value="">
         </p>
         <p>请输入图片中的验证码</p>
         <p>
-            <input type="text" name="checkNum" class="forgetInp inw2 inpTextbox inpTextBox" maxlength="5" size="2">
+            <input type="text" name="checkNum" id="checkNum" class="forgetInp inw2 inpTextBox" onkeyup="letterNum(this)" onpaste="letterNum(this)">
             <a id="getCheckNum" href="javascript:void(0)">看不清？</a>
         </p>
         <p>
             <label class="butt" id="butt">
-                <input type="submit" class="fgbtn inpButton" value="提交">
+                <input type="button" class="fgbtn inpButton" value="提交">
             </label>
         </p>
     </form>

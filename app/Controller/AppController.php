@@ -145,7 +145,8 @@ class AppController extends Controller {
                         'friends'       => array(),
                         'sms'           => array(),
                         'alipays'       => array(),
-                        'payment'       => array()
+                        'payment'       => array(),
+                        'resources'     => array()
                     );
                 } else {
                     $allow = array(

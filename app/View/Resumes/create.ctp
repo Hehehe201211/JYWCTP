@@ -5,7 +5,7 @@ $(document).ready(function(){
 	datepIniChange("#eduEnd","Eindate");
 	datepIniChange("#workBegin","Eindate");
 	datepIniChange("#workEnd","Eindate");
-	datepIniChange("#workTime","Eindate");
+	//datepIniChange("#workTime","Eindate");
     
     $(".divExpect .addOpts").click(function(){
 	    $(this).parent().find('.errorMsg').remove();
@@ -298,23 +298,19 @@ $(document).ready(function(){
           </dt>
         </dl>      
         <div class="biaotit">求职方向</div>
-        <dl>
-          <dt>
-            <label><font class="facexh">*</font>自我评价：</label>
-            <textarea cols="45" rows="5" id="evaluation" name="evaluation">{if isset($this->data['evaluation'])}{$this->data['evaluation']}{/if}</textarea>
-          </dt>
+        <dl>       
+		  <dt>
+            <label><font class="facexh">*</font>意向职位：</label>
+            <input type="text" id="intention" name="intention" class="contact" value="{if isset($this->data['intention'])}{$this->data['intention']}{/if}" />
+            &nbsp;（限20个字） </dt>   
           <dt>
             <label><font class="facexh">*</font>期望工作性质：</label>
             <div class="divSex">              
               <label><input type="radio" name="nature" value="全职" class="inpRadio" {if isset($this->data['nature']) && $this->data['nature'] == "全职"} checked="checked"{elseif !isset($this->data['nature'])}checked="checked"{/if}/>全职</label>              
-              <label><input type="radio" name="nature" value="兼职" {if isset($this->data['nature']) && $this->data['nature'] == "兼职"} checked="checked"{/if} class="inpRadio"/>兼职</label>             
+              <label><input type="radio" name="nature" value="兼职" {if isset($this->data['nature']) && $this->data['nature'] == "兼职"} checked="checked"{/if} class="inpRadio"/>兼职</label>         
               <label> <input type="radio" name="nature" value="不限" {if isset($this->data['nature']) && $this->data['nature'] == "不限"} checked="checked"{/if} class="inpRadio"/>不限</label>
             </div>
-          </dt>
-          <dt>
-            <label><font class="facexh">*</font>意向职位：</label>
-            <input type="text" id="intention" name="intention" class="contact" value="{if isset($this->data['intention'])}{$this->data['intention']}{/if}" />
-            &nbsp;（限20个字） </dt>
+          </dt>          
           <dt>
             <label><font class="facexh">*</font>期望从事行业：</label>
             <div class="divExpect">
@@ -376,7 +372,11 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>上岗时间：</label>
-            <input type="text" name="start" id="workTime" style="width:85px;" value="{if isset($this->data['start'])}{$this->data['start']}{/if}" readonly="readonly"/>
+            <input type="text" name="start" id="workTime" value="{if isset($this->data['start'])}{$this->data['start']}{/if}"/>
+          </dt>
+          <dt>
+            <label><font class="facexh">*</font>自我评价：</label>
+            <textarea cols="45" rows="5" id="evaluation" name="evaluation">{if isset($this->data['evaluation'])}{$this->data['evaluation']}{/if}</textarea>
           </dt>
         </dl>
         {if isset($this->request->query['fid'])}

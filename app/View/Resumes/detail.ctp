@@ -7,8 +7,11 @@ $(document).ready(function(){
     datepIniChange("#eduEnd","EPbirth");    
     datepIniChange("#workBegin","EPbirth");
     datepIniChange("#workEnd","EPbirth");    
-    datepIniChange("#workTime","EPbirth");
-    
+    //datepIniChange("#workTime","EPbirth");
+    var errorMsg = '<span class="errorMsg">请输入此项目</span>';
+	var dateEMsg = '<span class="errorMsg">请正确输入时间</span>';
+	var optEMsg = '<span class="errorMsg">请选择期望选项</span>';
+	
     $(".eduEdit").click(function(){
         bgKuang("#jsxxxqE",".jsxxxqB .closeDiv");
     });
@@ -19,24 +22,49 @@ $(document).ready(function(){
         bgKuang("#jsxxxqJ",".jsxxxqB .closeDiv");
     });
     $(".divExpect .addOpts").click(function(){
-      var selOpts=$(this).parent().parent().find(".selOpts option:selected");
-      var seledOpts=$(this).parent().parent().find(".seledOpts");      
-      for (i=0;i<selOpts.length;i++) {
-          if (seledOpts.find("option").length==0)  seledOpts.append(selOpts.eq(i).clone());
-          else {
-              for (j=0;j<seledOpts.find("option").length;j++) {
-                  if (selOpts.eq(i).val()==seledOpts.find("option").eq(j).val()) break;
-                  else if (j==(seledOpts.find("option").length-1)) seledOpts.append(selOpts.eq(i).clone());
-              }
-          }
-      }
-  });
-  
+	    $(this).parent().find('.errorMsg').remove();
+        var selOpts=$(this).parent().parent().find(".selOpts option:selected");
+        var seledOpts=$(this).parent().parent().find(".seledOpts");
+        for (i=0;i<selOpts.length;i++) {
+            if (seledOpts.find("option").length==0) {
+                seledOpts.append(selOpts.eq(i).clone());
+            } else if (seledOpts.find("option").length>2) {
+				alert("你选择已超过3项。");
+				break;
+			} else {
+                for (j=0;j<seledOpts.find("option").length;j++) {
+                    if (selOpts.eq(i).val()==seledOpts.find("option").eq(j).val()){
+                        break;
+                    } else if (j==(seledOpts.find("option").length-1)) {
+                        seledOpts.append(selOpts.eq(i).clone());
+                    }
+                }
+            }
+        }
+    });  
   $(".divExpect .removeOpts").click(function(){
       $(this).parent().parent().find(".seledOpts option:selected").remove();
   });
+  $('#provincial').change(function(){
+        if ($(this).val() != "") {
+            $.ajax({
+                'type' : 'Get',
+                'url'  : '/informations/getCityList/' + $(this).val(),
+                'success':function(data){
+                    var dataobj=eval("("+data+")");
+                    $('#city_id').find('option').remove();
+                    var optionStr = "";
+                    $.each(dataobj, function(idx, item){
+                        optionStr += '<option value="'+item.City.id+'">' + item.City.name + '</option>'
+                    });
+                    $('#city_id').append(optionStr);
+                }
+            })
+        }
+    });
   
     $('#editEducation').click(function(){
+		$(this).parent().find(".errorMsg").remove();	
         if (checkEducation()) {
             $.ajax({
                 url : '/resumes/editEducation',
@@ -55,6 +83,7 @@ $(document).ready(function(){
         }
     });
     $('#editWork').click(function(){
+		$(this).parent().find(".errorMsg").remove();	
         if (checkWork()) {
             $.ajax({
                 url : '/resumes/editWork',
@@ -73,6 +102,7 @@ $(document).ready(function(){
         }
     });
     $('#editResume').click(function(){
+		$(this).parent().find(".errorMsg").remove();	
         if (checkResume()) {
         var category = [];
         var city = [];
@@ -101,22 +131,66 @@ $(document).ready(function(){
         }
     });
     //如果没有错则返回true
-    function checkEducation()
-    {
-        
-        return true;
+    function checkEducation() {		
+		var error=0;
+		var checkTarget = ['school', 'discipline','educated'];
+		$.each(checkTarget, function(target){
+			if($('#' + this).val() == "") {
+				$('#' + this).parent().append(errorMsg);
+				error=1;
+			} 
+		});
+		if($('#eduBegin').val() == "" || $('#eduEnd').val() == "") {
+			$('#eduBegin').parent().parent().append(dateEMsg);
+			error=1;
+		} else if($('#eduBegin').val() != "" && $('#eduEnd').val() != "") {			
+			if ($('#eduBegin').val() > $('#eduEnd').val()) {
+			     $('#eduBegin').parent().parent().append(dateEMsg);
+                 error=1;
+			}
+		} 				
+		if (!error) return true;
     }
     //如果没有错则返回true
-    function checkWork()
-    {
-        
-        return true;
+    function checkWork() {
+        var error=0;
+		var checkTarget = ['company', 'department','post','service','responsiblly','work_category','salary','reason'];
+		$.each(checkTarget, function(target){
+			if($('#' + this).val() == "") {
+				$('#' + this).parent().append(errorMsg);
+				error=1;
+			} 
+		});
+		if($('#workBegin').val() == "" || $('#workEnd').val() == "") {
+			$('#workBegin').parent().parent().append(dateEMsg);
+			error=1;
+		} else if($('#workBegin').val() != "" && $('#workEnd').val() != "") {			
+			if ($('#workBegin').val() > $('#workEnd').val()) {
+				 $('#workBegin').parent().parent().append(dateEMsg);
+				 error=1;
+			}
+		} 
+        if (!error) return true;
     }
     //如果没有错则返回true
-    function checkResume()
-    {
-        
-        return true;
+    function checkResume() {
+        var error=0;
+		var checkTarget = ['evaluation', 'intention','rsalary','workTime'];
+		$.each(checkTarget, function(target){
+			if($('#' + this).val() == "") {
+				$('#' + this).parent().append(errorMsg);
+				error=1;
+			} 
+		});
+		if($("#category_contain option").length==0) {
+			$('#category_contain').prev().append(optEMsg);
+			error=1;
+		} 	
+		if($("#city_contain option").length==0) {
+			$('#city_contain').prev().append(optEMsg);
+			error=1;
+		} 	
+        if (!error) return true;
     }
   
 });
@@ -197,22 +271,22 @@ $(document).ready(function(){
           <td width="25%">{$resumeEducation.ResumeEducation.begin|date_format:"%Y-%m-%d"} - {$resumeEducation.ResumeEducation.end|date_format:"%Y-%m-%d"}</td>
           <td width="27%">{$resumeEducation.ResumeEducation.school}</td>
           <td width="17%">{$resumeEducation.ResumeEducation.discipline}</td>
-          <td width="15%">
+          <td width="14%">
           {$educate = Configure::read('Fulltime.educated')}
           {$educate[$resumeEducation.ResumeEducation.educated]}
           </td>
-          <td width="15%">{$resumeEducation.ResumeEducation.school_type}</td>
+          <td width="16%">{$resumeEducation.ResumeEducation.school_type}</td>
         </tr>
           </table>
           <div class="biaotit">工作经历<a href="javascript:;" class="workEdit">编辑</a></div>
           <table class="con_2_table preview" border="1" cellspacing="0" cellpadding="0" width="593">
 <tr>
-          <td class="tlt tltC">就职起讫时间</td>
-          <td class="tlt tltC">单位名称</td>
-          <td class="tlt tltC">单位行业</td>
-          <td class="tlt tltC">部门</td>
-          <td class="tlt tltC">职位</td>
-        </tr>
+              <td width="19%" class="tlt tltC">就职起讫时间</td>
+              <td width="26%" class="tlt tltC">单位名称</td>
+              <td width="18%" class="tlt tltC">单位行业</td>
+              <td width="18%" class="tlt tltC">部门</td>
+              <td width="19%" class="tlt tltC">职位</td>
+            </tr>
         <tr>
           <td>{$resumeWork.ResumeWork.begin|date_format:"%Y-%m-%d"} - {$resumeWork.ResumeWork.end|date_format:"%Y-%m-%d"}</td>
           <td>{$resumeWork.ResumeWork.company}</td>
@@ -364,7 +438,7 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>单位名称：</label>
-            <input type="text" name="company" value="{$resumeWork.ResumeWork.company}" class="contact" />
+            <input type="text" name="company" id="company" value="{$resumeWork.ResumeWork.company}"/>
           </dt>
           <dt class="productKinds">
             <label>单位行业：</label>
@@ -377,26 +451,26 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>部门：</label>
-            <input type="text" name="department" value="{$resumeWork.ResumeWork.department}" class="contact" />
+            <input type="text" name="department" id="department" value="{$resumeWork.ResumeWork.department}"/>
           </dt>
           <dt>
             <label><font class="facexh">*</font>职位：</label>
-            <input type="text" name="post" value="{$resumeWork.ResumeWork.post}" class="contact" />
+            <input type="text" name="post" id="post" value="{$resumeWork.ResumeWork.post}"/>
           </dt>
           <dt>
             <label><font class="facexh">*</font>从事产品及服务：</label>
-            <input type="text" name="service" value="{$resumeWork.ResumeWork.service}" class="contact" />
+            <input type="text" name="service" id="service" value="{$resumeWork.ResumeWork.service}"/>
           </dt>
           <dt>
             <label><font class="facexh">*</font>工作职责：</label>
-            <textarea cols="45" rows="5" name="responsiblly">{$resumeWork.ResumeWork.responsiblly}</textarea>
+            <textarea cols="45" rows="5" name="responsiblly" id="responsiblly">{$resumeWork.ResumeWork.responsiblly}</textarea>
           </dt>
           <dt>
-            <label>职位待遇：</label>
-            <input type="text" name="salary" value="{$resumeWork.ResumeWork.salary}" class="contact" />
+            <label><font class="facexh">*</font>职位待遇：</label>
+            <input type="text" name="salary" id="salary" value="{$resumeWork.ResumeWork.salary}"/>
           </dt>
           <dt>
-            <label>离职原因：</label>
+            <label><font class="facexh">*</font>离职原因：</label>
             <textarea cols="45" rows="5" name="reason" id="reason">{$resumeWork.ResumeWork.reason}</textarea>
           </dt>
         </dl>   
@@ -409,11 +483,7 @@ $(document).ready(function(){
       <div class="sjle">
       <form id="resumeForm">
       <input type="hidden" name="id" value="{$this->request->query['id']}" />
-        <dl>
-          <dt>
-            <label><font class="facexh">*</font>自我评价：</label>
-            <textarea cols="45" rows="5" name="evaluation">{$resume.Resume.evaluation}</textarea>
-          </dt>
+        <dl>          
           <dt>
             <label><font class="facexh">*</font>期望工作性质：</label>
             <div class="divSex">              
@@ -424,7 +494,7 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>意向职位：</label>
-            <input type="text" name="intention" class="contact" value="{$resume.Resume.intention}" />
+            <input type="text" name="intention" id="intention" value="{$resume.Resume.intention}" />
             &nbsp;（限20个字） </dt>
           <dt>
             <label><font class="facexh">*</font>期望从事行业：</label>
@@ -479,15 +549,19 @@ $(document).ready(function(){
           </dt>
           <dt>
             <label><font class="facexh">*</font>期望待遇：</label>
-            <input type="text" name="salary" class="contact" value="{$resume.Resume.salary}" />
+            <input type="text" name="salary" name="rsalary" value="{$resume.Resume.salary}" />
           </dt>
           <dt>
-            <label>上岗时间：</label>
+            <label><font class="facexh">*</font>上岗时间：</label>
             <ul class="validity">
               <li>
-                <input type="text" name="start" id="workTime" value="{$resume.Resume.start|date_format:"%Y-%m-%d"}" readonly="readonly"/>
+                <input type="text" name="start" id="workTime" value="{$resume.Resume.start}" style="width:218px;"/>
               </li>
             </ul>
+          </dt>
+		  <dt>
+            <label><font class="facexh">*</font>自我评价：</label>
+            <textarea cols="45" rows="5" name="evaluation" id="evaluation">{$resume.Resume.evaluation}</textarea>
           </dt>
         </dl>
          <a class="zclan zclan4" href="javascript:void(0);" id="editResume">修改</a>

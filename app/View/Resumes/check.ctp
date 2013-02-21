@@ -82,6 +82,12 @@ $(document).ready(function(){
         <tr>
           <td colspan="5" class="tlt tltH"> 教&nbsp;育&nbsp;经&nbsp;历</td>
         </tr>
+		<tr>
+          <td class="tlt tltC">就学起讫时间</td>
+          <td class="tlt tltC">就读院校名称</td>
+          <td class="tlt tltC">专业类别</td>
+          <td class="tlt tltC">专业学历</td>
+          <td class="tlt tltC">就学形式</td>
         <tr>
           <td width="19%">{$this->data['edu_begin']|date_format:"%Y.%m"} - {$this->data['edu_end']|date_format:"%Y.%m"}</td>
           <td width="23%">{$this->data['school']}</td>
@@ -95,18 +101,29 @@ $(document).ready(function(){
         <tr>
           <td colspan="5" class="tlt tltH">工&nbsp;作&nbsp;经&nbsp;历</td>
         </tr>
+		<tr>
+              <td width="19%" class="tlt tltC">就职起讫时间</td>
+              <td width="26%" class="tlt tltC">单位名称</td>
+              <td width="18%" class="tlt tltC">单位行业</td>
+              <td width="18%" class="tlt tltC">部门</td>
+              <td width="19%" class="tlt tltC">职位</td>
+            </tr>
         <tr>
           <td>{$this->data['work_begin']|date_format:"%Y.%m"} - {$this->data['work_end']|date_format:"%Y.%m"}</td>
           <td>{$this->data['company']}</td>
           <td>{$this->Category->getCategoryName($this->data['work_category'])}</td>
           <td>{$this->data['department']}</td>
           <td>{$this->data['post']}</td>
-        </tr>
+        </tr>        
         <tr>
-			<td colspan="3"><strong>从事产品或服务：</strong>{$this->data['service']}</td>
-            <td colspan="2"><strong>职位待遇：</strong>{$this->data['wrok_salary']}</td>
+            <td class="tlt">从事产品或服务：</td>
+            <td colspan="4">{$this->data['service']}</td>
         </tr>
-        <tr>
+		<tr>
+            <td class="tlt">职位待遇：</td>
+            <td colspan="4">{$this->data['wrok_salary']}</td>
+        </tr>
+		<tr>
             <td class="tlt">工作职责：</td>
             <td colspan="4">{$this->data['responsiblly']}</td>
         </tr>

@@ -364,21 +364,32 @@ class MembersController extends AppController
     {
         $facethumbnail = '';
         if (isset($_FILES['face'])) {
-            $filename = $this->_memberInfo['Member']['id'] . '_face_thumbnail';
-            $path = TMP;
-            $result = $this->Upload->upload($_FILES['face'], $path, $filename, "image");
-            if ($result['result'] == 'OK') {
-                $path = "thumbnail/" . 
-                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
-                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
-                if (!file_exists($path)) {
-                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
-                    try {
-                        exec($command);
-                    } catch (Exception $e) {
-                        $this->log($e->getMessage());
-                    }
+//            $filename = $this->_memberInfo['Member']['id'] . '_face_thumbnail';
+//            $path = TMP;
+            $path = "thumbnail/" . 
+                substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+                substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+            if (!file_exists($path)) {
+                $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+                try {
+                    exec($command);
+                } catch (Exception $e) {
+                    $this->log($e->getMessage());
                 }
+            }
+            $result = $this->Upload->upload($_FILES['face'], $path, 'license', "image");
+            if ($result['result'] == 'OK') {
+//                $path = "thumbnail/" . 
+//                        substr(md5(((int)($this->_memberInfo['Member']['id'] / 30000) + 1)), 0, 10) . "/" . 
+//                        substr(md5($this->_memberInfo['Member']['id']), 0, 10);
+//                if (!file_exists($path)) {
+//                    $command = "mkdir -p 0755 " . Configure::read('Data.path') . $path;
+//                    try {
+//                        exec($command);
+//                    } catch (Exception $e) {
+//                        $this->log($e->getMessage());
+//                    }
+//                }
                 $srcParams = array(
                     'path' => $result['path'],
                     'name' => $result['name']
@@ -391,7 +402,9 @@ class MembersController extends AppController
                 );
                 if ($this->Thumbnail->resize($srcParams, $descParams)){
                     $facethumbnail = $path . "/face_thumbnail." .  $this->Upload->getExt($_FILES['face']);
-                    @unlink($result['path'] . '/' . $result['name']);
+                    if ($this->request->data['type'] == Configure::read('UserType.Personal')) {
+                        @unlink($result['path'] . '/' . $result['name']);
+                    }
                 }
             }
         }

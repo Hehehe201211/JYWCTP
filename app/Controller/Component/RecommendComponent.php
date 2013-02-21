@@ -13,9 +13,58 @@ class RecommendComponent extends Component
      * 
      * 推荐简历
      */
-    public function resume()
+    public function resume($members_id, $category_id, $city_id)
     {
-        
+        $mResume = ClassRegistry::init('Resume');
+        $conditions = array(
+            'category LIKE ' => "%" . $category_id . "%",
+            'city LIKE '     => "%" . $city_id . "%",
+        );
+        $conditionsSubQuery['receiver'] = $members_id;
+        $db = $mResume->getDataSource();
+        $subQuery = $db->buildStatement(
+            array(
+                'fields'     => array('resumes_id'),
+                'table'      => 'cooperations',
+                'alias'      => 'Cooperation',
+                'limit'      => null,
+                'offset'     => null,
+                'joins'      => array(),
+                'conditions' => $conditionsSubQuery,
+                'order'      => null,
+                'group'      => null
+            ),
+            $mResume
+        );
+        $subQuery = 'Resume.id NOT IN (' . $subQuery . ')';
+        $subQueryExpression = $db->expression($subQuery);
+        $conditions[] = $subQueryExpression;
+        $fields = array(
+            'Resume.id',
+            'ResumeBase.name',
+            ''
+        );
+        $joinWork = array(
+            'table' => 'resume_works',
+            'alias' => 'ResumeWork',
+            'type'  => 'inner',
+            'conditions' => 'ResumeWork.resumes_id = Resume.id'
+        );
+        $joinBase = array(
+            'table' => 'resume_bases',
+            'alias' => 'ResumeBase',
+            'type'  => 'inner',
+            'conditions' => 'ResumeBase.members_id = Resume.members_id'
+        );
+        $params = array(
+            'fields'        => $fields,
+            'conditions'    => $conditions,
+            'limit'         => 5,
+            'joins'         => array($joinWork, $joinBase),
+            'order'         => array('created DESC')
+        );
+        $recommendResumes = $mPartTime->find('all', $params);
+        $this->controller->set('recommendResumes', $recommendResumes);
     }
     /**
      * 

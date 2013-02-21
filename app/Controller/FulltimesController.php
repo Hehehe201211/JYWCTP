@@ -105,6 +105,16 @@ class FulltimesController extends AppController
 	        );
 	        $this->_appendCss($css);
             $this->_appendJs($js);
+            $join = array(
+                'table' => 'company_attributes',
+                'alias' => 'CompanyAttribute',
+                'type'  => 'inner',
+                'conditions' => 'CompanyAttribute.members_id = Fulltime.members_id'
+            );
+            $conditions[] = array('CompanyAttribute.agree_normal' => 1);
+            $conditions[] = array('CompanyAttribute.agree_fulltime' => 1);
+            $conditions[] = array('Fulltime.delete_flg' => 0);
+            $this->Ft->fulltimeList($conditions, array($join));
             $this->Ft->fulltimeList();
         } else {
             //检索条件
@@ -162,7 +172,16 @@ class FulltimesController extends AppController
                     $conditions['Fulltime.salary between ? and ?'] = array($min, $max);
                 }
             }
-            $this->Ft->fulltimeList($conditions);
+            $join = array(
+                'table' => 'company_attributes',
+                'alias' => 'CompanyAttribute',
+                'type'  => 'inner',
+                'conditions' => 'CompanyAttribute.members_id = Fulltime.members_id'
+            );
+            $conditions[] = array('CompanyAttribute.agree_normal' => 1);
+            $conditions[] = array('CompanyAttribute.agree_fulltime' => 1);
+            $conditions[] = array('Fulltime.delete_flg' => 0);
+            $this->Ft->fulltimeList($conditions, array($join));
             $this->render('search-paginate');
             $this->Fulltime->printLog();
         }

@@ -39,7 +39,8 @@ class ForgetController extends AppController
                         $params = array(
                             'nickname' => $member['Member']['nickname'],
                             'checkLink' => $checkLink,
-                            'title_for_layout'  => "找回密码"
+                            'title_for_layout'  => "找回密码",
+                            'time'      => date('Y年m月d日 H:i:s', $_SERVER['REQUEST_TIME'])
                         );
                         $email->template('forget', 'register')
                         ->viewVars($params)
@@ -54,7 +55,7 @@ class ForgetController extends AppController
                         $message = "系统发生错误，请稍后重试！";
                     }
                 } else {
-                    $message = "系统不存在次邮箱用户！";
+                    $message = "系统不存在此邮箱用户！";
                 }
             } else {
                 $message = "系统不存在此邮箱用户！";

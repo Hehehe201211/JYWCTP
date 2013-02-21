@@ -30,7 +30,7 @@ class FtComponent extends Component
             'number',
             'modified'
         );
-        if (!empty($joins)) {
+        if (empty($joins)) {
 	        $this->controller->paginate = array(
 	            'Fulltime' => array('limit' => $pageSize,
 	                'page'  => $page,

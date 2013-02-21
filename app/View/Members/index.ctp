@@ -49,11 +49,11 @@
                 </a>
               </td>
               <td>
-              <a target="_blank" href="new-xxxq.html" >
+              <a target="_blank" href="/informations/detail/{$information.Information.id}" >
                 {$status[{$information.Information.status} - 1]}
               </a>
               </td>
-              <td><a target="_blank" href="new-xxxq.html" >{$information.Information.clicked}</a></td>
+              <td><a target="_blank" href="/informations/detail/{$information.Information.id}" >{$information.Information.clicked}</a></td>
               <td class="con_2_xq_tofu xiushan_anniu"><a target="_blank" href="/informations/detail/{$information.Information.id}" >详情</a><a onclick="confirm('确定删除这条信息吗？')" href="#" >删除</a></td>
             </tr>
         {/foreach}
